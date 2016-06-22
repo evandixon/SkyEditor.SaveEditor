@@ -22,7 +22,7 @@ Namespace MysteryDungeon.Rescue
             Public Overridable ReadOnly Property StoredMoneyOffset As Integer = &H4E6F * 8
             Public Overridable ReadOnly Property StoredMoneyLength As Integer = 24
             Public Overridable ReadOnly Property RescuePointsOffset As Integer = &H4ED3 * 8
-            Public Overridable ReadOnly Property RescuePointsLength As Integer = 16
+            Public Overridable ReadOnly Property RescuePointsLength As Integer = 32
             Public Overridable ReadOnly Property HeldItemOffset As Integer = &H4CF0 * 8
             Public Overridable ReadOnly Property HeldItemLength As Integer = 23
             Public Overridable ReadOnly Property HeldItemNumber As Integer = 20
@@ -35,6 +35,11 @@ Namespace MysteryDungeon.Rescue
         Public Sub New()
             MyBase.New
             Me.Offsets = New RBOffsets
+        End Sub
+
+        Protected Sub New(offsets As RBOffsets)
+            MyBase.New
+            Me.Offsets = offsets
         End Sub
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
