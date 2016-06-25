@@ -1,6 +1,12 @@
-﻿Imports SkyEditor.UI.WPF
+﻿Imports System.Windows.Threading
+Imports SkyEditor.UI.WPF
 
 Class Application
+    '#If DEBUG Then
+    '    Private Sub Application_DispatcherUnhandledException(sender As Object, e As DispatcherUnhandledExceptionEventArgs) Handles Me.DispatcherUnhandledException
+    '        Debugger.Break()
+    '    End Sub
+    '#End If
 
     ' Application-level events, such as Startup, Exit, and DispatcherUnhandledException
     ' can be handled in this file.

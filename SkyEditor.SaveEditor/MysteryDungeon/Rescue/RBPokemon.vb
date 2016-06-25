@@ -26,6 +26,7 @@ Namespace MysteryDungeon.Rescue
         End Sub
 
         Private Sub Initialize(bits As Binary)
+            Dim e As New RescueTeamCharacterEncoding
             With bits
                 Level = .Int(0, 0, 7)
                 ID = .Int(0, 7, 9)
@@ -43,11 +44,12 @@ Namespace MysteryDungeon.Rescue
                 Attack2 = New RBAttack(.Range(183, RBAttack.Length))
                 Attack3 = New RBAttack(.Range(203, RBAttack.Length))
                 Attack4 = New RBAttack(.Range(223, RBAttack.Length))
-                Name = .StringPMD(0, 243, 10)
+                Name = .Str(243, 10, e)
             End With
         End Sub
 
         Public Function GetStoredPokemonBits() As Binary
+            Dim e As New RescueTeamCharacterEncoding
             Dim out As New Binary(Length)
             With out
                 .Int(0, 0, 7) = Level
@@ -66,7 +68,7 @@ Namespace MysteryDungeon.Rescue
                 .Range(183, RBAttack.Length) = _attack2.GetAttackBits
                 .Range(203, RBAttack.Length) = _attack3.GetAttackBits
                 .Range(223, RBAttack.Length) = _attack4.GetAttackBits
-                .StringPMD(0, 243, 10) = Name
+                .Str(243, 10, e) = Name
             End With
             Return out
         End Function

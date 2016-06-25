@@ -45,6 +45,25 @@ Namespace MysteryDungeon.Rescue
                 Return Task.FromResult(False)
             End If
         End Function
+
+        Protected Overrides Sub FixChecksum()
+            'Fix the first checksum
+            Dim buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(Bits, 4, Offsets.ChecksumEnd) - 1)
+            For count = 0 To 3
+                Bits.Int(count, 0, 8) = buffer(count)
+            Next
+
+            'Ensure backup save matches.
+            'Not strictly required, as the first one will be loaded if it's valid, but looks nicer.
+            CopyToBackup()
+
+            ''Quicksave checksum
+            'TODO: Research the quick save
+            'buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(Me, Offsets.QuicksaveChecksumStart, Offsets.QuicksaveChecksumEnd))
+            'For x As Byte = 0 To 3
+            '    RawData(x + Offsets.QuicksaveStart) = buffer(x)
+            'Next
+        End Sub
     End Class
 
 End Namespace

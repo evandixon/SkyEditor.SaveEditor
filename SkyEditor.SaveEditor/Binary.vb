@@ -93,7 +93,7 @@ Public Class Binary
             Position += BitLength
         End Set
     End Property
-    Public Property StringPMD(ByteIndex As Integer, BitIndex As Integer, ByteLength As Integer) As String
+    <Obsolete("Use Str instead")> Public Property StringPMD(ByteIndex As Integer, BitIndex As Integer, ByteLength As Integer) As String
         Get
             Dim s As New StringBuilder
             Dim e = Encoding.GetEncoding("Windows-1252")
@@ -130,6 +130,26 @@ Public Class Binary
             End If
         End Set
     End Property
+
+    Public Property Str(bitIndex As Integer, byteLength As Integer, characterEncoding As Encoding) As String
+        Get
+            Return characterEncoding.GetString(Range(bitIndex, byteLength * 8).ToByteArray, 0, byteLength)
+        End Get
+        Set(value As String)
+            If value Is Nothing Then
+                value = String.Empty
+            End If
+            Dim bytes = characterEncoding.GetBytes(value)
+            For i = 0 To byteLength - 1
+                If value.Length > i Then
+                    Int(0, bitIndex + 8 * i, 8) = bytes(i)
+                Else
+                    Int(0, bitIndex + 8 * i, 8) = 0
+                End If
+            Next
+        End Set
+    End Property
+
     Public Property Range(Index As Integer, Length As Integer) As Binary
         Get
             Dim buffer(Length - 1) As Boolean
@@ -150,7 +170,7 @@ Public Class Binary
     Public Function ToByteArray() As Byte()
         Dim output As New List(Of Byte)
         For i = 0 To Bits.Count - 1 Step 8
-            If Bits.Count - 1 - i >= 8 Then
+            If Bits.Count - i >= 8 Then
                 output.Add(Int(0, i, 8))
             Else
                 Exit For

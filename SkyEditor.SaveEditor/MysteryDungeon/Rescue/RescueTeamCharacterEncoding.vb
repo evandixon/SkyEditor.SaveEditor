@@ -1,41 +1,43 @@
-﻿Namespace MysteryDungeon.Rescue
+﻿Imports System.Globalization
+
+Namespace MysteryDungeon.Rescue
     Public Class RescueTeamCharacterEncoding
         Inherits Text.Encoding
 
 #Region "8-bit Characters"
 
         Private Shared ReadOnly EightBitCharacters As Char() = {vbNullChar, '0x00
-                                                                "", '0x01
-                                                                "", '0x02
-                                                                "", '0x03
-                                                                "", '0x04
-                                                                "", '0x05
-                                                                "", '0x06
-                                                                "", '0x07
-                                                                "", '0x08
-                                                                "", '0x09
+                                                                "?", '0x01
+                                                                "?", '0x02
+                                                                "?", '0x03
+                                                                "?", '0x04
+                                                                "?", '0x05
+                                                                "?", '0x06
+                                                                "?", '0x07
+                                                                "?", '0x08
+                                                                "?", '0x09
                                                                 vbLf, '0x0A '13 pixel new line
-                                                                "", '0x0B
-                                                                "", '0x0C
+                                                                "?", '0x0B
+                                                                "?", '0x0C
                                                                 vbCr, '0x0D '13 pixel new line
-                                                                "", '0x0E
-                                                                "", '0x0F
-                                                                "", '0x10
-                                                                "", '0x11
-                                                                "", '0x12
-                                                                "", '0x13
-                                                                "", '0x14
-                                                                "", '0x15
-                                                                "", '0x16
-                                                                "", '0x17
-                                                                "", '0x18
-                                                                "", '0x19
-                                                                "", '0x1A
-                                                                "", '0x1B
-                                                                "", '0x1C
-                                                                "", '0x1D '5 pixel new line
-                                                                "", '0x1E
-                                                                "", '0x1F
+                                                                "?", '0x0E
+                                                                "?", '0x0F
+                                                                "?", '0x10
+                                                                "?", '0x11
+                                                                "?", '0x12
+                                                                "?", '0x13
+                                                                "?", '0x14
+                                                                "?", '0x15
+                                                                "?", '0x16
+                                                                "?", '0x17
+                                                                "?", '0x18
+                                                                "?", '0x19
+                                                                "?", '0x1A
+                                                                "?", '0x1B
+                                                                "?", '0x1C
+                                                                "?", '0x1D '5 pixel new line
+                                                                "?", '0x1E
+                                                                "?", '0x1F
                                                                 " ", '0x20
                                                                 "!", '0x21
                                                                 """", '0x22
@@ -130,7 +132,7 @@
                                                                 "{", '0x7B
                                                                 "|", '0x7C
                                                                 "}", '0x7D
-                                                                "\7E", '0x7E
+                                                                "?", '0x7E
                                                                 " ", '0x7F
                                                                 "€", '0x80
                                                                 "", '0x81 'Escape
@@ -271,7 +273,34 @@
         ''' <param name="count"></param>
         ''' <returns></returns>
         Public Overrides Function GetByteCount(chars() As Char, index As Integer, count As Integer) As Integer
-            Throw New NotImplementedException()
+            Dim eightBitChars = EightBitCharacters.ToList
+            Dim byteCount As Integer = 0
+            For i = 0 To count - 1
+                Select Case chars(i)
+                    Case vbNullChar
+                        byteCount += 1
+                        Exit For
+                    Case "\"c
+                        If chars.Length > index + i + 4 Then
+                            'Then this is long enough for an escape sequence
+                            Dim parsed As Integer
+                            Dim x As New String(chars.Skip(i + 1).Take(4).ToArray)
+                            If Integer.TryParse(x, NumberStyles.HexNumber, CultureInfo.InvariantCulture, parsed) Then
+                                'Then this is an escape sequence
+                                i += 4
+                                byteCount += 2
+                            Else
+                                'Then this is not an escape sequence
+                                byteCount += 1
+                            End If
+                        Else
+                            byteCount += 1
+                        End If
+                    Case Else
+                        byteCount += 1
+                End Select
+            Next
+            Return byteCount
         End Function
 
         ''' <summary>
@@ -284,7 +313,40 @@
         ''' <param name="byteIndex">The index at which to start writing the resulting sequence of bytes.</param>
         ''' <returns>The actual number of bytes written into <paramref name="bytes"/>.</returns>
         Public Overrides Function GetBytes(chars() As Char, charIndex As Integer, charCount As Integer, bytes() As Byte, byteIndex As Integer) As Integer
-            Throw New NotImplementedException()
+            Dim eightBitChars = EightBitCharacters.ToList
+            Dim byteCount As Integer = 0
+            For i = 0 To charCount - 1
+                Select Case chars(i)
+                    Case vbNullChar
+                        bytes(byteCount) = 0
+                        byteCount += 1
+                        Exit For
+                    Case "\"c
+                        If chars.Length > charIndex + i + 4 Then
+                            'Then this is long enough for an escape sequence
+                            Dim parsed As Integer
+                            Dim x As New String(chars.Skip(i + 1).Take(4).ToArray)
+                            If Integer.TryParse(x, NumberStyles.HexNumber, CultureInfo.InvariantCulture, parsed) Then
+                                'Then this is an escape sequence
+                                bytes(byteCount) = (parsed >> 8 And &HFF)
+                                bytes(byteCount + 1) = (parsed And &HFF)
+                                i += 4
+                                byteCount += 2
+                            Else
+                                'Then this is not an escape sequence
+                                bytes(byteCount) = &H5C
+                                byteCount += 1
+                            End If
+                        Else
+                            bytes(byteCount) = &H5C
+                            byteCount += 1
+                        End If
+                    Case Else
+                        bytes(byteCount) = eightBitChars.LastIndexOf(chars(i))
+                        byteCount += 1
+                End Select
+            Next
+            Return byteCount
         End Function
 
         ''' <summary>
@@ -302,7 +364,9 @@
                         'Null char
                         Exit For
                     Case &H81, &H82, &H83, &H84, &H87
-                        'Don't increment.  These are two byte escape sequences, and as a logic shortcut, the next character will be the one counted.
+                        'e.g. \81FF
+                        charCount += 5
+                        i += 1
                     Case Else
                         charCount += 1
                 End Select
@@ -322,17 +386,19 @@
         Public Overrides Function GetChars(bytes() As Byte, byteIndex As Integer, byteCount As Integer, chars() As Char, charIndex As Integer) As Integer
             Dim charCount As Integer
             For i = 0 To byteCount - 1
-                Dim current = bytes(i)
+                Dim current = bytes(i + byteIndex)
                 Select Case current
                     ''Todo: handle this, escape escape sequences, etc.
                     Case 0
                         'Null char
-                        'Exit For
-                        Throw New NotImplementedException
+                        Exit For
                     Case &H81, &H82, &H83, &H84, &H87
-                        'Don't increment.  These are two byte escape sequences, and as a logic shortcut, the next character will be the one counted.
-                        'i += 1
-                        Throw New NotImplementedException
+                        Dim escape As String = $"\{current.ToString("X2")}{bytes(i + byteIndex + 1).ToString("X2")}"
+                        For j = 0 To escape.Length - 1
+                            chars(charIndex + i + j) = escape(j)
+                        Next
+                        i += 1
+                        charCount += escape.Length
                     Case Else
                         chars(charIndex + i) = EightBitCharacters(current)
                         charCount += 1
@@ -347,7 +413,7 @@
         ''' <param name="charCount">The number of characters to encode.</param>
         ''' <returns>The maximum number of bytes produced by encoding the specified number of characters.</returns>
         Public Overrides Function GetMaxByteCount(charCount As Integer) As Integer
-            Return charCount
+            Return charCount * 5
         End Function
 
         ''' <summary>

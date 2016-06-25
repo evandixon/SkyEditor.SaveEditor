@@ -81,8 +81,7 @@ Namespace My.Resources
         '''12=Machop
         '''13=Bulbasaur
         '''14=Chikorita
-        '''15=(Missing Entry)
-        '''16=Treeko.
+        '''15=Treeko.
         '''</summary>
         Friend Shared ReadOnly Property RBBaseTypes() As String
             Get
@@ -342,10 +341,10 @@ Namespace My.Resources
         '''26=Raichu
         '''27=Sandshrew
         '''28=Sandslash
-        '''29=Nidoran¾
+        '''29=Nidoran♀
         '''30=Nidorina
         '''31=Nidoqueen
-        '''32=Nidoran½
+        '''32=Nidoran♂
         '''33=Nidorino
         '''34=Nidoking
         '''35=Clefairy
