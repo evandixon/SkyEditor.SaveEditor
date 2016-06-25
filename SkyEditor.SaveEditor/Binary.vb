@@ -1,6 +1,8 @@
 ﻿Imports System.Text
 
 Public Class Binary
+    Implements IEnumerable(Of Boolean)
+
     Public Property Bits As List(Of Boolean)
     Public Property Position As Integer
     Public Sub New()
@@ -103,7 +105,12 @@ Public Class Binary
                     Exit For
                 End If
             Next
-            Return s.ToString
+            If s.Length > 0 Then
+                Return s.ToString
+            Else
+                'If we return s.ToString, we'll get Null instead of an empty string
+                Return String.Empty
+            End If
         End Get
         Set(value As String)
             Dim e = Encoding.GetEncoding("Windows-1252")
@@ -150,5 +157,13 @@ Public Class Binary
             End If
         Next
         Return output.ToArray
+    End Function
+
+    Public Function GetEnumerator() As IEnumerator(Of Boolean) Implements IEnumerable(Of Boolean).GetEnumerator
+        Return Me.Bits.GetEnumerator
+    End Function
+
+    Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
+        Return DirectCast(Me.Bits, IEnumerable).GetEnumerator
     End Function
 End Class

@@ -6,7 +6,7 @@ Namespace MenuActions
         Implements IDisposable
 
         Dim FolderBrowserDialog1 As Windows.Forms.FolderBrowserDialog
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             'If FolderBrowserDialog1.ShowDialog = Forms.DialogResult.OK Then
             '    Dim source As New SdfSaveDataDirectory(IO.Path.Combine(FolderBrowserDialog1.SelectedPath, "filer", "UserSaveData"))
             '    Dim dest As New SdfSaveDataDirectory(SkyEditorBase.PluginHelper.GetResourceName("SDF"))
@@ -14,7 +14,7 @@ Namespace MenuActions
             'End If
             'Return Task.CompletedTask
             Throw New NotImplementedException
-        End Function
+        End Sub
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuDev, My.Resources.Language.MenuDevImportSDF})
