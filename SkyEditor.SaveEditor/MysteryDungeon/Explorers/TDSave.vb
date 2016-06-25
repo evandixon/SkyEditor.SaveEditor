@@ -84,11 +84,11 @@ Namespace MysteryDungeon.Explorers
 #Region "General"
 
         Sub LoadGeneral()
-            TeamName = Bits.StringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength)
+            TeamName = Bits.GetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength)
         End Sub
 
         Sub SaveGeneral()
-            Bits.StringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength) = TeamName
+            Bits.SetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength, TeamName)
         End Sub
 
         ''' <summary>

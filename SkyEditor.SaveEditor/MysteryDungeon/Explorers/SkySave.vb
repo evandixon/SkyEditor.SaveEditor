@@ -1,8 +1,6 @@
-﻿Imports SkyEditor.Core
-Imports SkyEditor.Core.IO
-Imports SkyEditor.Core.Utilities
-Imports SkyEditor.SaveEditor.Interfaces
+﻿Imports SkyEditor.Core.IO
 Imports SkyEditor.SaveEditor.Modeling
+Imports SkyEditor.SaveEditor.MysteryDungeon
 
 Namespace MysteryDungeon.Explorers
     Public Class SkySave
@@ -130,7 +128,7 @@ Namespace MysteryDungeon.Explorers
 #Region "General"
 
         Private Sub LoadGeneral()
-            TeamName = Bits.StringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength)
+            TeamName = Bits.GetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength)
             HeldMoney = Bits.Int(0, Offsets.HeldMoney, 24)
             SpEpisodeHeldMoney = Bits.Int(0, Offsets.SPHeldMoney, 24)
             StoredMoney = Bits.Int(0, Offsets.StoredMoney, 24)
@@ -139,7 +137,7 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Private Sub SaveGeneral()
-            Bits.StringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength) = TeamName
+            Bits.SetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength, TeamName)
             Bits.Int(0, Offsets.HeldMoney, 24) = HeldMoney
             Bits.Int(0, Offsets.SPHeldMoney, 24) = SpEpisodeHeldMoney
             Bits.Int(0, Offsets.StoredMoney, 24) = StoredMoney
@@ -572,8 +570,8 @@ Namespace MysteryDungeon.Explorers
             End If
 
             '-----Original Names
-            OriginalPlayerName = Bits.StringPMD(&H13F, 0, 10)
-            OriginalPartnerName = Bits.StringPMD(&H149, 0, 10)
+            OriginalPlayerName = Bits.GetStringPMD(&H13F, 0, 10)
+            OriginalPartnerName = Bits.GetStringPMD(&H149, 0, 10)
         End Sub
 
         Private Sub SaveHistory()
@@ -596,8 +594,8 @@ Namespace MysteryDungeon.Explorers
             Bits.Int(&HC0, 0, 16) = rawOriginalPlayerID
 
             '-----Original Names
-            Bits.StringPMD(&H13F, 0, 10) = OriginalPlayerName
-            Bits.StringPMD(&H149, 0, 10) = OriginalPartnerName
+            Bits.SetStringPMD(&H13F, 0, 10, OriginalPlayerName)
+            Bits.SetStringPMD(&H149, 0, 10, OriginalPartnerName)
         End Sub
 
         ''' <summary>

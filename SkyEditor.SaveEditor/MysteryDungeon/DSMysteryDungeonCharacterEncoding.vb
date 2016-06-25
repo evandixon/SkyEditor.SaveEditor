@@ -1,7 +1,7 @@
 ﻿Imports System.Globalization
 
-Namespace MysteryDungeon.Rescue
-    Public Class RescueTeamCharacterEncoding
+Namespace MysteryDungeon
+    Public Class DSMysteryDungeonCharacterEncoding
         Inherits Text.Encoding
 
 #Region "8-bit Characters"

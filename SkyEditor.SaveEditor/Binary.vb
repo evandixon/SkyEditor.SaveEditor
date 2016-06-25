@@ -93,43 +93,6 @@ Public Class Binary
             Position += BitLength
         End Set
     End Property
-    <Obsolete("Use Str instead")> Public Property StringPMD(ByteIndex As Integer, BitIndex As Integer, ByteLength As Integer) As String
-        Get
-            Dim s As New StringBuilder
-            Dim e = Encoding.GetEncoding("Windows-1252")
-            For i = 0 To ByteLength - 1
-                Dim c = e.GetString({CByte(Int(ByteIndex + i, BitIndex, 8))}, 0, 1)
-                If Not c = vbNullChar Then
-                    s.Append(c)
-                Else
-                    Exit For
-                End If
-            Next
-            If s.Length > 0 Then
-                Return s.ToString
-            Else
-                'If we return s.ToString, we'll get Null instead of an empty string
-                Return String.Empty
-            End If
-        End Get
-        Set(value As String)
-            Dim e = Encoding.GetEncoding("Windows-1252")
-            If value IsNot Nothing Then
-                For i = 0 To ByteLength - 1
-                    If value.Length > i Then
-                        Int(ByteIndex + i, BitIndex, 8) = e.GetBytes({value(i)})(0) 'Lists.StringEncodingInverse(value(i))
-                    Else
-                        Int(ByteIndex + i, BitIndex, 8) = 0
-                    End If
-                Next
-            Else
-                'Write an empty string in the event of null
-                For i = 0 To ByteLength - 1
-                    Int(ByteIndex + i, BitIndex, 8) = 0
-                Next
-            End If
-        End Set
-    End Property
 
     Public Property Str(bitIndex As Integer, byteLength As Integer, characterEncoding As Encoding) As String
         Get

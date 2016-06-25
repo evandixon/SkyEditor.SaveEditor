@@ -58,7 +58,7 @@ Namespace MysteryDungeon.Explorers
                 Attack2 = New ExplorersAttack(.Range(242, ExplorersAttack.Length))
                 Attack3 = New ExplorersAttack(.Range(263, ExplorersAttack.Length))
                 Attack4 = New ExplorersAttack(.Range(284, ExplorersAttack.Length))
-                Name = .StringPMD(0, 305, 10)
+                Name = .GetStringPMD(0, 305, 10)
             End With
         End Sub
 
@@ -93,7 +93,7 @@ Namespace MysteryDungeon.Explorers
                 .Range(242, ExplorersAttack.Length) = _attack2.GetAttackBits
                 .Range(263, ExplorersAttack.Length) = _attack3.GetAttackBits
                 .Range(284, ExplorersAttack.Length) = _attack4.GetAttackBits
-                .StringPMD(0, 305, 10) = Name
+                .SetStringPMD(0, 305, 10, Name)
             End With
             Return out
         End Function

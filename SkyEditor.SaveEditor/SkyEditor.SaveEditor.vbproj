@@ -122,6 +122,7 @@
     <Compile Include="Modeling\IPokemonBox.vb" />
     <Compile Include="Modeling\IPokemonStorage.vb" />
     <Compile Include="Modeling\ItemSlot.vb" />
+    <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
     <Compile Include="MysteryDungeon\I4Moves.vb" />
@@ -143,7 +144,7 @@
     <Compile Include="MysteryDungeon\Rescue\RBAttack.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBHeldItem.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBPokemon.vb" />
-    <Compile Include="MysteryDungeon\Rescue\RescueTeamCharacterEncoding.vb" />
+    <Compile Include="MysteryDungeon\DSMysteryDungeonCharacterEncoding.vb" />
     <Compile Include="PluginDefinition.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
@@ -197,9 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <Import Project="..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets" Condition="Exists('..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets')" />

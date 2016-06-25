@@ -26,7 +26,7 @@ Namespace MysteryDungeon.Rescue
         End Sub
 
         Private Sub Initialize(bits As Binary)
-            Dim e As New RescueTeamCharacterEncoding
+            Dim e As New DSMysteryDungeonCharacterEncoding
             With bits
                 Level = .Int(0, 0, 7)
                 ID = .Int(0, 7, 9)
@@ -49,7 +49,7 @@ Namespace MysteryDungeon.Rescue
         End Sub
 
         Public Function GetStoredPokemonBits() As Binary
-            Dim e As New RescueTeamCharacterEncoding
+            Dim e As New DSMysteryDungeonCharacterEncoding
             Dim out As New Binary(Length)
             With out
                 .Int(0, 0, 7) = Level
