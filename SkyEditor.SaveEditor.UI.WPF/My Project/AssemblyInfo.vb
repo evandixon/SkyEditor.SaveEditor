@@ -11,8 +11,8 @@ Imports System.Windows
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("SkyEditor.SaveEditor.UI.WPF")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyTitle("Sky Editor - Save Editor")>
+<Assembly: AssemblyDescription("The UI for Sky Editor's Save Editor")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("SkyEditor.SaveEditor.UI.WPF")>
 <Assembly: AssemblyCopyright("Copyright ©  2016")>
@@ -55,5 +55,5 @@ Imports System.Windows
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("4.0.3.0")>
+<Assembly: AssemblyFileVersion("4.0.3.0")>

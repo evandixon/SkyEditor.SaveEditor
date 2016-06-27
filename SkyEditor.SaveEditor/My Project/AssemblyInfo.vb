@@ -8,8 +8,8 @@ Imports System.Reflection
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("SkyEditor.SaveEditor")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyTitle("SkyEditor.SaveEditor")>
+<Assembly: AssemblyDescription("The save editing library for Sky Editor.")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("SkyEditor.SaveEditor")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016")> 
@@ -27,5 +27,5 @@ Imports System.Reflection
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("4.0.3.0")>
+<Assembly: AssemblyFileVersion("4.0.3.0")>
