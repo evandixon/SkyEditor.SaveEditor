@@ -1,6 +1,6 @@
 ﻿Imports SkyEditor.UI.WPF
 
-Namespace MysteryDungeon.Explorers
+Namespace MysteryDungeon.Explorers.Views
     Public Class SkyGeneralTab
         Inherits DataBoundObjectControl
 

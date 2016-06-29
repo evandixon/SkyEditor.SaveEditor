@@ -77,7 +77,6 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
 
-
         Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
 
@@ -127,132 +126,72 @@ Namespace MysteryDungeon.Explorers
 
 #Region "General"
 
+        ''' <summary>
+        ''' Loads the General properties from the raw data.
+        ''' </summary>
         Private Sub LoadGeneral()
             TeamName = Bits.GetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength)
             HeldMoney = Bits.Int(0, Offsets.HeldMoney, 24)
             SpEpisodeHeldMoney = Bits.Int(0, Offsets.SPHeldMoney, 24)
             StoredMoney = Bits.Int(0, Offsets.StoredMoney, 24)
             Adventures = Bits.Int(0, Offsets.Adventures, 32)
-            ExplorerRank = Bits.Int(0, Offsets.ExplorerRank, 32)
+            ExplorerRankPoints = Bits.Int(0, Offsets.ExplorerRank, 32)
         End Sub
 
+        ''' <summary>
+        ''' Saves the General properties to the raw data.
+        ''' </summary>
         Private Sub SaveGeneral()
             Bits.SetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength, TeamName)
             Bits.Int(0, Offsets.HeldMoney, 24) = HeldMoney
             Bits.Int(0, Offsets.SPHeldMoney, 24) = SpEpisodeHeldMoney
             Bits.Int(0, Offsets.StoredMoney, 24) = StoredMoney
             Bits.Int(0, Offsets.Adventures, 32) = Adventures
-            Bits.Int(0, Offsets.ExplorerRank, 32) = ExplorerRank
+            Bits.Int(0, Offsets.ExplorerRank, 32) = ExplorerRankPoints
         End Sub
+
 
         ''' <summary>
         ''' Gets or sets the save file's Team Name.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
+        ''' <returns>The save file's current Team Name.</returns>
         Public Property TeamName As String
-            Get
-                Return _teamName
-            End Get
-            Set(value As String)
-                If Not _teamName = value Then
-                    _teamName = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(TeamName)))
-                End If
-            End Set
-        End Property
-        Dim _teamName As String
 
         ''' <summary>
         ''' Gets or sets the held money in the main game
         ''' </summary>
-        ''' <returns></returns>
+        ''' <returns>The amount of money held by the player in the main game.</returns>
         Public Property HeldMoney As Integer
-            Get
-                Return _heldMoney
-            End Get
-            Set(value As Integer)
-                If Not _heldMoney = value Then
-                    _heldMoney = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(_heldMoney))
-                End If
-            End Set
-        End Property
-        Dim _heldMoney As Integer
 
         ''' <summary>
         ''' Gets or sets the held money in the active special episode
         ''' </summary>
-        ''' <returns></returns>
+        ''' <returns>The amount of money held by the player in the active special episode.</returns>
         Public Property SpEpisodeHeldMoney As Integer
-            Get
-                Return _spEpisodeHeldMoney
-            End Get
-            Set(value As Integer)
-                If Not _spEpisodeHeldMoney = value Then
-                    _spEpisodeHeldMoney = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpEpisodeHeldMoney)))
-                End If
-            End Set
-        End Property
-        Dim _spEpisodeHeldMoney As Integer
 
         ''' <summary>
         ''' Gets or sets the money in storage
         ''' </summary>
-        ''' <returns></returns>
+        ''' <returns>The amount of money stored in the Duskull bank.</returns>
         Public Property StoredMoney As Integer
-            Get
-                Return Bits.Int(0, Offsets.StoredMoney, 24)
-            End Get
-            Set(value As Integer)
-                If Not _storedMoney = value Then
-                    _storedMoney = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(StoredMoney)))
-                End If
-            End Set
-        End Property
-        Dim _storedMoney As Integer
 
         ''' <summary>
         ''' Gets or sets the number of adventures the team has had.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
+        ''' <returns>The number of adventures as reported by the save file.</returns>
         ''' <remarks>This is displayed as a signed integer in-game, so if this is set to a negative number, it will appear negative.</remarks>
         Public Property Adventures As Integer
-            Get
-                Return Bits.Int(0, Offsets.Adventures, 32)
-            End Get
-            Set(value As Integer)
-                If Not _numAdventures = value Then
-                    _numAdventures = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Adventures)))
-                End If
-            End Set
-        End Property
-        Dim _numAdventures As Integer
 
         ''' <summary>
         ''' Gets or sets the team's exploration rank points.
         ''' When set in certain ranges, the rank changes (ex. Silver, Gold, Master, etc).
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property ExplorerRank As Integer
-            Get
-                Return _explorerRank
-            End Get
-            Set(value As Integer)
-                If Not _explorerRank = value Then
-                    _explorerRank = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ExplorerRank)))
-                End If
-            End Set
-        End Property
-        Dim _explorerRank As Integer
+        ''' <returns>The current number of explorer points.</returns>
+        ''' <remarks>While this number is not directly visible in-game, it controls the current Explorer Rank.
+        ''' Use this page as reference to know what values mean what:
+        ''' http://bulbapedia.bulbagarden.net/wiki/Rank_(Mystery_Dungeon)#Exploration_Ranks
+        ''' </remarks>
+        Public Property ExplorerRankPoints As Integer
 
 #End Region
 
