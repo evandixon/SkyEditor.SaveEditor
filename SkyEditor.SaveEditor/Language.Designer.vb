@@ -84,24 +84,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sp. Episode Held Items.
-        '''</summary>
-        Friend Shared ReadOnly Property EpisodeHeldItems() As String
-            Get
-                Return ResourceManager.GetString("EpisodeHeldItems", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Held Items.
-        '''</summary>
-        Friend Shared ReadOnly Property HeldItemsSlot() As String
-            Get
-                Return ResourceManager.GetString("HeldItemsSlot", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Held by.
         '''</summary>
         Friend Shared ReadOnly Property ItemToStringHeldBy() As String
@@ -184,15 +166,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SpEpisodePokemonSlot() As String
             Get
                 Return ResourceManager.GetString("SpEpisodePokemonSlot", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Stored Items.
-        '''</summary>
-        Friend Shared ReadOnly Property StoredItemsSlot() As String
-            Get
-                Return ResourceManager.GetString("StoredItemsSlot", resourceCulture)
             End Get
         End Property
         

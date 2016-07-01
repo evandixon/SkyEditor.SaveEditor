@@ -164,6 +164,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Sp. Episode Held Items.
+        '''</summary>
+        Public Shared ReadOnly Property EpisodeHeldItems() As String
+            Get
+                Return ResourceManager.GetString("EpisodeHeldItems", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to You are holding the maximum number of items.  To add another, one must be deleted first..
         '''</summary>
         Public Shared ReadOnly Property ErrorTooManyItems() As String
@@ -196,6 +205,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property Ginseng() As String
             Get
                 Return ResourceManager.GetString("Ginseng", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Held Items.
+        '''</summary>
+        Public Shared ReadOnly Property HeldItemsSlot() As String
+            Get
+                Return ResourceManager.GetString("HeldItemsSlot", resourceCulture)
             End Get
         End Property
         
@@ -617,6 +635,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property StoredItems() As String
             Get
                 Return ResourceManager.GetString("StoredItems", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Stored Items.
+        '''</summary>
+        Public Shared ReadOnly Property StoredItemsSlot() As String
+            Get
+                Return ResourceManager.GetString("StoredItemsSlot", resourceCulture)
             End Get
         End Property
         

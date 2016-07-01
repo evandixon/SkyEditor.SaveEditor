@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SkyEditor.SaveEditor.UI.WPF"
              xmlns:res="clr-namespace:SkyEditor.SaveEditor.UI.WPF.My.Resources"
              xmlns:skyWPF="clr-namespace:SkyEditor.UI.WPF;assembly=SkyEditor.UI.WPF"
-             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.Modeling;assembly=SkyEditor.SaveEditor"
+             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.UI.WPF.ViewModelInterfaces"
              mc:Ignorable="d"
              TargetType="{x:Type modeling:IItemSlot}"
              d:DesignHeight="300" d:DesignWidth="300">

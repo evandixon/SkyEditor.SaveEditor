@@ -328,4 +328,13 @@ For stackable items like sticks and spikes, this lets you control how much is in
   <data name="HPBoost" xml:space="preserve">
     <value>HP Boost</value>
   </data>
+  <data name="EpisodeHeldItems" xml:space="preserve">
+    <value>Sp. Episode Held Items</value>
+  </data>
+  <data name="HeldItemsSlot" xml:space="preserve">
+    <value>Held Items</value>
+  </data>
+  <data name="StoredItemsSlot" xml:space="preserve">
+    <value>Stored Items</value>
+  </data>
 </root>

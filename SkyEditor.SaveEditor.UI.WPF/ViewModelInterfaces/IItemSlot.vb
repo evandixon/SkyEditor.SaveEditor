@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Input
 Imports SkyEditor.Core.UI
 
-Namespace Modeling
+Namespace ViewModelInterfaces
     Public Interface IItemSlot
         ReadOnly Property Name As String
         ReadOnly Property MaxItemCount As Integer

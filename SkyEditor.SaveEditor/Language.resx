@@ -120,12 +120,6 @@
   <data name="DeSmuMeSaveFile" xml:space="preserve">
     <value>DeSmuMe Save File</value>
   </data>
-  <data name="EpisodeHeldItems" xml:space="preserve">
-    <value>Sp. Episode Held Items</value>
-  </data>
-  <data name="HeldItemsSlot" xml:space="preserve">
-    <value>Held Items</value>
-  </data>
   <data name="ItemToStringHeldBy" xml:space="preserve">
     <value>Held by</value>
   </data>
@@ -148,9 +142,6 @@ Demonic722 (Misc RAM and save addresses)</value>
   </data>
   <data name="RB_Toolbox" xml:space="preserve">
     <value>Toolbox</value>
-  </data>
-  <data name="StoredItemsSlot" xml:space="preserve">
-    <value>Stored Items</value>
   </data>
   <data name="BlankPokemon" xml:space="preserve">
     <value>----------</value>

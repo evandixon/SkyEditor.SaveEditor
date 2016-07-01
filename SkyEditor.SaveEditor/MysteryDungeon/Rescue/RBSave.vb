@@ -6,12 +6,11 @@ Namespace MysteryDungeon.Rescue
     Public Class RBSave
         Inherits BinaryFile
         Implements IDetectableFileType
-        Implements IInventory
         Implements INotifyPropertyChanged
         Implements IPokemonStorage
         Implements INotifyModified
 
-        Protected Class RBOffsets
+        Public Class RBOffsets
             Public Overridable ReadOnly Property BackupSaveStart As Integer = &H6000
             Public Overridable ReadOnly Property ChecksumEnd As Integer = &H57D0
             Public Overridable ReadOnly Property BaseTypeOffset As Integer = &H67 * 8
@@ -61,7 +60,7 @@ Namespace MysteryDungeon.Rescue
             MyBase.Save(Destination, provider)
         End Sub
 
-        Protected Overridable ReadOnly Property Offsets As RBOffsets
+        Public Overridable ReadOnly Property Offsets As RBOffsets
 
 #Region "Event Handlers"
         Private Sub Me_OnPropertyChanged(sender As Object, e As EventArgs) Handles Me.PropertyChanged
@@ -69,9 +68,6 @@ Namespace MysteryDungeon.Rescue
         End Sub
         Private Sub OnModified(sender As Object, e As EventArgs)
             RaiseEvent Modified(sender, e)
-        End Sub
-        Private Sub OnCollectionChanged(sender As Object, e As EventArgs) Handles _heldItems.CollectionChanged
-            RaiseEvent Modified(Me, New EventArgs)
         End Sub
 #End Region
 
@@ -169,7 +165,7 @@ Namespace MysteryDungeon.Rescue
 
 #Region "Held Items"
         Private Sub LoadItems()
-            HeldItems = New ObservableCollection(Of RBHeldItem)
+            HeldItems = New List(Of RBHeldItem)
             For count = 0 To Offsets.HeldItemNumber
                 Dim i As RBHeldItem = RBHeldItem.FromHeldItemBits(Me.Bits.Range(Offsets.HeldItemOffset + count * Offsets.HeldItemLength, Offsets.HeldItemLength))
                 If i.IsValid Then
@@ -178,8 +174,6 @@ Namespace MysteryDungeon.Rescue
                     Exit For
                 End If
             Next
-
-            InitItemSlots()
         End Sub
 
         Private Sub SaveItems()
@@ -192,36 +186,7 @@ Namespace MysteryDungeon.Rescue
             Next
         End Sub
 
-        Public Property HeldItems As ObservableCollection(Of RBHeldItem)
-            Get
-                Return _heldItems
-            End Get
-            Set(value As ObservableCollection(Of RBHeldItem))
-                If _heldItems IsNot value Then
-                    _heldItems = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HeldItems)))
-                End If
-            End Set
-        End Property
-        Private WithEvents _heldItems As ObservableCollection(Of RBHeldItem)
-
-        Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
-            Get
-                Return _itemSlots
-            End Get
-            Private Set(value As IEnumerable(Of IItemSlot))
-                _itemSlots = value
-            End Set
-        End Property
-        Dim _itemSlots As ObservableCollection(Of IItemSlot)
-
-
-        Private Sub InitItemSlots()
-            Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of RBHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, Offsets.HeldItemNumber))
-            ItemSlots = slots
-        End Sub
-
+        Public Property HeldItems As List(Of RBHeldItem)
 
 #End Region
 
@@ -232,7 +197,6 @@ Namespace MysteryDungeon.Rescue
             Dim offset As Integer = 0
             For Each item In defs
                 Dim pokemon As New ObservableCollection(Of RBStoredPokemon)
-                AddHandler pokemon.CollectionChanged, AddressOf OnCollectionChanged
 
                 For count = offset To offset + item.Length - 1
                     Dim p = RawStoredPokemon(count)
