@@ -1,7 +1,6 @@
 ﻿Imports System.Collections.Specialized
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
-Imports SkyEditor.SaveEditor.Modeling
 
 Namespace MysteryDungeon.Explorers
     Public Class TDSave
@@ -9,12 +8,11 @@ Namespace MysteryDungeon.Explorers
         Implements IDetectableFileType
         Implements INotifyPropertyChanged
         Implements INotifyModified
-        Implements IInventory
-        Implements IPokemonStorage
-        Implements IParty
 
         Public Sub New()
             MyBase.New()
+
+            Offsets = New TDOffsets
         End Sub
 
         Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
@@ -35,6 +33,8 @@ Namespace MysteryDungeon.Explorers
             MyBase.Save(Destination, provider)
         End Sub
 
+        Public Overridable ReadOnly Property Offsets As TDOffsets
+
 #Region "Events"
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
@@ -44,38 +44,34 @@ Namespace MysteryDungeon.Explorers
         Private Sub TDSave_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
             RaiseEvent Modified(Me, e)
         End Sub
-        Private Sub On_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _heldItems.CollectionChanged
-            RaiseEvent Modified(Me, e)
-        End Sub
+
         Private Sub OnModified(sender As Object, e As EventArgs)
             RaiseEvent Modified(Me, e)
         End Sub
 #End Region
 
-
-
 #Region "Child Classes"
-        Friend Class Offsets
-            Public Const ChecksumEnd As Integer = &HDC7B
-            Public Const BackupSaveStart As Integer = &H10000
-            Public Const QuicksaveStart As Integer = &H2E000
-            Public Const QuicksaveChecksumStart As Integer = &H2E004
-            Public Const QuicksaveChecksumEnd As Integer = &H2E0FF
+        Public Class TDOffsets
+            Public Overridable ReadOnly Property ChecksumEnd As Integer = &HDC7B
+            Public Overridable ReadOnly Property BackupSaveStart As Integer = &H10000
+            Public Overridable ReadOnly Property QuicksaveStart As Integer = &H2E000
+            Public Overridable ReadOnly Property QuicksaveChecksumStart As Integer = &H2E004
+            Public Overridable ReadOnly Property QuicksaveChecksumEnd As Integer = &H2E0FF
 
-            Public Const TeamNameStart As Integer = &H96F7 * 8
-            Public Const TeamNameLength As Integer = 10
+            Public Overridable ReadOnly Property TeamNameStart As Integer = &H96F7 * 8
+            Public Overridable ReadOnly Property TeamNameLength As Integer = 10
 
-            Public Const HeldItemOffset As Integer = &H8B71 * 8
-            Public Const HeldItemNumber As Integer = 48
-            Public Const HeldItemLength As Integer = 31
+            Public Overridable ReadOnly Property HeldItemOffset As Integer = &H8B71 * 8
+            Public Overridable ReadOnly Property HeldItemNumber As Integer = 48
+            Public Overridable ReadOnly Property HeldItemLength As Integer = 31
 
-            Public Const StoredPokemonOffset As Integer = &H460 * 8 + 3
-            Public Const StoredPokemonLength As Integer = 388
-            Public Const StoredPokemonNumber As Integer = 550
+            Public Overridable ReadOnly Property StoredPokemonOffset As Integer = &H460 * 8 + 3
+            Public Overridable ReadOnly Property StoredPokemonLength As Integer = 388
+            Public Overridable ReadOnly Property StoredPokemonNumber As Integer = 550
 
-            Public Const ActivePokemonOffset As Integer = &H83CB * 8
-            Public Const ActivePokemonLength As Integer = 544
-            Public Const ActivePokemonNumber As Integer = 4
+            Public Overridable ReadOnly Property ActivePokemonOffset As Integer = &H83CB * 8
+            Public Overridable ReadOnly Property ActivePokemonLength As Integer = 544
+            Public Overridable ReadOnly Property ActivePokemonNumber As Integer = 4
         End Class
 #End Region
 
@@ -113,7 +109,7 @@ Namespace MysteryDungeon.Explorers
 
 #Region "Items"
         Public Sub LoadItems()
-            _heldItems = New ObservableCollection(Of TDHeldItem)
+            _HeldItems = New List(Of TDHeldItem)
             For count As Integer = 0 To Offsets.HeldItemNumber - 1
                 Dim i = TDHeldItem.FromHeldItemBits(Me.Bits.Range(Offsets.HeldItemOffset + count * Offsets.HeldItemLength, Offsets.HeldItemLength))
                 If i.IsValid Then
@@ -122,8 +118,6 @@ Namespace MysteryDungeon.Explorers
                     Exit For
                 End If
             Next
-
-            InitItemSlots()
         End Sub
 
         Public Sub SaveItems()
@@ -136,80 +130,28 @@ Namespace MysteryDungeon.Explorers
             Next
         End Sub
 
-        Public Property HeldItems As ObservableCollection(Of TDHeldItem)
-            Get
-                Return _heldItems
-            End Get
-            Set(value As ObservableCollection(Of TDHeldItem))
-                If _heldItems IsNot value Then
-                    _heldItems = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HeldItems)))
-                End If
-            End Set
-        End Property
-        Private WithEvents _heldItems As ObservableCollection(Of TDHeldItem)
-
-        Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
-            Get
-                Return _itemSlots
-            End Get
-            Private Set(value As IEnumerable(Of IItemSlot))
-                _itemSlots = value
-            End Set
-        End Property
-        Dim _itemSlots As ObservableCollection(Of IItemSlot)
-
-        Private Sub InitItemSlots()
-            Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of TDHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, Offsets.HeldItemNumber))
-            ItemSlots = slots
-        End Sub
+        Public Property HeldItems As List(Of TDHeldItem)
 
 
 #End Region
 
 #Region "Stored Pokemon"
         Private Sub LoadStoredPokemon()
-            StoredPlayerPartner = New ObservableCollection(Of TDStoredPokemon)
-            StoredPokemon = New ObservableCollection(Of TDStoredPokemon)
+            StoredPlayerPartner = New List(Of TDStoredPokemon)
+            StoredPokemon = New List(Of TDStoredPokemon)
 
             For count = 0 To Offsets.StoredPokemonNumber
                 Dim pkm As New TDStoredPokemon(Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
-                AddHandler pkm.Modified, AddressOf OnModified
-                AddHandler pkm.PropertyChanged, AddressOf OnModified
-
-                If count < 2 Then 'Player Partner
-                    StoredPlayerPartner.Add(pkm)
-                Else 'Others
-                    StoredPokemon.Add(pkm)
-                End If
+                StoredPokemon.Add(pkm)
             Next
-
-            _storage = New ObservableCollection(Of IPokemonBox)
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.PlayerPartnerPokemonSlot, StoredPlayerPartner))
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.StoredPokemonSlot, StoredPokemon))
         End Sub
         Private Sub SaveStoredPokemon()
             For count = 0 To Offsets.StoredPokemonNumber
-                Dim pkm As TDStoredPokemon
-                If count < 2 Then 'Player Partner
-                    pkm = StoredPlayerPartner(count)
-                Else 'Others
-                    pkm = StoredPokemon(count - 2)
-                End If
-                Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = pkm.GetStoredPokemonBits
+                Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = StoredPokemon(count).GetStoredPokemonBits
             Next
         End Sub
-        Public Property StoredPlayerPartner As ObservableCollection(Of TDStoredPokemon)
-        Public Property StoredSpEpisodePokemon As ObservableCollection(Of TDStoredPokemon)
-        Public Property StoredPokemon As ObservableCollection(Of TDStoredPokemon)
-
-        Public ReadOnly Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
-            Get
-                Return _storage
-            End Get
-        End Property
-        Dim _storage As ObservableCollection(Of IPokemonBox)
+        Public Property StoredPlayerPartner As List(Of TDStoredPokemon)
+        Public Property StoredPokemon As List(Of TDStoredPokemon)
 
 #End Region
 
@@ -248,15 +190,6 @@ Namespace MysteryDungeon.Explorers
             End Set
         End Property
         Dim _activePokemon As ObservableCollection(Of TDActivePokemon)
-
-        Protected Property Party As IEnumerable Implements IParty.Party
-            Get
-                Return ActivePokemon
-            End Get
-            Set(value As IEnumerable)
-                ActivePokemon = value
-            End Set
-        End Property
 
 #End Region
 

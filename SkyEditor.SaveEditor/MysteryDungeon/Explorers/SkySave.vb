@@ -1,81 +1,73 @@
 ﻿Imports SkyEditor.Core.IO
-Imports SkyEditor.SaveEditor.Modeling
 Imports SkyEditor.SaveEditor.MysteryDungeon
 
 Namespace MysteryDungeon.Explorers
     Public Class SkySave
         Inherits BinaryFile
         Implements IDetectableFileType
-        Implements IInventory
-        Implements IParty
-        Implements IPokemonStorage
         Implements INotifyPropertyChanged
         Implements INotifyModified
 
-        Friend Class Offsets
-            Public Const BackupSaveStart As Integer = &HC800
-            Public Const ChecksumEnd As Integer = &HB65A
-            Public Const QuicksaveStart As Integer = &H19000
-            Public Const QuicksaveChecksumStart As Integer = &H19004
-            Public Const QuicksaveChecksumEnd As Integer = &H1E7FF
+        Public Class SkyOffsets
+            Public Overridable ReadOnly Property BackupSaveStart As Integer = &HC800
+            Public Overridable ReadOnly Property ChecksumEnd As Integer = &HB65A
+            Public Overridable ReadOnly Property QuicksaveStart As Integer = &H19000
+            Public Overridable ReadOnly Property QuicksaveChecksumStart As Integer = &H19004
+            Public Overridable ReadOnly Property QuicksaveChecksumEnd As Integer = &H1E7FF
 
-            Public Const TeamNameStart As Integer = &H994E * 8
-            Public Const TeamNameLength As Integer = 10
+            Public Overridable ReadOnly Property TeamNameStart As Integer = &H994E * 8
+            Public Overridable ReadOnly Property TeamNameLength As Integer = 10
 
-            Public Const ExplorerRank As Integer = &H9958 * 8
+            Public Overridable ReadOnly Property ExplorerRank As Integer = &H9958 * 8
 
-            Public Const Adventures As Integer = &H8B70 * 8
+            Public Overridable ReadOnly Property Adventures As Integer = &H8B70 * 8
 
-            Public Const WindowFrameType As Integer = &H995F * 8 + 5
+            Public Overridable ReadOnly Property WindowFrameType As Integer = &H995F * 8 + 5
 
-            Public Const HeldMoney As Integer = &H990C * 8 + 6
-            Public Const SPHeldMoney As Integer = &H990F * 8 + 6
-            Public Const StoredMoney As Integer = &H9915 * 8 + 6
+            Public Overridable ReadOnly Property HeldMoney As Integer = &H990C * 8 + 6
+            Public Overridable ReadOnly Property SPHeldMoney As Integer = &H990F * 8 + 6
+            Public Overridable ReadOnly Property StoredMoney As Integer = &H9915 * 8 + 6
 
-            Public Const StoredPokemonOffset As Integer = &H464 * 8
-            Public Const StoredPokemonLength As Integer = 362
-            Public Const StoredPokemonNumber As Integer = 720
+            Public Overridable ReadOnly Property StoredPokemonOffset As Integer = &H464 * 8
+            Public Overridable ReadOnly Property StoredPokemonLength As Integer = 362
+            Public Overridable ReadOnly Property StoredPokemonNumber As Integer = 720
 
-            Public Const ActivePokemonOffset As Integer = &H83D9 * 8 + 1
-            Public Const SpActivePokemonOffset As Integer = &H84F4 * 8 + 2
-            Public Const ActivePokemonLength As Integer = 546
-            Public Const ActivePokemonNumber As Integer = 4
+            Public Overridable ReadOnly Property ActivePokemonOffset As Integer = &H83D9 * 8 + 1
+            Public Overridable ReadOnly Property SpActivePokemonOffset As Integer = &H84F4 * 8 + 2
+            Public Overridable ReadOnly Property ActivePokemonLength As Integer = 546
+            Public Overridable ReadOnly Property ActivePokemonNumber As Integer = 4
 
-            Public Const HeldItemOffset As Integer = &H8BA2 * 8
-            Public Const HeldItemLength As Integer = 33
-            Public Const HeldItemNumber As Integer = 50 '1st 50 are the team's, 2nd 50 are the Sp. Episode
+            Public Overridable ReadOnly Property HeldItemOffset As Integer = &H8BA2 * 8
+            Public Overridable ReadOnly Property HeldItemLength As Integer = 33
+            Public Overridable ReadOnly Property HeldItemNumber As Integer = 50 '1st 50 are the team's, 2nd 50 are the Sp. Episode
 
-            Public Const StoredItemOffset As Integer = &H8E0C * 8 + 6
-            Public Const StoredItemLength As Integer = 2 * 11
-            Public Const StoredItemNumber As Integer = 1000
+            Public Overridable ReadOnly Property StoredItemOffset As Integer = &H8E0C * 8 + 6
+            Public Overridable ReadOnly Property StoredItemLength As Integer = 2 * 11
+            Public Overridable ReadOnly Property StoredItemNumber As Integer = 1000
 
-            Public Const ItemShop1Offset As Integer = &H98CA * 8 + 6
-            Public Const ItemShopLength As Integer = 22
-            Public Const ItemShop1Number As Integer = 8
-            Public Const ItemShop2Offset As Integer = &H98E0 * 8 + 6
-            Public Const ItemShop2Number As Integer = 4
+            Public Overridable ReadOnly Property ItemShop1Offset As Integer = &H98CA * 8 + 6
+            Public Overridable ReadOnly Property ItemShopLength As Integer = 22
+            Public Overridable ReadOnly Property ItemShop1Number As Integer = 8
+            Public Overridable ReadOnly Property ItemShop2Offset As Integer = &H98E0 * 8 + 6
+            Public Overridable ReadOnly Property ItemShop2Number As Integer = 4
 
-            Public Const AdventureLogOffset As Integer = &H9958 * 8
-            Public Const AdventureLogLength As Integer = 447 'Not tested
+            Public Overridable ReadOnly Property AdventureLogOffset As Integer = &H9958 * 8
+            Public Overridable ReadOnly Property AdventureLogLength As Integer = 447 'Not tested
 
-            Public Const CroagunkShopOffset As Integer = &HB475 * 8
-            Public Const CroagunkShopLength As Integer = 11
-            Public Const CroagunkShopNumber As Integer = 8
+            Public Overridable ReadOnly Property CroagunkShopOffset As Integer = &HB475 * 8
+            Public Overridable ReadOnly Property CroagunkShopLength As Integer = 11
+            Public Overridable ReadOnly Property CroagunkShopNumber As Integer = 8
 
-            Public Const QuicksavePokemonNumber As Integer = 20
-            Public Const QuicksavePokemonLength As Integer = 429 * 8
-            Public Const QuicksavePokemonOffset As Integer = &H19000 * 8 + (&H3170 * 8)
+            Public Overridable ReadOnly Property QuicksavePokemonNumber As Integer = 20
+            Public Overridable ReadOnly Property QuicksavePokemonLength As Integer = 429 * 8
+            Public Overridable ReadOnly Property QuicksavePokemonOffset As Integer = &H19000 * 8 + (&H3170 * 8)
         End Class
 
         Public Sub New()
             MyBase.New
 
-            'Init Items
-            StoredItems = New ObservableCollection(Of SkyStoredItem)
-            HeldItems = New ObservableCollection(Of SkyHeldItem)
-            SpEpisodeHeldItems = New ObservableCollection(Of SkyHeldItem)
+            Offsets = New SkyOffsets
         End Sub
-
 
         Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
@@ -103,16 +95,14 @@ Namespace MysteryDungeon.Explorers
             MyBase.Save(Destination, provider)
         End Sub
 
+        Public ReadOnly Property Offsets As SkyOffsets
+
 #Region "Events"
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 #End Region
 
 #Region "Event Handlers"
-        Private Sub OnCollectionChanged(sender As Object, e As EventArgs) Handles _storedItems.CollectionChanged, _heldItems.CollectionChanged, _spEpisodeHeldItems.CollectionChanged
-            RaiseEvent Modified(Me, e)
-        End Sub
-
         Private Sub OnModified(sender As Object, e As EventArgs)
             RaiseEvent Modified(Me, e)
         End Sub
@@ -199,7 +189,7 @@ Namespace MysteryDungeon.Explorers
 
         Private Sub LoadItems()
             'Stored Items
-            StoredItems = New ObservableCollection(Of SkyStoredItem)
+            StoredItems = New List(Of SkyStoredItem)
             Dim ids = Bits.Range(Offsets.StoredItemOffset, 11 * Offsets.StoredItemNumber)
             Dim params = Bits.Range(Offsets.StoredItemOffset + 11 * Offsets.StoredItemNumber, 11 * Offsets.StoredItemNumber)
             For count As Integer = 0 To 999
@@ -213,7 +203,7 @@ Namespace MysteryDungeon.Explorers
             Next
 
             'Held Items
-            HeldItems = New ObservableCollection(Of SkyHeldItem)
+            HeldItems = New List(Of SkyHeldItem)
             For count As Integer = 0 To Offsets.HeldItemNumber - 1
                 Dim item = SkyHeldItem.FromHeldItemBits(Me.Bits.Range(Offsets.HeldItemOffset + count * Offsets.HeldItemLength, Offsets.HeldItemLength))
                 If item.IsValid Then
@@ -224,7 +214,7 @@ Namespace MysteryDungeon.Explorers
             Next
 
             'Special Episode Held Items
-            SpEpisodeHeldItems = New ObservableCollection(Of SkyHeldItem)
+            SpEpisodeHeldItems = New List(Of SkyHeldItem)
             For count As Integer = Offsets.HeldItemNumber To Offsets.HeldItemNumber + Offsets.HeldItemNumber - 1
                 Dim item = SkyHeldItem.FromHeldItemBits(Me.Bits.Range(Offsets.HeldItemOffset + count * Offsets.HeldItemLength, Offsets.HeldItemLength))
                 If item.IsValid Then
@@ -233,13 +223,6 @@ Namespace MysteryDungeon.Explorers
                     Exit For
                 End If
             Next
-
-            'Item slots
-            Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of SkyStoredItem)(My.Resources.Language.StoredItemsSlot, StoredItems, Offsets.StoredItemNumber))
-            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, Offsets.HeldItemNumber))
-            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, Offsets.HeldItemNumber))
-            ItemSlots = slots
         End Sub
 
         Private Sub SaveItems()
@@ -279,105 +262,33 @@ Namespace MysteryDungeon.Explorers
             Next
         End Sub
 
-        Public Property StoredItems As ObservableCollection(Of SkyStoredItem)
-            Get
-                Return _storedItems
-            End Get
-            Set(value As ObservableCollection(Of SkyStoredItem))
-                If _storedItems IsNot value Then
-                    _storedItems = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(StoredItems)))
-                End If
-            End Set
-        End Property
-        Private WithEvents _storedItems As ObservableCollection(Of SkyStoredItem)
+        Public Property StoredItems As List(Of SkyStoredItem)
 
-        Public Property HeldItems As ObservableCollection(Of SkyHeldItem)
-            Get
-                Return _heldItems
-            End Get
-            Set(value As ObservableCollection(Of SkyHeldItem))
-                If _heldItems IsNot value Then
-                    _heldItems = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HeldItems)))
-                End If
-            End Set
-        End Property
-        Private WithEvents _heldItems As ObservableCollection(Of SkyHeldItem)
+        Public Property HeldItems As List(Of SkyHeldItem)
 
-        Public Property SpEpisodeHeldItems As ObservableCollection(Of SkyHeldItem)
-            Get
-                Return _spEpisodeHeldItems
-            End Get
-            Set(value As ObservableCollection(Of SkyHeldItem))
-                If _spEpisodeHeldItems IsNot value Then
-                    _spEpisodeHeldItems = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpEpisodeActivePokemon)))
-                End If
-            End Set
-        End Property
-        Private WithEvents _spEpisodeHeldItems As ObservableCollection(Of SkyHeldItem)
-
-        Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
-            Get
-                Return _itemSlots
-            End Get
-            Private Set(value As IEnumerable(Of IItemSlot))
-                _itemSlots = value
-            End Set
-        End Property
-        Dim _itemSlots As ObservableCollection(Of IItemSlot)
+        Public Property SpEpisodeHeldItems As List(Of SkyHeldItem)
 
 #End Region
 
 #Region "Stored Pokemon"
         Private Sub LoadStoredPokemon()
-            StoredPlayerPartner = New ObservableCollection(Of SkyStoredPokemon)
-            StoredSpEpisodePokemon = New ObservableCollection(Of SkyStoredPokemon)
-            StoredPokemon = New ObservableCollection(Of SkyStoredPokemon)
+            StoredPlayerPartner = New List(Of SkyStoredPokemon)
+            StoredSpEpisodePokemon = New List(Of SkyStoredPokemon)
+            StoredPokemon = New List(Of SkyStoredPokemon)
 
             For count = 0 To Offsets.StoredPokemonNumber
                 Dim pkm As New SkyStoredPokemon(Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
-                AddHandler pkm.Modified, AddressOf OnModified
-                AddHandler pkm.PropertyChanged, AddressOf OnModified
-
-                If count < 2 Then 'Player Partner
-                    StoredPlayerPartner.Add(pkm)
-                ElseIf count < 5 Then 'Sp. Episode
-                    StoredSpEpisodePokemon.Add(pkm)
-                Else 'Others
-                    StoredPokemon.Add(pkm)
-                End If
+                StoredPokemon.Add(pkm)
             Next
-
-            _storage = New ObservableCollection(Of IPokemonBox)
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.PlayerPartnerPokemonSlot, StoredPlayerPartner))
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.SpEpisodePokemonSlot, StoredSpEpisodePokemon))
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.StoredPokemonSlot, StoredPokemon))
         End Sub
         Private Sub SaveStoredPokemon()
             For count = 0 To Offsets.StoredPokemonNumber
-                Dim pkm As SkyStoredPokemon
-                If count < 2 Then 'Player Partner
-                    pkm = StoredPlayerPartner(count)
-                ElseIf count < 5 Then 'Sp. Episode
-                    pkm = StoredSpEpisodePokemon(count - 2)
-                Else 'Others
-                    pkm = StoredPokemon(count - 5)
-                End If
-                Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = pkm.GetStoredPokemonBits
+                Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = StoredPokemon(count).GetStoredPokemonBits
             Next
         End Sub
-        Public Property StoredPlayerPartner As ObservableCollection(Of SkyStoredPokemon)
-        Public Property StoredSpEpisodePokemon As ObservableCollection(Of SkyStoredPokemon)
-        Public Property StoredPokemon As ObservableCollection(Of SkyStoredPokemon)
-
-        Public ReadOnly Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
-            Get
-                Return _storage
-            End Get
-        End Property
-        Dim _storage As ObservableCollection(Of IPokemonBox)
+        Public Property StoredPlayerPartner As List(Of SkyStoredPokemon)
+        Public Property StoredSpEpisodePokemon As List(Of SkyStoredPokemon)
+        Public Property StoredPokemon As List(Of SkyStoredPokemon)
 
 #End Region
 
@@ -422,15 +333,6 @@ Namespace MysteryDungeon.Explorers
             End Set
         End Property
         Dim _activePokemon As ObservableCollection(Of SkyActivePokemon)
-
-        Protected Property Party As IEnumerable Implements IParty.Party
-            Get
-                Return ActivePokemon
-            End Get
-            Set(value As IEnumerable)
-                ActivePokemon = value
-            End Set
-        End Property
 
         Public Property SpEpisodeActivePokemon As ObservableCollection(Of SkyActivePokemon)
             Get

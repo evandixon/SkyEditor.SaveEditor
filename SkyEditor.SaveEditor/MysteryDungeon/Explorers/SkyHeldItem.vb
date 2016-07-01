@@ -62,7 +62,7 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Public Function GetHeldItemBits() As Binary
-            Dim out As New Binary(SkySave.Offsets.HeldItemLength)
+            Dim out As New Binary((New SkySave.SkyOffsets).HeldItemLength)
             With out
                 .Bit(0) = IsValid
                 .Bit(1) = Flag1

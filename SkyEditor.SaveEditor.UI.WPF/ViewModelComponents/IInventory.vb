@@ -1,4 +1,4 @@
-﻿Namespace Modeling
+﻿Namespace ViewModelComponents
     Public Interface IInventory
         ReadOnly Property ItemSlots As IEnumerable(Of IItemSlot)
     End Interface

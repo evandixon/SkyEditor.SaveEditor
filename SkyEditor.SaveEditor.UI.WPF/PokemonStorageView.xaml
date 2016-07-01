@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SkyEditor.SaveEditor.UI.WPF"
              xmlns:skyui="clr-namespace:SkyEditor.UI.WPF;assembly=SkyEditor.UI.WPF"
-             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.Modeling;assembly=SkyEditor.SaveEditor"
+             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.UI.WPF.ViewModelComponents"
              xmlns:res="clr-namespace:SkyEditor.SaveEditor.UI.WPF.My.Resources"
              mc:Ignorable="d"
              SortOrder="1"

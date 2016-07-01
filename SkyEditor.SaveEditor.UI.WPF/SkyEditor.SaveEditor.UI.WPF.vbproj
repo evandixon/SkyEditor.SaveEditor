@@ -60,15 +60,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.Core, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.3-CI00003\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.0.3-CI00009\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.Core.Windows, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.3-CI00003\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.3-CI00009\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.UI.WPF, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.UI.WPF.4.0.3-CI00001\lib\net46\SkyEditor.UI.WPF.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.UI.WPF.4.0.3-CI00002\lib\net46\SkyEditor.UI.WPF.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
@@ -120,6 +120,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyGeneralViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyPartyViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDPartyViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDStoredPokemonViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyStoredPokemonViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDInventoryViewModel.vb" />
+    <Compile Include="MysteryDungeon\Rescue\ViewModels\RBInventoryViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyInventoryViewModel.vb" />
+    <Compile Include="MysteryDungeon\Rescue\ViewModels\RBStoredPokemonViewModel.vb" />
+    <Compile Include="ViewModelComponents\BasicPokemonBox.vb" />
+    <Compile Include="ViewModelComponents\IInventory.vb" />
+    <Compile Include="ViewModelComponents\IItemSlot.vb" />
+    <Compile Include="ViewModelComponents\IParty.vb" />
+    <Compile Include="ViewModelComponents\IPokemonBox.vb" />
+    <Compile Include="ViewModelComponents\IPokemonStorage.vb" />
+    <Compile Include="ViewModelComponents\ItemSlot.vb" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="System.Threading.Tasks" />
