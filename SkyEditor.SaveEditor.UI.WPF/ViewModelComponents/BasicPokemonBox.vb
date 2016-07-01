@@ -1,6 +1,6 @@
 ﻿Imports System.Text
 
-Namespace Modeling
+Namespace ViewModelComponents
     Public Class BasicPokemonBox
         Implements IPokemonBox
 

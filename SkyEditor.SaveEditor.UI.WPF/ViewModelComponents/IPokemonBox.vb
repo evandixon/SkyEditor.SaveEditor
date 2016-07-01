@@ -1,4 +1,4 @@
-﻿Namespace Modeling
+﻿Namespace ViewModelComponents
     Public Interface IPokemonBox
         Property ItemCollection As IEnumerable
         Property Name As String

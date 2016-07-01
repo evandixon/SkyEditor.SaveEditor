@@ -93,15 +93,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Player and Partner.
-        '''</summary>
-        Friend Shared ReadOnly Property PlayerPartnerPokemonSlot() As String
-            Get
-                Return ResourceManager.GetString("PlayerPartnerPokemonSlot", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to .
         '''</summary>
         Friend Shared ReadOnly Property PluginAuthor() As String
@@ -157,24 +148,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SkyStoredPokemonToString() As String
             Get
                 Return ResourceManager.GetString("SkyStoredPokemonToString", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Special Episode Pokemon.
-        '''</summary>
-        Friend Shared ReadOnly Property SpEpisodePokemonSlot() As String
-            Get
-                Return ResourceManager.GetString("SpEpisodePokemonSlot", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Others.
-        '''</summary>
-        Friend Shared ReadOnly Property StoredPokemonSlot() As String
-            Get
-                Return ResourceManager.GetString("StoredPokemonSlot", resourceCulture)
             End Get
         End Property
     End Class

@@ -26,7 +26,7 @@ Namespace My.Resources
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
-    Friend Class ListResources
+    Public Class ListResources
         
         Private Shared resourceMan As Global.System.Resources.ResourceManager
         
@@ -41,7 +41,7 @@ Namespace My.Resources
         '''  Returns the cached ResourceManager instance used by this class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
+        Public Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
                     Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("SkyEditor.SaveEditor.ListResources", GetType(ListResources).GetTypeInfo.Assembly)
@@ -56,7 +56,7 @@ Namespace My.Resources
         '''  resource lookups using this strongly typed resource class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Shared Property Culture() As Global.System.Globalization.CultureInfo
+        Public Shared Property Culture() As Global.System.Globalization.CultureInfo
             Get
                 Return resourceCulture
             End Get
@@ -83,7 +83,7 @@ Namespace My.Resources
         '''14=Chikorita
         '''15=Treeko.
         '''</summary>
-        Friend Shared ReadOnly Property RBBaseTypes() As String
+        Public Shared ReadOnly Property RBBaseTypes() As String
             Get
                 Return ResourceManager.GetString("RBBaseTypes", resourceCulture)
             End Get
@@ -119,7 +119,7 @@ Namespace My.Resources
         '''Tadpole Pond: 9
         '''Turtleshe [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property RBFriendAreaOffsets() As String
+        Public Shared ReadOnly Property RBFriendAreaOffsets() As String
             Get
                 Return ResourceManager.GetString("RBFriendAreaOffsets", resourceCulture)
             End Get
@@ -128,7 +128,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to 0=Item 0.
         '''</summary>
-        Friend Shared ReadOnly Property RBItemOffsets() As String
+        Public Shared ReadOnly Property RBItemOffsets() As String
             Get
                 Return ResourceManager.GetString("RBItemOffsets", resourceCulture)
             End Get
@@ -177,7 +177,7 @@ Namespace My.Resources
         '''Goggle Specs
         '''Lockon Spe [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property RBItemOrder() As String
+        Public Shared ReadOnly Property RBItemOrder() As String
             Get
                 Return ResourceManager.GetString("RBItemOrder", resourceCulture)
             End Get
@@ -219,7 +219,7 @@ Namespace My.Resources
         '''32=Plain Ribbon
         '''33=Speci [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property RBItems() As String
+        Public Shared ReadOnly Property RBItems() As String
             Get
                 Return ResourceManager.GetString("RBItems", resourceCulture)
             End Get
@@ -257,7 +257,7 @@ Namespace My.Resources
         '''28=Pitfall Valley
         '''29=Northern Range  [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property RBLocations() As String
+        Public Shared ReadOnly Property RBLocations() As String
             Get
                 Return ResourceManager.GetString("RBLocations", resourceCulture)
             End Get
@@ -305,7 +305,7 @@ Namespace My.Resources
         '''38=Pursuit
         '''39=Doubles [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property RBMoves() As String
+        Public Shared ReadOnly Property RBMoves() As String
             Get
                 Return ResourceManager.GetString("RBMoves", resourceCulture)
             End Get
@@ -354,7 +354,7 @@ Namespace My.Resources
         '''39=Jigglypuff
         '''40=Wigg [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property RBPokemon() As String
+        Public Shared ReadOnly Property RBPokemon() As String
             Get
                 Return ResourceManager.GetString("RBPokemon", resourceCulture)
             End Get
@@ -365,7 +365,7 @@ Namespace My.Resources
         '''Special Episode:3
         '''Others:715.
         '''</summary>
-        Friend Shared ReadOnly Property SkyFriendAreaOffsets() As String
+        Public Shared ReadOnly Property SkyFriendAreaOffsets() As String
             Get
                 Return ResourceManager.GetString("SkyFriendAreaOffsets", resourceCulture)
             End Get
@@ -408,7 +408,7 @@ Namespace My.Resources
         '''33=Goggle Specs
         '''34=Diet  [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property SkyItems() As String
+        Public Shared ReadOnly Property SkyItems() As String
             Get
                 Return ResourceManager.GetString("SkyItems", resourceCulture)
             End Get
@@ -447,7 +447,7 @@ Namespace My.Resources
         '''29=Sealed Ruin
         '''30=D [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property SkyLocations() As String
+        Public Shared ReadOnly Property SkyLocations() As String
             Get
                 Return ResourceManager.GetString("SkyLocations", resourceCulture)
             End Get
@@ -495,7 +495,7 @@ Namespace My.Resources
         '''38=Pursuit
         '''39=DoubleSla [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property SkyMoves() As String
+        Public Shared ReadOnly Property SkyMoves() As String
             Get
                 Return ResourceManager.GetString("SkyMoves", resourceCulture)
             End Get
@@ -544,7 +544,7 @@ Namespace My.Resources
         '''39=Jigglypuff
         '''40=Wigg [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property SkyPokemon() As String
+        Public Shared ReadOnly Property SkyPokemon() As String
             Get
                 Return ResourceManager.GetString("SkyPokemon", resourceCulture)
             End Get
@@ -554,7 +554,7 @@ Namespace My.Resources
         '''  Looks up a localized string similar to Player and Partner: 2
         '''Others:548.
         '''</summary>
-        Friend Shared ReadOnly Property TDFriendAreaOffsets() As String
+        Public Shared ReadOnly Property TDFriendAreaOffsets() As String
             Get
                 Return ResourceManager.GetString("TDFriendAreaOffsets", resourceCulture)
             End Get
@@ -597,7 +597,7 @@ Namespace My.Resources
         '''33=Goggle Specs
         '''34=Diet  [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property TDItems() As String
+        Public Shared ReadOnly Property TDItems() As String
             Get
                 Return ResourceManager.GetString("TDItems", resourceCulture)
             End Get
@@ -636,7 +636,7 @@ Namespace My.Resources
         '''29=Sealed Ruin
         '''30=D [rest of string was truncated]&quot;;.
         '''</summary>
-        Friend Shared ReadOnly Property TDLocations() As String
+        Public Shared ReadOnly Property TDLocations() As String
             Get
                 Return ResourceManager.GetString("TDLocations", resourceCulture)
             End Get

@@ -7,7 +7,6 @@ Namespace MysteryDungeon.Rescue
         Inherits BinaryFile
         Implements IDetectableFileType
         Implements INotifyPropertyChanged
-        Implements IPokemonStorage
         Implements INotifyModified
 
         Public Class RBOffsets
@@ -192,48 +191,20 @@ Namespace MysteryDungeon.Rescue
 
 #Region "Stored Pokemon"
         Private Sub LoadStoredPokemon()
-            _storage = New ObservableCollection(Of IPokemonBox)
-            Dim defs = StoredPokemonSlotDefinition.FromLines(My.Resources.ListResources.RBFriendAreaOffsets)
-            Dim offset As Integer = 0
-            For Each item In defs
-                Dim pokemon As New ObservableCollection(Of RBStoredPokemon)
-
-                For count = offset To offset + item.Length - 1
-                    Dim p = RawStoredPokemon(count)
-                    AddHandler p.Modified, AddressOf OnModified
-                    AddHandler p.PropertyChanged, AddressOf OnModified
-
-                    pokemon.Add(p)
-                Next
-                offset += item.Length - 1
-                _storage.Add(New BasicPokemonBox(item.Name, pokemon))
+            StoredPokemon = New List(Of RBStoredPokemon)
+            For count = 0 To Offsets.StoredPokemonNumber - 1
+                Dim p As New RBStoredPokemon(Me.Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
+                StoredPokemon.Add(p)
             Next
         End Sub
 
         Private Sub SaveStoredPokemon()
-            Dim defs = StoredPokemonSlotDefinition.FromLines(My.Resources.ListResources.RBFriendAreaOffsets)
-            For i = 0 To defs.Count - 1
-                For j = 0 To defs(i).Length - 1
-                    RawStoredPokemon(i + j) = _storage(i).ItemCollection(j)
-                Next
+            For count = 0 To Offsets.StoredPokemonNumber - 1
+                Me.Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = StoredPokemon(count).GetStoredPokemonBits
             Next
         End Sub
 
-        Private Property RawStoredPokemon(Index As Integer) As RBStoredPokemon
-            Get
-                Return New RBStoredPokemon(Me.Bits.Range(Offsets.StoredPokemonOffset + Index * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
-            End Get
-            Set(value As RBStoredPokemon)
-                Me.Bits.Range(Offsets.StoredPokemonOffset + Index * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = value.GetStoredPokemonBits
-            End Set
-        End Property
-
-        Public ReadOnly Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
-            Get
-                Return _storage
-            End Get
-        End Property
-        Dim _storage As ObservableCollection(Of IPokemonBox)
+        Public Property StoredPokemon As List(Of RBStoredPokemon)
 
 #End Region
 

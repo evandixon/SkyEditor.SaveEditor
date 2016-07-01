@@ -7,7 +7,6 @@ Namespace MysteryDungeon.Explorers
         Inherits BinaryFile
         Implements IDetectableFileType
         Implements IParty
-        Implements IPokemonStorage
         Implements INotifyPropertyChanged
         Implements INotifyModified
 
@@ -275,52 +274,23 @@ Namespace MysteryDungeon.Explorers
 
 #Region "Stored Pokemon"
         Private Sub LoadStoredPokemon()
-            StoredPlayerPartner = New ObservableCollection(Of SkyStoredPokemon)
-            StoredSpEpisodePokemon = New ObservableCollection(Of SkyStoredPokemon)
-            StoredPokemon = New ObservableCollection(Of SkyStoredPokemon)
+            StoredPlayerPartner = New List(Of SkyStoredPokemon)
+            StoredSpEpisodePokemon = New List(Of SkyStoredPokemon)
+            StoredPokemon = New List(Of SkyStoredPokemon)
 
             For count = 0 To Offsets.StoredPokemonNumber
                 Dim pkm As New SkyStoredPokemon(Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
-                AddHandler pkm.Modified, AddressOf OnModified
-                AddHandler pkm.PropertyChanged, AddressOf OnModified
-
-                If count < 2 Then 'Player Partner
-                    StoredPlayerPartner.Add(pkm)
-                ElseIf count < 5 Then 'Sp. Episode
-                    StoredSpEpisodePokemon.Add(pkm)
-                Else 'Others
-                    StoredPokemon.Add(pkm)
-                End If
+                StoredPokemon.Add(pkm)
             Next
-
-            _storage = New ObservableCollection(Of IPokemonBox)
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.PlayerPartnerPokemonSlot, StoredPlayerPartner))
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.SpEpisodePokemonSlot, StoredSpEpisodePokemon))
-            _storage.Add(New BasicPokemonBox(My.Resources.Language.StoredPokemonSlot, StoredPokemon))
         End Sub
         Private Sub SaveStoredPokemon()
             For count = 0 To Offsets.StoredPokemonNumber
-                Dim pkm As SkyStoredPokemon
-                If count < 2 Then 'Player Partner
-                    pkm = StoredPlayerPartner(count)
-                ElseIf count < 5 Then 'Sp. Episode
-                    pkm = StoredSpEpisodePokemon(count - 2)
-                Else 'Others
-                    pkm = StoredPokemon(count - 5)
-                End If
-                Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = pkm.GetStoredPokemonBits
+                Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = StoredPokemon(count).GetStoredPokemonBits
             Next
         End Sub
-        Public Property StoredPlayerPartner As ObservableCollection(Of SkyStoredPokemon)
-        Public Property StoredSpEpisodePokemon As ObservableCollection(Of SkyStoredPokemon)
-        Public Property StoredPokemon As ObservableCollection(Of SkyStoredPokemon)
-
-        Public ReadOnly Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
-            Get
-                Return _storage
-            End Get
-        End Property
-        Dim _storage As ObservableCollection(Of IPokemonBox)
+        Public Property StoredPlayerPartner As List(Of SkyStoredPokemon)
+        Public Property StoredSpEpisodePokemon As List(Of SkyStoredPokemon)
+        Public Property StoredPokemon As List(Of SkyStoredPokemon)
 
 #End Region
 

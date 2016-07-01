@@ -3,7 +3,7 @@ Imports System.Collections.Specialized
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
-Imports SkyEditor.SaveEditor.UI.WPF.ViewModelInterfaces
+Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
 
 Namespace MysteryDungeon.Explorers.ViewModels
     Public Class TDInventoryViewModel

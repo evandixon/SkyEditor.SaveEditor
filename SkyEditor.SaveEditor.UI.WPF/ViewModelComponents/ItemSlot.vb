@@ -4,7 +4,7 @@ Imports System.Windows.Input
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
-Namespace ViewModelInterfaces
+Namespace ViewModelComponents
     Public Class ItemSlot(Of T As IClonable)
         Implements IItemSlot
 
