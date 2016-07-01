@@ -1,7 +1,6 @@
 ﻿Imports System.Collections.Specialized
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
-Imports SkyEditor.SaveEditor.Modeling
 
 Namespace MysteryDungeon.Explorers
     Public Class TDSave
@@ -9,7 +8,6 @@ Namespace MysteryDungeon.Explorers
         Implements IDetectableFileType
         Implements INotifyPropertyChanged
         Implements INotifyModified
-        Implements IParty
 
         Public Sub New()
             MyBase.New()
@@ -192,15 +190,6 @@ Namespace MysteryDungeon.Explorers
             End Set
         End Property
         Dim _activePokemon As ObservableCollection(Of TDActivePokemon)
-
-        Protected Property Party As IEnumerable Implements IParty.Party
-            Get
-                Return ActivePokemon
-            End Get
-            Set(value As IEnumerable)
-                ActivePokemon = value
-            End Set
-        End Property
 
 #End Region
 

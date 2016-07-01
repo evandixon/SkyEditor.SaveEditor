@@ -82,7 +82,6 @@
     <Compile Include="Binary.vb" />
     <Compile Include="BinaryFile.vb" />
     <Compile Include="Checksums.vb" />
-    <Compile Include="Interfaces\iPokemonStorage.vb" />
     <Compile Include="Language.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,7 +113,6 @@
       <DependentUpon>ListResources.it.resx</DependentUpon>
     </Compile>
     <Compile Include="Lists.vb" />
-    <Compile Include="Modeling\IParty.vb" />
     <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
@@ -192,6 +190,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <Import Project="..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets" Condition="Exists('..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

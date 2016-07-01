@@ -1,12 +1,10 @@
 ﻿Imports SkyEditor.Core.IO
-Imports SkyEditor.SaveEditor.Modeling
 Imports SkyEditor.SaveEditor.MysteryDungeon
 
 Namespace MysteryDungeon.Explorers
     Public Class SkySave
         Inherits BinaryFile
         Implements IDetectableFileType
-        Implements IParty
         Implements INotifyPropertyChanged
         Implements INotifyModified
 
@@ -335,15 +333,6 @@ Namespace MysteryDungeon.Explorers
             End Set
         End Property
         Dim _activePokemon As ObservableCollection(Of SkyActivePokemon)
-
-        Protected Property Party As IEnumerable Implements IParty.Party
-            Get
-                Return ActivePokemon
-            End Get
-            Set(value As IEnumerable)
-                ActivePokemon = value
-            End Set
-        End Property
 
         Public Property SpEpisodeActivePokemon As ObservableCollection(Of SkyActivePokemon)
             Get

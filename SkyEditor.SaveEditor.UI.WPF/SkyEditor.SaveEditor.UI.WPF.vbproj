@@ -120,6 +120,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyGeneralViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyPartyViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDPartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDInventoryViewModel.vb" />
@@ -129,6 +131,7 @@
     <Compile Include="ViewModelComponents\BasicPokemonBox.vb" />
     <Compile Include="ViewModelComponents\IInventory.vb" />
     <Compile Include="ViewModelComponents\IItemSlot.vb" />
+    <Compile Include="ViewModelComponents\IParty.vb" />
     <Compile Include="ViewModelComponents\IPokemonBox.vb" />
     <Compile Include="ViewModelComponents\IPokemonStorage.vb" />
     <Compile Include="ViewModelComponents\ItemSlot.vb" />

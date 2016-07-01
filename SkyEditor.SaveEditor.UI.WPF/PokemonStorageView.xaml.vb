@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports SkyEditor.SaveEditor.Modeling
 
 Public Class PokemonStorageView
     Implements INotifyPropertyChanged
