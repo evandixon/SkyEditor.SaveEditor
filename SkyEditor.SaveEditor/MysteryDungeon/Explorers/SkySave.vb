@@ -432,7 +432,7 @@ Namespace MysteryDungeon.Explorers
             If OriginalPartnerIsFemale Then
                 rawOriginalPartnerID += 600
             End If
-            Bits.Int(&HC0, 0, 16) = rawOriginalPlayerID
+            Bits.Int(&HC0, 0, 16) = rawOriginalPartnerID
 
             '-----Original Names
             Bits.SetStringPMD(&H13F, 0, 10, OriginalPlayerName)
@@ -445,17 +445,6 @@ Namespace MysteryDungeon.Explorers
         ''' </summary>
         ''' <returns></returns>
         Public Property OriginalPlayerID As Integer
-            Get
-                Return _originalPlayerID
-            End Get
-            Set(value As Integer)
-                If Not value = _originalPlayerID Then
-                    _originalPlayerID = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerID)))
-                End If
-            End Set
-        End Property
-        Dim _originalPlayerID As Integer
 
         ''' <summary>
         ''' Gets or sets the original player gender.
@@ -463,17 +452,6 @@ Namespace MysteryDungeon.Explorers
         ''' </summary>
         ''' <returns></returns>
         Public Property OriginalPlayerIsFemale As Boolean
-            Get
-                Return _originalPlayerIsFemale
-            End Get
-            Set(value As Boolean)
-                If Not value = _originalPlayerIsFemale Then
-                    _originalPlayerIsFemale = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPlayerIsFemale)))
-                End If
-            End Set
-        End Property
-        Dim _originalPlayerIsFemale As Boolean
 
         ''' <summary>
         ''' Gets or sets the original partner Pokemon.
@@ -481,17 +459,6 @@ Namespace MysteryDungeon.Explorers
         ''' </summary>
         ''' <returns></returns>
         Public Property OriginalPartnerID As Integer
-            Get
-                Return _originalPartnerID
-            End Get
-            Set(value As Integer)
-                If Not _originalPartnerID = value Then
-                    _originalPartnerID = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerID)))
-                End If
-            End Set
-        End Property
-        Dim _originalPartnerID As Integer
 
         ''' <summary>
         ''' Gets or sets the original partner gender.
@@ -499,17 +466,6 @@ Namespace MysteryDungeon.Explorers
         ''' </summary>
         ''' <returns></returns>
         Public Property OriginalPartnerIsFemale As Boolean
-            Get
-                Return _originalPartnerIsFemale
-            End Get
-            Set(value As Boolean)
-                If Not _originalPartnerIsFemale = value Then
-                    _originalPartnerIsFemale = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerIsFemale)))
-                End If
-            End Set
-        End Property
-        Dim _originalPartnerIsFemale As Boolean
 
         ''' <summary>
         ''' Gets or sets the original player name.
@@ -517,17 +473,6 @@ Namespace MysteryDungeon.Explorers
         ''' </summary>
         ''' <returns></returns>
         Public Property OriginalPlayerName As String
-            Get
-                Return _originalPlayerName
-            End Get
-            Set(value As String)
-                If Not _originalPlayerName = value Then
-                    _originalPlayerName = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPlayerName)))
-                End If
-            End Set
-        End Property
-        Dim _originalPlayerName As String
 
         ''' <summary>
         ''' Gets or sets the original partner name.
@@ -535,17 +480,6 @@ Namespace MysteryDungeon.Explorers
         ''' </summary>
         ''' <returns></returns>
         Public Property OriginalPartnerName As String
-            Get
-                Return _originalPartnerName
-            End Get
-            Set(value As String)
-                If Not _originalPartnerName = value Then
-                    _originalPartnerName = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerName)))
-                End If
-            End Set
-        End Property
-        Dim _originalPartnerName As String
 #End Region
 
 #Region "Settings"
