@@ -5,16 +5,11 @@ Namespace MysteryDungeon.Rescue
         Implements IOpenableFile
         Implements ISavableAs
         Implements IOnDisk
-        Implements INotifyPropertyChanged
-        Implements INotifyModified
-        Implements I4Moves
 
         Public Const Length = 362
         Public Const MimeType As String = "application/x-rb-pokemon"
 
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
-        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
         Public Sub New()
             Unk1 = New Binary(15)
@@ -115,220 +110,71 @@ Namespace MysteryDungeon.Rescue
             End If
         End Function
 
-        Private Sub OnAttackModified(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged, _attack2.PropertyChanged, _attack3.PropertyChanged, _attack4.PropertyChanged
-            RaiseEvent Modified(Me, e)
-        End Sub
-
 #Region "Properties"
         Private Property Unk1 As Binary
         Private Property Unk2 As Binary
 
         Public Property Level As Byte
-            Get
-                Return _level
-            End Get
-            Set(value As Byte)
-                If Not _level = value Then
-                    _level = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Level)))
-                End If
-            End Set
-        End Property
-        Dim _level As Byte
 
         Public Property ID As Integer
-            Get
-                Return _id
-            End Get
-            Set(value As Integer)
-                If Not _id = value Then
-                    _id = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ID)))
-                End If
-            End Set
-        End Property
-        Dim _id As Integer
 
         Public Property MetAt As Integer
-            Get
-                Return _metAt
-            End Get
-            Set(value As Integer)
-                If Not _metAt = value Then
-                    _metAt = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(MetAt)))
-                End If
-            End Set
-        End Property
-        Dim _metAt As Integer
-
-        'Public Property MetFloor As Integer
-        '    Get
-        '        Return _metFloor
-        '    End Get
-        '    Set(value As Integer)
-        '        If Not _metFloor = value Then
-        '            _metFloor = value
-        '        End If
-        '    End Set
-        'End Property
-        'Dim _metFloor As Integer
 
         Public Property IQ As Integer
-            Get
-                Return _iq
-            End Get
-            Set(value As Integer)
-                If Not _iq = value Then
-                    _iq = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IQ)))
-                End If
-            End Set
-        End Property
-        Dim _iq As Integer
 
         Public Property HP As Integer
-            Get
-                Return _hp
-            End Get
-            Set(value As Integer)
-                If Not _hp = value Then
-                    _hp = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HP)))
-                End If
-            End Set
-        End Property
-        Dim _hp As Integer
 
         Public Property Attack As Byte
-            Get
-                Return _attack
-            End Get
-            Set(value As Byte)
-                If Not _attack = value Then
-                    _attack = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack)))
-                End If
-            End Set
-        End Property
-        Dim _attack As Byte
 
         Public Property Defense As Byte
-            Get
-                Return _defense
-            End Get
-            Set(value As Byte)
-                If Not _defense = value Then
-                    _defense = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Defense)))
-                End If
-            End Set
-        End Property
-        Dim _defense As Byte
 
         Public Property SpAttack As Byte
-            Get
-                Return _spAttack
-            End Get
-            Set(value As Byte)
-                If Not _spAttack = value Then
-                    _spAttack = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpAttack)))
-                End If
-            End Set
-        End Property
-        Dim _spAttack As Byte
 
         Public Property SpDefense As Byte
-            Get
-                Return _spDefense
-            End Get
-            Set(value As Byte)
-                If Not _spDefense = value Then
-                    _spDefense = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpDefense)))
-                End If
-            End Set
-        End Property
-        Dim _spDefense As Byte
 
         Public Property Exp As Integer
-            Get
-                Return _exp
-            End Get
-            Set(value As Integer)
-                If Not _exp = value Then
-                    _exp = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Exp)))
-                End If
-            End Set
-        End Property
-        Dim _exp As Integer
 
-        Public Property Attack1 As IMDAttack Implements I4Moves.Attack1
+        Public Property Attack1 As IMDAttack
             Get
                 Return _attack1
             End Get
             Set(value As IMDAttack)
-                If _attack1 IsNot value Then
-                    _attack1 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack1)))
-                End If
+                _attack1 = value
             End Set
         End Property
         Private WithEvents _attack1 As RBAttack
 
-        Public Property Attack2 As IMDAttack Implements I4Moves.Attack2
+        Public Property Attack2 As IMDAttack
             Get
                 Return _attack2
             End Get
             Set(value As IMDAttack)
-                If _attack2 IsNot value Then
-                    _attack2 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack2)))
-                End If
+                _attack2 = value
             End Set
         End Property
         Private WithEvents _attack2 As RBAttack
 
-        Public Property Attack3 As IMDAttack Implements I4Moves.Attack3
+        Public Property Attack3 As IMDAttack
             Get
                 Return _attack3
             End Get
             Set(value As IMDAttack)
-                If _attack3 IsNot value Then
-                    _attack3 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack3)))
-                End If
+                _attack3 = value
             End Set
         End Property
         Private WithEvents _attack3 As RBAttack
 
-        Public Property Attack4 As IMDAttack Implements I4Moves.Attack4
+        Public Property Attack4 As IMDAttack
             Get
                 Return _attack4
             End Get
             Set(value As IMDAttack)
-                If _attack4 IsNot value Then
-                    _attack4 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack4)))
-                End If
+                _attack4 = value
             End Set
         End Property
         Private WithEvents _attack4 As RBAttack
 
         Public Property Name As String
-            Get
-                Return _name
-            End Get
-            Set(value As String)
-                If Not _name = value Then
-                    _name = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Name)))
-                End If
-            End Set
-        End Property
-        Dim _name As String
 
         Public ReadOnly Property PokemonNames As Dictionary(Of Integer, String)
             Get

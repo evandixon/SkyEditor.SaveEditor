@@ -5,7 +5,7 @@ Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Rescue
 Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
 
-Namespace MysteryDungeon.Explorers.ViewModels
+Namespace MysteryDungeon.Rescue.ViewModels
     Public Class RBInventoryViewModel
         Inherits GenericViewModel(Of RBSave)
         Implements IInventory

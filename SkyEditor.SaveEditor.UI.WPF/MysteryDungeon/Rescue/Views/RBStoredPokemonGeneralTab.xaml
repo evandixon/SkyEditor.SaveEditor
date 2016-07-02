@@ -1,4 +1,4 @@
-﻿<skyWPF:DataBoundObjectControl x:Class="MysteryDungeon.Rescue.RBStoredPokemonGeneralTab"
+﻿<skyWPF:DataBoundObjectControl x:Class="MysteryDungeon.Rescue.Views.RBStoredPokemonGeneralTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,10 +6,10 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:SkyEditor.SaveEditor.UI.WPF"
              xmlns:skyWPF="clr-namespace:SkyEditor.UI.WPF;assembly=SkyEditor.UI.WPF"
-             xmlns:rescue="clr-namespace:SkyEditor.SaveEditor.MysteryDungeon.Rescue;assembly=SkyEditor.SaveEditor"
+             xmlns:vm="clr-namespace:SkyEditor.SaveEditor.UI.WPF.MysteryDungeon.Rescue.ViewModels"
              xmlns:res="clr-namespace:SkyEditor.SaveEditor.UI.WPF.My.Resources"
              SortOrder="0"
-             TargetType="{x:Type rescue:RBStoredPokemon}"
+             TargetType="{x:Type vm:RBStoredPokemonGeneralViewModel}"
              Header="{x:Static res:Language.General}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">

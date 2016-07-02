@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
+Imports System.ComponentModel
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -9,17 +10,19 @@ Namespace MysteryDungeon.Explorers.ViewModels
     Public Class SkyStoredPokemonViewModel
         Inherits GenericViewModel(Of SkySave)
         Implements INotifyModified
+        Implements INotifyPropertyChanged
         Implements IPokemonStorage
 
         Public Sub New()
             MyBase.New
 
-            StoredPlayerPartner = New ObservableCollection(Of SkyStoredPokemon)
-            StoredSpEpisodePokemon = New ObservableCollection(Of SkyStoredPokemon)
-            StoredPokemon = New ObservableCollection(Of SkyStoredPokemon)
+            StoredPlayerPartner = New ObservableCollection(Of FileViewModel)
+            StoredSpEpisodePokemon = New ObservableCollection(Of FileViewModel)
+            StoredPokemon = New ObservableCollection(Of FileViewModel)
         End Sub
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
         Private Sub _storedPlayerPartner_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _storedPlayerPartner.CollectionChanged, _storedSpEpisodePokemon.CollectionChanged, _storedPokemon.CollectionChanged
             RaiseEvent Modified(Me, e)
@@ -31,35 +34,49 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
 #Region "Properties"
         Public Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
-        Public Property StoredPlayerPartner As IEnumerable(Of SkyStoredPokemon)
+
+        Public Property SelectedBox As IPokemonBox Implements IPokemonStorage.SelectedBox
+            Get
+                Return _selectedBox
+            End Get
+            Set(value As IPokemonBox)
+                If _selectedBox IsNot value Then
+                    _selectedBox = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SelectedBox)))
+                End If
+            End Set
+        End Property
+        Dim _selectedBox As IPokemonBox
+
+        Public Property StoredPlayerPartner As IEnumerable(Of FileViewModel)
             Get
                 Return _storedPlayerPartner
             End Get
-            Set(value As IEnumerable(Of SkyStoredPokemon))
+            Set(value As IEnumerable(Of FileViewModel))
                 _storedPlayerPartner = value
             End Set
         End Property
-        Private WithEvents _storedPlayerPartner As ObservableCollection(Of SkyStoredPokemon)
+        Private WithEvents _storedPlayerPartner As ObservableCollection(Of FileViewModel)
 
-        Public Property StoredSpEpisodePokemon As IEnumerable(Of SkyStoredPokemon)
+        Public Property StoredSpEpisodePokemon As IEnumerable(Of FileViewModel)
             Get
                 Return _storedSpEpisodePokemon
             End Get
-            Set(value As IEnumerable(Of SkyStoredPokemon))
+            Set(value As IEnumerable(Of FileViewModel))
                 _storedSpEpisodePokemon = value
             End Set
         End Property
-        Private WithEvents _storedSpEpisodePokemon As ObservableCollection(Of SkyStoredPokemon)
+        Private WithEvents _storedSpEpisodePokemon As ObservableCollection(Of FileViewModel)
 
-        Public Property StoredPokemon As IEnumerable(Of SkyStoredPokemon)
+        Public Property StoredPokemon As IEnumerable(Of FileViewModel)
             Get
                 Return _storedPokemon
             End Get
-            Set(value As IEnumerable(Of SkyStoredPokemon))
+            Set(value As IEnumerable(Of FileViewModel))
                 _storedPokemon = value
             End Set
         End Property
-        Private WithEvents _storedPokemon As ObservableCollection(Of SkyStoredPokemon)
+        Private WithEvents _storedPokemon As ObservableCollection(Of FileViewModel)
 #End Region
 
 
@@ -74,15 +91,15 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             For count = 0 To s.StoredPokemon.Count - 1
                 Dim pkm = s.StoredPokemon(count)
-                AddHandler pkm.Modified, AddressOf OnModified
-                AddHandler pkm.PropertyChanged, AddressOf OnModified
+                Dim fvm As New FileViewModel(pkm)
+                AddHandler fvm.Modified, AddressOf OnModified
 
                 If count < 2 Then 'Player Partner
-                    _storedPlayerPartner.Add(pkm)
+                    _storedPlayerPartner.Add(fvm)
                 ElseIf count < 5 Then 'Sp. Episode
-                    _storedSpEpisodePokemon.Add(pkm)
+                    _storedSpEpisodePokemon.Add(fvm)
                 Else 'Others
-                    _storedPokemon.Add(pkm)
+                    _storedPokemon.Add(fvm)
                 End If
             Next
 
@@ -100,18 +117,18 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             s.StoredPlayerPartner.Clear()
             For Each item In StoredPlayerPartner
-                s.StoredPlayerPartner.Add(item)
+                s.StoredPlayerPartner.Add(item.File)
             Next
 
             s.StoredSpEpisodePokemon.Clear()
             For Each item In StoredSpEpisodePokemon
-                s.StoredSpEpisodePokemon.Add(item)
+                s.StoredSpEpisodePokemon.Add(item.File)
             Next
 
             s.StoredPokemon.Clear()
 
             For Each item In StoredPokemon
-                s.StoredPokemon.Add(item)
+                s.StoredPokemon.Add(item.File)
             Next
         End Sub
 
