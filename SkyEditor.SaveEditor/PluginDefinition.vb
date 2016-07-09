@@ -23,6 +23,7 @@ Public Class PluginDefinition
 
     Public Overrides Sub Load(manager As PluginManager)
         MyBase.Load(manager)
-        manager.CurrentIOUIManager.RegisterIOFilter("*.sav", My.Resources.Language.RawSaveFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("sav", My.Resources.Language.RawSaveFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("skypkm", My.Resources.Language.SkyPkmFile)
     End Sub
 End Class

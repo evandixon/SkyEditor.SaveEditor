@@ -119,7 +119,7 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-            Return ".tdpkm"
+            Return "tdpkm"
         End Function
 
         Public Sub Save(provider As IOProvider) Implements ISavable.Save
@@ -134,6 +134,10 @@ Namespace MysteryDungeon.Explorers
             Else
                 Return My.Resources.Language.BlankPokemon
             End If
+        End Function
+
+        Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+            Return {"tdpkm"}
         End Function
 
 #Region "Properties"

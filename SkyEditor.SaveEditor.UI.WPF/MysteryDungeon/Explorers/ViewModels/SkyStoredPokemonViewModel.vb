@@ -121,21 +121,19 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             Dim s As SkySave = model
 
-            s.StoredPlayerPartner.Clear()
-            For Each item In StoredPlayerPartner
-                s.StoredPlayerPartner.Add(item.File)
-            Next
-
-            s.StoredSpEpisodePokemon.Clear()
-            For Each item In StoredSpEpisodePokemon
-                s.StoredSpEpisodePokemon.Add(item.File)
-            Next
-
             s.StoredPokemon.Clear()
+            For Each item In StoredPlayerPartner
+                s.StoredPokemon.Add(item.File)
+            Next
+
+            For Each item In StoredSpEpisodePokemon
+                s.StoredPokemon.Add(item.File)
+            Next
 
             For Each item In StoredPokemon
                 s.StoredPokemon.Add(item.File)
             Next
+
         End Sub
 
     End Class

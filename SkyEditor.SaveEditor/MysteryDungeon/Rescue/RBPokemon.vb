@@ -93,7 +93,7 @@ Namespace MysteryDungeon.Rescue
         End Sub
 
         Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-            Return ".rbpkm"
+            Return "rbpkm"
         End Function
 
         Public Sub Save(provider As IOProvider) Implements ISavable.Save
@@ -108,6 +108,10 @@ Namespace MysteryDungeon.Rescue
             Else
                 Return My.Resources.Language.BlankPokemon
             End If
+        End Function
+
+        Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+            Return {"rbpkm"}
         End Function
 
 #Region "Properties"

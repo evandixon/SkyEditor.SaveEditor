@@ -1,6 +1,7 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
+Imports SkyEditor.UI.WPF
 
 Namespace MenuActions
     Public Class ExportPokemon
@@ -24,7 +25,11 @@ Namespace MenuActions
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If SupportsObject(item) Then
-                    Throw New NotImplementedException
+                    Dim pkm = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
+                    Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
+                    If s.ShowDialog = Forms.DialogResult.OK Then
+                        pkm.Save(s.FileName, CurrentPluginManager)
+                    End If
                 End If
             Next
         End Sub

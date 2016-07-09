@@ -149,4 +149,7 @@ Demonic722 (Misc RAM and save addresses)</value>
   <data name="SkyStoredPokemonToString" xml:space="preserve">
     <value>{0} (Lvl. {1} {2})</value>
   </data>
+  <data name="SkyPkmFile" xml:space="preserve">
+    <value>Explorers of Sky Stored Pokemon</value>
+  </data>
 </root>

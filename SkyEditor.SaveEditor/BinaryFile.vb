@@ -67,7 +67,7 @@ Public Class BinaryFile
     End Sub
 
     Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-        Return ".sav"
+        Return "sav"
     End Function
 
     Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
@@ -79,4 +79,8 @@ Public Class BinaryFile
     Public Sub CreateFile(Name As String) Implements ICreatableFile.CreateFile
         Me.Name = ""
     End Sub
+
+    Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+        Return {"sav"}
+    End Function
 End Class

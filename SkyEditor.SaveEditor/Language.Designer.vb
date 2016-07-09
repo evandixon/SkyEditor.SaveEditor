@@ -143,6 +143,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Explorers of Sky Stored Pokemon.
+        '''</summary>
+        Friend Shared ReadOnly Property SkyPkmFile() As String
+            Get
+                Return ResourceManager.GetString("SkyPkmFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to {0} (Lvl. {1} {2}).
         '''</summary>
         Friend Shared ReadOnly Property SkyStoredPokemonToString() As String

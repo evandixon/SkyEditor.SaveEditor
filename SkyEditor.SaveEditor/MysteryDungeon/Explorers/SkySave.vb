@@ -272,22 +272,19 @@ Namespace MysteryDungeon.Explorers
 
 #Region "Stored Pokemon"
         Private Sub LoadStoredPokemon()
-            StoredPlayerPartner = New List(Of SkyStoredPokemon)
-            StoredSpEpisodePokemon = New List(Of SkyStoredPokemon)
             StoredPokemon = New List(Of SkyStoredPokemon)
 
-            For count = 0 To Offsets.StoredPokemonNumber
+            For count = 0 To Offsets.StoredPokemonNumber - 1
                 Dim pkm As New SkyStoredPokemon(Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
                 StoredPokemon.Add(pkm)
             Next
         End Sub
         Private Sub SaveStoredPokemon()
-            For count = 0 To Offsets.StoredPokemonNumber
+            For count = 0 To Offsets.StoredPokemonNumber - 1
                 Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = StoredPokemon(count).GetStoredPokemonBits
             Next
         End Sub
-        Public Property StoredPlayerPartner As List(Of SkyStoredPokemon)
-        Public Property StoredSpEpisodePokemon As List(Of SkyStoredPokemon)
+
         Public Property StoredPokemon As List(Of SkyStoredPokemon)
 
 #End Region
