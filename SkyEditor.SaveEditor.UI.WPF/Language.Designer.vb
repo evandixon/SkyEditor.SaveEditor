@@ -362,6 +362,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to _Pokémon.
+        '''</summary>
+        Public Shared ReadOnly Property MenuPokemon() As String
+            Get
+                Return ResourceManager.GetString("MenuPokemon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to _Export.
+        '''</summary>
+        Public Shared ReadOnly Property MenuPokemonExport() As String
+            Get
+                Return ResourceManager.GetString("MenuPokemonExport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Met At.
         '''</summary>
         Public Shared ReadOnly Property MetAt() As String

@@ -19,6 +19,7 @@ Namespace ViewModelComponents
                 If _selectedPokemon IsNot value Then
                     _selectedPokemon = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SelectedPokemon)))
+                    RaiseEvent SelectedPokemonChanged(Me, New EventArgs)
                 End If
             End Set
         End Property
@@ -38,6 +39,7 @@ Namespace ViewModelComponents
         End Function
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+        Public Event SelectedPokemonChanged(sender As Object, e As EventArgs) Implements IPokemonBox.SelectedPokemonChanged
 
         Public Sub New(name As String, itemCollection As IEnumerable)
             Me.Name = name

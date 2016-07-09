@@ -349,4 +349,10 @@ For stackable items like sticks and spikes, this lets you control how much is in
   <data name="AllPokemon" xml:space="preserve">
     <value>All Pokémon</value>
   </data>
+  <data name="MenuPokemon" xml:space="preserve">
+    <value>_Pokémon</value>
+  </data>
+  <data name="MenuPokemonExport" xml:space="preserve">
+    <value>_Export</value>
+  </data>
 </root>

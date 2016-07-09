@@ -24,6 +24,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
+#Region "Event Handlers"
         Private Sub _storedPlayerPartner_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _storedPlayerPartner.CollectionChanged, _storedSpEpisodePokemon.CollectionChanged, _storedPokemon.CollectionChanged
             RaiseEvent Modified(Me, e)
         End Sub
@@ -31,6 +32,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Private Sub OnModified(sender As Object, e As EventArgs)
             RaiseEvent Modified(Me, e)
         End Sub
+
+        Private Sub _selectedBox_SelectedPokemonChanged(sender As Object, e As EventArgs) Handles _selectedBox.SelectedPokemonChanged
+            RequestMenuItemRefresh()
+        End Sub
+#End Region
 
 #Region "Properties"
         Public Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
@@ -46,7 +52,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 End If
             End Set
         End Property
-        Dim _selectedBox As IPokemonBox
+        Private WithEvents _selectedBox As IPokemonBox
 
         Public Property StoredPlayerPartner As IEnumerable(Of FileViewModel)
             Get

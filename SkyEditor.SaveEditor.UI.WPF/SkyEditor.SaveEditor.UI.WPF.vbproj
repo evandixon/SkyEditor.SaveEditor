@@ -60,11 +60,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.Core, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.3-CI00022\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.0.3-CI00026\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.Core.Windows, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.3-CI00022\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.3-CI00026\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.UI.WPF, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -119,6 +119,7 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MenuActions\ExportPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersPokemonMovesViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersStoredPokemonGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyGeneralViewModel.vb" />
@@ -140,7 +141,7 @@
     <Compile Include="ViewModelComponents\IInventory.vb" />
     <Compile Include="ViewModelComponents\IItemSlot.vb" />
     <Compile Include="ViewModelComponents\IParty.vb" />
-    <Compile Include="ViewModelComponents\IPokemonBoxViewModel.vb" />
+    <Compile Include="ViewModelComponents\IPokemonBox.vb" />
     <Compile Include="ViewModelComponents\IPokemonStorage.vb" />
     <Compile Include="ViewModelComponents\ItemSlot.vb" />
   </ItemGroup>
