@@ -82,11 +82,9 @@ Namespace MysteryDungeon.Rescue.ViewModels
                 Dim pokemon As New ObservableCollection(Of FileViewModel)
 
                 For count = offset To offset + item.Length - 1
-                    Dim p = _storedPokemon(count)
-
-                    pokemon.Add(p)
+                    pokemon.Add(_storedPokemon(count))
                 Next
-                offset += item.Length - 1
+                offset += item.Length
                 b.Add(New BasicPokemonBox(item.Name, pokemon))
             Next
 
@@ -99,9 +97,11 @@ Namespace MysteryDungeon.Rescue.ViewModels
             Dim s As RBSave = model
 
             Dim defs = StoredPokemonSlotDefinition.FromLines(SkyEditor.SaveEditor.My.Resources.ListResources.RBFriendAreaOffsets)
+            Dim offset As Integer = 0
             For i = 0 To defs.Count - 1
                 For j = 0 To defs(i).Length - 1
-                    _storedPokemon(i + j) = _Storage(i).ItemCollection(j)
+                    _storedPokemon(offset) = _Storage(i + 1).ItemCollection(j)
+                    offset += 1
                 Next
             Next
 
