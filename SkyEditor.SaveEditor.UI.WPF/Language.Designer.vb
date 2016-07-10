@@ -308,6 +308,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Item Name.
+        '''</summary>
+        Public Shared ReadOnly Property ItemName() As String
+            Get
+                Return ResourceManager.GetString("ItemName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Level.
         '''</summary>
         Public Shared ReadOnly Property Level() As String
@@ -581,6 +590,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property PP() As String
             Get
                 Return ResourceManager.GetString("PP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quantity.
+        '''</summary>
+        Public Shared ReadOnly Property Quantity() As String
+            Get
+                Return ResourceManager.GetString("Quantity", resourceCulture)
             End Get
         End Property
         

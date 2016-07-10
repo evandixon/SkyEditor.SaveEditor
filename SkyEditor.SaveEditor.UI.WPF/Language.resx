@@ -358,4 +358,10 @@ For stackable items like sticks and spikes, this lets you control how much is in
   <data name="MenuPokemonImport" xml:space="preserve">
     <value>_Import</value>
   </data>
+  <data name="ItemName" xml:space="preserve">
+    <value>Item Name</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
 </root>

@@ -132,10 +132,18 @@
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDInventoryViewModel.vb" />
     <Compile Include="MysteryDungeon\MDAttackViewModel.vb" />
+    <Compile Include="MysteryDungeon\Rescue\RBStoredItemEditView.xaml.vb">
+      <DependentUpon>RBStoredItemEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MysteryDungeon\Rescue\RBStoredItemView.xaml.vb">
+      <DependentUpon>RBStoredItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MysteryDungeon\Rescue\ViewModels\RBPokemonMovesViewModel.vb" />
     <Compile Include="MysteryDungeon\Rescue\ViewModels\RBInventoryViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyInventoryViewModel.vb" />
     <Compile Include="MysteryDungeon\Rescue\ViewModels\RBPokemonStorageViewModel.vb" />
+    <Compile Include="MysteryDungeon\Rescue\ViewModels\RBStoredItemSlot.vb" />
+    <Compile Include="MysteryDungeon\Rescue\ViewModels\RBStoredItemViewModel.vb" />
     <Compile Include="MysteryDungeon\Rescue\ViewModels\RBStoredPokemonGeneralViewModel.vb" />
     <Compile Include="ViewModelComponents\BasicPokemonBox.vb" />
     <Compile Include="ViewModelComponents\I4Moves.vb" />
@@ -266,9 +274,6 @@
     <Compile Include="Tabs\GIGDGeneralTab.xaml.vb">
       <DependentUpon>GIGDGeneralTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tabs\RBStoredItemsTab.xaml.vb">
-      <DependentUpon>RBStoredItemsTab.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MysteryDungeon\Explorers\Views\SkyGeneralTab.xaml.vb">
       <DependentUpon>SkyGeneralTab.xaml</DependentUpon>
     </Compile>
@@ -283,6 +288,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IPartyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MysteryDungeon\Rescue\RBStoredItemEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MysteryDungeon\Rescue\RBStoredItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -347,10 +360,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Tabs\GIGDGeneralTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tabs\RBStoredItemsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -23,6 +23,7 @@ Namespace MysteryDungeon.Rescue
             Public Overridable ReadOnly Property HeldItemLength As Integer = 23
             Public Overridable ReadOnly Property HeldItemNumber As Integer = 20
             Public Overridable ReadOnly Property StoredItemOffset As Integer = &H4D2B * 8 - 2
+            Public Overridable ReadOnly Property StoredItemNumber As Integer = 239
             Public Overridable ReadOnly Property StoredPokemonOffset As Integer = (&H5B3 * 8 + 3) - (323 * 9)
             Public Overridable ReadOnly Property StoredPokemonLength As Integer = 323
             Public Overridable ReadOnly Property StoredPokemonNumber As Integer = 407 + 6
@@ -46,12 +47,14 @@ Namespace MysteryDungeon.Rescue
 
             LoadGeneral()
             LoadItems()
+            LoadStoredItems()
             LoadStoredPokemon()
         End Function
 
         Public Overrides Sub Save(Destination As String, provider As IOProvider)
             SaveGeneral()
             SaveItems()
+            SaveStoredItems()
             SaveStoredPokemon()
 
             MyBase.Save(Destination, provider)
@@ -187,6 +190,44 @@ Namespace MysteryDungeon.Rescue
 
 #End Region
 
+#Region "Stored Items"
+        Private Sub LoadStoredItems()
+            StoredItems = New List(Of RBStoredItem)
+            Dim block = Bits.Range(Offsets.StoredItemOffset, Offsets.StoredItemNumber * 10)
+            For count As Integer = 0 To Offsets.StoredItemNumber - 1
+                Dim quantity = block.NextInt(10)
+                If quantity > 0 Then
+                    StoredItems.Add(New RBStoredItem(count + 1, quantity))
+                End If
+            Next
+        End Sub
+
+        Private Sub SaveStoredItems()
+            Dim compiledItems As New Dictionary(Of Integer, Integer) 'Key: Item ID, Value: Quantity
+
+            'Combine the quantities
+            For Each item In StoredItems
+                If Not compiledItems.ContainsKey(item.ItemID) Then
+                    compiledItems.Add(item.ItemID, 0)
+                End If
+                compiledItems(item.ItemID) = Math.Min(item.Quantity + compiledItems(item.ItemID), 1024) 'Cap at max count
+            Next
+
+            'Update the save
+            Dim block = New Binary(Offsets.StoredItemNumber * 10)
+            For count As Integer = 0 To Offsets.StoredItemNumber - 1
+                If compiledItems.ContainsKey(count + 1) Then
+                    block.NextInt(10) = compiledItems(count + 1)
+                Else
+                    block.NextInt(10) = 0
+                End If
+            Next
+            Bits.Range(Offsets.StoredItemOffset, Offsets.StoredItemNumber * 10) = block
+        End Sub
+
+        Public Property StoredItems As List(Of RBStoredItem)
+#End Region
+
 #Region "Stored Pokemon"
         Private Sub LoadStoredPokemon()
             StoredPokemon = New List(Of RBStoredPokemon)
@@ -206,16 +247,7 @@ Namespace MysteryDungeon.Rescue
 
 #End Region
 
-        Public ReadOnly Property StoredItemCounts As Integer()
-            Get
-                Dim out(239) As Integer
-                Dim block = Bits.Range(Offsets.StoredItemOffset, 2400)
-                For count As Integer = 0 To 238
-                    out(count) = block.NextInt(10)
-                Next
-                Return out
-            End Get
-        End Property
+
 
 #End Region
 

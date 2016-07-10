@@ -9,9 +9,13 @@ Public Class Binary
         Bits = New List(Of Boolean)
         Position = 0
     End Sub
-    Public Sub New(Length As Integer)
+    ''' <summary>
+    ''' Creates a new instance of <see cref="Binary"/>.
+    ''' </summary>
+    ''' <param name="length">Number of bits with which to initialize the <see cref="Binary"/>.</param>
+    Public Sub New(length As Integer)
         Bits = New List(Of Boolean)
-        For i = 0 To Length - 1
+        For i = 0 To length - 1
             Bits.Add(0)
         Next
     End Sub

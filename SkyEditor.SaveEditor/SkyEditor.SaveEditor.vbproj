@@ -135,6 +135,7 @@
     <Compile Include="MysteryDungeon\Rescue\RBHeldItem.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBPokemon.vb" />
     <Compile Include="MysteryDungeon\DSMysteryDungeonCharacterEncoding.vb" />
+    <Compile Include="MysteryDungeon\Rescue\RBStoredItem.vb" />
     <Compile Include="PluginDefinition.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
