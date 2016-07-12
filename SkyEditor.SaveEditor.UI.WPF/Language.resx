@@ -232,15 +232,16 @@
     <value>evandixon</value>
   </data>
   <data name="PluginCredits" xml:space="preserve">
-    <value>Sky Editor Credits:
-evandixon (General Research)
-matix2267 (Pokemon Structure, code for interacting with bits)
-Grovyle91 (Item Structure, IDs of Pokemon/Items/etc)
-Prof. 9 (Team Name character encoding)
-Demonic722 (Misc RAM and save addresses)</value>
+    <value>Sky Editor's save editor for Pokémon Mystery Dungeon was made possible with help from the following researchers:
+
+evandixon - General Research
+matix2267 - Pokemon Structure, code for interacting with bits
+Grovyle91 - Item Structure, IDs of Pokemon/Items/etc
+Prof. 9 - Team Name character encoding
+Demonic722 - Misc RAM and save addresses</value>
   </data>
   <data name="PluginName" xml:space="preserve">
-    <value>Pokémon Mystery Dungeon Save Editor</value>
+    <value>Pokémon Mystery Dungeon Save Editor UI - WPF</value>
   </data>
   <data name="Pokemon" xml:space="preserve">
     <value>Pokémon</value>

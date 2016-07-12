@@ -553,12 +553,13 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sky Editor Credits:
-        '''evandixon (General Research)
-        '''matix2267 (Pokemon Structure, code for interacting with bits)
-        '''Grovyle91 (Item Structure, IDs of Pokemon/Items/etc)
-        '''Prof. 9 (Team Name character encoding)
-        '''Demonic722 (Misc RAM and save addresses).
+        '''  Looks up a localized string similar to Sky Editor&apos;s save editor for Pokémon Mystery Dungeon was made possible with help from the following researchers:
+        '''
+        '''evandixon - General Research
+        '''matix2267 - Pokemon Structure, code for interacting with bits
+        '''Grovyle91 - Item Structure, IDs of Pokemon/Items/etc
+        '''Prof. 9 - Team Name character encoding
+        '''Demonic722 - Misc RAM and save addresses.
         '''</summary>
         Public Shared ReadOnly Property PluginCredits() As String
             Get
@@ -567,7 +568,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pokémon Mystery Dungeon Save Editor.
+        '''  Looks up a localized string similar to Pokémon Mystery Dungeon Save Editor UI - WPF.
         '''</summary>
         Public Shared ReadOnly Property PluginName() As String
             Get

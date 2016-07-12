@@ -26,7 +26,7 @@ Namespace My.Resources
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
-    Friend Class Language
+    Public Class Language
         
         Private Shared resourceMan As Global.System.Resources.ResourceManager
         
@@ -41,7 +41,7 @@ Namespace My.Resources
         '''  Returns the cached ResourceManager instance used by this class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
+        Public Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
                     Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("SkyEditor.SaveEditor.Language", GetType(Language).GetTypeInfo.Assembly)
@@ -56,7 +56,7 @@ Namespace My.Resources
         '''  resource lookups using this strongly typed resource class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Shared Property Culture() As Global.System.Globalization.CultureInfo
+        Public Shared Property Culture() As Global.System.Globalization.CultureInfo
             Get
                 Return resourceCulture
             End Get
@@ -68,7 +68,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to ----------.
         '''</summary>
-        Friend Shared ReadOnly Property BlankPokemon() As String
+        Public Shared ReadOnly Property BlankPokemon() As String
             Get
                 Return ResourceManager.GetString("BlankPokemon", resourceCulture)
             End Get
@@ -77,7 +77,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to DeSmuMe Save File.
         '''</summary>
-        Friend Shared ReadOnly Property DeSmuMeSaveFile() As String
+        Public Shared ReadOnly Property DeSmuMeSaveFile() As String
             Get
                 Return ResourceManager.GetString("DeSmuMeSaveFile", resourceCulture)
             End Get
@@ -86,39 +86,40 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Held by.
         '''</summary>
-        Friend Shared ReadOnly Property ItemToStringHeldBy() As String
+        Public Shared ReadOnly Property ItemToStringHeldBy() As String
             Get
                 Return ResourceManager.GetString("ItemToStringHeldBy", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to .
+        '''  Looks up a localized string similar to evandixon.
         '''</summary>
-        Friend Shared ReadOnly Property PluginAuthor() As String
+        Public Shared ReadOnly Property PluginAuthor() As String
             Get
                 Return ResourceManager.GetString("PluginAuthor", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sky Editor Credits:
-        '''evandixon (General Research)
-        '''matix2267 (Pokemon Structure, code for interacting with bits)
-        '''Grovyle91 (Item Structure, IDs of Pokemon/Items/etc)
-        '''Prof. 9 (Team Name character encoding)
-        '''Demonic722 (Misc RAM and save addresses).
+        '''  Looks up a localized string similar to Sky Editor&apos;s save editor for Pokémon Mystery Dungeon was made possible with help from the following researchers:
+        '''
+        '''evandixon - General Research
+        '''matix2267 - Pokemon Structure, code for interacting with bits
+        '''Grovyle91 - Item Structure, IDs of Pokemon/Items/etc
+        '''Prof. 9 - Team Name character encoding
+        '''Demonic722 - Misc RAM and save addresses.
         '''</summary>
-        Friend Shared ReadOnly Property PluginCredits() As String
+        Public Shared ReadOnly Property PluginCredits() As String
             Get
                 Return ResourceManager.GetString("PluginCredits", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pokémon Mystery Dungeon Save Editor.
+        '''  Looks up a localized string similar to Pokémon Mystery Dungeon Save Editor Core.
         '''</summary>
-        Friend Shared ReadOnly Property PluginName() As String
+        Public Shared ReadOnly Property PluginName() As String
             Get
                 Return ResourceManager.GetString("PluginName", resourceCulture)
             End Get
@@ -127,7 +128,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Raw Save File.
         '''</summary>
-        Friend Shared ReadOnly Property RawSaveFile() As String
+        Public Shared ReadOnly Property RawSaveFile() As String
             Get
                 Return ResourceManager.GetString("RawSaveFile", resourceCulture)
             End Get
@@ -136,7 +137,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Toolbox.
         '''</summary>
-        Friend Shared ReadOnly Property RB_Toolbox() As String
+        Public Shared ReadOnly Property RB_Toolbox() As String
             Get
                 Return ResourceManager.GetString("RB_Toolbox", resourceCulture)
             End Get
@@ -145,7 +146,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Explorers of Sky Stored Pokemon.
         '''</summary>
-        Friend Shared ReadOnly Property SkyPkmFile() As String
+        Public Shared ReadOnly Property SkyPkmFile() As String
             Get
                 Return ResourceManager.GetString("SkyPkmFile", resourceCulture)
             End Get
@@ -154,7 +155,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to {0} (Lvl. {1} {2}).
         '''</summary>
-        Friend Shared ReadOnly Property SkyStoredPokemonToString() As String
+        Public Shared ReadOnly Property SkyStoredPokemonToString() As String
             Get
                 Return ResourceManager.GetString("SkyStoredPokemonToString", resourceCulture)
             End Get
