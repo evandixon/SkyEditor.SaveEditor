@@ -25,5 +25,10 @@ Public Class PluginDefinition
         MyBase.Load(manager)
         manager.CurrentIOUIManager.RegisterIOFilter("sav", My.Resources.Language.RawSaveFile)
         manager.CurrentIOUIManager.RegisterIOFilter("skypkm", My.Resources.Language.SkyPkmFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("skypkmex", My.Resources.Language.SkyPkmExFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("skypkmq", My.Resources.Language.SkyPkmQFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("tdpkm", My.Resources.Language.TDPkmFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("tdpkmex", My.Resources.Language.TDPkmExFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("rbpkm", My.Resources.Language.RBPkmFile)
     End Sub
 End Class
