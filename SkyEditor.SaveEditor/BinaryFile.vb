@@ -12,6 +12,10 @@ Public Class BinaryFile
         Bits = New Binary(0)
     End Sub
 
+    Public Sub New(rawData As Byte())
+        Bits = New Binary(rawData)
+    End Sub
+
     Public Overridable Function OpenFile(Filename As String, Provider As IOProvider) As Task Implements IOpenableFile.OpenFile
         Me.Filename = Filename
         Me.CurrentIOProvider = Provider
@@ -75,6 +79,10 @@ Public Class BinaryFile
     Public Sub Save(provider As IOProvider) Implements ISavable.Save
         Save(Filename, provider)
     End Sub
+
+    Public Overridable Function ToByteArray() As Byte()
+        Return Bits.ToByteArray
+    End Function
 
     Public Sub CreateFile(Name As String) Implements ICreatableFile.CreateFile
         Me.Name = ""

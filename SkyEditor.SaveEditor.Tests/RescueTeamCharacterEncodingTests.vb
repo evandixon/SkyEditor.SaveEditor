@@ -1,8 +1,8 @@
 ﻿Imports SkyEditor.SaveEditor.MysteryDungeon
 
 <TestClass()> Public Class RescueTeamCharacterEncodingTests
-
-    <TestMethod()> Public Sub BasicNamesTests()
+    Public Const TestCategory As String = "Character Encoding"
+    <TestMethod()> <TestCategory(TestCategory)> Public Sub BasicNamesTests()
         Dim e As New DSMysteryDungeonCharacterEncoding
         Dim testNames As String() = {"Riolu", "Poochyena", "Pikachu", "Test Name", "Accent Test: éèê", "♀♂", "", vbCrLf}
         For Each item In testNames
@@ -12,7 +12,7 @@
         Next
     End Sub
 
-    <TestMethod()> Public Sub BasicEscapeTests()
+    <TestMethod()> <TestCategory(TestCategory)> Public Sub BasicEscapeTests()
         Dim e As New DSMysteryDungeonCharacterEncoding
         Dim testNames As String() = {"\81FF", "This\That", "Line End Test\"}
         For Each item In testNames
@@ -22,7 +22,7 @@
         Next
     End Sub
 
-    <TestMethod> Public Sub ByteCountTests()
+    <TestMethod> <TestCategory(TestCategory)> Public Sub ByteCountTests()
         Dim data As New Dictionary(Of String, Integer)
         data.Add("\81FF", 2)
         data.Add("Riolu", 5)
@@ -36,7 +36,7 @@
         Next
     End Sub
 
-    <TestMethod> Public Sub NullCharacterTest()
+    <TestMethod> <TestCategory(TestCategory)> Public Sub NullCharacterTest()
         Dim e As New DSMysteryDungeonCharacterEncoding
         Dim sequence As Byte() = {&H50, &H6F, &H6F, &H63, &H68, &H79, &H65, &H6E, &H61, 0, &H52, &H69, &H6F, &H6C, &H75}
         Dim back = e.GetString(sequence)

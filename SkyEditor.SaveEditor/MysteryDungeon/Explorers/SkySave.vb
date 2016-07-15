@@ -65,13 +65,21 @@ Namespace MysteryDungeon.Explorers
 
         Public Sub New()
             MyBase.New
-
             Offsets = New SkyOffsets
+        End Sub
+
+        Public Sub New(rawData As Byte())
+            MyBase.New(rawData)
+            Offsets = New SkyOffsets
+            Init()
         End Sub
 
         Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
+            Init()
+        End Function
 
+        Private Sub Init()
             LoadGeneral()
             LoadItems()
             LoadActivePokemon()
@@ -79,11 +87,9 @@ Namespace MysteryDungeon.Explorers
             LoadQuicksavePokemon()
             LoadHistory()
             LoadSettings()
+        End Sub
 
-        End Function
-
-        Public Overrides Sub Save(Destination As String, provider As IOProvider)
-
+        Private Sub PreSave()
             SaveGeneral()
             SaveItems()
             SaveActivePokemon()
@@ -91,9 +97,18 @@ Namespace MysteryDungeon.Explorers
             SaveQuicksavePokemon()
             SaveHistory()
             SaveSettings()
+        End Sub
 
+        Public Overrides Sub Save(Destination As String, provider As IOProvider)
+            PreSave()
             MyBase.Save(Destination, provider)
         End Sub
+
+        Public Overrides Function ToByteArray() As Byte()
+            PreSave()
+            FixChecksum()
+            Return MyBase.ToByteArray()
+        End Function
 
         Public ReadOnly Property Offsets As SkyOffsets
 

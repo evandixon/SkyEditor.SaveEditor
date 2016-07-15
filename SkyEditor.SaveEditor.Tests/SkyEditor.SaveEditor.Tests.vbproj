@@ -96,6 +96,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SkySaveDataTests.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -115,6 +116,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Resources\BRT.sav" />
+    <None Include="Resources\EoS.sav" />
+    <None Include="Resources\EoT.SAV" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SkyEditor.SaveEditor\SkyEditor.SaveEditor.vbproj">
