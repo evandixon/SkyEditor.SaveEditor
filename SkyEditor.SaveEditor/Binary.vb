@@ -1,15 +1,21 @@
 ﻿Imports System.Text
 
 Public Class Binary
+    Implements IEnumerable(Of Boolean)
+
     Public Property Bits As List(Of Boolean)
     Public Property Position As Integer
     Public Sub New()
         Bits = New List(Of Boolean)
         Position = 0
     End Sub
-    Public Sub New(Length As Integer)
+    ''' <summary>
+    ''' Creates a new instance of <see cref="Binary"/>.
+    ''' </summary>
+    ''' <param name="length">Number of bits with which to initialize the <see cref="Binary"/>.</param>
+    Public Sub New(length As Integer)
         Bits = New List(Of Boolean)
-        For i = 0 To Length - 1
+        For i = 0 To length - 1
             Bits.Add(0)
         Next
     End Sub
@@ -91,38 +97,26 @@ Public Class Binary
             Position += BitLength
         End Set
     End Property
-    Public Property StringPMD(ByteIndex As Integer, BitIndex As Integer, ByteLength As Integer) As String
+
+    Public Property Str(bitIndex As Integer, byteLength As Integer, characterEncoding As Encoding) As String
         Get
-            Dim s As New StringBuilder
-            Dim e = Encoding.GetEncoding("Windows-1252")
-            For i = 0 To ByteLength - 1
-                Dim c = e.GetString({CByte(Int(ByteIndex + i, BitIndex, 8))}, 0, 1)
-                If Not c = vbNullChar Then
-                    s.Append(c)
-                Else
-                    Exit For
-                End If
-            Next
-            Return s.ToString
+            Return characterEncoding.GetString(Range(bitIndex, byteLength * 8).ToByteArray, 0, byteLength)
         End Get
         Set(value As String)
-            Dim e = Encoding.GetEncoding("Windows-1252")
-            If value IsNot Nothing Then
-                For i = 0 To ByteLength - 1
-                    If value.Length > i Then
-                        Int(ByteIndex + i, BitIndex, 8) = e.GetBytes({value(i)})(0) 'Lists.StringEncodingInverse(value(i))
-                    Else
-                        Int(ByteIndex + i, BitIndex, 8) = 0
-                    End If
-                Next
-            Else
-                'Write an empty string in the event of null
-                For i = 0 To ByteLength - 1
-                    Int(ByteIndex + i, BitIndex, 8) = 0
-                Next
+            If value Is Nothing Then
+                value = String.Empty
             End If
+            Dim bytes = characterEncoding.GetBytes(value)
+            For i = 0 To byteLength - 1
+                If value.Length > i Then
+                    Int(0, bitIndex + 8 * i, 8) = bytes(i)
+                Else
+                    Int(0, bitIndex + 8 * i, 8) = 0
+                End If
+            Next
         End Set
     End Property
+
     Public Property Range(Index As Integer, Length As Integer) As Binary
         Get
             Dim buffer(Length - 1) As Boolean
@@ -143,12 +137,20 @@ Public Class Binary
     Public Function ToByteArray() As Byte()
         Dim output As New List(Of Byte)
         For i = 0 To Bits.Count - 1 Step 8
-            If Bits.Count - 1 - i >= 8 Then
+            If Bits.Count - i >= 8 Then
                 output.Add(Int(0, i, 8))
             Else
                 Exit For
             End If
         Next
         Return output.ToArray
+    End Function
+
+    Public Function GetEnumerator() As IEnumerator(Of Boolean) Implements IEnumerable(Of Boolean).GetEnumerator
+        Return Me.Bits.GetEnumerator
+    End Function
+
+    Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
+        Return DirectCast(Me.Bits, IEnumerable).GetEnumerator
     End Function
 End Class

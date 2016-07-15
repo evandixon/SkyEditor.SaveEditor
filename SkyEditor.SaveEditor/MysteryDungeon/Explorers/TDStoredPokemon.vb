@@ -6,15 +6,11 @@ Namespace MysteryDungeon.Explorers
         Implements IOpenableFile
         Implements ISavableAs
         Implements IOnDisk
-        Implements INotifyPropertyChanged
-        Implements INotifyModified
 
         Public Const Length = 388
         Public Const MimeType As String = "application/x-td-pokemon"
 
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
-        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
         Public Sub New()
             Unk1 = New Binary(15)
@@ -58,7 +54,7 @@ Namespace MysteryDungeon.Explorers
                 Attack2 = New ExplorersAttack(.Range(242, ExplorersAttack.Length))
                 Attack3 = New ExplorersAttack(.Range(263, ExplorersAttack.Length))
                 Attack4 = New ExplorersAttack(.Range(284, ExplorersAttack.Length))
-                Name = .StringPMD(0, 305, 10)
+                Name = .GetStringPMD(0, 305, 10)
             End With
         End Sub
 
@@ -93,7 +89,7 @@ Namespace MysteryDungeon.Explorers
                 .Range(242, ExplorersAttack.Length) = _attack2.GetAttackBits
                 .Range(263, ExplorersAttack.Length) = _attack3.GetAttackBits
                 .Range(284, ExplorersAttack.Length) = _attack4.GetAttackBits
-                .StringPMD(0, 305, 10) = Name
+                .SetStringPMD(0, 305, 10, Name)
             End With
             Return out
         End Function
@@ -123,7 +119,7 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-            Return ".tdpkm"
+            Return "tdpkm"
         End Function
 
         Public Sub Save(provider As IOProvider) Implements ISavable.Save
@@ -140,9 +136,9 @@ Namespace MysteryDungeon.Explorers
             End If
         End Function
 
-        Private Sub OnAttackModified(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged, _attack2.PropertyChanged, _attack3.PropertyChanged, _attack4.PropertyChanged
-            RaiseEvent Modified(Me, e)
-        End Sub
+        Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+            Return {"tdpkm"}
+        End Function
 
 #Region "Properties"
         Private Property Unk1 As Binary
@@ -155,170 +151,35 @@ Namespace MysteryDungeon.Explorers
         End Property
 
         Public Property Level As Byte Implements IExplorersStoredPokemon.Level
-            Get
-                Return _level
-            End Get
-            Set(value As Byte)
-                If Not _level = value Then
-                    _level = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Level)))
-                End If
-            End Set
-        End Property
-        Dim _level As Byte
 
         Public Property ID As Integer Implements IExplorersStoredPokemon.ID
-            Get
-                Return _id
-            End Get
-            Set(value As Integer)
-                If Not _id = value Then
-                    _id = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ID)))
-                End If
-            End Set
-        End Property
-        Dim _id As Integer
 
         Public Property IsFemale As Boolean Implements IExplorersStoredPokemon.IsFemale
-            Get
-                Return _isFemale
-            End Get
-            Set(value As Boolean)
-                If Not _isFemale = value Then
-                    _isFemale = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsFemale)))
-                End If
-            End Set
-        End Property
-        Dim _isFemale As Boolean
 
         Public Property MetAt As Integer Implements IExplorersStoredPokemon.MetAt
-            Get
-                Return _metAt
-            End Get
-            Set(value As Integer)
-                If Not _metAt = value Then
-                    _metAt = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(MetAt)))
-                End If
-            End Set
-        End Property
-        Dim _metAt As Integer
 
         Public Property MetFloor As Integer Implements IExplorersStoredPokemon.MetFloor
-            Get
-                Return _metFloor
-            End Get
-            Set(value As Integer)
-                If Not _metFloor = value Then
-                    _metFloor = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(MetFloor)))
-                End If
-            End Set
-        End Property
-        Dim _metFloor As Integer
 
         Public Property IQ As Integer Implements IExplorersStoredPokemon.IQ
-            Get
-                Return _iq
-            End Get
-            Set(value As Integer)
-                If Not _iq = value Then
-                    _iq = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IQ)))
-                End If
-            End Set
-        End Property
-        Dim _iq As Integer
 
         Public Property HP As Integer Implements IExplorersStoredPokemon.HP
-            Get
-                Return _hp
-            End Get
-            Set(value As Integer)
-                If Not _hp = value Then
-                    _hp = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HP)))
-                End If
-            End Set
-        End Property
-        Dim _hp As Integer
 
         Public Property Attack As Byte Implements IExplorersStoredPokemon.Attack
-            Get
-                Return _attack
-            End Get
-            Set(value As Byte)
-                If Not _attack = value Then
-                    _attack = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack)))
-                End If
-            End Set
-        End Property
-        Dim _attack As Byte
 
         Public Property Defense As Byte Implements IExplorersStoredPokemon.Defense
-            Get
-                Return _defense
-            End Get
-            Set(value As Byte)
-                If Not _defense = value Then
-                    _defense = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Defense)))
-                End If
-            End Set
-        End Property
-        Dim _defense As Byte
 
         Public Property SpAttack As Byte Implements IExplorersStoredPokemon.SpAttack
-            Get
-                Return _spAttack
-            End Get
-            Set(value As Byte)
-                If Not _spAttack = value Then
-                    _spAttack = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpAttack)))
-                End If
-            End Set
-        End Property
-        Dim _spAttack As Byte
 
         Public Property SpDefense As Byte Implements IExplorersStoredPokemon.SpDefense
-            Get
-                Return _spDefense
-            End Get
-            Set(value As Byte)
-                If Not _spDefense = value Then
-                    _spDefense = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpDefense)))
-                End If
-            End Set
-        End Property
-        Dim _spDefense As Byte
 
         Public Property Exp As Integer Implements IExplorersStoredPokemon.Exp
-            Get
-                Return _exp
-            End Get
-            Set(value As Integer)
-                If Not _exp = value Then
-                    _exp = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Exp)))
-                End If
-            End Set
-        End Property
-        Dim _exp As Integer
 
         Public Property Attack1 As IMDAttack Implements IExplorersStoredPokemon.Attack1
             Get
                 Return _attack1
             End Get
             Set(value As IMDAttack)
-                If _attack1 IsNot value Then
-                    _attack1 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack1)))
-                End If
+                _attack1 = value
             End Set
         End Property
         Private WithEvents _attack1 As ExplorersAttack
@@ -328,10 +189,7 @@ Namespace MysteryDungeon.Explorers
                 Return _attack2
             End Get
             Set(value As IMDAttack)
-                If _attack2 IsNot value Then
-                    _attack2 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack2)))
-                End If
+                _attack2 = value
             End Set
         End Property
         Private WithEvents _attack2 As ExplorersAttack
@@ -341,10 +199,7 @@ Namespace MysteryDungeon.Explorers
                 Return _attack3
             End Get
             Set(value As IMDAttack)
-                If _attack3 IsNot value Then
-                    _attack3 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack3)))
-                End If
+                _attack3 = value
             End Set
         End Property
         Private WithEvents _attack3 As ExplorersAttack
@@ -354,26 +209,12 @@ Namespace MysteryDungeon.Explorers
                 Return _attack4
             End Get
             Set(value As IMDAttack)
-                If _attack4 IsNot value Then
-                    _attack4 = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack4)))
-                End If
+                _attack4 = value
             End Set
         End Property
         Private WithEvents _attack4 As ExplorersAttack
 
         Public Property Name As String Implements IExplorersStoredPokemon.Name
-            Get
-                Return _name
-            End Get
-            Set(value As String)
-                If Not _name = value Then
-                    _name = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Name)))
-                End If
-            End Set
-        End Property
-        Dim _name As String
 
         Public ReadOnly Property PokemonNames As Dictionary(Of Integer, String) Implements IExplorersStoredPokemon.PokemonNames
             Get

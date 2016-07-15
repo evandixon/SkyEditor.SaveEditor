@@ -128,7 +128,7 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-            Return ".skypkm"
+            Return "skypkmq"
         End Function
 
         Public Sub Save(provider As IOProvider) Implements ISavable.Save
@@ -413,6 +413,10 @@ Namespace MysteryDungeon.Explorers
             Else
                 Return "----------"
             End If
+        End Function
+
+        Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+            Return "skypkmq"
         End Function
     End Class
 End Namespace
