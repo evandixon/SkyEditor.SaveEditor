@@ -2,7 +2,7 @@
 Imports SkyEditor.Core.Utilities
 
 Public Class BinaryFile
-    Implements ICreatableFile
+    'Implements ICreatableFile
     Implements IOpenableFile
     Implements INamed
     Implements IOnDisk
@@ -84,8 +84,8 @@ Public Class BinaryFile
         Return Bits.ToByteArray
     End Function
 
-    Public Sub CreateFile(Name As String) Implements ICreatableFile.CreateFile
-        Me.Name = ""
+    Public Sub CreateFile(Name As String) ' Implements ICreatableFile.CreateFile
+        Me.Name = Name
     End Sub
 
     Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
