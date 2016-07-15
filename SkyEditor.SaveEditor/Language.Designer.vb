@@ -144,6 +144,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Red and Blue Rescue Team Stored Pokemon.
+        '''</summary>
+        Public Shared ReadOnly Property RBPkmFile() As String
+            Get
+                Return ResourceManager.GetString("RBPkmFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Explorers of Sky Active Pokemon.
+        '''</summary>
+        Public Shared ReadOnly Property SkyPkmExFile() As String
+            Get
+                Return ResourceManager.GetString("SkyPkmExFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Explorers of Sky Stored Pokemon.
         '''</summary>
         Public Shared ReadOnly Property SkyPkmFile() As String
@@ -153,11 +171,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Explorers of Sky Quicksave Pokemon.
+        '''</summary>
+        Public Shared ReadOnly Property SkyPkmQFile() As String
+            Get
+                Return ResourceManager.GetString("SkyPkmQFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to {0} (Lvl. {1} {2}).
         '''</summary>
         Public Shared ReadOnly Property SkyStoredPokemonToString() As String
             Get
                 Return ResourceManager.GetString("SkyStoredPokemonToString", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Explorers of Time and Darkness Active Pokemon.
+        '''</summary>
+        Public Shared ReadOnly Property TDPkmExFile() As String
+            Get
+                Return ResourceManager.GetString("TDPkmExFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Explorers of Time and Darkness Stored Pokemon.
+        '''</summary>
+        Public Shared ReadOnly Property TDPkmFile() As String
+            Get
+                Return ResourceManager.GetString("TDPkmFile", resourceCulture)
             End Get
         End Property
     End Class

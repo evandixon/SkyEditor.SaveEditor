@@ -82,6 +82,11 @@
     <Compile Include="Binary.vb" />
     <Compile Include="BinaryFile.vb" />
     <Compile Include="Checksums.vb" />
+    <Compile Include="ClassNames.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="Language.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,6 +151,11 @@
     <Compile Include="StoredPokemonSlotDefinition.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClassNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClassNames.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Language.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.vb</LastGenOutput>
