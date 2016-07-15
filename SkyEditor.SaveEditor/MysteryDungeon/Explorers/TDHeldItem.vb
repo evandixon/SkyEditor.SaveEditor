@@ -60,7 +60,7 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Public Function GetHeldItemBits() As Binary
-            Dim out As New Binary(TDSave.Offsets.HeldItemLength)
+            Dim out As New Binary((New TDSave.TDOffsets).HeldItemLength)
             With out
                 .Bit(0) = IsValid
                 .Bit(1) = Flag1

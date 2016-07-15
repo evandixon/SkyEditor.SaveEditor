@@ -45,7 +45,7 @@
         <xctk:IntegerUpDown Grid.Column="2" Grid.Row="4" Minimum="0" Maximum="99999" Text="{Binding StoredMoney}" />
 
         <TextBlock Grid.Column="0" Grid.Row="6" Text="{x:Static res:Language.RescuePoints}" />
-        <xctk:IntegerUpDown Grid.Column="2" Grid.Row="6" Minimum="0" Maximum="99999" Text="{Binding RescuePoints}" />
+        <xctk:IntegerUpDown Grid.Column="2" Grid.Row="6" Minimum="0" Maximum="99999999" Text="{Binding RescuePoints}" />
 
         <TextBlock Grid.Column="0" Grid.Row="8" Text="{x:Static res:Language.BaseType}" />
         <ComboBox Grid.Column="2" Grid.Row="8" IsEditable="True" ItemsSource="{x:Static saveEditor:Lists.RBBaseTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding BaseType}" />

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SkyEditor.SaveEditor.UI.WPF"
              xmlns:res="clr-namespace:SkyEditor.SaveEditor.UI.WPF.My.Resources"
              xmlns:skyWPF="clr-namespace:SkyEditor.UI.WPF;assembly=SkyEditor.UI.WPF"
-             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.Modeling;assembly=SkyEditor.SaveEditor"
+             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.UI.WPF.ViewModelComponents"
              mc:Ignorable="d"
              TargetType="{x:Type modeling:IItemSlot}"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -15,7 +15,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="3" />
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="{Binding Height, ElementName=placeholderEdit}"/>
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -26,7 +26,7 @@
             </StackPanel>
             <skyWPF:ObjectControlPlaceholder Grid.Row="1" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding ItemCollection}" EnableTabs="False" ScrollViewer.CanContentScroll="True" />
         <GridSplitter Grid.Row="2" ResizeBehavior="PreviousAndNext" Height="3" Background="#FFBCBCBC" HorizontalAlignment="Stretch" />
-        <skyWPF:ObjectControlPlaceholder Grid.Row="3" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding NewItem}" EnableTabs="False"/>
+        <skyWPF:ObjectControlPlaceholder x:Name="placeholderEdit"  Grid.Row="3" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding NewItem}" EnableTabs="False"/>
         <Button Grid.Row="4" Content="{x:Static res:Language.Add}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding AddCommand}"/>
     </Grid>
 </skyWPF:DataBoundObjectControl>

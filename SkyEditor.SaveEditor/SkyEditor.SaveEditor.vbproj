@@ -82,7 +82,11 @@
     <Compile Include="Binary.vb" />
     <Compile Include="BinaryFile.vb" />
     <Compile Include="Checksums.vb" />
-    <Compile Include="Interfaces\iPokemonStorage.vb" />
+    <Compile Include="ClassNames.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="Language.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,17 +118,9 @@
       <DependentUpon>ListResources.it.resx</DependentUpon>
     </Compile>
     <Compile Include="Lists.vb" />
-    <Compile Include="Modeling\BasicPokemonBox.vb" />
-    <Compile Include="Modeling\IInventory.vb" />
-    <Compile Include="Modeling\IItem.vb" />
-    <Compile Include="Modeling\IItemSlot.vb" />
-    <Compile Include="Modeling\IParty.vb" />
-    <Compile Include="Modeling\IPokemonBox.vb" />
-    <Compile Include="Modeling\IPokemonStorage.vb" />
-    <Compile Include="Modeling\ItemSlot.vb" />
+    <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
-    <Compile Include="MysteryDungeon\I4Moves.vb" />
     <Compile Include="MysteryDungeon\IExplorersAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersStoredItem.vb" />
@@ -143,6 +139,8 @@
     <Compile Include="MysteryDungeon\Rescue\RBAttack.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBHeldItem.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBPokemon.vb" />
+    <Compile Include="MysteryDungeon\DSMysteryDungeonCharacterEncoding.vb" />
+    <Compile Include="MysteryDungeon\Rescue\RBStoredItem.vb" />
     <Compile Include="PluginDefinition.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
@@ -153,29 +151,34 @@
     <Compile Include="StoredPokemonSlotDefinition.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClassNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClassNames.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Language.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResouces.es.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResouces.es.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.de.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.de.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.fr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.fr.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.it.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.it.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
@@ -185,18 +188,19 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\11\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core, Version=1.0.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.1.0.12\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+    <Reference Include="SkyEditor.Core, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.4.0.3\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <Import Project="..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets" Condition="Exists('..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

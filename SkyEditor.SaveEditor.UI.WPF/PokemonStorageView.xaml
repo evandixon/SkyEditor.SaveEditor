@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SkyEditor.SaveEditor.UI.WPF"
              xmlns:skyui="clr-namespace:SkyEditor.UI.WPF;assembly=SkyEditor.UI.WPF"
-             xmlns:modeling="clr-namespace:SkyEditor.SaveEditor.Modeling;assembly=SkyEditor.SaveEditor"
+             xmlns:vmc="clr-namespace:SkyEditor.SaveEditor.UI.WPF.ViewModelComponents"
              xmlns:res="clr-namespace:SkyEditor.SaveEditor.UI.WPF.My.Resources"
              mc:Ignorable="d"
              SortOrder="1"
-             TargetType="{x:Type modeling:IPokemonStorage}"
+             TargetType="{x:Type vmc:IPokemonStorage}"
              Header="{x:Static res:Language.StoredPokemonTab}"
              d:DesignHeight="300" d:DesignWidth="700">
     <Grid>
@@ -20,10 +20,30 @@
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>        
-        <ListView Grid.Column="0" Name="cbBoxes" ItemsSource="{Binding Storage}" SelectedValuePath="ItemCollection" SelectedIndex="0" />
-        <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3" VerticalAlignment="Stretch"/>
-        <ListView Grid.Column="2" ItemsSource="{Binding ElementName=cbBoxes,Path=SelectedValue}" ScrollViewer.CanContentScroll="True" SelectedItem="{Binding SelectedPokemon,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}"/>
-        <GridSplitter Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="3" VerticalAlignment="Stretch"/>
-        <skyui:ObjectControlPlaceholder Grid.Column="4" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding SelectedPokemon,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" EnableTabs="True" TabControlOrientation="Top"/>
+        <ListView Grid.Column="0"
+                  Name="cbBoxes"
+                  ItemsSource="{Binding Path=(vmc:IPokemonStorage.Storage)}"
+                  SelectedItem="{Binding Path=(vmc:IPokemonStorage.SelectedBox)}"
+                  SelectedValuePath="ItemCollection"
+                  SelectedIndex="0" />
+        <GridSplitter Grid.Column="1"
+                      ResizeBehavior="PreviousAndNext"
+                      Width="3"
+                      VerticalAlignment="Stretch"/>
+        <ListView Grid.Column="2"
+                  ItemsSource="{Binding ElementName=cbBoxes,Path=SelectedValue}"
+                  DisplayMemberPath="File"
+                  ScrollViewer.CanContentScroll="True"
+                  SelectedItem="{Binding Path=(vmc:IPokemonStorage.SelectedBox).SelectedPokemon}"/>
+        <GridSplitter Grid.Column="3"
+                      ResizeBehavior="PreviousAndNext"
+                      Width="3"
+                      VerticalAlignment="Stretch"/>
+        <skyui:ObjectControlPlaceholder
+            Grid.Column="4"
+            CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}"
+            ObjectToEdit="{Binding Path=(vmc:IPokemonStorage.SelectedBox).SelectedPokemon}"
+            EnableTabs="True"
+            TabControlOrientation="Top"/>
     </Grid>
 </skyui:DataBoundObjectControl>

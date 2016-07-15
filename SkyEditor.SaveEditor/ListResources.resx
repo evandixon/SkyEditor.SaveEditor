@@ -133,8 +133,7 @@
 12=Machop
 13=Bulbasaur
 14=Chikorita
-15=(Missing Entry)
-16=Treeko</value>
+15=Treeko</value>
   </data>
   <data name="RBFriendAreaOffsets" xml:space="preserve">
     <value>Bountiful Sea: 9
@@ -1220,10 +1219,10 @@ Weavile Fig</value>
 26=Raichu
 27=Sandshrew
 28=Sandslash
-29=Nidoran¾
+29=Nidoran♀
 30=Nidorina
 31=Nidoqueen
-32=Nidoran½
+32=Nidoran♂
 33=Nidorino
 34=Nidoking
 35=Clefairy

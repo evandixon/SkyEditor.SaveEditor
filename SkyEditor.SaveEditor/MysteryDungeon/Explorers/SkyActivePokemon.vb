@@ -55,8 +55,8 @@ Namespace MysteryDungeon.Explorers
                 Attack2 = New ExplorersActiveAttack(.Range(186, ExplorersActiveAttack.Length))
                 Attack3 = New ExplorersActiveAttack(.Range(215, ExplorersActiveAttack.Length))
                 Attack4 = New ExplorersActiveAttack(.Range(244, ExplorersActiveAttack.Length))
-                unk4 = .Range(273, 193)
-                Name = .StringPMD(0, 466, 10)
+                Unk4 = .Range(273, 193)
+                Name = .GetStringPMD(0, 466, 10)
             End With
         End Sub
 
@@ -89,7 +89,7 @@ Namespace MysteryDungeon.Explorers
                 .Range(215, ExplorersActiveAttack.Length) = _attack3.GetAttackBits
                 .Range(244, ExplorersActiveAttack.Length) = _attack4.GetAttackBits
                 .Range(273, 193) = Unk4
-                .StringPMD(0, 466, 10) = Name
+                .SetStringPMD(0, 466, 10, Name)
             End With
             Return out
         End Function
@@ -119,7 +119,7 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-            Return ".skypkm"
+            Return ".skypkmex"
         End Function
 
         Public Sub Save(provider As IOProvider) Implements ISavable.Save
@@ -139,6 +139,10 @@ Namespace MysteryDungeon.Explorers
         Private Sub OnAttackModified(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged, _attack2.PropertyChanged, _attack3.PropertyChanged, _attack4.PropertyChanged
             RaiseEvent Modified(Me, e)
         End Sub
+
+        Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+            Return {"skypkmex"}
+        End Function
 
 #Region "Properties"
         Private Property Unk1 As Binary

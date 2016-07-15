@@ -120,28 +120,23 @@
   <data name="DeSmuMeSaveFile" xml:space="preserve">
     <value>DeSmuMe Save File</value>
   </data>
-  <data name="EpisodeHeldItems" xml:space="preserve">
-    <value>Sp. Episode Held Items</value>
-  </data>
-  <data name="HeldItemsSlot" xml:space="preserve">
-    <value>Held Items</value>
-  </data>
   <data name="ItemToStringHeldBy" xml:space="preserve">
     <value>Held by</value>
   </data>
   <data name="PluginAuthor" xml:space="preserve">
-    <value />
+    <value>evandixon</value>
   </data>
   <data name="PluginCredits" xml:space="preserve">
-    <value>Sky Editor Credits:
-evandixon (General Research)
-matix2267 (Pokemon Structure, code for interacting with bits)
-Grovyle91 (Item Structure, IDs of Pokemon/Items/etc)
-Prof. 9 (Team Name character encoding)
-Demonic722 (Misc RAM and save addresses)</value>
+    <value>Sky Editor's save editor for Pokémon Mystery Dungeon was made possible with help from the following researchers:
+
+evandixon - General Research
+matix2267 - Pokemon Structure, code for interacting with bits
+Grovyle91 - Item Structure, IDs of Pokemon/Items/etc
+Prof. 9 - Team Name character encoding
+Demonic722 - Misc RAM and save addresses</value>
   </data>
   <data name="PluginName" xml:space="preserve">
-    <value>Pokémon Mystery Dungeon Save Editor</value>
+    <value>Pokémon Mystery Dungeon Save Editor Core</value>
   </data>
   <data name="RawSaveFile" xml:space="preserve">
     <value>Raw Save File</value>
@@ -149,22 +144,28 @@ Demonic722 (Misc RAM and save addresses)</value>
   <data name="RB_Toolbox" xml:space="preserve">
     <value>Toolbox</value>
   </data>
-  <data name="StoredItemsSlot" xml:space="preserve">
-    <value>Stored Items</value>
-  </data>
   <data name="BlankPokemon" xml:space="preserve">
     <value>----------</value>
   </data>
   <data name="SkyStoredPokemonToString" xml:space="preserve">
     <value>{0} (Lvl. {1} {2})</value>
   </data>
-  <data name="PlayerPartnerPokemonSlot" xml:space="preserve">
-    <value>Player and Partner</value>
+  <data name="SkyPkmFile" xml:space="preserve">
+    <value>Explorers of Sky Stored Pokemon</value>
   </data>
-  <data name="SpEpisodePokemonSlot" xml:space="preserve">
-    <value>Special Episode Pokemon</value>
+  <data name="RBPkmFile" xml:space="preserve">
+    <value>Red and Blue Rescue Team Stored Pokemon</value>
   </data>
-  <data name="StoredPokemonSlot" xml:space="preserve">
-    <value>Others</value>
+  <data name="SkyPkmExFile" xml:space="preserve">
+    <value>Explorers of Sky Active Pokemon</value>
+  </data>
+  <data name="SkyPkmQFile" xml:space="preserve">
+    <value>Explorers of Sky Quicksave Pokemon</value>
+  </data>
+  <data name="TDPkmExFile" xml:space="preserve">
+    <value>Explorers of Time and Darkness Active Pokemon</value>
+  </data>
+  <data name="TDPkmFile" xml:space="preserve">
+    <value>Explorers of Time and Darkness Stored Pokemon</value>
   </data>
 </root>

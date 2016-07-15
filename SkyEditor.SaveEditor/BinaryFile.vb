@@ -2,7 +2,7 @@
 Imports SkyEditor.Core.Utilities
 
 Public Class BinaryFile
-    Implements ICreatableFile
+    'Implements ICreatableFile
     Implements IOpenableFile
     Implements INamed
     Implements IOnDisk
@@ -10,6 +10,10 @@ Public Class BinaryFile
 
     Public Sub New()
         Bits = New Binary(0)
+    End Sub
+
+    Public Sub New(rawData As Byte())
+        Bits = New Binary(rawData)
     End Sub
 
     Public Overridable Function OpenFile(Filename As String, Provider As IOProvider) As Task Implements IOpenableFile.OpenFile
@@ -67,7 +71,7 @@ Public Class BinaryFile
     End Sub
 
     Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-        Return ".sav"
+        Return "sav"
     End Function
 
     Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
@@ -76,7 +80,15 @@ Public Class BinaryFile
         Save(Filename, provider)
     End Sub
 
-    Public Sub CreateFile(Name As String) Implements ICreatableFile.CreateFile
-        Me.Name = ""
+    Public Overridable Function ToByteArray() As Byte()
+        Return Bits.ToByteArray
+    End Function
+
+    Public Sub CreateFile(Name As String) ' Implements ICreatableFile.CreateFile
+        Me.Name = Name
     End Sub
+
+    Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+        Return {"sav"}
+    End Function
 End Class
