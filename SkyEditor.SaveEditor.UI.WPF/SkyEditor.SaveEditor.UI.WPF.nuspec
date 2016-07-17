@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>SkyEditor.SaveEditor.UI.WPF</id>
+    <version>$version$</version>
+    <title>SkyEditor.SaveEditor.UI.WPF</title>
+    <authors>evandixon</authors>
+    <owners>evandixon</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>WPF UI for SkyEditor.SaveEditor</description>
+    <copyright>Copyright 2016</copyright>
+    <dependencies>
+      <dependency id="SkyEditor.SaveEditor" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>
