@@ -30,5 +30,6 @@ Public Class PluginDefinition
         manager.CurrentIOUIManager.RegisterIOFilter("tdpkm", My.Resources.Language.TDPkmFile)
         manager.CurrentIOUIManager.RegisterIOFilter("tdpkmex", My.Resources.Language.TDPkmExFile)
         manager.CurrentIOUIManager.RegisterIOFilter("rbpkm", My.Resources.Language.RBPkmFile)
+        manager.CurrentIOUIManager.RegisterIOFilter("game_data", My.Resources.Language.GameDataFile)
     End Sub
 End Class

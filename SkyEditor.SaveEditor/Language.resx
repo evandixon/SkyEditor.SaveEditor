@@ -168,4 +168,7 @@ Demonic722 - Misc RAM and save addresses</value>
   <data name="TDPkmFile" xml:space="preserve">
     <value>Explorers of Time and Darkness Stored Pokemon</value>
   </data>
+  <data name="GameDataFile" xml:space="preserve">
+    <value>Mystery Dungeon game_data Files</value>
+  </data>
 </root>
