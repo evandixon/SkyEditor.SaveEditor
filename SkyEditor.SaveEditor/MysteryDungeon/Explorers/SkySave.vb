@@ -440,7 +440,7 @@ Namespace MysteryDungeon.Explorers
             Bits.Int(&HBE, 0, 16) = rawOriginalPlayerID
 
             '-----Original Partner ID & Gender
-            Dim rawOriginalPartnerID = OriginalPartnerIsFemale
+            Dim rawOriginalPartnerID = OriginalPartnerID
             If OriginalPartnerIsFemale Then
                 rawOriginalPartnerID += 600
             End If
