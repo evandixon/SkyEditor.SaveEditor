@@ -147,7 +147,7 @@ Namespace MysteryDungeon
                                                                 "Š", '0x8A
                                                                 "‹", '0x8B
                                                                 "Œ", '0x8C
-                                                                "e", '0x8D
+                                                                "ₑ", '0x8D 'Should be super script e
                                                                 "Ž", '0x8E
                                                                 "•", '0x8F
                                                                 "•", '0x90

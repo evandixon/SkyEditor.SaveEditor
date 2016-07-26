@@ -61,6 +61,7 @@ Namespace MysteryDungeon.Explorers
                 Attack2 = New SkyQuicksaveAttack(.Range(2696 + 1 * SkyQuicksaveAttack.Length, SkyQuicksaveAttack.Length))
                 Attack3 = New SkyQuicksaveAttack(.Range(2696 + 2 * SkyQuicksaveAttack.Length, SkyQuicksaveAttack.Length))
                 Attack4 = New SkyQuicksaveAttack(.Range(2696 + 3 * SkyQuicksaveAttack.Length, SkyQuicksaveAttack.Length))
+                Unk6 = .Range(2840, 592)
             End With
         End Sub
 
@@ -99,6 +100,8 @@ Namespace MysteryDungeon.Explorers
                 .Range(2696 + 1 * SkyQuicksaveAttack.Length, SkyQuicksaveAttack.Length) = _attack2.GetAttackBits
                 .Range(2696 + 2 * SkyQuicksaveAttack.Length, SkyQuicksaveAttack.Length) = _attack3.GetAttackBits
                 .Range(2696 + 3 * SkyQuicksaveAttack.Length, SkyQuicksaveAttack.Length) = _attack4.GetAttackBits
+
+                .Range(2840, 592) = Unk6
             End With
             Return out
         End Function
@@ -147,6 +150,7 @@ Namespace MysteryDungeon.Explorers
         Private Property Unk3 As Binary
         Private Property Unk4 As Binary
         Private Property Unk5 As Binary
+        Private Property Unk6 As Binary
 
         Public ReadOnly Property IsValid As Boolean
             Get

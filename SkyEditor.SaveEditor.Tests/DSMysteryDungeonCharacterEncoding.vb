@@ -1,9 +1,9 @@
 ﻿Imports SkyEditor.SaveEditor.MysteryDungeon
 
-<TestClass()> Public Class RescueTeamCharacterEncodingTests
+<TestClass()> Public Class DSMysteryDungeonCharacterEncoding
     Public Const TestCategory As String = "Character Encoding"
     <TestMethod()> <TestCategory(TestCategory)> Public Sub BasicNamesTests()
-        Dim e As New DSMysteryDungeonCharacterEncoding
+        Dim e As New MysteryDungeon.DSMysteryDungeonCharacterEncoding
         Dim testNames As String() = {"Riolu", "Poochyena", "Pikachu", "Test Name", "Accent Test: éèê", "♀♂", "", vbCrLf}
         For Each item In testNames
             Dim bytes = e.GetBytes(item)
@@ -13,7 +13,7 @@
     End Sub
 
     <TestMethod()> <TestCategory(TestCategory)> Public Sub BasicEscapeTests()
-        Dim e As New DSMysteryDungeonCharacterEncoding
+        Dim e As New MysteryDungeon.DSMysteryDungeonCharacterEncoding
         Dim testNames As String() = {"\81FF", "This\That", "Line End Test\"}
         For Each item In testNames
             Dim bytes = e.GetBytes(item)
@@ -29,7 +29,7 @@
         data.Add("Poochyena", 9)
         data.Add("This\That", 9)
 
-        Dim e As New DSMysteryDungeonCharacterEncoding
+        Dim e As New MysteryDungeon.DSMysteryDungeonCharacterEncoding
         For Each item In data
             Dim count = e.GetByteCount(item.Key)
             Assert.AreEqual(item.Value, count)
@@ -37,10 +37,18 @@
     End Sub
 
     <TestMethod> <TestCategory(TestCategory)> Public Sub NullCharacterTest()
-        Dim e As New DSMysteryDungeonCharacterEncoding
+        Dim e As New MysteryDungeon.DSMysteryDungeonCharacterEncoding
         Dim sequence As Byte() = {&H50, &H6F, &H6F, &H63, &H68, &H79, &H65, &H6E, &H61, 0, &H52, &H69, &H6F, &H6C, &H75}
         Dim back = e.GetString(sequence)
         Assert.AreEqual("Poochyena", back)
+    End Sub
+
+    <TestMethod> <TestCategory(TestCategory)> Public Sub BinaryToStringToBinary()
+        Dim e As New MysteryDungeon.DSMysteryDungeonCharacterEncoding
+        Dim sequence As Byte() = {&H50, &H6F, &H6F, &H63, &H68, &H79, &H65, &H6E, &H61}
+        Dim sequenceString = e.GetString(sequence) 'Should be "Poochyena"
+        Dim convertedBack As Byte() = e.GetBytes(sequenceString)
+        Assert.IsTrue(sequence.SequenceEqual(convertedBack), "Resulting byte array is not equal to the original sequence")
     End Sub
 
 End Class
