@@ -1,0 +1,60 @@
+﻿Imports System.Reflection
+Imports SkyEditor.Core
+Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
+
+Namespace MysteryDungeon.Explorers
+    Public Class MDActiveAttackViewModel
+        Inherits MDAttackViewModel
+        Implements IExplorersActiveAttack
+
+        Public Sub New()
+            MyBase.New
+        End Sub
+
+        Public Sub New(model As IExplorersActiveAttack, manager As PluginManager)
+            MyBase.New(model, manager)
+        End Sub
+
+        Public Shadows Property Model As IExplorersActiveAttack
+            Get
+                Return MyBase.Model
+            End Get
+            Set(value As IExplorersActiveAttack)
+                MyBase.Model = value
+            End Set
+        End Property
+
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
+            Return MyBase.GetSupportedTypes().Concat({GetType(IExplorersActiveAttack).GetTypeInfo})
+        End Function
+
+        Public Overrides Function SupportsObject(Obj As Object) As Boolean
+            Return MyBase.SupportsObject(Obj) AndAlso TypeOf Obj Is IExplorersActiveAttack
+        End Function
+
+        Public Property IsSealed As Boolean Implements IExplorersActiveAttack.IsSealed
+            Get
+                Return Model.IsSealed
+            End Get
+            Set(value As Boolean)
+                If Not Model.IsSealed = value Then
+                    Model.IsSealed = value
+                    RaisePropertyChanged(NameOf(IsSealed))
+                End If
+            End Set
+        End Property
+
+        Public Property PP As Integer Implements IExplorersActiveAttack.PP
+            Get
+                Return Model.PP
+            End Get
+            Set(value As Integer)
+                If Not Model.PP = value Then
+                    Model.PP = value
+                    RaisePropertyChanged(NameOf(PP))
+                End If
+            End Set
+        End Property
+    End Class
+End Namespace
+

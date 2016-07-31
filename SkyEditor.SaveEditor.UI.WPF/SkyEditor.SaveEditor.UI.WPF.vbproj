@@ -121,6 +121,11 @@
     </Compile>
     <Compile Include="MenuActions\ExportPokemon.vb" />
     <Compile Include="MenuActions\ImportPokemon.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ExplorersActivePokemonGeneralTab.xaml.vb">
+      <DependentUpon>ExplorersActivePokemonGeneralTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MysteryDungeon\Explorers\MDActiveAttackViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersActivePokemonGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersPokemonMovesViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersStoredPokemonGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyGeneralViewModel.vb" />
@@ -291,6 +296,10 @@
     <Page Include="IPartyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MysteryDungeon\Explorers\ExplorersActivePokemonGeneralTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MysteryDungeon\Rescue\RBStoredItemEditView.xaml">
       <Generator>MSBuild:Compile</Generator>

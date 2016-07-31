@@ -19,6 +19,10 @@ Namespace MysteryDungeon
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
+        Protected Sub RaisePropertyChanged(propertyName As String)
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+        End Sub
+
         Public Property IsLinked As Boolean Implements IMDAttack.IsLinked
             Get
                 Return Model.IsLinked
