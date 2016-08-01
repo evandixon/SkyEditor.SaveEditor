@@ -41,8 +41,8 @@ Namespace MysteryDungeon.Explorers
                 HP1 = .Int(0, 81, 10)
                 HP2 = .Int(0, 91, 10)
                 Attack = .Int(0, 101, 8)
-                Defense = .Int(0, 109, 8)
-                SpAttack = .Int(0, 117, 8)
+                SpAttack = .Int(0, 109, 8)
+                Defense = .Int(0, 117, 8)
                 SpDefense = .Int(0, 125, 8)
                 Exp = .Int(0, 133, 24)
                 Attack1 = New ExplorersActiveAttack(.Range(157, ExplorersActiveAttack.Length))
@@ -73,8 +73,8 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 81, 10) = HP1
                 .Int(0, 91, 10) = HP2
                 .Int(0, 101, 8) = Attack
-                .Int(0, 109, 8) = Defense
-                .Int(0, 117, 8) = SpAttack
+                .Int(0, 109, 8) = SpAttack
+                .Int(0, 117, 8) = Defense
                 .Int(0, 125, 8) = SpDefense
                 .Int(0, 133, 24) = Exp
                 .Range(157, ExplorersActiveAttack.Length) = _attack1.GetAttackBits
