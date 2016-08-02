@@ -18,7 +18,7 @@
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" Name="lvItems" ItemsSource="{Binding Path=(modeling:IParty.Party)}" DisplayMemberPath="File" />
+        <ListView Grid.Column="0" Name="lvItems" ItemsSource="{Binding Path=(modeling:IParty.Party)}" />
         <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" VerticalAlignment="Stretch"/>
         <skyWPF:ObjectControlPlaceholder Grid.Column="2" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding ElementName=lvItems,Path=SelectedItem}" EnableTabs="True" TabControlOrientation="Top"/>
     </Grid>

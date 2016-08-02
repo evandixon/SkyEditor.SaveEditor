@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
-Imports SkyEditor.Core.Utilities
 Imports SkyEditor.SaveEditor.MysteryDungeon
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
@@ -11,7 +10,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements IExplorersStoredPokemon
         Implements INotifyPropertyChanged
         Implements INotifyModified
-        Implements INamed
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
@@ -212,7 +210,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Name As String Implements IExplorersStoredPokemon.Name, INamed.Name
+        Public Property Name As String Implements IExplorersStoredPokemon.Name
             Get
                 Return Model.Name
             End Get

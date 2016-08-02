@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Reflection
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -7,13 +6,13 @@ Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
 
 Namespace MysteryDungeon.Explorers.ViewModels
     Public Class ExplorersPokemonMovesViewModel
-        Inherits GenericViewModel
+        Inherits GenericViewModel(Of IExplorersStoredPokemon)
         Implements I4Moves
         Implements INotifyModified
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
-        Private Sub _attack_Modified(sender As Object, e As EventArgs) Handles _attack1.Modified, _attack2.Modified, _attack3.Modified, _attack4.Modified
+        Private Sub _attack1_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged
             RaiseEvent Modified(sender, e)
         End Sub
 
@@ -61,36 +60,18 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
 
-            If TypeOf model Is IExplorersStoredPokemon Then
-                Dim s As IExplorersStoredPokemon = model
+            Dim s As IExplorersStoredPokemon = model
 
-                Dim a1 = New MDAttackViewModel(s.Attack1, CurrentPluginManager)
-                Dim a2 = New MDAttackViewModel(s.Attack2, CurrentPluginManager)
-                Dim a3 = New MDAttackViewModel(s.Attack3, CurrentPluginManager)
-                Dim a4 = New MDAttackViewModel(s.Attack4, CurrentPluginManager)
+            Dim a1 = New MDAttackViewModel(s.Attack1, CurrentPluginManager)
+            Dim a2 = New MDAttackViewModel(s.Attack2, CurrentPluginManager)
+            Dim a3 = New MDAttackViewModel(s.Attack3, CurrentPluginManager)
+            Dim a4 = New MDAttackViewModel(s.Attack4, CurrentPluginManager)
 
-                Attack1 = a1
-                Attack2 = a2
-                Attack3 = a3
-                Attack4 = a4
-            ElseIf TypeOf model Is IExplorersActivePokemon Then
-                Dim s As IExplorersActivePokemon = model
-
-                Dim a1 = New MDActiveAttackViewModel(s.Attack1, CurrentPluginManager)
-                Dim a2 = New MDActiveAttackViewModel(s.Attack2, CurrentPluginManager)
-                Dim a3 = New MDActiveAttackViewModel(s.Attack3, CurrentPluginManager)
-                Dim a4 = New MDActiveAttackViewModel(s.Attack4, CurrentPluginManager)
-
-                Attack1 = a1
-                Attack2 = a2
-                Attack3 = a3
-                Attack4 = a4
-            End If
-
+            Attack1 = a1
+            Attack2 = a2
+            Attack3 = a3
+            Attack4 = a4
         End Sub
 
-        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(IExplorersStoredPokemon).GetTypeInfo, GetType(IExplorersActivePokemon).GetTypeInfo}
-        End Function
     End Class
 End Namespace
