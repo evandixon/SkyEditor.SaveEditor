@@ -13,7 +13,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
-        Private Sub _attack1_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged
+        Private Sub _attack_Modified(sender As Object, e As EventArgs) Handles _attack1.Modified, _attack2.Modified, _attack3.Modified, _attack4.Modified
             RaiseEvent Modified(sender, e)
         End Sub
 
