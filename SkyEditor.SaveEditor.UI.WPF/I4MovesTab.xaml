@@ -12,20 +12,10 @@
              TargetType="{x:Type vmc:I4Moves}"
              Header="{x:Static res:Language.Moves}"
              SortOrder="1">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
-
-        <skyui:ObjectControlPlaceholder Grid.Row="0" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack1)}" EnableTabs="False"/>
-        <skyui:ObjectControlPlaceholder Grid.Row="2" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack2)}" EnableTabs="False"/>
-        <skyui:ObjectControlPlaceholder Grid.Row="4" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack3)}" EnableTabs="False"/>
-        <skyui:ObjectControlPlaceholder Grid.Row="6" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack4)}" EnableTabs="False"/>
-    </Grid>
+    <StackPanel>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack1)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack2)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack3)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack4)}" EnableTabs="False"/>
+    </StackPanel>
 </skyui:DataBoundObjectControl>
