@@ -420,7 +420,7 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
-            Return "skypkmq"
+            Return {"skypkmq"}
         End Function
     End Class
 End Namespace
