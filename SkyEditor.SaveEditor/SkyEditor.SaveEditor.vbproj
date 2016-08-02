@@ -122,7 +122,6 @@
     <Compile Include="Lists.vb" />
     <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
-    <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
     <Compile Include="MysteryDungeon\IExplorersAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersItem.vb" />

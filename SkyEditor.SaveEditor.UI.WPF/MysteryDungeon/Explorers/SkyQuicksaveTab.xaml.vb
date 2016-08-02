@@ -1,4 +1,4 @@
-﻿Namespace MysteryDungeon.Views.Explorers
+﻿Namespace MysteryDungeon.Explorers
     Public Class SkyQuicksaveTab
 
     End Class

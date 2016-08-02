@@ -1,4 +1,4 @@
-﻿Namespace MysteryDungeon.Explorers.Views
+﻿Namespace MysteryDungeon.Explorers
     Public Class TDHeldItemEditView
 
     End Class

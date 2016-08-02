@@ -43,8 +43,8 @@ Namespace MysteryDungeon.Explorers
                 IQ = .Int(0, 49, 10)
                 HP = .Int(0, 59, 10)
                 Attack = .Int(0, 69, 8)
-                SpAttack = .Int(0, 77, 8)
-                Defense = .Int(0, 85, 8)
+                Defense = .Int(0, 77, 8)
+                SpAttack = .Int(0, 85, 8)
                 SpDefense = .Int(0, 93, 8)
                 Exp = .Int(0, 101, 24)
 
@@ -78,8 +78,8 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 49, 10) = IQ
                 .Int(0, 59, 10) = HP
                 .Int(0, 69, 8) = Attack
-                .Int(0, 77, 8) = SpAttack
-                .Int(0, 85, 8) = Defense
+                .Int(0, 77, 8) = Defense
+                .Int(0, 85, 8) = SpAttack
                 .Int(0, 93, 8) = SpDefense
                 .Int(0, 101, 24) = Exp
 

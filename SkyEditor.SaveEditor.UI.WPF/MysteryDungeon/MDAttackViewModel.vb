@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports SkyEditor.Core
-Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon
 
@@ -8,7 +7,6 @@ Namespace MysteryDungeon
     Public Class MDAttackViewModel
         Inherits GenericViewModel(Of IMDAttack)
         Implements INotifyPropertyChanged
-        Implements INotifyModified
         Implements IMDAttack
 
         Public Sub New()
@@ -20,15 +18,6 @@ Namespace MysteryDungeon
         End Sub
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
-
-        Protected Sub RaisePropertyChanged(propertyName As String)
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-        End Sub
-
-        Private Sub MDAttackViewModel_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
-            RaiseEvent Modified(Me, New EventArgs)
-        End Sub
 
         Public Property IsLinked As Boolean Implements IMDAttack.IsLinked
             Get
