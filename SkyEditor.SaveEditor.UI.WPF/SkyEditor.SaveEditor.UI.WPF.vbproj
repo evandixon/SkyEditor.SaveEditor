@@ -220,8 +220,8 @@
     <None Include="SkyEditor.SaveEditor.UI.WPF.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\MDActiveAttack.xaml.vb">
-      <DependentUpon>MDActiveAttack.xaml</DependentUpon>
+    <Compile Include="MysteryDungeon\Explorers\Views\ExplorersActiveAttackView.xaml.vb">
+      <DependentUpon>ExplorersActiveAttackView.xaml</DependentUpon>
     </Compile>
     <Compile Include="InventoryTab.xaml.vb">
       <DependentUpon>InventoryTab.xaml</DependentUpon>
@@ -285,7 +285,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\MDActiveAttack.xaml">
+    <Page Include="MysteryDungeon\Explorers\Views\ExplorersActiveAttackView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -387,6 +387,8 @@
       <Name>SkyEditor.SaveEditor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
