@@ -2,13 +2,12 @@
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
-Imports SkyEditor.SaveEditor.MysteryDungeon
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
 Namespace MysteryDungeon.Explorers.ViewModels
-    Public Class ExplorersStoredPokemonGeneralViewModel
-        Inherits GenericViewModel(Of IExplorersStoredPokemon)
-        Implements IExplorersStoredPokemon
+    Public Class ExplorersActivePokemonGeneralViewModel
+        Inherits GenericViewModel(Of IExplorersActivePokemon)
+        Implements IExplorersActivePokemon
         Implements INotifyPropertyChanged
         Implements INotifyModified
         Implements INamed
@@ -16,11 +15,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
-        Private Sub ExplorersStoredPokemonGeneralViewModel_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
-            RaiseEvent Modified(Me, e)
+        Private Sub ExplorersActivePokemonGeneralViewModel_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
+            RaiseEvent Modified(Me, New EventArgs)
         End Sub
 
-        Public Property Level As Byte Implements IExplorersStoredPokemon.Level
+        Public Property Level As Byte Implements IExplorersActivePokemon.Level
             Get
                 Return Model.Level
             End Get
@@ -32,7 +31,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property ID As Integer Implements IExplorersStoredPokemon.ID
+        Public Property ID As Integer Implements IExplorersActivePokemon.ID
             Get
                 Return Model.ID
             End Get
@@ -44,7 +43,23 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property IsFemale As Boolean Implements IExplorersStoredPokemon.IsFemale
+        ''' <summary>
+        ''' The index of the Pokemon in storage as stored in the save file.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property RosterNumber As Integer Implements IExplorersActivePokemon.RosterNumber
+            Get
+                Return Model.RosterNumber
+            End Get
+            Set(value As Integer)
+                If Not Model.RosterNumber = value Then
+                    Model.RosterNumber = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(RosterNumber)))
+                End If
+            End Set
+        End Property
+
+        Public Property IsFemale As Boolean Implements IExplorersActivePokemon.IsFemale
             Get
                 Return Model.IsFemale
             End Get
@@ -56,7 +71,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property MetAt As Integer Implements IExplorersStoredPokemon.MetAt
+        Public Property MetAt As Integer Implements IExplorersActivePokemon.MetAt
             Get
                 Return Model.MetAt
             End Get
@@ -68,7 +83,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property MetFloor As Integer Implements IExplorersStoredPokemon.MetFloor
+        Public Property MetFloor As Integer Implements IExplorersActivePokemon.MetFloor
             Get
                 Return Model.MetFloor
             End Get
@@ -80,7 +95,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property IQ As Integer Implements IExplorersStoredPokemon.IQ
+        Public Property IQ As Integer Implements IExplorersActivePokemon.IQ
             Get
                 Return Model.IQ
             End Get
@@ -92,19 +107,31 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property HP As Integer Implements IExplorersStoredPokemon.HP
+        Public Property HP1 As Integer Implements IExplorersActivePokemon.HP1
             Get
-                Return Model.HP
+                Return Model.HP1
             End Get
             Set(value As Integer)
-                If Not Model.HP = value Then
-                    Model.HP = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HP)))
+                If Not Model.HP1 = value Then
+                    Model.HP1 = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HP1)))
                 End If
             End Set
         End Property
 
-        Public Property Attack As Byte Implements IExplorersStoredPokemon.Attack
+        Public Property HP2 As Integer Implements IExplorersActivePokemon.HP2
+            Get
+                Return Model.HP2
+            End Get
+            Set(value As Integer)
+                If Not Model.HP2 = value Then
+                    Model.HP2 = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(HP2)))
+                End If
+            End Set
+        End Property
+
+        Public Property Attack As Byte Implements IExplorersActivePokemon.Attack
             Get
                 Return Model.Attack
             End Get
@@ -116,7 +143,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Defense As Byte Implements IExplorersStoredPokemon.Defense
+        Public Property Defense As Byte Implements IExplorersActivePokemon.Defense
             Get
                 Return Model.Defense
             End Get
@@ -128,7 +155,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property SpAttack As Byte Implements IExplorersStoredPokemon.SpAttack
+        Public Property SpAttack As Byte Implements IExplorersActivePokemon.SpAttack
             Get
                 Return Model.SpAttack
             End Get
@@ -140,7 +167,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property SpDefense As Byte Implements IExplorersStoredPokemon.SpDefense
+        Public Property SpDefense As Byte Implements IExplorersActivePokemon.SpDefense
             Get
                 Return Model.SpDefense
             End Get
@@ -152,7 +179,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Exp As Integer Implements IExplorersStoredPokemon.Exp
+        Public Property Exp As Integer Implements IExplorersActivePokemon.Exp
             Get
                 Return Model.Exp
             End Get
@@ -164,11 +191,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack1 As IMDAttack Implements IExplorersStoredPokemon.Attack1
+        Public Property Attack1 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack1
             Get
                 Return Model.Attack1
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersActiveAttack)
                 If Model.Attack1 IsNot value Then
                     Model.Attack1 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack1)))
@@ -176,11 +203,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack2 As IMDAttack Implements IExplorersStoredPokemon.Attack2
+        Public Property Attack2 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack2
             Get
                 Return Model.Attack2
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersActiveAttack)
                 If Model.Attack2 IsNot value Then
                     Model.Attack2 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack2)))
@@ -188,11 +215,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack3 As IMDAttack Implements IExplorersStoredPokemon.Attack3
+        Public Property Attack3 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack3
             Get
                 Return Model.Attack3
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersActiveAttack)
                 If Model.Attack3 IsNot value Then
                     Model.Attack3 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack3)))
@@ -200,11 +227,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack4 As IMDAttack Implements IExplorersStoredPokemon.Attack4
+        Public Property Attack4 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack4
             Get
                 Return Model.Attack4
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersActiveAttack)
                 If Model.Attack4 IsNot value Then
                     Model.Attack4 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack4)))
@@ -212,7 +239,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Name As String Implements IExplorersStoredPokemon.Name, INamed.Name
+        Public Property Name As String Implements IExplorersActivePokemon.Name, INamed.Name
             Get
                 Return Model.Name
             End Get
@@ -224,18 +251,18 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public ReadOnly Property PokemonNames As Dictionary(Of Integer, String) Implements IExplorersStoredPokemon.PokemonNames
+        Public ReadOnly Property PokemonNames As Dictionary(Of Integer, String) Implements IExplorersActivePokemon.PokemonNames
             Get
-                Return Lists.ExplorersPokemon
+                Return Model.PokemonNames
             End Get
         End Property
 
-        Public ReadOnly Property LocationNames As Dictionary(Of Integer, String) Implements IExplorersStoredPokemon.LocationNames
+        Public ReadOnly Property LocationNames As Dictionary(Of Integer, String) Implements IExplorersActivePokemon.LocationNames
             Get
-                Return Lists.GetSkyLocations
+                Return Model.LocationNames
             End Get
         End Property
 
     End Class
-End Namespace
 
+End Namespace

@@ -5,8 +5,6 @@ Namespace MysteryDungeon.Explorers
     Public Class SkySave
         Inherits BinaryFile
         Implements IDetectableFileType
-        Implements INotifyPropertyChanged
-        Implements INotifyModified
 
         Public Class SkyOffsets
             Public Overridable ReadOnly Property BackupSaveStart As Integer = &HC800
@@ -111,21 +109,6 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Public ReadOnly Property Offsets As SkyOffsets
-
-#Region "Events"
-        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
-#End Region
-
-#Region "Event Handlers"
-        Private Sub OnModified(sender As Object, e As EventArgs)
-            RaiseEvent Modified(Me, e)
-        End Sub
-
-        Private Sub Me_OnPropertyChanged(sender As Object, e As EventArgs) Handles Me.PropertyChanged
-            RaiseEvent Modified(Me, e)
-        End Sub
-#End Region
 
 #Region "Save Interaction"
 
@@ -307,16 +290,11 @@ Namespace MysteryDungeon.Explorers
 #Region "Active Pokemon"
 
         Private Sub LoadActivePokemon()
-            Dim activePokemon As New ObservableCollection(Of SkyActivePokemon)
-            Dim spEpisodeActivePokemon As New ObservableCollection(Of SkyActivePokemon)
+            Dim activePokemon As New List(Of SkyActivePokemon)
+            Dim spEpisodeActivePokemon As New List(Of SkyActivePokemon)
             For count As Integer = 0 To Offsets.ActivePokemonNumber - 1
                 Dim main = New SkyActivePokemon(Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength))
                 Dim special = New SkyActivePokemon(Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength))
-
-                AddHandler main.Modified, AddressOf OnModified
-                AddHandler main.PropertyChanged, AddressOf OnModified
-                AddHandler special.Modified, AddressOf OnModified
-                AddHandler special.PropertyChanged, AddressOf OnModified
 
                 activePokemon.Add(main)
                 spEpisodeActivePokemon.Add(special)
@@ -333,41 +311,17 @@ Namespace MysteryDungeon.Explorers
             Next
         End Sub
 
-        Public Property ActivePokemon As ObservableCollection(Of SkyActivePokemon)
-            Get
-                Return _activePokemon
-            End Get
-            Set(value As ObservableCollection(Of SkyActivePokemon))
-                If _activePokemon IsNot value Then
-                    _activePokemon = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ActivePokemon)))
-                End If
-            End Set
-        End Property
-        Dim _activePokemon As ObservableCollection(Of SkyActivePokemon)
+        Public Property ActivePokemon As List(Of SkyActivePokemon)
 
-        Public Property SpEpisodeActivePokemon As ObservableCollection(Of SkyActivePokemon)
-            Get
-                Return _spEpisodeActivePokemon
-            End Get
-            Set(value As ObservableCollection(Of SkyActivePokemon))
-                If _spEpisodeActivePokemon IsNot value Then
-                    _spEpisodeActivePokemon = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SpEpisodeActivePokemon)))
-                End If
-            End Set
-        End Property
-        Dim _spEpisodeActivePokemon As ObservableCollection(Of SkyActivePokemon)
+        Public Property SpEpisodeActivePokemon As List(Of SkyActivePokemon)
 
 #End Region
 
 #Region "Quicksave Pokemon"
         Private Sub LoadQuicksavePokemon()
-            _quicksavePokemon = New ObservableCollection(Of SkyQuicksavePokemon)
+            _QuicksavePokemon = New List(Of SkyQuicksavePokemon)
             For count = 0 To Offsets.QuicksavePokemonNumber - 1
                 Dim quick = New SkyQuicksavePokemon(Bits.Range(Offsets.QuicksavePokemonOffset + Offsets.QuicksavePokemonLength * count, Offsets.QuicksavePokemonLength))
-                AddHandler quick.Modified, AddressOf OnModified
-                AddHandler quick.PropertyChanged, AddressOf OnModified
                 _quicksavePokemon.Add(quick)
             Next
         End Sub
@@ -381,18 +335,7 @@ Namespace MysteryDungeon.Explorers
             Next
         End Sub
 
-        Public Property QuicksavePokemon As ObservableCollection(Of SkyQuicksavePokemon)
-            Get
-                Return _quicksavePokemon
-            End Get
-            Set(value As ObservableCollection(Of SkyQuicksavePokemon))
-                If _quicksavePokemon IsNot value Then
-                    _quicksavePokemon = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(QuicksavePokemon)))
-                End If
-            End Set
-        End Property
-        Dim _quicksavePokemon As ObservableCollection(Of SkyQuicksavePokemon)
+        Public Property QuicksavePokemon As List(Of SkyQuicksavePokemon)
 
 #End Region
 
@@ -509,17 +452,6 @@ Namespace MysteryDungeon.Explorers
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property WindowFrameType As Byte
-            Get
-                Return _windowFrameType
-            End Get
-            Set(value As Byte)
-                If Not _windowFrameType = value Then
-                    _windowFrameType = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(WindowFrameType)))
-                End If
-            End Set
-        End Property
-        Dim _windowFrameType As Byte
 
 #End Region
 
