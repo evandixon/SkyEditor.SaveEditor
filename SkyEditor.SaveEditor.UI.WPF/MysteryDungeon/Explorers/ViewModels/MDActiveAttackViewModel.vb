@@ -2,7 +2,7 @@
 Imports SkyEditor.Core
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
-Namespace MysteryDungeon.Explorers
+Namespace MysteryDungeon.Explorers.ViewModels
     Public Class MDActiveAttackViewModel
         Inherits MDAttackViewModel
         Implements IExplorersActiveAttack
