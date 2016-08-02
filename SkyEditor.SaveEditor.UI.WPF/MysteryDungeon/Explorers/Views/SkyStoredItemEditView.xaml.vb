@@ -1,4 +1,4 @@
-﻿Namespace MysteryDungeon.Explorers
+﻿Namespace MysteryDungeon.Views.Explorers
     Public Class SkyStoredItemEditView
 
     End Class

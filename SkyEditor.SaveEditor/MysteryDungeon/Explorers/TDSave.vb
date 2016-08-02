@@ -6,8 +6,6 @@ Namespace MysteryDungeon.Explorers
     Public Class TDSave
         Inherits BinaryFile
         Implements IDetectableFileType
-        Implements INotifyPropertyChanged
-        Implements INotifyModified
 
         Public Sub New()
             MyBase.New()
@@ -34,21 +32,6 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Public Overridable ReadOnly Property Offsets As TDOffsets
-
-#Region "Events"
-        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
-#End Region
-
-#Region "Event Handlers"
-        Private Sub TDSave_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
-            RaiseEvent Modified(Me, e)
-        End Sub
-
-        Private Sub OnModified(sender As Object, e As EventArgs)
-            RaiseEvent Modified(Me, e)
-        End Sub
-#End Region
 
 #Region "Child Classes"
         Public Class TDOffsets
@@ -94,17 +77,6 @@ Namespace MysteryDungeon.Explorers
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property TeamName As String
-            Get
-                Return _teamName
-            End Get
-            Set(value As String)
-                If Not _teamName = value Then
-                    _teamName = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(TeamName)))
-                End If
-            End Set
-        End Property
-        Dim _teamName As String
 #End Region
 
 #Region "Items"
@@ -158,14 +130,10 @@ Namespace MysteryDungeon.Explorers
 #Region "Active Pokemon"
 
         Private Sub LoadActivePokemon()
-            Dim activePokemon As New ObservableCollection(Of TDActivePokemon)
-            Dim spEpisodeActivePokemon As New ObservableCollection(Of TDActivePokemon)
+            Dim activePokemon As New List(Of TDActivePokemon)
+            Dim spEpisodeActivePokemon As New List(Of TDActivePokemon)
             For count As Integer = 0 To Offsets.ActivePokemonNumber - 1
                 Dim main = New TDActivePokemon(Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength))
-
-                AddHandler main.Modified, AddressOf OnModified
-                AddHandler main.PropertyChanged, AddressOf OnModified
-
                 activePokemon.Add(main)
             Next
 
@@ -178,18 +146,7 @@ Namespace MysteryDungeon.Explorers
             Next
         End Sub
 
-        Public Property ActivePokemon As ObservableCollection(Of TDActivePokemon)
-            Get
-                Return _activePokemon
-            End Get
-            Set(value As ObservableCollection(Of TDActivePokemon))
-                If _activePokemon IsNot value Then
-                    _activePokemon = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ActivePokemon)))
-                End If
-            End Set
-        End Property
-        Dim _activePokemon As ObservableCollection(Of TDActivePokemon)
+        Public Property ActivePokemon As List(Of TDActivePokemon)
 
 #End Region
 
