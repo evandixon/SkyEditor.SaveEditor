@@ -30,6 +30,10 @@ Namespace MysteryDungeon.Explorers
             Public Overridable ReadOnly Property StoredPokemonLength As Integer = 362
             Public Overridable ReadOnly Property StoredPokemonNumber As Integer = 720
 
+            Public Overridable ReadOnly Property ActivePokemon1RosterIndexOffset As Integer = &H83D1 * 8 + 1
+            Public Overridable ReadOnly Property ActivePokemon2RosterIndexOffset As Integer = &H83D3 * 8 + 1
+            Public Overridable ReadOnly Property ActivePokemon3RosterIndexOffset As Integer = &H83D5 * 8 + 1
+            Public Overridable ReadOnly Property ActivePokemon4RosterIndexOffset As Integer = &H83D7 * 8 + 1
             Public Overridable ReadOnly Property ActivePokemonOffset As Integer = &H83D9 * 8 + 1
             Public Overridable ReadOnly Property SpActivePokemonOffset As Integer = &H84F4 * 8 + 2
             Public Overridable ReadOnly Property ActivePokemonLength As Integer = 546
@@ -290,6 +294,11 @@ Namespace MysteryDungeon.Explorers
 #Region "Active Pokemon"
 
         Private Sub LoadActivePokemon()
+            ActivePokemon1RosterIndex = Me.Bits.GetShort(Offsets.ActivePokemon1RosterIndexOffset)
+            ActivePokemon2RosterIndex = Me.Bits.GetShort(Offsets.ActivePokemon2RosterIndexOffset)
+            ActivePokemon3RosterIndex = Me.Bits.GetShort(Offsets.ActivePokemon3RosterIndexOffset)
+            ActivePokemon4RosterIndex = Me.Bits.GetShort(Offsets.ActivePokemon4RosterIndexOffset)
+
             Dim activePokemon As New List(Of SkyActivePokemon)
             Dim spEpisodeActivePokemon As New List(Of SkyActivePokemon)
             For count As Integer = 0 To Offsets.ActivePokemonNumber - 1
@@ -305,11 +314,40 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Private Sub SaveActivePokemon()
+            Me.Bits.SetShort(Offsets.ActivePokemon1RosterIndexOffset, ActivePokemon1RosterIndex)
+            Me.Bits.SetShort(Offsets.ActivePokemon2RosterIndexOffset, ActivePokemon2RosterIndex)
+            Me.Bits.SetShort(Offsets.ActivePokemon3RosterIndexOffset, ActivePokemon3RosterIndex)
+            Me.Bits.SetShort(Offsets.ActivePokemon4RosterIndexOffset, ActivePokemon4RosterIndex)
+
             For count As Integer = 0 To Offsets.ActivePokemonNumber - 1
                 Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = ActivePokemon(count).GetActivePokemonBits
                 Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = SpEpisodeActivePokemon(count).GetActivePokemonBits
             Next
         End Sub
+
+        ''' <summary>
+        ''' Index of the Stored Pokémon corresponding to the first party member of the main game.
+        ''' </summary>
+        ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the first Active Pokémon, or -1 if there isn't a first Active Pokémon.</returns>
+        Public Property ActivePokemon1RosterIndex As Short
+
+        ''' <summary>
+        ''' Index of the Stored Pokémon corresponding to the second party member of the main game.
+        ''' </summary>
+        ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the second Active Pokémon, or -1 if there isn't a second Active Pokémon.</returns>
+        Public Property ActivePokemon2RosterIndex As Short
+
+        ''' <summary>
+        ''' Index of the Stored Pokémon corresponding to the third party member of the main game.
+        ''' </summary>
+        ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the third Active Pokémon, or -1 if there isn't a third Active Pokémon.</returns>
+        Public Property ActivePokemon3RosterIndex As Short
+
+        ''' <summary>
+        ''' Index of the Stored Pokémon corresponding to the fourth party member of the main game.
+        ''' </summary>
+        ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the fourth Active Pokémon, or -1 if there isn't a fourth Active Pokémon.</returns>
+        Public Property ActivePokemon4RosterIndex As Short
 
         Public Property ActivePokemon As List(Of SkyActivePokemon)
 

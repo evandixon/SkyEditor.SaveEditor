@@ -150,6 +150,31 @@ Public Class Binary
         Return Me.Bits.GetEnumerator
     End Function
 
+    ''' <summary>
+    ''' Gets a <see cref="Short"/> located at the given bit offset.
+    ''' </summary>
+    ''' <param name="bitIndex">Offset in bits relative to the start of the <see cref="Binary"/> where the <see cref="Short"/> is located.</param>
+    ''' <returns>The <see cref="Short"/> located at <paramref name="bitIndex"/></returns>
+    Public Function GetShort(bitIndex As Integer) As Short
+        Dim output As Short = 0
+        For j As Integer = 0 To 15
+            output = output Or (If(Bits(bitIndex + j), 1, 0)) << j
+        Next j
+        Return output
+    End Function
+
+    ''' <summary>
+    ''' Sets <see cref="Short"/> located at the given bit offset to the given value.
+    ''' </summary>
+    ''' <param name="bitIndex">Offset in bits relative to the start of the <see cref="Binary"/> where the <see cref="Short"/> is located.</param>
+    ''' <param name="value">The value to write to the target location.</param>
+    Public Sub SetShort(bitIndex As Integer, value As Short)
+        Dim bin As New Binary(BitConverter.GetBytes(value))
+        For i = 0 To 15
+            Bits(bitIndex + i) = bin.Bits(i)
+        Next
+    End Sub
+
     Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
         Return DirectCast(Me.Bits, IEnumerable).GetEnumerator
     End Function
