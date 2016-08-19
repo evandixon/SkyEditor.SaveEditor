@@ -314,11 +314,35 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Private Sub SaveActivePokemon()
+            'Update the Active Pokemon Roster Indexes
+            If ActivePokemon.Count > 0 Then
+                ActivePokemon1RosterIndex = ActivePokemon(0).RosterNumber
+            Else
+                ActivePokemon1RosterIndex = -1
+            End If
+            If ActivePokemon.Count > 1 Then
+                ActivePokemon2RosterIndex = ActivePokemon(1).RosterNumber
+            Else
+                ActivePokemon2RosterIndex = -1
+            End If
+            If ActivePokemon.Count > 2 Then
+                ActivePokemon3RosterIndex = ActivePokemon(2).RosterNumber
+            Else
+                ActivePokemon3RosterIndex = -1
+            End If
+            If ActivePokemon.Count > 3 Then
+                ActivePokemon4RosterIndex = ActivePokemon(3).RosterNumber
+            Else
+                ActivePokemon4RosterIndex = -1
+            End If
+
+            'Write the Active Pokemon Roster Indexes
             Me.Bits.SetShort(Offsets.ActivePokemon1RosterIndexOffset, ActivePokemon1RosterIndex)
             Me.Bits.SetShort(Offsets.ActivePokemon2RosterIndexOffset, ActivePokemon2RosterIndex)
             Me.Bits.SetShort(Offsets.ActivePokemon3RosterIndexOffset, ActivePokemon3RosterIndex)
             Me.Bits.SetShort(Offsets.ActivePokemon4RosterIndexOffset, ActivePokemon4RosterIndex)
 
+            'Write the Active Pokemon
             For count As Integer = 0 To Offsets.ActivePokemonNumber - 1
                 Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = ActivePokemon(count).GetActivePokemonBits
                 Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = SpEpisodeActivePokemon(count).GetActivePokemonBits
@@ -329,25 +353,25 @@ Namespace MysteryDungeon.Explorers
         ''' Index of the Stored Pokémon corresponding to the first party member of the main game.
         ''' </summary>
         ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the first Active Pokémon, or -1 if there isn't a first Active Pokémon.</returns>
-        Public Property ActivePokemon1RosterIndex As Short
+        Protected Property ActivePokemon1RosterIndex As Short
 
         ''' <summary>
         ''' Index of the Stored Pokémon corresponding to the second party member of the main game.
         ''' </summary>
         ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the second Active Pokémon, or -1 if there isn't a second Active Pokémon.</returns>
-        Public Property ActivePokemon2RosterIndex As Short
+        Protected Property ActivePokemon2RosterIndex As Short
 
         ''' <summary>
         ''' Index of the Stored Pokémon corresponding to the third party member of the main game.
         ''' </summary>
         ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the third Active Pokémon, or -1 if there isn't a third Active Pokémon.</returns>
-        Public Property ActivePokemon3RosterIndex As Short
+        Protected Property ActivePokemon3RosterIndex As Short
 
         ''' <summary>
         ''' Index of the Stored Pokémon corresponding to the fourth party member of the main game.
         ''' </summary>
         ''' <returns>The index of the Stored Pokémon in <see cref="StoredPokemon"/> corresponding to the fourth Active Pokémon, or -1 if there isn't a fourth Active Pokémon.</returns>
-        Public Property ActivePokemon4RosterIndex As Short
+        Protected Property ActivePokemon4RosterIndex As Short
 
         Public Property ActivePokemon As List(Of SkyActivePokemon)
 
