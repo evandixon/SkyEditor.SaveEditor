@@ -371,4 +371,7 @@ For stackable items like sticks and spikes, this lets you control how much is in
   <data name="MenuPokemonImportActive" xml:space="preserve">
     <value>_Import Active Pokémon</value>
   </data>
+  <data name="RemoveActivePokemonCommandName" xml:space="preserve">
+    <value>Standby</value>
+  </data>
 </root>

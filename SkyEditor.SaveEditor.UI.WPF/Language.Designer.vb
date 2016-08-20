@@ -640,6 +640,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Standby.
+        '''</summary>
+        Public Shared ReadOnly Property RemoveActivePokemonCommandName() As String
+            Get
+                Return ResourceManager.GetString("RemoveActivePokemonCommandName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Rescue Points.
         '''</summary>
         Public Shared ReadOnly Property RescuePoints() As String

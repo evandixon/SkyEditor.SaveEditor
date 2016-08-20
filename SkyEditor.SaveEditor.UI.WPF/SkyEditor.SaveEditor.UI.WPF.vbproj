@@ -132,9 +132,8 @@
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersStoredPokemonGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyHistoryViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyPartyViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersPartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDGeneralViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDPartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDInventoryViewModel.vb" />

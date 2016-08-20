@@ -305,8 +305,13 @@ Namespace MysteryDungeon.Explorers
                 Dim main = New SkyActivePokemon(Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength))
                 Dim special = New SkyActivePokemon(Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength))
 
-                activePokemon.Add(main)
-                spEpisodeActivePokemon.Add(special)
+                If main.IsValid Then
+                    activePokemon.Add(main)
+                End If
+
+                If special.IsValid Then
+                    spEpisodeActivePokemon.Add(special)
+                End If
             Next
 
             Me.ActivePokemon = activePokemon
@@ -344,8 +349,17 @@ Namespace MysteryDungeon.Explorers
 
             'Write the Active Pokemon
             For count As Integer = 0 To Offsets.ActivePokemonNumber - 1
-                Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = ActivePokemon(count).GetActivePokemonBits
-                Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = SpEpisodeActivePokemon(count).GetActivePokemonBits
+                If ActivePokemon.Count > count Then
+                    Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = ActivePokemon(count).GetActivePokemonBits
+                Else
+                    Me.Bits.Range(Offsets.ActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = New Binary(Offsets.ActivePokemonLength)
+                End If
+
+                If SpEpisodeActivePokemon.Count > count Then
+                    Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = SpEpisodeActivePokemon(count).GetActivePokemonBits
+                Else
+                    Me.Bits.Range(Offsets.SpActivePokemonOffset + count * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength) = New Binary(Offsets.ActivePokemonLength)
+                End If
             Next
         End Sub
 
