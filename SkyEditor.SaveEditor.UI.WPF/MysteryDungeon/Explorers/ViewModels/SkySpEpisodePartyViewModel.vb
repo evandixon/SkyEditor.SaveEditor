@@ -20,7 +20,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
-        Private Sub OnModified(sender As Object, e As EventArgs)
+        Private Sub OnModified(sender As Object, e As EventArgs) Handles _party.CollectionChanged
             RaiseEvent Modified(Me, New EventArgs)
         End Sub
 
@@ -32,7 +32,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 _party = value
             End Set
         End Property
-        Dim _party As ObservableCollection(Of FileViewModel)
+        Private WithEvents _party As ObservableCollection(Of FileViewModel)
 
         Public Property SelectedPokemon As FileViewModel Implements IParty.SelectedPokemon
             Get
