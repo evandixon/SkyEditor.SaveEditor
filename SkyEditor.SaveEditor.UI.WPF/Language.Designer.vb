@@ -721,6 +721,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Sp. Episode Party.
+        '''</summary>
+        Public Shared ReadOnly Property SpEpisodeParty() As String
+            Get
+                Return ResourceManager.GetString("SpEpisodeParty", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Special Episode Pokemon.
         '''</summary>
         Public Shared ReadOnly Property SpEpisodePokemonSlot() As String

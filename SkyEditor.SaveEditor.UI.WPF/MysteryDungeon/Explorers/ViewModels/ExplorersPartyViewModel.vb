@@ -10,6 +10,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
     Public Class ExplorersPartyViewModel
         Inherits GenericViewModel
         Implements IParty
+
         Implements INotifyModified
         Implements INotifyPropertyChanged
 
@@ -54,6 +55,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Dim _selectedPokemon As FileViewModel
 
         Public ReadOnly Property StandbyCommand As RelayCommand Implements IParty.StandbyCommand
+
+        Public ReadOnly Property PartyName As String Implements IParty.PartyName
+            Get
+                Return My.Resources.Language.Party
+            End Get
+        End Property
 
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
@@ -112,6 +119,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
             _party.Remove(SelectedPokemon)
             SelectedPokemon = Nothing
         End Sub
+
+        Public Overrides Function GetSortOrder() As Integer
+            Return 3
+        End Function
     End Class
 
 End Namespace

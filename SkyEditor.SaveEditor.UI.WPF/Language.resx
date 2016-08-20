@@ -374,4 +374,7 @@ For stackable items like sticks and spikes, this lets you control how much is in
   <data name="RemoveActivePokemonCommandName" xml:space="preserve">
     <value>Standby</value>
   </data>
+  <data name="SpEpisodeParty" xml:space="preserve">
+    <value>Sp. Episode Party</value>
+  </data>
 </root>

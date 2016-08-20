@@ -136,6 +136,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         End Sub
 
+        Public Overrides Function GetSortOrder() As Integer
+            Return 2
+        End Function
+
     End Class
 End Namespace
 
