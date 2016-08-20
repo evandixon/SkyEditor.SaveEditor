@@ -10,6 +10,7 @@ Namespace MenuActions
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuPokemon, My.Resources.Language.MenuPokemonImportActive})
+            DevOnly = True
         End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
