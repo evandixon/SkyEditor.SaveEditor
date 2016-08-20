@@ -120,6 +120,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MenuActions\ExportPokemon.vb" />
+    <Compile Include="MenuActions\ExportActivePokemon.vb" />
+    <Compile Include="MenuActions\ImportActivePokemon.vb" />
     <Compile Include="MenuActions\ImportPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\Views\ExplorersActivePokemonGeneralTab.xaml.vb">
       <DependentUpon>ExplorersActivePokemonGeneralTab.xaml</DependentUpon>

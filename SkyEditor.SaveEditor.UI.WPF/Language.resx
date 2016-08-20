@@ -354,15 +354,21 @@ For stackable items like sticks and spikes, this lets you control how much is in
     <value>_Pokémon</value>
   </data>
   <data name="MenuPokemonExport" xml:space="preserve">
-    <value>_Export</value>
+    <value>_Export Stored Pokémon</value>
   </data>
   <data name="MenuPokemonImport" xml:space="preserve">
-    <value>_Import</value>
+    <value>_Import Stored Pokémon</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Item Name</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
+  </data>
+  <data name="MenuPokemonExportActive" xml:space="preserve">
+    <value>_Export Active Pokémon</value>
+  </data>
+  <data name="MenuPokemonImportActive" xml:space="preserve">
+    <value>_Import Active Pokémon</value>
   </data>
 </root>
