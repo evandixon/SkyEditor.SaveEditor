@@ -19,6 +19,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             StoredPlayerPartner = New ObservableCollection(Of FileViewModel)
             StoredSpEpisodePokemon = New ObservableCollection(Of FileViewModel)
             StoredPokemon = New ObservableCollection(Of FileViewModel)
+            AllPokemon = New ObservableCollection(Of FileViewModel)
 
             AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
         End Sub
@@ -37,7 +38,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Private Sub _selectedBox_SelectedPokemonChanged(sender As Object, e As EventArgs) Handles _selectedBox.SelectedPokemonChanged
             RequestMenuItemRefresh()
-            AddToPartyCommand.IsEnabled = (_activeVM.CanAddActivePokemon < 4 AndAlso SelectedBox IsNot Nothing AndAlso SelectedBox.SelectedPokemon IsNot Nothing)
+            AddToPartyCommand.IsEnabled = (ActivePokemonViewModel.CanAddActivePokemon < 4 AndAlso SelectedBox IsNot Nothing AndAlso SelectedBox.SelectedPokemon IsNot Nothing)
         End Sub
 
         Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
