@@ -19,6 +19,7 @@
         Property Attack2 As IMDAttack
         Property Attack3 As IMDAttack
         Property Attack4 As IMDAttack
+        Function ToActive() As IExplorersActivePokemon
     End Interface
 
 End Namespace
