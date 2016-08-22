@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core.UI
+Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
 Imports SkyEditor.UI.WPF
 
@@ -29,6 +30,10 @@ Namespace MenuActions
                     Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
                         pkm.Save(s.FileName, CurrentPluginManager)
+
+                        If TypeOf pkm.File Is SkyStoredPokemon Then
+                            DirectCast(pkm.File, SkyStoredPokemon).DumpToConsole(CurrentPluginManager.CurrentConsoleProvider)
+                        End If
                     End If
                 End If
             Next

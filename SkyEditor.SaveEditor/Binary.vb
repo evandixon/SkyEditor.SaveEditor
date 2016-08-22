@@ -175,6 +175,23 @@ Public Class Binary
         Next
     End Sub
 
+    ''' <summary>
+    ''' Gets a representation of the binary
+    ''' </summary>
+    ''' <returns>A string representing the binary.</returns>
+    ''' <remarks>Example: A 5-Bit <see cref="Binary"/> representing the number 8 will return "1000"</remarks>
+    Public Function GetBigEndianStringRepresentation() As String
+        Dim x As New StringBuilder
+        For i = Bits.Count - 1 To 0 Step -1
+            If Bits(i) Then
+                x.Append("1")
+            Else
+                x.Append("0")
+            End If
+        Next
+        Return x.ToString
+    End Function
+
     Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
         Return DirectCast(Me.Bits, IEnumerable).GetEnumerator
     End Function

@@ -5,6 +5,8 @@
         Property IsFemale As Boolean
         Property MetAt As Integer
         Property MetFloor As Integer
+        Property EvolvedAtLevel1 As Integer
+        Property EvolvedAtLevel2 As Integer
         Property IQ As Integer
         Property HP As Integer
         Property Attack As Byte

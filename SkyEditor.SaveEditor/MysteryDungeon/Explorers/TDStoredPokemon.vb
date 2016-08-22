@@ -13,7 +13,6 @@ Namespace MysteryDungeon.Explorers
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
         Public Sub New()
-            Unk1 = New Binary(15)
             Unk2 = New Binary(73)
         End Sub
 
@@ -38,7 +37,9 @@ Namespace MysteryDungeon.Explorers
                 MetAt = .Int(0, 19, 8)
                 MetFloor = .Int(0, 27, 7)
 
-                Unk1 = .Range(34, 15)
+                Unk1 = .Bit(34)
+                EvolvedAtLevel1 = .Int(0, 35, 7)
+                EvolvedAtLevel2 = .Int(0, 42, 7)
 
                 IQ = .Int(0, 49, 10)
                 HP = .Int(0, 59, 10)
@@ -73,7 +74,9 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 19, 8) = MetAt
                 .Int(0, 27, 7) = MetFloor
 
-                .Range(34, 15) = Unk1
+                .Bit(34) = Unk1
+                .Int(0, 35, 7) = EvolvedAtLevel1
+                .Int(0, 42, 7) = EvolvedAtLevel2
 
                 .Int(0, 49, 10) = IQ
                 .Int(0, 59, 10) = HP
@@ -145,7 +148,7 @@ Namespace MysteryDungeon.Explorers
         End Function
 
 #Region "Properties"
-        Private Property Unk1 As Binary
+        Private Property Unk1 As Boolean
         Private Property Unk2 As Binary
 
         Public ReadOnly Property IsValid As Boolean
@@ -163,6 +166,10 @@ Namespace MysteryDungeon.Explorers
         Public Property MetAt As Integer Implements IExplorersStoredPokemon.MetAt
 
         Public Property MetFloor As Integer Implements IExplorersStoredPokemon.MetFloor
+
+        Public Property EvolvedAtLevel1 As Integer Implements IExplorersStoredPokemon.EvolvedAtLevel1
+
+        Public Property EvolvedAtLevel2 As Integer Implements IExplorersStoredPokemon.EvolvedAtLevel2
 
         Public Property IQ As Integer Implements IExplorersStoredPokemon.IQ
 
