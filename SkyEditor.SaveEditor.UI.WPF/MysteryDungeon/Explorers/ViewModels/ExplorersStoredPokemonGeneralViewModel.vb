@@ -20,6 +20,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
             RaiseEvent Modified(Me, e)
         End Sub
 
+        Public Function ToActive() As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
+            Return Model.ToActive
+        End Function
+
         Public Property Level As Byte Implements IExplorersStoredPokemon.Level
             Get
                 Return Model.Level

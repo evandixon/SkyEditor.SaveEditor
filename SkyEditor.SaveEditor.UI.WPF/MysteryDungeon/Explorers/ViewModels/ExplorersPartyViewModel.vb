@@ -10,7 +10,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
     Public Class ExplorersPartyViewModel
         Inherits GenericViewModel
         Implements IParty
-
         Implements INotifyModified
         Implements INotifyPropertyChanged
 
@@ -24,6 +23,8 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+        Public Event ActivePokemonRemoving(sender As Object, e As ActivePokemonRemoveEventArgs)
+        Public Event ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs)
 
         Private Sub OnModified(sender As Object, e As EventArgs) Handles _party.CollectionChanged
             RaiseEvent Modified(Me, New EventArgs)
@@ -59,6 +60,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public ReadOnly Property PartyName As String Implements IParty.PartyName
             Get
                 Return My.Resources.Language.Party
+            End Get
+        End Property
+
+        Public ReadOnly Property CanAddActivePokemon As Boolean
+            Get
+                Return _party.Count < 4
             End Get
         End Property
 
@@ -116,8 +123,21 @@ Namespace MysteryDungeon.Explorers.ViewModels
         End Sub
 
         Public Sub StandbySelectedActivePokemon()
-            _party.Remove(SelectedPokemon)
-            SelectedPokemon = Nothing
+            Dim pkm = SelectedPokemon?.File
+
+            If pkm IsNot Nothing Then
+                RaiseEvent ActivePokemonRemoving(Me, New ActivePokemonRemoveEventArgs With {.Pokemon = pkm})
+
+                _party.Remove(SelectedPokemon)
+                SelectedPokemon = Nothing
+
+                RaiseEvent ActivePokemonRemoved(Me, New ActivePokemonRemoveEventArgs With {.Pokemon = pkm})
+            End If
+
+        End Sub
+
+        Public Sub AddActivePokemon(pkm As IExplorersStoredPokemon)
+            _party.Add(pkm.ToActive)
         End Sub
 
         Public Overrides Function GetSortOrder() As Integer

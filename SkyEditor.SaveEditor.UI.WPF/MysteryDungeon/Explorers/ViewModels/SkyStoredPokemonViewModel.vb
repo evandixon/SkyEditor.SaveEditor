@@ -19,6 +19,8 @@ Namespace MysteryDungeon.Explorers.ViewModels
             StoredPlayerPartner = New ObservableCollection(Of FileViewModel)
             StoredSpEpisodePokemon = New ObservableCollection(Of FileViewModel)
             StoredPokemon = New ObservableCollection(Of FileViewModel)
+
+            AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
         End Sub
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
@@ -35,8 +37,23 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Private Sub _selectedBox_SelectedPokemonChanged(sender As Object, e As EventArgs) Handles _selectedBox.SelectedPokemonChanged
             RequestMenuItemRefresh()
+            AddToPartyCommand.IsEnabled = (_activeVM.CanAddActivePokemon < 4 AndAlso SelectedBox IsNot Nothing AndAlso SelectedBox.SelectedPokemon IsNot Nothing)
+        End Sub
+
+        Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
+            AllPokemon(e.Pokemon.RosterNumber).File = e.Pokemon.ToStored
         End Sub
 #End Region
+
+        Protected ReadOnly Property ActivePokemonViewModel As ExplorersPartyViewModel
+            Get
+                If _activeVM Is Nothing Then
+                    _activeVM = GetSiblingViewModel(Of ExplorersPartyViewModel)()
+                End If
+                Return _activeVM
+            End Get
+        End Property
+        Private WithEvents _activeVM As ExplorersPartyViewModel
 
 #Region "Properties"
         Public Property Storage As IEnumerable(Of IPokemonBox) Implements IPokemonStorage.Storage
@@ -83,6 +100,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
         Private WithEvents _storedPokemon As ObservableCollection(Of FileViewModel)
+
+        Private Property AllPokemon As ObservableCollection(Of FileViewModel)
+
+        Public Property AddToPartyCommand As RelayCommand
 #End Region
 
 
@@ -107,6 +128,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 Else 'Others
                     _storedPokemon.Add(fvm)
                 End If
+                AllPokemon.Add(fvm)
             Next
 
             Dim b = New ObservableCollection(Of IPokemonBox)
@@ -139,6 +161,15 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Overrides Function GetSortOrder() As Integer
             Return 2
         End Function
+
+        ''' <summary>
+        ''' Adds the selected box's selected pokemon to active Pokemon
+        ''' </summary>
+        Private Sub AddActivePokemon()
+            If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
+                ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.File)
+            End If
+        End Sub
 
     End Class
 End Namespace
