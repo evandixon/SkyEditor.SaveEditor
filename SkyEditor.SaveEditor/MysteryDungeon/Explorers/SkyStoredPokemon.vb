@@ -141,6 +141,14 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Public Function ToActive() As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
+            Dim out As New SkyActivePokemon
+            out.Name = Me.Name
+            out.ID = Me.ID
+            out.IQ = Me.IQ
+            out.Attack = Me.Attack
+            out.SpAttack = Me.SpAttack
+            out.Defense = Me.Defense
+            out.SpDefense = Me.SpDefense
             Throw New NotImplementedException()
         End Function
 
