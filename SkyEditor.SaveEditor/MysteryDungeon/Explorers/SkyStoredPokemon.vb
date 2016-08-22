@@ -140,6 +140,10 @@ Namespace MysteryDungeon.Explorers
             Return {"skypkm"}
         End Function
 
+        Public Function ToActive() As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
+            Throw New NotImplementedException()
+        End Function
+
 #Region "Properties"
         Private Property Unk1 As Binary
         Private Property Unk2 As Binary
