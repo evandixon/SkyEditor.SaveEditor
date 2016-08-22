@@ -13,8 +13,7 @@ Namespace MysteryDungeon.Explorers
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
         Public Sub New()
-            Unk1 = New Binary(15)
-            Unk2 = New Binary(73)
+            Initialize(New Binary(Length))
         End Sub
 
         Public Sub New(bits As Binary)
