@@ -14,7 +14,7 @@ Namespace MysteryDungeon.Explorers
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
         Public Sub New()
-            Unk2 = New Binary(73)
+            Unk2 = New Binary(69)
         End Sub
 
         Public Sub New(bits As Binary)
@@ -50,7 +50,8 @@ Namespace MysteryDungeon.Explorers
                 SpDefense = .Int(0, 93, 8)
                 Exp = .Int(0, 101, 24)
 
-                Unk2 = .Range(125, 73)
+                Unk2 = .Range(125, 69)
+                Tactic = .Int(0, 194, 4)
 
                 Attack1 = New ExplorersAttack(.Range(198, ExplorersAttack.Length))
                 Attack2 = New ExplorersAttack(.Range(219, ExplorersAttack.Length))
@@ -87,7 +88,8 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 93, 8) = SpDefense
                 .Int(0, 101, 24) = Exp
 
-                .Range(125, 73) = Unk2
+                .Range(125, 69) = Unk2
+                .Int(0, 194, 4) = Tactic
 
                 .Range(198, ExplorersAttack.Length) = _attack1.GetAttackBits
                 .Range(219, ExplorersAttack.Length) = _attack2.GetAttackBits
@@ -206,6 +208,7 @@ Namespace MysteryDungeon.Explorers
         Public Property SpDefense As Byte Implements IExplorersStoredPokemon.SpDefense
 
         Public Property Exp As Integer Implements IExplorersStoredPokemon.Exp
+        Public Property Tactic As Integer Implements IExplorersStoredPokemon.Tactic
 
         Public Property Attack1 As IMDAttack Implements IExplorersStoredPokemon.Attack1
             Get

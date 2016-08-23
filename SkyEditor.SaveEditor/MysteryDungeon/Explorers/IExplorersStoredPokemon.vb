@@ -15,6 +15,7 @@
         Property SpDefense As Byte
         Property Exp As Integer
         Property Name As String
+        Property Tactic As Integer
         ReadOnly Property PokemonNames As Dictionary(Of Integer, String)
         ReadOnly Property LocationNames As Dictionary(Of Integer, String)
         Property Attack1 As IMDAttack
