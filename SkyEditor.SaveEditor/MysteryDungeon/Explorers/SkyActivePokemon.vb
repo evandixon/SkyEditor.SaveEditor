@@ -1,4 +1,5 @@
-﻿Imports SkyEditor.Core.IO
+﻿Imports SkyEditor.Core.ConsoleCommands
+Imports SkyEditor.Core.IO
 
 Namespace MysteryDungeon.Explorers
     Public Class SkyActivePokemon
@@ -211,6 +212,15 @@ Namespace MysteryDungeon.Explorers
         End Property
 
 #End Region
+
+        <Obsolete("Testing code, remove before PR")> Public Sub DumpToConsole(Console As IConsoleProvider)
+            Console.WriteLine($"Name: {Name}")
+            Console.WriteLine($"Unknown 1: {Unk1.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 2: {Unk2.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 3: {Unk3.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 4: {Unk4.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 5: {Unk5.GetBigEndianStringRepresentation}")
+        End Sub
 
     End Class
 End Namespace
