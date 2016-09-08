@@ -18,11 +18,11 @@
         Property Tactic As Integer
         ReadOnly Property PokemonNames As Dictionary(Of Integer, String)
         ReadOnly Property LocationNames As Dictionary(Of Integer, String)
-        Property Attack1 As IMDAttack
-        Property Attack2 As IMDAttack
-        Property Attack3 As IMDAttack
-        Property Attack4 As IMDAttack
-        Function ToActive() As IExplorersActivePokemon
+        Property Attack1 As ExplorersAttack
+        Property Attack2 As ExplorersAttack
+        Property Attack3 As ExplorersAttack
+        Property Attack4 As ExplorersAttack
+        Function ToActive(rosterNumber As Integer) As IExplorersActivePokemon
     End Interface
 
 End Namespace

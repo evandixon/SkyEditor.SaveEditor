@@ -145,7 +145,7 @@ Namespace MysteryDungeon.Explorers
             Return {"tdpkm"}
         End Function
 
-        Public Function ToActive() As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
+        Public Function ToActive(rosterNumber As Integer) As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
             Throw New NotImplementedException()
         End Function
 
@@ -189,41 +189,41 @@ Namespace MysteryDungeon.Explorers
 
         Public Property Tactic As Integer Implements IExplorersStoredPokemon.Tactic
 
-        Public Property Attack1 As IMDAttack Implements IExplorersStoredPokemon.Attack1
+        Public Property Attack1 As ExplorersAttack Implements IExplorersStoredPokemon.Attack1
             Get
                 Return _attack1
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack1 = value
             End Set
         End Property
         Private WithEvents _attack1 As ExplorersAttack
 
-        Public Property Attack2 As IMDAttack Implements IExplorersStoredPokemon.Attack2
+        Public Property Attack2 As ExplorersAttack Implements IExplorersStoredPokemon.Attack2
             Get
                 Return _attack2
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack2 = value
             End Set
         End Property
         Private WithEvents _attack2 As ExplorersAttack
 
-        Public Property Attack3 As IMDAttack Implements IExplorersStoredPokemon.Attack3
+        Public Property Attack3 As ExplorersAttack Implements IExplorersStoredPokemon.Attack3
             Get
                 Return _attack3
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack3 = value
             End Set
         End Property
         Private WithEvents _attack3 As ExplorersAttack
 
-        Public Property Attack4 As IMDAttack Implements IExplorersStoredPokemon.Attack4
+        Public Property Attack4 As ExplorersAttack Implements IExplorersStoredPokemon.Attack4
             Get
                 Return _attack4
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack4 = value
             End Set
         End Property
@@ -244,6 +244,7 @@ Namespace MysteryDungeon.Explorers
         End Property
 
 #End Region
+
     End Class
 
 End Namespace

@@ -14,7 +14,7 @@ Namespace MysteryDungeon.Explorers
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
         Public Sub New()
-            Unk2 = New Binary(69)
+            IQMap = New Binary(69)
         End Sub
 
         Public Sub New(bits As Binary)
@@ -50,7 +50,7 @@ Namespace MysteryDungeon.Explorers
                 SpDefense = .Int(0, 93, 8)
                 Exp = .Int(0, 101, 24)
 
-                Unk2 = .Range(125, 69)
+                IQMap = .Range(125, 69)
                 Tactic = .Int(0, 194, 4)
 
                 Attack1 = New ExplorersAttack(.Range(198, ExplorersAttack.Length))
@@ -88,7 +88,7 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 93, 8) = SpDefense
                 .Int(0, 101, 24) = Exp
 
-                .Range(125, 69) = Unk2
+                .Range(125, 69) = IQMap
                 .Int(0, 194, 4) = Tactic
 
                 .Range(198, ExplorersAttack.Length) = _attack1.GetAttackBits
@@ -146,16 +146,40 @@ Namespace MysteryDungeon.Explorers
             Return {"skypkm"}
         End Function
 
-        Public Function ToActive() As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
+        Public Function ToActive(rosterNumber As Integer) As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
             Dim out As New SkyActivePokemon
-            out.Name = Me.Name
+            out.RosterNumber = rosterNumber
+
+            'Todo: unk1
+            out.IsValid = Me.IsValid
+            out.Level = Me.Level
             out.ID = Me.ID
+            out.IsFemale = Me.IsFemale
+            out.MetAt = Me.MetAt
+            out.MetFloor = Me.MetFloor
+
+            'WARNING: Not setting these could delete history
+            'EvolvedAtLevel1
+            'EvolvedAtLevel2
+
             out.IQ = Me.IQ
+            out.HP1 = Me.HP
             out.Attack = Me.Attack
             out.SpAttack = Me.SpAttack
             out.Defense = Me.Defense
             out.SpDefense = Me.SpDefense
-            Throw New NotImplementedException()
+            out.Exp = Me.Exp
+            out.IQMap = Me.IQMap.Clone
+            out.Tactic = Me.Tactic
+            out.Name = Me.Name
+            out.Attack1 = Me.Attack1.ToActive
+            out.Attack2 = Me.Attack2.ToActive
+            out.Attack3 = Me.Attack3.ToActive
+            out.Attack4 = Me.Attack4.ToActive
+
+            Throw New NotImplementedException("Unknown values need to be set.  Otherwise, the game will reject this conversion.")
+
+            Return out
         End Function
 
         Public Sub DumpToConsole(console As IConsoleProvider)
@@ -172,12 +196,10 @@ Namespace MysteryDungeon.Explorers
             console.WriteLine($"{NameOf(SpDefense)}: {SpDefense}")
             console.WriteLine($"{NameOf(Exp)}: {Exp}")
             console.WriteLine($"Dumping attacks to console not impelemented yet.")
-            console.WriteLine("Unknown 2: " & Unk2.GetBigEndianStringRepresentation)
         End Sub
 
 #Region "Properties"
         Private Property Unk1 As Boolean
-        Private Property Unk2 As Binary 'Possibly related to IQ skills
 
         Public Property IsValid As Boolean
 
@@ -208,43 +230,46 @@ Namespace MysteryDungeon.Explorers
         Public Property SpDefense As Byte Implements IExplorersStoredPokemon.SpDefense
 
         Public Property Exp As Integer Implements IExplorersStoredPokemon.Exp
+
+        Public Property IQMap As Binary
+
         Public Property Tactic As Integer Implements IExplorersStoredPokemon.Tactic
 
-        Public Property Attack1 As IMDAttack Implements IExplorersStoredPokemon.Attack1
+        Public Property Attack1 As ExplorersAttack Implements IExplorersStoredPokemon.Attack1
             Get
                 Return _attack1
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack1 = value
             End Set
         End Property
         Dim _attack1 As ExplorersAttack
 
-        Public Property Attack2 As IMDAttack Implements IExplorersStoredPokemon.Attack2
+        Public Property Attack2 As ExplorersAttack Implements IExplorersStoredPokemon.Attack2
             Get
                 Return _attack2
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack2 = value
             End Set
         End Property
         Dim _attack2 As ExplorersAttack
 
-        Public Property Attack3 As IMDAttack Implements IExplorersStoredPokemon.Attack3
+        Public Property Attack3 As ExplorersAttack Implements IExplorersStoredPokemon.Attack3
             Get
                 Return _attack3
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack3 = value
             End Set
         End Property
         Dim _attack3 As ExplorersAttack
 
-        Public Property Attack4 As IMDAttack Implements IExplorersStoredPokemon.Attack4
+        Public Property Attack4 As ExplorersAttack Implements IExplorersStoredPokemon.Attack4
             Get
                 Return _attack4
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 _attack4 = value
             End Set
         End Property

@@ -20,8 +20,8 @@ Namespace MysteryDungeon.Explorers.ViewModels
             RaiseEvent Modified(Me, e)
         End Sub
 
-        Public Function ToActive() As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
-            Return Model.ToActive
+        Public Function ToActive(rosterNumber As Integer) As IExplorersActivePokemon Implements IExplorersStoredPokemon.ToActive
+            Return Model.ToActive(rosterNumber)
         End Function
 
         Public Property Level As Byte Implements IExplorersStoredPokemon.Level
@@ -168,11 +168,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack1 As IMDAttack Implements IExplorersStoredPokemon.Attack1
+        Public Property Attack1 As ExplorersAttack Implements IExplorersStoredPokemon.Attack1
             Get
                 Return Model.Attack1
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 If Model.Attack1 IsNot value Then
                     Model.Attack1 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack1)))
@@ -180,11 +180,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack2 As IMDAttack Implements IExplorersStoredPokemon.Attack2
+        Public Property Attack2 As ExplorersAttack Implements IExplorersStoredPokemon.Attack2
             Get
                 Return Model.Attack2
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 If Model.Attack2 IsNot value Then
                     Model.Attack2 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack2)))
@@ -192,11 +192,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack3 As IMDAttack Implements IExplorersStoredPokemon.Attack3
+        Public Property Attack3 As ExplorersAttack Implements IExplorersStoredPokemon.Attack3
             Get
                 Return Model.Attack3
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 If Model.Attack3 IsNot value Then
                     Model.Attack3 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack3)))
@@ -204,11 +204,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Attack4 As IMDAttack Implements IExplorersStoredPokemon.Attack4
+        Public Property Attack4 As ExplorersAttack Implements IExplorersStoredPokemon.Attack4
             Get
                 Return Model.Attack4
             End Get
-            Set(value As IMDAttack)
+            Set(value As ExplorersAttack)
                 If Model.Attack4 IsNot value Then
                     Model.Attack4 = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Attack4)))
@@ -240,6 +240,41 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Get
         End Property
 
+        Public Property EvolvedAtLevel1 As Integer Implements IExplorersStoredPokemon.EvolvedAtLevel1
+            Get
+                Return Model.EvolvedAtLevel1
+            End Get
+            Set(value As Integer)
+                If Not Model.EvolvedAtLevel1 = value Then
+                    Model.EvolvedAtLevel1 = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(EvolvedAtLevel1)))
+                End If
+            End Set
+        End Property
+
+        Public Property EvolvedAtLevel2 As Integer Implements IExplorersStoredPokemon.EvolvedAtLevel2
+            Get
+                Return Model.EvolvedAtLevel2
+            End Get
+            Set(value As Integer)
+                If Not Model.EvolvedAtLevel2 = value Then
+                    Model.EvolvedAtLevel2 = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(EvolvedAtLevel2)))
+                End If
+            End Set
+        End Property
+
+        Public Property Tactic As Integer Implements IExplorersStoredPokemon.Tactic
+            Get
+                Return Model.Tactic
+            End Get
+            Set(value As Integer)
+                If Not Model.Tactic = value Then
+                    Model.Tactic = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Tactic)))
+                End If
+            End Set
+        End Property
     End Class
 End Namespace
 

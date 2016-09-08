@@ -42,7 +42,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         End Sub
 
         Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
-            AllPokemon(e.Pokemon.RosterNumber).File = e.Pokemon.ToStored
+            'AllPokemon(e.Pokemon.RosterNumber).File = e.Pokemon.ToStored
         End Sub
 #End Region
 
@@ -104,7 +104,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Private Property AllPokemon As ObservableCollection(Of FileViewModel)
 
-        Public Property AddToPartyCommand As RelayCommand
+        Public Property AddToPartyCommand As RelayCommand Implements IPokemonStorage.AddToPartyCommand
 #End Region
 
 
@@ -168,9 +168,19 @@ Namespace MysteryDungeon.Explorers.ViewModels
         ''' </summary>
         Private Sub AddActivePokemon()
             If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
-                ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.File)
+                ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.File, GetPokemonIndex(SelectedBox.SelectedPokemon))
             End If
         End Sub
+
+        Private Function GetPokemonIndex(pkm As FileViewModel)
+            If _storedPlayerPartner.Contains(pkm) Then
+                Return _storedPlayerPartner.IndexOf(pkm)
+            ElseIf _storedSpEpisodePokemon.Contains(pkm) Then
+                Return _storedSpEpisodePokemon.IndexOf(pkm) + 2
+            Else
+                Return _storedPokemon.IndexOf(pkm) + 5
+            End If
+        End Function
 
     End Class
 End Namespace

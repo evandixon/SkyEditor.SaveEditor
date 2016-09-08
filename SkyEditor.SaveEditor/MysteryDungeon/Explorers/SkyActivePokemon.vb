@@ -50,7 +50,10 @@ Namespace MysteryDungeon.Explorers
                 Attack2 = New ExplorersActiveAttack(.Range(186, ExplorersActiveAttack.Length))
                 Attack3 = New ExplorersActiveAttack(.Range(215, ExplorersActiveAttack.Length))
                 Attack4 = New ExplorersActiveAttack(.Range(244, ExplorersActiveAttack.Length))
-                Unk4 = .Range(273, 193)
+                Unk4 = .Range(273, 105)
+                IQMap = .Range(378, 69)
+                Tactic = .Int(0, 447, 4)
+                Unk5 = .Range(451, 15)
                 Name = .GetStringPMD(0, 466, 10)
             End With
         End Sub
@@ -83,7 +86,10 @@ Namespace MysteryDungeon.Explorers
                 .Range(186, ExplorersActiveAttack.Length) = _Attack2.GetAttackBits
                 .Range(215, ExplorersActiveAttack.Length) = _Attack3.GetAttackBits
                 .Range(244, ExplorersActiveAttack.Length) = _Attack4.GetAttackBits
-                .Range(273, 193) = Unk4
+                .Range(273, 105) = Unk4
+                .Range(378, 69) = IQMap
+                .Int(0, 447, 4) = Tactic
+                .Range(451, 15) = Unk5
                 .SetStringPMD(0, 466, 10, Name)
             End With
             Return out
@@ -144,6 +150,7 @@ Namespace MysteryDungeon.Explorers
         Private Property Unk2 As Binary
         Private Property Unk3 As Binary
         Private Property Unk4 As Binary
+        Private Property Unk5 As Binary
 
         Public Property IsValid As Boolean
 
@@ -186,6 +193,8 @@ Namespace MysteryDungeon.Explorers
         Public Property Attack3 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack3
 
         Public Property Attack4 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack4
+        Public Property IQMap As Binary
+        Public Property Tactic As Integer
 
         Public Property Name As String Implements IExplorersActivePokemon.Name
 
@@ -202,5 +211,6 @@ Namespace MysteryDungeon.Explorers
         End Property
 
 #End Region
+
     End Class
 End Namespace

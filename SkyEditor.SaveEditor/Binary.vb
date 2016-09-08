@@ -1,7 +1,9 @@
 ﻿Imports System.Text
+Imports SkyEditor.Core.Utilities
 
 Public Class Binary
     Implements IEnumerable(Of Boolean)
+    Implements IClonable
 
     Public Property Bits As List(Of Boolean)
     Public Property Position As Integer
@@ -194,5 +196,9 @@ Public Class Binary
 
     Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
         Return DirectCast(Me.Bits, IEnumerable).GetEnumerator
+    End Function
+
+    Public Function Clone() As Object Implements IClonable.Clone
+        Return New Binary(Me)
     End Function
 End Class

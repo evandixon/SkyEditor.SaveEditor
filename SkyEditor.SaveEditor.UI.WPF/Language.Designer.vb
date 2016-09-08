@@ -83,6 +83,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to _Add to Party.
+        '''</summary>
+        Public Shared ReadOnly Property AddToPartyContext() As String
+            Get
+                Return ResourceManager.GetString("AddToPartyContext", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Adventures.
         '''</summary>
         Public Shared ReadOnly Property Adventures() As String
