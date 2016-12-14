@@ -112,13 +112,13 @@ Namespace MysteryDungeon.Explorers
             StoredPlayerPartner = New List(Of TDStoredPokemon)
             StoredPokemon = New List(Of TDStoredPokemon)
 
-            For count = 0 To Offsets.StoredPokemonNumber
+            For count = 0 To Offsets.StoredPokemonNumber - 1
                 Dim pkm As New TDStoredPokemon(Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength))
                 StoredPokemon.Add(pkm)
             Next
         End Sub
         Private Sub SaveStoredPokemon()
-            For count = 0 To Offsets.StoredPokemonNumber
+            For count = 0 To Offsets.StoredPokemonNumber - 1
                 Bits.Range(Offsets.StoredPokemonOffset + count * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength) = StoredPokemon(count).GetStoredPokemonBits
             Next
         End Sub
