@@ -57,6 +57,7 @@ Namespace MysteryDungeon.Explorers
                 Attack3 = New ExplorersAttack(.Range(263, ExplorersAttack.Length))
                 Attack4 = New ExplorersAttack(.Range(284, ExplorersAttack.Length))
                 Name = .GetStringPMD(0, 305, 10)
+                Unk3 = .Range(385, 3)
             End With
         End Sub
 
@@ -95,6 +96,7 @@ Namespace MysteryDungeon.Explorers
                 .Range(263, ExplorersAttack.Length) = _attack3.GetAttackBits
                 .Range(284, ExplorersAttack.Length) = _attack4.GetAttackBits
                 .SetStringPMD(0, 305, 10, Name)
+                .Range(385, 3) = Unk3
             End With
             Return out
         End Function
@@ -152,6 +154,7 @@ Namespace MysteryDungeon.Explorers
 #Region "Properties"
         Private Property Unk1 As Boolean
         Private Property Unk2 As Binary
+        Private Property Unk3 As Binary
 
         Public ReadOnly Property IsValid As Boolean
             Get
