@@ -213,7 +213,7 @@ Namespace MysteryDungeon.Explorers
 
 #End Region
 
-        <Obsolete("Testing code, remove before PR")> Public Sub DumpToConsole(Console As IConsoleProvider)
+        <Obsolete("Testing code")> Public Sub DumpToConsole(Console As IConsoleProvider)
             Console.WriteLine($"Name: {Name}")
             Console.WriteLine($"Unknown 1: {Unk1.GetBigEndianStringRepresentation}")
             Console.WriteLine($"Unknown 2: {Unk2.GetBigEndianStringRepresentation}")
