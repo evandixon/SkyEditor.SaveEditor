@@ -13,7 +13,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
-        Private Sub _attack1_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged
+        Private Sub _attack1_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged, _attack2.PropertyChanged, _attack3.PropertyChanged, _attack4.PropertyChanged
             RaiseEvent Modified(sender, e)
         End Sub
 
