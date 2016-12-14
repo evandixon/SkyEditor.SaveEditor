@@ -43,7 +43,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
                     _selectedPokemon = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(SelectedPokemon)))
                     Me.RequestMenuItemRefresh()
-                    StandbyCommand.IsEnabled = (value IsNot Nothing)
+                    StandbyCommand.IsEnabled = False '(value IsNot Nothing)
                 End If
             End Set
         End Property

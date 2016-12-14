@@ -38,11 +38,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Private Sub _selectedBox_SelectedPokemonChanged(sender As Object, e As EventArgs) Handles _selectedBox.SelectedPokemonChanged
             RequestMenuItemRefresh()
-            AddToPartyCommand.IsEnabled = (ActivePokemonViewModel.CanAddActivePokemon < 4 AndAlso SelectedBox IsNot Nothing AndAlso SelectedBox.SelectedPokemon IsNot Nothing)
+            AddToPartyCommand.IsEnabled = False '(ActivePokemonViewModel.CanAddActivePokemon < 4 AndAlso SelectedBox IsNot Nothing AndAlso SelectedBox.SelectedPokemon IsNot Nothing)
         End Sub
 
         Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
-            'AllPokemon(e.Pokemon.RosterNumber).File = e.Pokemon.ToStored
+            AllPokemon(e.Pokemon.RosterNumber).File = e.Pokemon.ToStored
         End Sub
 #End Region
 
