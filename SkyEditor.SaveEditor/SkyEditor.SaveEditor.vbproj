@@ -27,6 +27,7 @@
     <DocumentationFile>SkyEditor.SaveEditor.xml</DocumentationFile>
     <NoWarn>40057,42016,41999,42020,42021,42022</NoWarn>
     <WarningsAsErrors>42017,42018,42019,42032,42036</WarningsAsErrors>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -124,7 +125,7 @@
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
-    <Compile Include="MysteryDungeon\IExplorersAttack.vb" />
+    <Compile Include="MysteryDungeon\IMDAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersStoredItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersStoredPokemon.vb" />
@@ -196,8 +197,8 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.4\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+    <Reference Include="SkyEditor.Core, Version=4.0.6.115, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.4.0.6-CI115\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, processorArchitecture=MSIL">

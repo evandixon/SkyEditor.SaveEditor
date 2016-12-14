@@ -17,6 +17,10 @@ Namespace MysteryDungeon.Rescue.ViewModels
             MyBase.New
 
             StoredPokemon = New ObservableCollection(Of FileViewModel)
+            AddToPartyCommand = New RelayCommand(Sub()
+                                                     'Do nothing
+                                                 End Sub)
+            AddToPartyCommand.IsEnabled = False
         End Sub
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
@@ -60,6 +64,9 @@ Namespace MysteryDungeon.Rescue.ViewModels
                 _storedPokemon = value
             End Set
         End Property
+
+        Public ReadOnly Property AddToPartyCommand As RelayCommand Implements IPokemonStorage.AddToPartyCommand
+
         Private WithEvents _storedPokemon As ObservableCollection(Of FileViewModel)
 
         Public Overrides Sub SetModel(model As Object)

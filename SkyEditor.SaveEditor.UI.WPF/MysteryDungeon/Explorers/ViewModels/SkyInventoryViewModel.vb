@@ -58,9 +58,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Private WithEvents _spEpisodeItems As ObservableCollection(Of SkyHeldItem)
 #End Region
 
-
-
-
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
 
@@ -110,6 +107,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 m.SpEpisodeHeldItems.Add(item)
             Next
         End Sub
+
+        Public Overrides Function GetSortOrder() As Integer
+            Return 1
+        End Function
     End Class
 End Namespace
 

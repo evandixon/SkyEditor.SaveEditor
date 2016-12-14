@@ -1,4 +1,5 @@
-﻿Imports SkyEditor.Core.IO
+﻿Imports SkyEditor.Core.ConsoleCommands
+Imports SkyEditor.Core.IO
 
 Namespace MysteryDungeon.Explorers
     Public Class SkyActivePokemon
@@ -13,8 +14,7 @@ Namespace MysteryDungeon.Explorers
         Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
         Public Sub New()
-            Unk1 = New Binary(15)
-            Unk2 = New Binary(73)
+            Initialize(New Binary(Length))
         End Sub
 
         Public Sub New(bits As Binary)
@@ -51,7 +51,10 @@ Namespace MysteryDungeon.Explorers
                 Attack2 = New ExplorersActiveAttack(.Range(186, ExplorersActiveAttack.Length))
                 Attack3 = New ExplorersActiveAttack(.Range(215, ExplorersActiveAttack.Length))
                 Attack4 = New ExplorersActiveAttack(.Range(244, ExplorersActiveAttack.Length))
-                Unk4 = .Range(273, 193)
+                Unk4 = .Range(273, 105)
+                IQMap = .Range(378, 69)
+                Tactic = .Int(0, 447, 4)
+                Unk5 = .Range(451, 15)
                 Name = .GetStringPMD(0, 466, 10)
             End With
         End Sub
@@ -80,11 +83,14 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 117, 8) = Defense
                 .Int(0, 125, 8) = SpDefense
                 .Int(0, 133, 24) = Exp
-                .Range(157, ExplorersActiveAttack.Length) = _attack1.GetAttackBits
-                .Range(186, ExplorersActiveAttack.Length) = _attack2.GetAttackBits
-                .Range(215, ExplorersActiveAttack.Length) = _attack3.GetAttackBits
-                .Range(244, ExplorersActiveAttack.Length) = _attack4.GetAttackBits
-                .Range(273, 193) = Unk4
+                .Range(157, ExplorersActiveAttack.Length) = _Attack1.GetAttackBits
+                .Range(186, ExplorersActiveAttack.Length) = _Attack2.GetAttackBits
+                .Range(215, ExplorersActiveAttack.Length) = _Attack3.GetAttackBits
+                .Range(244, ExplorersActiveAttack.Length) = _Attack4.GetAttackBits
+                .Range(273, 105) = Unk4
+                .Range(378, 69) = IQMap
+                .Int(0, 447, 4) = Tactic
+                .Range(451, 15) = Unk5
                 .SetStringPMD(0, 466, 10, Name)
             End With
             Return out
@@ -136,11 +142,16 @@ Namespace MysteryDungeon.Explorers
             Return {"skypkmex"}
         End Function
 
+        Public Function ToStored() As IExplorersStoredPokemon Implements IExplorersActivePokemon.ToStored
+            Throw New NotImplementedException()
+        End Function
+
 #Region "Properties"
         Private Property Unk1 As Binary
         Private Property Unk2 As Binary
         Private Property Unk3 As Binary
         Private Property Unk4 As Binary
+        Private Property Unk5 As Binary
 
         Public Property IsValid As Boolean
 
@@ -183,6 +194,8 @@ Namespace MysteryDungeon.Explorers
         Public Property Attack3 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack3
 
         Public Property Attack4 As ExplorersActiveAttack Implements IExplorersActivePokemon.Attack4
+        Public Property IQMap As Binary
+        Public Property Tactic As Integer
 
         Public Property Name As String Implements IExplorersActivePokemon.Name
 
@@ -199,5 +212,15 @@ Namespace MysteryDungeon.Explorers
         End Property
 
 #End Region
+
+        <Obsolete("Testing code")> Public Sub DumpToConsole(Console As IConsoleProvider)
+            Console.WriteLine($"Name: {Name}")
+            Console.WriteLine($"Unknown 1: {Unk1.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 2: {Unk2.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 3: {Unk3.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 4: {Unk4.GetBigEndianStringRepresentation}")
+            Console.WriteLine($"Unknown 5: {Unk5.GetBigEndianStringRepresentation}")
+        End Sub
+
     End Class
 End Namespace

@@ -8,6 +8,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
     Public Class ExplorersActivePokemonGeneralViewModel
         Inherits GenericViewModel(Of IExplorersActivePokemon)
         Implements IExplorersActivePokemon
+
         Implements INotifyPropertyChanged
         Implements INotifyModified
         Implements INamed
@@ -18,6 +19,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Private Sub ExplorersActivePokemonGeneralViewModel_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
             RaiseEvent Modified(Me, New EventArgs)
         End Sub
+
+        Public Function ToStored() As IExplorersStoredPokemon Implements IExplorersActivePokemon.ToStored
+            Return Model.ToStored
+        End Function
 
         Public Property Level As Byte Implements IExplorersActivePokemon.Level
             Get

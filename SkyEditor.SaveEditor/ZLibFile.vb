@@ -30,7 +30,7 @@ Public Class ZLibFile
 
 
     Public Function IsOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
-        If File.Length > 2 AndAlso File.Length < 32 * 1024 * 1024 Then
+        If File.Length > 2 AndAlso File.RawData(0) = &H78 AndAlso {&H1, &H9C, &HDA}.Contains(File.RawData(1)) AndAlso File.Length < 32 * 1024 * 1024 Then
             Try
                 Using compressed As New MemoryStream(File.RawData)
                     compressed.Seek(2, SeekOrigin.Begin)

@@ -59,16 +59,16 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.4\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+    <Reference Include="SkyEditor.Core, Version=4.0.6.115, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.4.0.6-CI115\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core.Windows, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.4\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+    <Reference Include="SkyEditor.Core.Windows, Version=4.0.6.115, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.6-CI115\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.UI.WPF, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.UI.WPF.4.0.4\lib\net46\SkyEditor.UI.WPF.dll</HintPath>
+    <Reference Include="SkyEditor.UI.WPF, Version=4.0.6.60, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.UI.WPF.4.0.6-CI60\lib\net46\SkyEditor.UI.WPF.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
@@ -120,7 +120,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MenuActions\ExportPokemon.vb" />
+    <Compile Include="MenuActions\ExportActivePokemon.vb" />
+    <Compile Include="MenuActions\ImportActivePokemon.vb" />
     <Compile Include="MenuActions\ImportPokemon.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ActivePokemonRemoveEventArgs.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkySpEpisodePartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\Views\ExplorersActivePokemonGeneralTab.xaml.vb">
       <DependentUpon>ExplorersActivePokemonGeneralTab.xaml</DependentUpon>
     </Compile>
@@ -130,9 +134,8 @@
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersStoredPokemonGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyGeneralViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyHistoryViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyPartyViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersPartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDGeneralViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDPartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDInventoryViewModel.vb" />
@@ -211,6 +214,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <None Include="info.skyext">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>

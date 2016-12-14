@@ -83,6 +83,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to _Add to Party.
+        '''</summary>
+        Public Shared ReadOnly Property AddToPartyContext() As String
+            Get
+                Return ResourceManager.GetString("AddToPartyContext", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Adventures.
         '''</summary>
         Public Shared ReadOnly Property Adventures() As String
@@ -380,7 +389,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to _Export.
+        '''  Looks up a localized string similar to _Export Stored Pokémon.
         '''</summary>
         Public Shared ReadOnly Property MenuPokemonExport() As String
             Get
@@ -389,11 +398,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to _Import.
+        '''  Looks up a localized string similar to _Export Active Pokémon.
+        '''</summary>
+        Public Shared ReadOnly Property MenuPokemonExportActive() As String
+            Get
+                Return ResourceManager.GetString("MenuPokemonExportActive", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to _Import Stored Pokémon.
         '''</summary>
         Public Shared ReadOnly Property MenuPokemonImport() As String
             Get
                 Return ResourceManager.GetString("MenuPokemonImport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to _Import Active Pokémon.
+        '''</summary>
+        Public Shared ReadOnly Property MenuPokemonImportActive() As String
+            Get
+                Return ResourceManager.GetString("MenuPokemonImportActive", resourceCulture)
             End Get
         End Property
         
@@ -622,6 +649,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Standby.
+        '''</summary>
+        Public Shared ReadOnly Property RemoveActivePokemonCommandName() As String
+            Get
+                Return ResourceManager.GetString("RemoveActivePokemonCommandName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Rescue Points.
         '''</summary>
         Public Shared ReadOnly Property RescuePoints() As String
@@ -690,6 +726,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property SpEpisodeHeldMoney() As String
             Get
                 Return ResourceManager.GetString("SpEpisodeHeldMoney", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sp. Episode Party.
+        '''</summary>
+        Public Shared ReadOnly Property SpEpisodeParty() As String
+            Get
+                Return ResourceManager.GetString("SpEpisodeParty", resourceCulture)
             End Get
         End Property
         
