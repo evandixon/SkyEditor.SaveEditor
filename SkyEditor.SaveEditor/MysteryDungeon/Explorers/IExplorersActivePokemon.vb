@@ -29,6 +29,8 @@
         Property Attack3 As ExplorersActiveAttack
         Property Attack4 As ExplorersActiveAttack
 
+        Function ToStored() As IExplorersStoredPokemon
+
 
     End Interface
 End Namespace

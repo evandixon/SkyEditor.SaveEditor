@@ -88,6 +88,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
+        Public Overrides Function GetSortOrder() As Integer
+            Return 5
+        End Function
+
     End Class
 End Namespace
 

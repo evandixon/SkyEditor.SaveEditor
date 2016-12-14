@@ -48,6 +48,18 @@
             End Get
         End Property
 
+        Public Function ToActive() As ExplorersActiveAttack
+            Dim out As New ExplorersActiveAttack
+            out.IsValid = Me.IsValid
+            out.IsLinked = Me.IsLinked
+            out.IsSwitched = Me.IsSwitched
+            out.IsSet = Me.IsSet
+            out.ID = Me.ID
+            out.Ginseng = Me.Ginseng
+            out.IsSealed = False
+            Return out
+        End Function
+
     End Class
 
 End Namespace

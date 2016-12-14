@@ -1,7 +1,9 @@
 ﻿Imports System.Text
+Imports SkyEditor.Core.Utilities
 
 Public Class Binary
     Implements IEnumerable(Of Boolean)
+    Implements IClonable
 
     Public Property Bits As List(Of Boolean)
     Public Property Position As Integer
@@ -150,7 +152,53 @@ Public Class Binary
         Return Me.Bits.GetEnumerator
     End Function
 
+    ''' <summary>
+    ''' Gets a <see cref="Short"/> located at the given bit offset.
+    ''' </summary>
+    ''' <param name="bitIndex">Offset in bits relative to the start of the <see cref="Binary"/> where the <see cref="Short"/> is located.</param>
+    ''' <returns>The <see cref="Short"/> located at <paramref name="bitIndex"/></returns>
+    Public Function GetShort(bitIndex As Integer) As Short
+        Dim output As Short = 0
+        For j As Integer = 0 To 15
+            output = output Or (If(Bits(bitIndex + j), 1, 0)) << j
+        Next j
+        Return output
+    End Function
+
+    ''' <summary>
+    ''' Sets <see cref="Short"/> located at the given bit offset to the given value.
+    ''' </summary>
+    ''' <param name="bitIndex">Offset in bits relative to the start of the <see cref="Binary"/> where the <see cref="Short"/> is located.</param>
+    ''' <param name="value">The value to write to the target location.</param>
+    Public Sub SetShort(bitIndex As Integer, value As Short)
+        Dim bin As New Binary(BitConverter.GetBytes(value))
+        For i = 0 To 15
+            Bits(bitIndex + i) = bin.Bits(i)
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Gets a representation of the binary
+    ''' </summary>
+    ''' <returns>A string representing the binary.</returns>
+    ''' <remarks>Example: A 5-Bit <see cref="Binary"/> representing the number 8 will return "1000"</remarks>
+    Public Function GetBigEndianStringRepresentation() As String
+        Dim x As New StringBuilder
+        For i = Bits.Count - 1 To 0 Step -1
+            If Bits(i) Then
+                x.Append("1")
+            Else
+                x.Append("0")
+            End If
+        Next
+        Return x.ToString
+    End Function
+
     Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
         Return DirectCast(Me.Bits, IEnumerable).GetEnumerator
+    End Function
+
+    Public Function Clone() As Object Implements IClonable.Clone
+        Return New Binary(Me)
     End Function
 End Class

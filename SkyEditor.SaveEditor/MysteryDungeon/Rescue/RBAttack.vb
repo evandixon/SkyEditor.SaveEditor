@@ -14,17 +14,26 @@
         Public Sub New(bits As Binary)
             With bits
                 IsValid = .Bit(0)
-                IsLinked = .Bit(1)
-                IsSwitched = .Bit(2)
-                IsSet = .Bit(3)
-                ID = .Int(0, 4, 9)
-                Ginseng = .Int(0, 13, 7)
+                If IsValid Then
+                    IsLinked = .Bit(1)
+                    IsSwitched = .Bit(2)
+                    IsSet = .Bit(3)
+                    ID = .Int(0, 4, 9)
+                    Ginseng = .Int(0, 13, 7)
+                Else
+                    'Assume move to be empty if not valid
+                    IsLinked = False
+                    IsSwitched = False
+                    IsSet = False
+                    ID = 0
+                    Ginseng = 0
+                End If
             End With
         End Sub
         Public Function GetAttackBits() As Binary
             Dim out As New Binary(Length)
             With out
-                .Bit(0) = IsValid
+                .Bit(0) = (ID > 0) 'Set validity based on whether or not move ID is 0
                 .Bit(1) = IsLinked
                 .Bit(2) = IsSwitched
                 .Bit(3) = IsSet

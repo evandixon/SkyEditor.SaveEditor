@@ -77,10 +77,10 @@ Namespace MysteryDungeon.Explorers
                 .Int(0, 117, 8) = Defense
                 .Int(0, 125, 8) = SpDefense
                 .Int(0, 133, 24) = Exp
-                .Range(157, ExplorersActiveAttack.Length) = _attack1.GetAttackBits
-                .Range(186, ExplorersActiveAttack.Length) = _attack2.GetAttackBits
-                .Range(215, ExplorersActiveAttack.Length) = _attack3.GetAttackBits
-                .Range(244, ExplorersActiveAttack.Length) = _attack4.GetAttackBits
+                .Range(157, ExplorersActiveAttack.Length) = _Attack1.GetAttackBits
+                .Range(186, ExplorersActiveAttack.Length) = _Attack2.GetAttackBits
+                .Range(215, ExplorersActiveAttack.Length) = _Attack3.GetAttackBits
+                .Range(244, ExplorersActiveAttack.Length) = _Attack4.GetAttackBits
                 .Range(273, 191) = Unk4
                 .SetStringPMD(0, 464, 10, Name)
             End With
@@ -131,6 +131,10 @@ Namespace MysteryDungeon.Explorers
 
         Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
             Return {"tdpkmex"}
+        End Function
+
+        Public Function ToStored() As IExplorersStoredPokemon Implements IExplorersActivePokemon.ToStored
+            Throw New NotImplementedException()
         End Function
 
 #Region "Properties"

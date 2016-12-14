@@ -18,6 +18,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             StoredPlayerPartner = New ObservableCollection(Of FileViewModel)
             StoredPokemon = New ObservableCollection(Of FileViewModel)
+
+            AddToPartyCommand = New RelayCommand(Sub()
+                                                     'Do nothing
+                                                 End Sub)
+            AddToPartyCommand.IsEnabled = False
         End Sub
 
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
@@ -71,6 +76,9 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 _storedPokemon = value
             End Set
         End Property
+
+        Public Property AddToPartyCommand As RelayCommand Implements IPokemonStorage.AddToPartyCommand
+
         Private WithEvents _storedPokemon As ObservableCollection(Of FileViewModel)
 #End Region
 

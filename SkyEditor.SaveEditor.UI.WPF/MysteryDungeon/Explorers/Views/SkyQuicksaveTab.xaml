@@ -8,7 +8,7 @@
              xmlns:explorers="clr-namespace:SkyEditor.SaveEditor.MysteryDungeon.Explorers;assembly=SkyEditor.SaveEditor"
              xmlns:res="clr-namespace:SkyEditor.SaveEditor.UI.WPF.My.Resources"
              mc:Ignorable="d" 
-             TargetType="{x:Type explorers:SkySave}"
+             
              SortOrder="6"
              Header="{x:Static res:Language.QuicksavePokemonTabHeader}"
              d:DesignHeight="300" d:DesignWidth="300">

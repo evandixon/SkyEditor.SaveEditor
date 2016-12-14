@@ -60,7 +60,7 @@ Namespace ViewModelComponents
         End Sub
 
         Public Sub New(name As String, items As IList(Of T), maxItemCount As Integer)
-            If Not ReflectionHelpers.IsOfType(GetType(T).GetTypeInfo, GetType(IClonable).GetTypeInfo, False) Then
+            If Not ReflectionHelpers.IsOfType(GetType(T).GetTypeInfo, GetType(IClonable).GetTypeInfo) Then
                 Throw New ArgumentException("T must implement IClonable.  If not, use the overload of New that provides a cloner delegate.", NameOf(T))
             End If
             Me.Name = name
