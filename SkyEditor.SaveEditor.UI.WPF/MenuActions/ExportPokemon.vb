@@ -16,16 +16,16 @@ Namespace MenuActions
             Return {GetType(IPokemonStorage).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            Return MyBase.SupportsObject(Obj) AndAlso
+        Public Overrides Async Function SupportsObject(Obj As Object) As Task(Of Boolean)
+            Return (Await MyBase.SupportsObject(Obj)) AndAlso
                 DirectCast(Obj, IPokemonStorage).SelectedBox IsNot Nothing AndAlso
                 DirectCast(Obj, IPokemonStorage).SelectedBox.SelectedPokemon IsNot Nothing AndAlso
                 DirectCast(Obj, IPokemonStorage).SelectedBox.SelectedPokemon.CanSaveAs(CurrentPluginManager)
         End Function
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
-                If SupportsObject(item) Then
+                If Await SupportsObject(item) Then
                     Dim pkm = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
                     Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
