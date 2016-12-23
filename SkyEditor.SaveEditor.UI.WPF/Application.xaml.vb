@@ -21,8 +21,9 @@ Class Application
         PresentationTraceSources.DataBindingSource.Listeners.Add(New DebugTraceListener)
         PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning Or SourceLevels.Error
 #End If
-        Application.Current.Dispatcher.BeginInvoke(Sub()
-                                                       StartupHelpers.RunWPFStartupSequence(New WPFCoreSkyEditorPlugin(New SkyEditorInfo))
+        Application.Current.Dispatcher.BeginInvoke(Async Sub()
+                                                       Dim mainWindow = Await StartupHelpers.RunWPFStartupSequence(New WPFCoreSkyEditorPlugin(New SkyEditorInfo))
+                                                       mainWindow.DisplayStatusBar = False
                                                    End Sub)
     End Sub
 End Class
