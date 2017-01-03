@@ -29,7 +29,7 @@ Namespace MenuActions
                     Dim pkm = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
                     Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
-                        pkm.Save(s.FileName, CurrentPluginManager)
+                        Await pkm.Save(s.FileName, CurrentPluginManager)
 
                         If TypeOf pkm.File Is SkyStoredPokemon Then
                             DirectCast(pkm.File, SkyStoredPokemon).DumpToConsole(CurrentPluginManager.CurrentConsoleProvider)

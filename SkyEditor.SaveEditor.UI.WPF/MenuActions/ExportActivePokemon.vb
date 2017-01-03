@@ -30,7 +30,7 @@ Namespace MenuActions
                     Dim pkm = DirectCast(item, IParty).SelectedPokemon
                     Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
-                        pkm.Save(s.FileName, CurrentPluginManager)
+                        Await pkm.Save(s.FileName, CurrentPluginManager)
                     End If
 
                     If TypeOf pkm.File Is SkyActivePokemon Then

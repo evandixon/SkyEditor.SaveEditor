@@ -22,14 +22,14 @@ Namespace MysteryDungeon.Explorers
             LoadActivePokemon
         End Function
 
-        Public Overrides Sub Save(Destination As String, provider As IOProvider)
+        Public Overrides Async Function Save(Destination As String, provider As IOProvider) As Task
             SaveGeneral()
             SaveItems()
             SaveStoredPokemon()
-            SaveActivePokemon
+            SaveActivePokemon()
 
-            MyBase.Save(Destination, provider)
-        End Sub
+            Await MyBase.Save(Destination, provider)
+        End Function
 
         Public Overridable ReadOnly Property Offsets As TDOffsets
 

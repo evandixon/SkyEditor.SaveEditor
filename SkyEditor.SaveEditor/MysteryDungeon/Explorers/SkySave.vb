@@ -101,10 +101,10 @@ Namespace MysteryDungeon.Explorers
             SaveSettings()
         End Sub
 
-        Public Overrides Sub Save(Destination As String, provider As IOProvider)
+        Public Overrides Async Function Save(Destination As String, provider As IOProvider) As Task
             PreSave()
-            MyBase.Save(Destination, provider)
-        End Sub
+            Await MyBase.Save(Destination, provider)
+        End Function
 
         Public Overrides Function ToByteArray() As Byte()
             PreSave()

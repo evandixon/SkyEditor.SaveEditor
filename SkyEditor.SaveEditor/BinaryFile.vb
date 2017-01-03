@@ -58,17 +58,17 @@ Public Class BinaryFile
 
     End Sub
 
-    Public Overridable Sub Save(Destination As String, provider As IOProvider) Implements ISavableAs.Save
+    Public Overridable Async Function Save(Destination As String, provider As IOProvider) As Task Implements ISavableAs.Save
         FixChecksum()
         Dim tmp(Math.Ceiling(Bits.Count / 8) - 1) As Byte
         Using f As New GenericFile(provider, tmp)
             For count As Integer = 0 To Math.Ceiling(Bits.Count / 8) - 1
                 f.RawData(count) = Bits.Int(count, 0, 8)
             Next
-            f.Save(Destination, provider)
+            Await f.Save(Destination, provider)
         End Using
         RaiseEvent FileSaved(Me, New EventArgs)
-    End Sub
+    End Function
 
     Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
         Return "sav"
@@ -76,9 +76,9 @@ Public Class BinaryFile
 
     Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
-    Public Sub Save(provider As IOProvider) Implements ISavable.Save
-        Save(Filename, provider)
-    End Sub
+    Public Async Function Save(provider As IOProvider) As Task Implements ISavable.Save
+        Await Save(Filename, provider)
+    End Function
 
     Public Overridable Function ToByteArray() As Byte()
         Return Bits.ToByteArray

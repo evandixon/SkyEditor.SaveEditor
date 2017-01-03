@@ -51,14 +51,14 @@ Namespace MysteryDungeon.Rescue
             LoadStoredPokemon()
         End Function
 
-        Public Overrides Sub Save(Destination As String, provider As IOProvider)
+        Public Overrides Async Function Save(Destination As String, provider As IOProvider) As Task
             SaveGeneral()
             SaveItems()
             SaveStoredItems()
             SaveStoredPokemon()
 
-            MyBase.Save(Destination, provider)
-        End Sub
+            Await MyBase.Save(Destination, provider)
+        End Function
 
         Public Overridable ReadOnly Property Offsets As RBOffsets
 

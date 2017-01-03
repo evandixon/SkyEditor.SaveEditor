@@ -80,7 +80,7 @@ Namespace MysteryDungeon.Rescue
             Initialize(toOpen.Bits)
         End Function
 
-        Public Sub Save(Filename As String, provider As IOProvider) Implements ISavableAs.Save
+        Public Async Function Save(Filename As String, provider As IOProvider) As Task Implements ISavableAs.Save
             Dim toSave As New BinaryFile()
             toSave.CreateFile(Path.GetFileNameWithoutExtension(Filename))
             'matix2267's convention adds 6 bits to the beginning of a file so that the name will be byte-aligned
@@ -88,17 +88,17 @@ Namespace MysteryDungeon.Rescue
                 toSave.Bits.Bits.Add(0)
             Next
             toSave.Bits.Bits.AddRange(GetStoredPokemonBits)
-            toSave.Save(Filename, provider)
+            Await toSave.Save(Filename, provider)
             RaiseEvent FileSaved(Me, New EventArgs)
-        End Sub
+        End Function
 
         Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
             Return "rbpkm"
         End Function
 
-        Public Sub Save(provider As IOProvider) Implements ISavable.Save
-            Save(Filename, provider)
-        End Sub
+        Public Async Function Save(provider As IOProvider) As Task Implements ISavable.Save
+            Await Save(Filename, provider)
+        End Function
 
         Public Property Filename As String Implements IOnDisk.Filename
 
