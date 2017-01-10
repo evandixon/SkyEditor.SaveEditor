@@ -185,8 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListResources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>ListResources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +214,27 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MysteryDungeon\PSMD\" />
+    <Folder Include="Resources\de\" />
+    <Folder Include="Resources\es\" />
+    <Folder Include="Resources\fr\" />
+    <Folder Include="Resources\it\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\en\RBBaseTypes.txt" />
+    <None Include="Resources\en\RBFriendAreaOffsets.txt" />
+    <None Include="Resources\en\RBItemOrder.txt" />
+    <None Include="Resources\en\RBItems.txt" />
+    <None Include="Resources\en\RBLocations.txt" />
+    <None Include="Resources\en\RBMoves.txt" />
+    <None Include="Resources\en\RBPokemon.txt" />
+    <None Include="Resources\en\SkyFriendAreaOffsets.txt" />
+    <None Include="Resources\en\SkyItems.txt" />
+    <None Include="Resources\en\SkyLocations.txt" />
+    <None Include="Resources\en\SkyMoves.txt" />
+    <None Include="Resources\en\SkyPokemon.txt" />
+    <None Include="Resources\en\TDFriendAreaOffsets.txt" />
+    <None Include="Resources\en\TDItems.txt" />
+    <None Include="Resources\en\TDLocations.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -126,15 +126,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 0=Item 0.
-        '''</summary>
-        Public Shared ReadOnly Property RBItemOffsets() As String
-            Get
-                Return ResourceManager.GetString("RBItemOffsets", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Beauty Scarf
         '''Def. Scarf
         '''Dodge Scarf
