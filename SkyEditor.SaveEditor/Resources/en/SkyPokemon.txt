@@ -27,10 +27,10 @@
 26=Raichu
 27=Sandshrew
 28=Sandslash
-29=Nidoranｾ
+29=Nidoran♀
 30=Nidorina
 31=Nidoqueen
-32=Nidoranｽ
+32=Nidoran♂
 33=Nidorino
 34=Nidoking
 35=Clefairy
