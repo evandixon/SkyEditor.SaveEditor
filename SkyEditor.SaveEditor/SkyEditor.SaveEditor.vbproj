@@ -179,6 +179,7 @@
     <EmbeddedResource Include="ListResources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.fr.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -217,7 +218,6 @@
     <Folder Include="MysteryDungeon\PSMD\" />
     <Folder Include="Resources\de\" />
     <Folder Include="Resources\es\" />
-    <Folder Include="Resources\fr\" />
     <Folder Include="Resources\it\" />
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +236,14 @@
     <None Include="Resources\en\TDFriendAreaOffsets.txt" />
     <None Include="Resources\en\TDItems.txt" />
     <None Include="Resources\en\TDLocations.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fr\SkyFriendAreaOffsets.txt" />
+    <None Include="Resources\fr\SkyItems.txt" />
+    <None Include="Resources\fr\SkyLocations.txt" />
+    <None Include="Resources\fr\SkyMoves.txt" />
+    <None Include="Resources\fr\SkyPokemon.txt" />
+    <None Include="Resources\fr\TDFriendAreaOffsets.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
