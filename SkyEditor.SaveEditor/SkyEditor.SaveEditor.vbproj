@@ -171,6 +171,7 @@
     <EmbeddedResource Include="ListResouces.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResouces.es.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -185,6 +186,7 @@
     <EmbeddedResource Include="ListResources.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.it.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ListResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -217,8 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MysteryDungeon\PSMD\" />
-    <Folder Include="Resources\es\" />
-    <Folder Include="Resources\it\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\en\RBBaseTypes.txt" />
@@ -250,6 +250,14 @@
     <Content Include="Resources\de\SkyLocations.txt" />
     <Content Include="Resources\de\SkyMoves.txt" />
     <Content Include="Resources\de\SkyPokemon.txt" />
+    <None Include="Resources\es\SkyItems.txt" />
+    <None Include="Resources\es\SkyLocations.txt" />
+    <None Include="Resources\es\SkyMoves.txt" />
+    <None Include="Resources\es\SkyPokemon.txt" />
+    <None Include="Resources\it\SkyItems.txt" />
+    <None Include="Resources\it\SkyLocations.txt" />
+    <None Include="Resources\it\SkyMoves.txt" />
+    <None Include="Resources\it\SkyPokemon.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
