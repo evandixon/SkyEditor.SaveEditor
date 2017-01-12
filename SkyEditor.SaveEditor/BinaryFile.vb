@@ -16,7 +16,7 @@ Public Class BinaryFile
         Bits = New Binary(rawData)
     End Sub
 
-    Public Overridable Function OpenFile(Filename As String, Provider As IOProvider) As Task Implements IOpenableFile.OpenFile
+    Public Overridable Function OpenFile(Filename As String, Provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
         Me.Filename = Filename
         Me.CurrentIOProvider = Provider
         Using f As New GenericFile(Provider, Filename, True, True)
@@ -34,7 +34,7 @@ Public Class BinaryFile
 
     Public Property Bits As Binary
     Public Property Filename As String Implements IOnDisk.Filename
-    Private Property CurrentIOProvider As IOProvider
+    Private Property CurrentIOProvider As IIOProvider
 
     ''' <summary>
     ''' Name of the file.
@@ -58,7 +58,7 @@ Public Class BinaryFile
 
     End Sub
 
-    Public Overridable Async Function Save(Destination As String, provider As IOProvider) As Task Implements ISavableAs.Save
+    Public Overridable Async Function Save(Destination As String, provider As IIOProvider) As Task Implements ISavableAs.Save
         FixChecksum()
         Dim tmp(Math.Ceiling(Bits.Count / 8) - 1) As Byte
         Using f As New GenericFile(provider, tmp)
@@ -76,7 +76,7 @@ Public Class BinaryFile
 
     Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
 
-    Public Async Function Save(provider As IOProvider) As Task Implements ISavable.Save
+    Public Async Function Save(provider As IIOProvider) As Task Implements ISavable.Save
         Await Save(Filename, provider)
     End Function
 

@@ -9,7 +9,7 @@ Public Class ZLibFile
     Implements IOpenableFile
     Implements IDetectableFileType
 
-    Public Function OpenFile(Filename As String, Provider As IOProvider) As Task Implements IOpenableFile.OpenFile
+    Public Function OpenFile(Filename As String, Provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
         Using File As New GenericFile(Provider, Filename)
             Using compressed As New MemoryStream(File.RawData)
                 compressed.Seek(2, SeekOrigin.Begin)
@@ -22,8 +22,8 @@ Public Class ZLibFile
             End Using
         End Using
 
-        'Debug
-        Provider.WriteAllBytes(Filename & "-decompressed", RawData)
+        ''Debug
+        'Provider.WriteAllBytes(Filename & "-decompressed", RawData)
 
         Return Task.FromResult(0)
     End Function

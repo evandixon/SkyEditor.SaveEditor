@@ -13,16 +13,16 @@ Namespace MysteryDungeon.Explorers
             Offsets = New TDOffsets
         End Sub
 
-        Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
+        Public Overrides Async Function OpenFile(Filename As String, Provider As IIOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
 
             LoadGeneral()
             LoadItems()
             LoadStoredPokemon()
-            LoadActivePokemon
+            LoadActivePokemon()
         End Function
 
-        Public Overrides Async Function Save(Destination As String, provider As IOProvider) As Task
+        Public Overrides Async Function Save(Destination As String, provider As IIOProvider) As Task
             SaveGeneral()
             SaveItems()
             SaveStoredPokemon()

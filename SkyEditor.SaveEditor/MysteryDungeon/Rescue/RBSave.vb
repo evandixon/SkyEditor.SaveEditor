@@ -42,7 +42,7 @@ Namespace MysteryDungeon.Rescue
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
-        Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
+        Public Overrides Async Function OpenFile(Filename As String, Provider As IIOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
 
             LoadGeneral()
@@ -51,7 +51,7 @@ Namespace MysteryDungeon.Rescue
             LoadStoredPokemon()
         End Function
 
-        Public Overrides Async Function Save(Destination As String, provider As IOProvider) As Task
+        Public Overrides Async Function Save(Destination As String, provider As IIOProvider) As Task
             SaveGeneral()
             SaveItems()
             SaveStoredItems()

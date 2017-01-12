@@ -100,7 +100,7 @@ Namespace MysteryDungeon.Explorers
             Return out
         End Function
 
-        Public Async Function OpenFile(Filename As String, Provider As IOProvider) As Task Implements IOpenableFile.OpenFile
+        Public Async Function OpenFile(Filename As String, Provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
             Dim toOpen As New BinaryFile
             Await toOpen.OpenFile(Filename, Provider)
 
@@ -112,7 +112,7 @@ Namespace MysteryDungeon.Explorers
             Initialize(toOpen.Bits)
         End Function
 
-        Public Async Function Save(Filename As String, provider As IOProvider) As Task Implements ISavableAs.Save
+        Public Async Function Save(Filename As String, provider As IIOProvider) As Task Implements ISavableAs.Save
             Dim toSave As New BinaryFile()
             toSave.CreateFile(Path.GetFileNameWithoutExtension(Filename))
             'matix2267's convention adds 6 bits to the beginning of a file so that the name will be byte-aligned
@@ -128,7 +128,7 @@ Namespace MysteryDungeon.Explorers
             Return "skypkm"
         End Function
 
-        Public Async Function Save(provider As IOProvider) As Task Implements ISavable.Save
+        Public Async Function Save(provider As IIOProvider) As Task Implements ISavable.Save
             Await Save(Filename, provider)
         End Function
 

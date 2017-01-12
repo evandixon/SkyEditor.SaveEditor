@@ -17,7 +17,7 @@ Namespace MysteryDungeon.Rescue
         '        Bits.AppendByte(RawData(count))
         '    Next
         'End Sub
-        Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task Implements IOpenableFile.OpenFile
+        Public Overrides Async Function OpenFile(Filename As String, Provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
             Await MyBase.OpenFile(Filename, Provider)
         End Function
 

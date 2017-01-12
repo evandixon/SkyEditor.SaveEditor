@@ -6,7 +6,7 @@ Namespace Saves
         Public Sub New()
             MyBase.New()
         End Sub
-        Public Overrides Async Function OpenFile(Filename As String, Provider As IOProvider) As Task
+        Public Overrides Async Function OpenFile(Filename As String, Provider As IIOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
             originalChecksum = CalculateChecksum()
         End Function
