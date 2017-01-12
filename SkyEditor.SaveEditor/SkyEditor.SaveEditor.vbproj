@@ -126,6 +126,7 @@
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
+    <Compile Include="MysteryDungeon\IDConversion.vb" />
     <Compile Include="MysteryDungeon\IMDAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersStoredItem.vb" />
