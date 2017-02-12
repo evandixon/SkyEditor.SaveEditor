@@ -9,7 +9,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements INotifyPropertyChanged
         Implements INotifyModified
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
         Private Sub SkyGeneralViewModel_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
@@ -88,9 +88,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Overrides Function GetSortOrder() As Integer
-            Return 5
-        End Function
+        Public Overrides ReadOnly Property SortOrder As Integer
+            Get
+                Return 5
+            End Get
+        End Property
 
     End Class
 End Namespace

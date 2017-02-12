@@ -17,6 +17,8 @@ Namespace MysteryDungeon.Explorers.ViewModels
             HeldItems = New ObservableCollection(Of TDHeldItem)
         End Sub
 
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
+
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
 
         Public Property HeldItems As ObservableCollection(Of TDHeldItem)
@@ -45,8 +47,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
             slots.Add(New ItemSlot(Of TDHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemNumber))
             ItemSlots = slots
         End Sub
-
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
         Public Overrides Sub UpdateModel(model As Object)
             MyBase.UpdateModel(model)

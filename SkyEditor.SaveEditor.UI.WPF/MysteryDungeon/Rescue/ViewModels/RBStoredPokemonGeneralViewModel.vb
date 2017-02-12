@@ -10,7 +10,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
         Implements INotifyModified
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Private Sub RBStoredPokemonGeneralViewModel_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
             RaiseEvent Modified(Me, e)

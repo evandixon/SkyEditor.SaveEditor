@@ -9,7 +9,7 @@ Namespace MysteryDungeon.Rescue
         Public Const Length = 362
         Public Const MimeType As String = "application/x-rb-pokemon"
 
-        Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
+        Public Event FileSaved As EventHandler Implements ISavable.FileSaved
 
         Public Sub New()
             Unk1 = New Binary(15)

@@ -24,7 +24,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
         End Sub
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
 #Region "Event Handlers"
@@ -42,7 +42,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         End Sub
 
         Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
-            AllPokemon(e.Pokemon.RosterNumber).File = e.Pokemon.ToStored
+            AllPokemon(e.Pokemon.RosterNumber).Model = e.Pokemon.ToStored
         End Sub
 #End Region
 
@@ -105,6 +105,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Private Property AllPokemon As ObservableCollection(Of FileViewModel)
 
         Public Property AddToPartyCommand As RelayCommand Implements IPokemonStorage.AddToPartyCommand
+
+        Public Overrides ReadOnly Property SortOrder As Integer
+            Get
+                Return 2
+            End Get
+        End Property
 #End Region
 
 
@@ -146,29 +152,25 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             s.StoredPokemon.Clear()
             For Each item In StoredPlayerPartner
-                s.StoredPokemon.Add(item.File)
+                s.StoredPokemon.Add(item.Model)
             Next
 
             For Each item In StoredSpEpisodePokemon
-                s.StoredPokemon.Add(item.File)
+                s.StoredPokemon.Add(item.Model)
             Next
 
             For Each item In StoredPokemon
-                s.StoredPokemon.Add(item.File)
+                s.StoredPokemon.Add(item.Model)
             Next
 
         End Sub
-
-        Public Overrides Function GetSortOrder() As Integer
-            Return 2
-        End Function
 
         ''' <summary>
         ''' Adds the selected box's selected pokemon to active Pokemon
         ''' </summary>
         Private Sub AddActivePokemon()
             If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
-                ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.File, GetPokemonIndex(SelectedBox.SelectedPokemon))
+                ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.Model, GetPokemonIndex(SelectedBox.SelectedPokemon))
             End If
         End Sub
 

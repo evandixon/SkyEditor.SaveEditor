@@ -189,12 +189,12 @@ Namespace MysteryDungeon.Explorers
         'End Sub
 #End Region
 
-        Public Function IsFileOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
+        Public Async Function IsFileOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
             If File.Length > Offsets.ChecksumEnd Then
                 Dim buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(File, 4, Offsets.ChecksumEnd))
-                Return Task.FromResult(File.RawData(0) = buffer(0) AndAlso File.RawData(1) = buffer(1) AndAlso File.RawData(2) = buffer(2) AndAlso File.RawData(3) = buffer(3))
+                Return Await File.ReadAsync(0) = buffer(0) AndAlso Await File.ReadAsync(1) = buffer(1) AndAlso Await File.ReadAsync(2) = buffer(2) AndAlso Await File.ReadAsync(3) = buffer(3)
             Else
-                Return Task.FromResult(False)
+                Return False
             End If
         End Function
 

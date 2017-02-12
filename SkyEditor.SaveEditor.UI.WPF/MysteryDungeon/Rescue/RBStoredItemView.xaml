@@ -1,4 +1,4 @@
-﻿<skyWPF:DataBoundObjectControl x:Class="MysteryDungeon.Rescue.RBStoredItemView"
+﻿<skyWPF:DataBoundViewControl x:Class="MysteryDungeon.Rescue.RBStoredItemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -41,4 +41,4 @@
             </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>
-</skyWPF:DataBoundObjectControl>
+</skyWPF:DataBoundViewControl>

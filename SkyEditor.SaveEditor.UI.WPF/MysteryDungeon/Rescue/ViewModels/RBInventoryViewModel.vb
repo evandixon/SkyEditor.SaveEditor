@@ -19,6 +19,8 @@ Namespace MysteryDungeon.Rescue.ViewModels
             StoredItems = New ObservableCollection(Of RBStoredItemViewModel)
         End Sub
 
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
+
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
         Public Property HeldItems As ObservableCollection(Of RBHeldItem)
             Get
@@ -39,8 +41,6 @@ Namespace MysteryDungeon.Rescue.ViewModels
             End Set
         End Property
         Private WithEvents _storedItems As ObservableCollection(Of RBStoredItemViewModel)
-
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
 
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)

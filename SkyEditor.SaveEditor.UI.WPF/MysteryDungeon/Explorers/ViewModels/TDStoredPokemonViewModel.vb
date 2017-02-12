@@ -25,7 +25,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             AddToPartyCommand.IsEnabled = False
         End Sub
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
 #Region "Event Handlers"
@@ -116,10 +116,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             s.StoredPokemon.Clear()
             For Each item In StoredPlayerPartner
-                s.StoredPokemon.Add(item.File)
+                s.StoredPokemon.Add(item.Model)
             Next
             For Each item In StoredPokemon
-                s.StoredPokemon.Add(item.File)
+                s.StoredPokemon.Add(item.Model)
             Next
         End Sub
 

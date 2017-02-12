@@ -19,7 +19,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             SpEpisodeHeldItems = New ObservableCollection(Of SkyHeldItem)
         End Sub
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Private Sub _heldItems_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _storedItems.CollectionChanged, _heldItems.CollectionChanged, _spEpisodeItems.CollectionChanged
             RaiseEvent Modified(Me, New EventArgs)
@@ -56,6 +56,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
         Private WithEvents _spEpisodeItems As ObservableCollection(Of SkyHeldItem)
+
+        Public Overrides ReadOnly Property SortOrder As Integer
+            Get
+                Return 1
+            End Get
+        End Property
 #End Region
 
         Public Overrides Sub SetModel(model As Object)
@@ -107,10 +113,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 m.SpEpisodeHeldItems.Add(item)
             Next
         End Sub
-
-        Public Overrides Function GetSortOrder() As Integer
-            Return 1
-        End Function
     End Class
 End Namespace
 

@@ -12,7 +12,7 @@ Namespace MenuActions
             MyBase.New({My.Resources.Language.MenuPokemon, My.Resources.Language.MenuPokemonExport})
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(IPokemonStorage).GetTypeInfo}
         End Function
 
@@ -20,19 +20,19 @@ Namespace MenuActions
             Return (Await MyBase.SupportsObject(Obj)) AndAlso
                 DirectCast(Obj, IPokemonStorage).SelectedBox IsNot Nothing AndAlso
                 DirectCast(Obj, IPokemonStorage).SelectedBox.SelectedPokemon IsNot Nothing AndAlso
-                DirectCast(Obj, IPokemonStorage).SelectedBox.SelectedPokemon.CanSaveAs(CurrentPluginManager)
+                DirectCast(Obj, IPokemonStorage).SelectedBox.SelectedPokemon.CanSaveAs(CurrentApplicationViewModel.CurrentPluginManager)
         End Function
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
-                    Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
+                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
-                        Await pkm.Save(s.FileName, CurrentPluginManager)
+                        Await pkm.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
 
-                        If TypeOf pkm.File Is SkyStoredPokemon Then
-                            DirectCast(pkm.File, SkyStoredPokemon).DumpToConsole(CurrentPluginManager.CurrentConsoleProvider)
+                        If TypeOf pkm.Model Is SkyStoredPokemon Then
+                            DirectCast(pkm.Model, SkyStoredPokemon).DumpToConsole(CurrentApplicationViewModel.CurrentPluginManager.CurrentConsoleProvider)
                         End If
                     End If
                 End If

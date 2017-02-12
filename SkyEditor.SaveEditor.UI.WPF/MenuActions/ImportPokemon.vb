@@ -12,7 +12,7 @@ Namespace MenuActions
             MyBase.New({My.Resources.Language.MenuPokemon, My.Resources.Language.MenuPokemonImport})
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(IPokemonStorage).GetTypeInfo}
         End Function
 
@@ -26,10 +26,10 @@ Namespace MenuActions
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm As FileViewModel = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
-                    Dim o = CurrentPluginManager.CurrentIOUIManager.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentPluginManager))
+                    Dim o = CurrentApplicationViewModel.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentApplicationViewModel.CurrentPluginManager))
                     If o.ShowDialog = Forms.DialogResult.OK Then
-                        Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.File.GetType.GetTypeInfo, CurrentPluginManager)
-                        pkm.File = newModel
+                        Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.Model.GetType.GetTypeInfo, CurrentApplicationViewModel.CurrentPluginManager)
+                        pkm.Model = newModel
                     End If
                 End If
             Next

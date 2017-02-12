@@ -15,12 +15,12 @@ Namespace MysteryDungeon
             MyBase.New
         End Sub
 
-        Public Sub New(model As IMDAttack, manager As PluginManager)
-            MyBase.New(model, manager)
+        Public Sub New(model As IMDAttack, appViewModel As ApplicationViewModel)
+            MyBase.New(model, appViewModel)
         End Sub
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Protected Sub RaisePropertyChanged(propertyName As String)
             RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))

@@ -40,7 +40,7 @@ Namespace MysteryDungeon.Rescue
         End Sub
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Public Overrides Async Function OpenFile(Filename As String, Provider As IIOProvider) As Task
             Await MyBase.OpenFile(Filename, Provider)
@@ -280,12 +280,12 @@ Namespace MysteryDungeon.Rescue
         '    Return GameStrings.RBSave
         'End Function
 #End Region
-        Public Overridable Function IsFileOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
+        Public Overridable Async Function IsFileOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
             If File.Length > Offsets.ChecksumEnd Then
                 Dim buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(File, 4, Offsets.ChecksumEnd))
-                Return Task.FromResult(File.RawData(0) = buffer(0) AndAlso File.RawData(1) = buffer(1) AndAlso File.RawData(2) = buffer(2) AndAlso File.RawData(3) = buffer(3))
+                Return Await File.ReadAsync(0) = buffer(0) AndAlso Await File.ReadAsync(1) = buffer(1) AndAlso Await File.ReadAsync(2) = buffer(2) AndAlso Await File.ReadAsync(3) = buffer(3)
             Else
-                Return Task.FromResult(False)
+                Return False
             End If
         End Function
     End Class

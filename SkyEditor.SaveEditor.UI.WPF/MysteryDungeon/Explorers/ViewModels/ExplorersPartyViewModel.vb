@@ -21,7 +21,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             Return {GetType(SkySave).GetTypeInfo, GetType(TDSave).GetTypeInfo}
         End Function
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event ActivePokemonRemoving(sender As Object, e As ActivePokemonRemoveEventArgs)
         Public Event ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs)
@@ -69,6 +69,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Get
         End Property
 
+        Public Overrides ReadOnly Property SortOrder As Integer
+            Get
+                Return 3
+            End Get
+        End Property
+
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
 
@@ -108,7 +114,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 s.ActivePokemon.Clear()
 
                 For Each item In Party
-                    s.ActivePokemon.Add(item.File)
+                    s.ActivePokemon.Add(item.Model)
                 Next
             ElseIf TypeOf model Is TDSave Then
                 Dim s As TDSave = model
@@ -116,14 +122,14 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 s.ActivePokemon.Clear()
 
                 For Each item In Party
-                    s.ActivePokemon.Add(item.File)
+                    s.ActivePokemon.Add(item.Model)
                 Next
             End If
 
         End Sub
 
         Public Sub StandbySelectedActivePokemon()
-            Dim pkm = SelectedPokemon?.File
+            Dim pkm = SelectedPokemon?.Model
 
             If pkm IsNot Nothing Then
                 RaiseEvent ActivePokemonRemoving(Me, New ActivePokemonRemoveEventArgs With {.Pokemon = pkm})
@@ -141,10 +147,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
             AddHandler vm.Modified, AddressOf OnModified
             _party.Add(vm)
         End Sub
-
-        Public Overrides Function GetSortOrder() As Integer
-            Return 3
-        End Function
     End Class
 
 End Namespace

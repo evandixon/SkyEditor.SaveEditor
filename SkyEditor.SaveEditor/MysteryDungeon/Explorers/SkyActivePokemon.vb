@@ -11,7 +11,7 @@ Namespace MysteryDungeon.Explorers
         Public Const Length = 546
         Public Const MimeType As String = "application/x-sky-active-pokemon"
 
-        Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
+        Public Event FileSaved As EventHandler Implements ISavable.FileSaved
 
         Public Sub New()
             Initialize(New Binary(Length))

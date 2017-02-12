@@ -11,7 +11,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
         Implements I4Moves
         Implements INotifyModified
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Private Sub _attack1_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles _attack1.PropertyChanged, _attack2.PropertyChanged, _attack3.PropertyChanged, _attack4.PropertyChanged
             RaiseEvent Modified(sender, e)
@@ -63,10 +63,10 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             Dim s As RBStoredPokemon = model
 
-            Dim a1 = New MDAttackViewModel(s.Attack1, CurrentPluginManager)
-            Dim a2 = New MDAttackViewModel(s.Attack2, CurrentPluginManager)
-            Dim a3 = New MDAttackViewModel(s.Attack3, CurrentPluginManager)
-            Dim a4 = New MDAttackViewModel(s.Attack4, CurrentPluginManager)
+            Dim a1 = New MDAttackViewModel(s.Attack1, CurrentApplicationViewModel)
+            Dim a2 = New MDAttackViewModel(s.Attack2, CurrentApplicationViewModel)
+            Dim a3 = New MDAttackViewModel(s.Attack3, CurrentApplicationViewModel)
+            Dim a4 = New MDAttackViewModel(s.Attack4, CurrentApplicationViewModel)
 
             Attack1 = a1
             Attack2 = a2

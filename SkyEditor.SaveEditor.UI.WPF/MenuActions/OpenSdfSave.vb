@@ -11,7 +11,7 @@ Namespace MenuActions
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             If dialog.ShowDialog Then
-                CurrentPluginManager.CurrentIOUIManager.OpenFile(Await IOHelper.OpenObject(dialog.SelectedPath, AddressOf IOHelper.PickFirstDuplicateMatchSelector, CurrentPluginManager), True)
+                CurrentApplicationViewModel.OpenFile(Await IOHelper.OpenFile(dialog.SelectedPath, AddressOf IOHelper.PickFirstDuplicateMatchSelector, CurrentApplicationViewModel.CurrentPluginManager), True)
             End If
         End Sub
 

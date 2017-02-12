@@ -11,9 +11,9 @@ Namespace MysteryDungeon.Explorers
         Public Const Length = 429 * 8
         Public Const MimeType As String = "application/x-sky-quicksave-pokemon"
 
-        Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
+        Public Event FileSaved As EventHandler Implements ISavable.FileSaved
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Public Sub New()
             Unk1 = New Binary(15)
