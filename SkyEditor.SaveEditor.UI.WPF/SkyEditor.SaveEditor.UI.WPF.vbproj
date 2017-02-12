@@ -65,10 +65,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI43\lib\netstandard1.3\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI44\lib\netstandard1.3\SkyEditor.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SkyEditor.Core.Windows, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.1.0-CI43\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+    <Reference Include="SkyEditor.Core.Windows, Version=4.1.0.44, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.1.0-CI44\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
     </Reference>
     <Reference Include="SkyEditor.UI.WPF, Version=4.1.0.106, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SkyEditor.UI.WPF.4.1.0-CI106\lib\net46\SkyEditor.UI.WPF.dll</HintPath>
