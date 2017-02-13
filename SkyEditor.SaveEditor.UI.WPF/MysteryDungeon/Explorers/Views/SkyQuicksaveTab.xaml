@@ -20,6 +20,6 @@
         </Grid.ColumnDefinitions>
         <ListView Grid.Column="0" Name="lvItems" ItemsSource="{Binding QuicksavePokemon}" />
         <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" VerticalAlignment="Stretch"/>
-        <skyWPF:ObjectControlPlaceholder Grid.Column="2" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding ElementName=lvItems,Path=SelectedItem}" EnableTabs="True" TabControlOrientation="Top"/>
+        <skyWPF:ObjectControlPlaceholder Grid.Column="2" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundViewControl}}" ObjectToEdit="{Binding ElementName=lvItems,Path=SelectedItem}" EnableTabs="True" TabControlOrientation="Top"/>
     </Grid>
 </skyWPF:DataBoundViewControl>

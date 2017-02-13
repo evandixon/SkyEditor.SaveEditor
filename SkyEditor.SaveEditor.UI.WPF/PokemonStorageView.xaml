@@ -47,7 +47,7 @@
                       VerticalAlignment="Stretch"/>
         <skyui:ObjectControlPlaceholder
             Grid.Column="4"
-            CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}"
+            CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}"
             ObjectToEdit="{Binding Path=(vmc:IPokemonStorage.SelectedBox).SelectedPokemon}"
             EnableTabs="True"
             TabControlOrientation="Top"/>

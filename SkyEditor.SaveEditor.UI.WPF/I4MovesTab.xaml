@@ -13,9 +13,9 @@
              Header="{x:Static res:Language.Moves}"
              SortOrder="1">
     <StackPanel>
-        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack1)}" EnableTabs="False"/>
-        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack2)}" EnableTabs="False"/>
-        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack3)}" EnableTabs="False"/>
-        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack4)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack1)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack2)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack3)}" EnableTabs="False"/>
+        <skyui:ObjectControlPlaceholder Margin="0,0,5,0" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}" ObjectToEdit="{Binding Path=(vmc:I4Moves.Attack4)}" EnableTabs="False"/>
     </StackPanel>
 </skyui:DataBoundViewControl>
