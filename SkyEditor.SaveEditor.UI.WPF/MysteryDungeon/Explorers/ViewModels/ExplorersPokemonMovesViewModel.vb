@@ -11,7 +11,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements I4Moves
         Implements INotifyModified
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Private Sub _attack_Modified(sender As Object, e As EventArgs) Handles _attack1.Modified, _attack2.Modified, _attack3.Modified, _attack4.Modified
             RaiseEvent Modified(sender, e)
@@ -64,10 +64,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
             If TypeOf model Is IExplorersStoredPokemon Then
                 Dim s As IExplorersStoredPokemon = model
 
-                Dim a1 = New MDAttackViewModel(s.Attack1, CurrentPluginManager)
-                Dim a2 = New MDAttackViewModel(s.Attack2, CurrentPluginManager)
-                Dim a3 = New MDAttackViewModel(s.Attack3, CurrentPluginManager)
-                Dim a4 = New MDAttackViewModel(s.Attack4, CurrentPluginManager)
+                Dim a1 = New MDAttackViewModel(s.Attack1, CurrentApplicationViewModel)
+                Dim a2 = New MDAttackViewModel(s.Attack2, CurrentApplicationViewModel)
+                Dim a3 = New MDAttackViewModel(s.Attack3, CurrentApplicationViewModel)
+                Dim a4 = New MDAttackViewModel(s.Attack4, CurrentApplicationViewModel)
 
                 Attack1 = a1
                 Attack2 = a2
@@ -76,10 +76,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
             ElseIf TypeOf model Is IExplorersActivePokemon Then
                 Dim s As IExplorersActivePokemon = model
 
-                Dim a1 = New MDActiveAttackViewModel(s.Attack1, CurrentPluginManager)
-                Dim a2 = New MDActiveAttackViewModel(s.Attack2, CurrentPluginManager)
-                Dim a3 = New MDActiveAttackViewModel(s.Attack3, CurrentPluginManager)
-                Dim a4 = New MDActiveAttackViewModel(s.Attack4, CurrentPluginManager)
+                Dim a1 = New MDActiveAttackViewModel(s.Attack1, CurrentApplicationViewModel)
+                Dim a2 = New MDActiveAttackViewModel(s.Attack2, CurrentApplicationViewModel)
+                Dim a3 = New MDActiveAttackViewModel(s.Attack3, CurrentApplicationViewModel)
+                Dim a4 = New MDActiveAttackViewModel(s.Attack4, CurrentApplicationViewModel)
 
                 Attack1 = a1
                 Attack2 = a2

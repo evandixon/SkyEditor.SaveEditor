@@ -1,4 +1,4 @@
-﻿<skyui:DataBoundObjectControl x:Class="MysteryDungeon.Explorers.SkyHistory"
+﻿<skyui:DataBoundViewControl x:Class="MysteryDungeon.Explorers.SkyHistory"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -35,4 +35,4 @@
             <CheckBox VerticalAlignment="Center" Content="{x:Static res:Language.IsFemale}"  IsChecked="{Binding OriginalPartnerIsFemale}"/>
         </UniformGrid>
     </Grid>
-</skyui:DataBoundObjectControl>
+</skyui:DataBoundViewControl>

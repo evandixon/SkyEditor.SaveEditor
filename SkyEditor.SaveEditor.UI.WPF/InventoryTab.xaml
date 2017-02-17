@@ -1,4 +1,4 @@
-﻿<skyui:DataBoundObjectControl x:Class="InventoryTab"
+﻿<skyui:DataBoundViewControl x:Class="InventoryTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -21,9 +21,9 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <skyui:ObjectControlPlaceholder CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}" ObjectToEdit="{Binding .}" EnableTabs="False"/>
+                    <skyui:ObjectControlPlaceholder CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}" ObjectToEdit="{Binding .}" EnableTabs="False"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
     </Grid>
-</skyui:DataBoundObjectControl>
+</skyui:DataBoundViewControl>

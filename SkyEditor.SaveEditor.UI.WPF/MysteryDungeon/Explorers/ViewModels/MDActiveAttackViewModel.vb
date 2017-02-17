@@ -11,8 +11,8 @@ Namespace MysteryDungeon.Explorers.ViewModels
             MyBase.New
         End Sub
 
-        Public Sub New(model As IExplorersActiveAttack, manager As PluginManager)
-            MyBase.New(model, manager)
+        Public Sub New(model As IExplorersActiveAttack, appViewModel As ApplicationViewModel)
+            MyBase.New(model, appViewModel)
         End Sub
 
         Public Shadows Property Model As IExplorersActiveAttack

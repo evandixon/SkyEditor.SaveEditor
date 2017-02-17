@@ -1,4 +1,4 @@
-﻿<skyui:DataBoundObjectControl x:Class="PokemonStorageView"
+﻿<skyui:DataBoundViewControl x:Class="PokemonStorageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -32,7 +32,7 @@
                       VerticalAlignment="Stretch"/>
         <ListView Grid.Column="2"
                   ItemsSource="{Binding ElementName=cbBoxes,Path=SelectedValue}"
-                  DisplayMemberPath="File"
+                  DisplayMemberPath="Model"
                   ScrollViewer.CanContentScroll="True"
                   SelectedItem="{Binding Path=(vmc:IPokemonStorage.SelectedBox).SelectedPokemon}">
             <!--<ListView.ContextMenu>
@@ -47,9 +47,9 @@
                       VerticalAlignment="Stretch"/>
         <skyui:ObjectControlPlaceholder
             Grid.Column="4"
-            CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyui:DataBoundObjectControl}}"
+            CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyui:DataBoundViewControl}}"
             ObjectToEdit="{Binding Path=(vmc:IPokemonStorage.SelectedBox).SelectedPokemon}"
             EnableTabs="True"
             TabControlOrientation="Top"/>
     </Grid>
-</skyui:DataBoundObjectControl>
+</skyui:DataBoundViewControl>

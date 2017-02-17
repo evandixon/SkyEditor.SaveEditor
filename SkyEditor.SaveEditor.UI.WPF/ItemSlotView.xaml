@@ -1,4 +1,4 @@
-﻿<skyWPF:DataBoundObjectControl x:Class="ItemSlotView"
+﻿<skyWPF:DataBoundViewControl x:Class="ItemSlotView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -24,9 +24,9 @@
                 <TextBlock Text="{x:Static res:Language.XofYItemsSeparator}" />
                 <TextBlock Text="{Binding MaxItemCount}" />
             </StackPanel>
-            <skyWPF:ObjectControlPlaceholder Grid.Row="1" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding ItemCollection}" EnableTabs="False" ScrollViewer.CanContentScroll="True" />
+        <skyWPF:ObjectControlPlaceholder Grid.Row="1" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundViewControl}}" ObjectToEdit="{Binding ItemCollection}" EnableTabs="False" ScrollViewer.CanContentScroll="True" />
         <GridSplitter Grid.Row="2" ResizeBehavior="PreviousAndNext" Height="3" Background="#FFBCBCBC" HorizontalAlignment="Stretch" />
-        <skyWPF:ObjectControlPlaceholder x:Name="placeholderEdit"  Grid.Row="3" CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundObjectControl}}" ObjectToEdit="{Binding NewItem}" EnableTabs="False"/>
+        <skyWPF:ObjectControlPlaceholder x:Name="placeholderEdit"  Grid.Row="3" CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=skyWPF:DataBoundViewControl}}" ObjectToEdit="{Binding NewItem}" EnableTabs="False"/>
         <Button Grid.Row="4" Content="{x:Static res:Language.Add}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding AddCommand}"/>
     </Grid>
-</skyWPF:DataBoundObjectControl>
+</skyWPF:DataBoundViewControl>

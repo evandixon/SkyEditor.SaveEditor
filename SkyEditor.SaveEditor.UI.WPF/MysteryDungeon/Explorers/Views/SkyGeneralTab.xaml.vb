@@ -2,7 +2,7 @@
 
 Namespace MysteryDungeon.Explorers.Views
     Public Class SkyGeneralTab
-        Inherits DataBoundObjectControl
+        Inherits DataBoundViewControl
 
     End Class
 End Namespace

@@ -1,4 +1,4 @@
-﻿<skyWPF:DataBoundObjectControl x:Class="MysteryDungeon.Explorers.Views.IExplorersActiveAttackView"
+﻿<skyWPF:DataBoundViewControl x:Class="MysteryDungeon.Explorers.Views.IExplorersActiveAttackView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -50,4 +50,4 @@
         <CheckBox Grid.Column="10" Grid.Row="2" Content="{x:Static res:Language.IsSet}" VerticalAlignment="Center" IsChecked="{Binding Path=(mysteryDungeon:IMDAttack.IsSet)}" />
         <CheckBox Grid.Column="12" Grid.Row="2" Content="{x:Static res:Language.Sealed}" VerticalAlignment="Center" IsChecked="{Binding Path=(explorers:IExplorersActiveAttack.IsSealed)}" />
     </Grid>
-</skyWPF:DataBoundObjectControl>
+</skyWPF:DataBoundViewControl>

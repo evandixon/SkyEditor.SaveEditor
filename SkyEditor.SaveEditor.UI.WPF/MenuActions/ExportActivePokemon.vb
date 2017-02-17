@@ -13,7 +13,7 @@ Namespace MenuActions
             DevOnly = True
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(IParty).GetTypeInfo}
         End Function
 
@@ -21,20 +21,20 @@ Namespace MenuActions
             Return (Await MyBase.SupportsObject(Obj)) AndAlso
                 DirectCast(Obj, IParty).Party IsNot Nothing AndAlso
                 DirectCast(Obj, IParty).SelectedPokemon IsNot Nothing AndAlso
-                DirectCast(Obj, IParty).SelectedPokemon.CanSaveAs(CurrentPluginManager)
+                DirectCast(Obj, IParty).SelectedPokemon.CanSaveAs(CurrentApplicationViewModel.CurrentPluginManager)
         End Function
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm = DirectCast(item, IParty).SelectedPokemon
-                    Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(pkm)
+                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
-                        Await pkm.Save(s.FileName, CurrentPluginManager)
+                        Await pkm.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                     End If
 
-                    If TypeOf pkm.File Is SkyActivePokemon Then
-                        DirectCast(pkm.File, SkyActivePokemon).DumpToConsole(CurrentPluginManager.CurrentConsoleProvider)
+                    If TypeOf pkm.Model Is SkyActivePokemon Then
+                        DirectCast(pkm.Model, SkyActivePokemon).DumpToConsole(CurrentApplicationViewModel.CurrentPluginManager.CurrentConsoleProvider)
                     End If
                 End If
             Next

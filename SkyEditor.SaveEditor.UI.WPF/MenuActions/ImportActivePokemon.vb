@@ -13,24 +13,24 @@ Namespace MenuActions
             DevOnly = True
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(IParty).GetTypeInfo}
         End Function
 
         Public Overrides Async Function SupportsObject(Obj As Object) As Task(Of Boolean)
             Return Await MyBase.SupportsObject(Obj) AndAlso
                 DirectCast(Obj, IParty).SelectedPokemon IsNot Nothing AndAlso
-                DirectCast(Obj, IParty).SelectedPokemon.CanSaveAs(CurrentPluginManager)
+                DirectCast(Obj, IParty).SelectedPokemon.CanSaveAs(CurrentApplicationViewModel.CurrentPluginManager)
         End Function
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm As FileViewModel = DirectCast(item, IParty).SelectedPokemon
-                    Dim o = CurrentPluginManager.CurrentIOUIManager.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentPluginManager))
+                    Dim o = CurrentApplicationViewModel.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentApplicationViewModel.CurrentPluginManager))
                     If o.ShowDialog = Forms.DialogResult.OK Then
-                        Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.File.GetType.GetTypeInfo, CurrentPluginManager)
-                        pkm.File = newModel
+                        Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.Model.GetType.GetTypeInfo, CurrentApplicationViewModel.CurrentPluginManager)
+                        pkm.Model = newModel
                     End If
                 End If
             Next

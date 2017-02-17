@@ -17,7 +17,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             StandbyCommand = New RelayCommand(AddressOf StandbySelectedActivePokemon)
         End Sub
 
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
         Private Sub OnModified(sender As Object, e As EventArgs) Handles _party.CollectionChanged
@@ -57,6 +57,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Get
         End Property
 
+        Public Overrides ReadOnly Property SortOrder As Integer
+            Get
+                Return 4
+            End Get
+        End Property
+
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
 
@@ -81,7 +87,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             s.SpEpisodeActivePokemon.Clear()
 
             For Each item In Party
-                s.SpEpisodeActivePokemon.Add(item.File)
+                s.SpEpisodeActivePokemon.Add(item.Model)
             Next
 
         End Sub
@@ -91,9 +97,6 @@ Namespace MysteryDungeon.Explorers.ViewModels
             SelectedPokemon = Nothing
         End Sub
 
-        Public Overrides Function GetSortOrder() As Integer
-            Return 4
-        End Function
     End Class
 
 End Namespace

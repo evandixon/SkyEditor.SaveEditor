@@ -1,4 +1,4 @@
-﻿Imports Ionic.Zlib
+﻿Imports System.IO.Compression
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 
@@ -9,9 +9,10 @@ Public Class ZLibFile
     Implements IOpenableFile
     Implements IDetectableFileType
 
-    Public Function OpenFile(Filename As String, Provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
-        Using File As New GenericFile(Provider, Filename)
-            Using compressed As New MemoryStream(File.RawData)
+    Public Async Function OpenFile(filename As String, provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
+        Using file As New GenericFile
+            Await file.OpenFile(filename, provider)
+            Using compressed As New MemoryStream(file.Read)
                 compressed.Seek(2, SeekOrigin.Begin)
                 Using decompressed As New MemoryStream
                     Using zlib As New DeflateStream(compressed, CompressionMode.Decompress)
@@ -24,15 +25,13 @@ Public Class ZLibFile
 
         ''Debug
         'Provider.WriteAllBytes(Filename & "-decompressed", RawData)
-
-        Return Task.FromResult(0)
     End Function
 
 
-    Public Function IsOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
-        If File.Length > 2 AndAlso File.RawData(0) = &H78 AndAlso {&H1, &H9C, &HDA}.Contains(File.RawData(1)) AndAlso File.Length < 32 * 1024 * 1024 Then
+    Public Async Function IsOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
+        If File.Length > 2 AndAlso Await File.ReadAsync(0) = &H78 AndAlso {&H1, &H9C, &HDA}.Contains(Await File.ReadAsync(1)) AndAlso File.Length < 32 * 1024 * 1024 Then
             Try
-                Using compressed As New MemoryStream(File.RawData)
+                Using compressed As New MemoryStream(File.Read)
                     compressed.Seek(2, SeekOrigin.Begin)
                     Using decompressed As New MemoryStream
                         Using zlib As New DeflateStream(compressed, CompressionMode.Decompress)
@@ -42,12 +41,12 @@ Public Class ZLibFile
                     End Using
                 End Using
             Catch ex As Exception
-                Return Task.FromResult(False)
+                Return False
             End Try
             'If we get here (without returning in the Catch), then this is a zlib file.
-            Return Task.FromResult(True)
+            Return True
         Else
-            Return Task.FromResult(False)
+            Return False
         End If
     End Function
 

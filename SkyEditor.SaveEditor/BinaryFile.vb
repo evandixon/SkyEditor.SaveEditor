@@ -16,19 +16,23 @@ Public Class BinaryFile
         Bits = New Binary(rawData)
     End Sub
 
-    Public Overridable Function OpenFile(Filename As String, Provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
-        Me.Filename = Filename
-        Me.CurrentIOProvider = Provider
-        Using f As New GenericFile(Provider, Filename, True, True)
+    Public Event FileSaved As EventHandler Implements ISavable.FileSaved
+
+    Public Overridable Async Function OpenFile(filename As String, provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
+        Me.Filename = filename
+        Me.CurrentIOProvider = provider
+        Using f As New GenericFile
+            f.EnableInMemoryLoad = True
+            f.IsReadOnly = True
+            Await f.OpenFile(filename, provider)
             Bits = New Binary(0)
             ProcessRawData(f)
         End Using
-        Return Task.FromResult(0)
     End Function
 
     Private Sub ProcessRawData(File As GenericFile)
         For count As Integer = 0 To File.Length - 1
-            Bits.AppendByte(File.RawData(count))
+            Bits.AppendByte(File.Read(count))
         Next
     End Sub
 
@@ -61,9 +65,10 @@ Public Class BinaryFile
     Public Overridable Async Function Save(Destination As String, provider As IIOProvider) As Task Implements ISavableAs.Save
         FixChecksum()
         Dim tmp(Math.Ceiling(Bits.Count / 8) - 1) As Byte
-        Using f As New GenericFile(provider, tmp)
+        Using f As New GenericFile
+            f.CreateFile(tmp)
             For count As Integer = 0 To Math.Ceiling(Bits.Count / 8) - 1
-                f.RawData(count) = Bits.Int(count, 0, 8)
+                Await f.WriteAsync(count, Bits.Int(count, 0, 8))
             Next
             Await f.Save(Destination, provider)
         End Using
@@ -71,10 +76,12 @@ Public Class BinaryFile
     End Function
 
     Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-        Return "sav"
+        Return "*.sav"
     End Function
 
-    Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
+    Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+        Return {"*.sav"}
+    End Function
 
     Public Async Function Save(provider As IIOProvider) As Task Implements ISavable.Save
         Await Save(Filename, provider)
@@ -88,7 +95,4 @@ Public Class BinaryFile
         Me.Name = Name
     End Sub
 
-    Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
-        Return {"sav"}
-    End Function
 End Class

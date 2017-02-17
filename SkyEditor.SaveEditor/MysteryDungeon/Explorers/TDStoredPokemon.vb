@@ -10,7 +10,7 @@ Namespace MysteryDungeon.Explorers
         Public Const Length = 388
         Public Const MimeType As String = "application/x-td-pokemon"
 
-        Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
+        Public Event FileSaved As EventHandler Implements ISavable.FileSaved
 
         Public Sub New()
             Unk2 = New Binary(96)

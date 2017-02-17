@@ -14,29 +14,28 @@ Class Application
         StartupHelpers.RunExitSequence()
     End Sub
 
-    Private Sub Application_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
-#If DEBUG Then
-        PresentationTraceSources.Refresh()
-        PresentationTraceSources.DataBindingSource.Listeners.Add(New ConsoleTraceListener)
-        PresentationTraceSources.DataBindingSource.Listeners.Add(New DebugTraceListener)
-        PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning Or SourceLevels.Error
-#End If
-        Application.Current.Dispatcher.BeginInvoke(Async Sub()
-                                                       Dim mainWindow = Await StartupHelpers.RunWPFStartupSequence(New WPFCoreSkyEditorPlugin(New SkyEditorInfo))
-                                                       mainWindow.DisplayStatusBar = False
-                                                   End Sub)
+    Private Async Sub Application_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
+        '#If DEBUG Then
+        '        PresentationTraceSources.Refresh()
+        '        PresentationTraceSources.DataBindingSource.Listeners.Add(New ConsoleTraceListener)
+        '        PresentationTraceSources.DataBindingSource.Listeners.Add(New DebugTraceListener)
+        '        PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning Or SourceLevels.Error
+        '#End If
+        StartupHelpers.EnableErrorDialog()
+        Dim mainWindow = Await StartupHelpers.RunWPFStartupSequence(New WPFCoreSkyEditorPlugin(New SkyEditorInfo))
+        mainWindow.DisplayStatusBar = False
     End Sub
 End Class
 
-#If DEBUG Then
-Public Class DebugTraceListener
-    Inherits TraceListener
+'#If DEBUG Then
+'Public Class DebugTraceListener
+'    Inherits TraceListener
 
-    Public Overrides Sub Write(message As String)
-    End Sub
+'    Public Overrides Sub Write(message As String)
+'    End Sub
 
-    Public Overrides Sub WriteLine(message As String)
-        Debugger.Break()
-    End Sub
-End Class
-#End If
+'    Public Overrides Sub WriteLine(message As String)
+'        Debugger.Break()
+'    End Sub
+'End Class
+'#End If

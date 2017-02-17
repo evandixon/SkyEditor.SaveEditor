@@ -1,9 +1,11 @@
-﻿Imports SkyEditor.SaveEditor.Saves
+﻿Imports System.Reflection
+Imports SkyEditor.SaveEditor.Saves
 Imports SkyEditor.UI.WPF
 
 Namespace Tabs
     Public Class GIGDGeneralTab
         Inherits ObjectControl
+
         Public Overrides Sub RefreshDisplay()
             With GetEditingObject(Of GTIGameData)()
                 numGeneral_HeldMoney.Value = .HeldMoney
@@ -26,12 +28,8 @@ Namespace Tabs
             IsModified = True
         End Sub
 
-        Public Overrides Function GetSupportedTypes() As IEnumerable(Of Type)
-            Return {GetType(GTIGameData)}
-        End Function
-
-        Public Overrides Function GetSortOrder(CurrentType As Type, IsTab As Boolean) As Integer
-            Return 0
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
+            Return {GetType(GTIGameData).GetTypeInfo}
         End Function
 
     End Class

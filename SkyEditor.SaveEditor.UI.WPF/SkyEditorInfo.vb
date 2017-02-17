@@ -45,12 +45,4 @@ Public Class SkyEditorInfo
         Return {}
         'End If
     End Function
-
-    Public Overrides Sub UnLoad(Manager As PluginManager)
-
-    End Sub
-
-    Public Overrides Sub PrepareForDistribution()
-
-    End Sub
 End Class
