@@ -32,7 +32,7 @@
                       VerticalAlignment="Stretch"/>
         <ListView Grid.Column="2"
                   ItemsSource="{Binding ElementName=cbBoxes,Path=SelectedValue}"
-                  DisplayMemberPath="File"
+                  DisplayMemberPath="Model"
                   ScrollViewer.CanContentScroll="True"
                   SelectedItem="{Binding Path=(vmc:IPokemonStorage.SelectedBox).SelectedPokemon}">
             <!--<ListView.ContextMenu>

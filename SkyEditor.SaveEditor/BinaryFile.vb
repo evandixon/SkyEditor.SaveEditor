@@ -16,6 +16,8 @@ Public Class BinaryFile
         Bits = New Binary(rawData)
     End Sub
 
+    Public Event FileSaved As EventHandler Implements ISavable.FileSaved
+
     Public Overridable Async Function OpenFile(filename As String, provider As IIOProvider) As Task Implements IOpenableFile.OpenFile
         Me.Filename = filename
         Me.CurrentIOProvider = provider
@@ -74,10 +76,12 @@ Public Class BinaryFile
     End Function
 
     Public Function GetDefaultExtension() As String Implements ISavableAs.GetDefaultExtension
-        Return "sav"
+        Return "*.sav"
     End Function
 
-    Public Event FileSaved As EventHandler Implements ISavable.FileSaved
+    Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
+        Return {"*.sav"}
+    End Function
 
     Public Async Function Save(provider As IIOProvider) As Task Implements ISavable.Save
         Await Save(Filename, provider)
@@ -91,7 +95,4 @@ Public Class BinaryFile
         Me.Name = Name
     End Sub
 
-    Public Function GetSupportedExtensions() As IEnumerable(Of String) Implements ISavableAs.GetSupportedExtensions
-        Return {"sav"}
-    End Function
 End Class

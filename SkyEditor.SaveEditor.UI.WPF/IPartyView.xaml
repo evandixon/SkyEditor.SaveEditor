@@ -18,7 +18,7 @@
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" Name="lvItems" ItemsSource="{Binding Path=(modeling:IParty.Party)}" DisplayMemberPath="File" SelectedItem="{Binding Path=(modeling:IParty.SelectedPokemon)}">
+        <ListView Grid.Column="0" Name="lvItems" ItemsSource="{Binding Path=(modeling:IParty.Party)}" DisplayMemberPath="Model" SelectedItem="{Binding Path=(modeling:IParty.SelectedPokemon)}">
             <!--<ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding Path=(modeling:IParty.StandbyCommand)}" Header="{x:Static res:Language.RemoveActivePokemonCommandName}"/>
