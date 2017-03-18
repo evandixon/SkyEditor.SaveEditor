@@ -87,6 +87,11 @@
     <Compile Include="Binary.vb" />
     <Compile Include="BinaryFile.vb" />
     <Compile Include="Checksums.vb" />
+    <Compile Include="ClassNames.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="IClonable.vb" />
     <Compile Include="Language.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -158,6 +163,7 @@
     <EmbeddedResource Include="ClassNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <LastGenOutput>ClassNames.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Language.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
