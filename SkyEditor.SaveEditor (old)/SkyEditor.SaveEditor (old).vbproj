@@ -83,47 +83,7 @@
     <Import Include="Windows.UI.Xaml.Media.Imaging" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicDictionaryIniFile.vb" />
-    <Compile Include="Binary.vb" />
-    <Compile Include="BinaryFile.vb" />
     <Compile Include="Checksums.vb" />
-    <Compile Include="ClassNames.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClassNames.resx</DependentUpon>
-    </Compile>
-    <Compile Include="IClonable.vb" />
-    <Compile Include="Language.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ListResouces.es.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ListResouces.es.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ListResources.de.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ListResources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ListResources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ListResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ListResources.fr.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ListResources.fr.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ListResources.it.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ListResources.it.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Lists.vb" />
     <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
@@ -150,7 +110,6 @@
     <Compile Include="MysteryDungeon\Rescue\RBPokemon.vb" />
     <Compile Include="MysteryDungeon\DSMysteryDungeonCharacterEncoding.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBStoredItem.vb" />
-    <Compile Include="PluginDefinition.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBSave.vb" />
@@ -160,88 +119,11 @@
     <Compile Include="StoredPokemonSlotDefinition.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClassNames.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <LastGenOutput>ClassNames.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Language.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <LastGenOutput>Language.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListResouces.es.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListResouces.es.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListResources.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListResources.de.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListResources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListResources.fr.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListResources.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListResources.it.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-      <LastGenOutput>ListResources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="project.json" />
     <None Include="SkyEditor.SaveEditor.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MysteryDungeon\PSMD\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\en\RBBaseTypes.txt" />
-    <None Include="Resources\en\RBFriendAreaOffsets.txt" />
-    <None Include="Resources\en\RBItemOrder.txt" />
-    <None Include="Resources\en\RBItems.txt" />
-    <None Include="Resources\en\RBLocations.txt" />
-    <None Include="Resources\en\RBMoves.txt" />
-    <None Include="Resources\en\RBPokemon.txt" />
-    <None Include="Resources\en\SkyFriendAreaOffsets.txt" />
-    <None Include="Resources\en\SkyItems.txt" />
-    <None Include="Resources\en\SkyLocations.txt" />
-    <None Include="Resources\en\SkyMoves.txt" />
-    <None Include="Resources\en\SkyPokemon.txt" />
-    <None Include="Resources\en\TDFriendAreaOffsets.txt" />
-    <None Include="Resources\en\TDItems.txt" />
-    <None Include="Resources\en\TDLocations.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fr\SkyFriendAreaOffsets.txt" />
-    <None Include="Resources\fr\SkyItems.txt" />
-    <None Include="Resources\fr\SkyLocations.txt" />
-    <None Include="Resources\fr\SkyMoves.txt" />
-    <None Include="Resources\fr\SkyPokemon.txt" />
-    <None Include="Resources\fr\TDFriendAreaOffsets.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\de\SkyItems.txt" />
-    <Content Include="Resources\de\SkyLocations.txt" />
-    <Content Include="Resources\de\SkyMoves.txt" />
-    <Content Include="Resources\de\SkyPokemon.txt" />
-    <None Include="Resources\es\SkyItems.txt" />
-    <None Include="Resources\es\SkyLocations.txt" />
-    <None Include="Resources\es\SkyMoves.txt" />
-    <None Include="Resources\es\SkyPokemon.txt" />
-    <None Include="Resources\it\SkyItems.txt" />
-    <None Include="Resources\it\SkyLocations.txt" />
-    <None Include="Resources\it\SkyMoves.txt" />
-    <None Include="Resources\it\SkyPokemon.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

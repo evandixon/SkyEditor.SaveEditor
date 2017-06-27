@@ -394,13 +394,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SkyEditor.SaveEditor\SkyEditor.SaveEditor.vbproj">
-      <Project>{ab874ac2-d497-49f0-9eb4-cd57397f757f}</Project>
-      <Name>SkyEditor.SaveEditor</Name>
-    </ProjectReference>
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <ProjectReference Include="..\SkyEditor.SaveEditor\SkyEditor.SaveEditor.csproj">
+      <Project>{ec69c3f0-74c2-4256-bc4b-021ecebdc769}</Project>
+      <Name>SkyEditor.SaveEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

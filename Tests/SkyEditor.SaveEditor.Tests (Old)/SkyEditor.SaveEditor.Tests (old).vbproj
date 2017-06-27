@@ -178,12 +178,6 @@
     <None Include="Resources\EoS.sav" />
     <None Include="Resources\EoT.SAV" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SkyEditor.SaveEditor\SkyEditor.SaveEditor.vbproj">
-      <Project>{AB874AC2-D497-49F0-9EB4-CD57397F757F}</Project>
-      <Name>SkyEditor.SaveEditor</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
