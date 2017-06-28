@@ -83,7 +83,6 @@
     <Import Include="Windows.UI.Xaml.Media.Imaging" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Checksums.vb" />
     <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
