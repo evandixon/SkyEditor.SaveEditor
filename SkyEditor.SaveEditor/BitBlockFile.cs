@@ -48,7 +48,7 @@ namespace SkyEditor.SaveEditor
         
         private IIOProvider CurrentIOProvider { get; set; }
 
-        public async Task OpenFile(string filename, IIOProvider provider)
+        public virtual async Task OpenFile(string filename, IIOProvider provider)
         {
             Filename = filename;
             CurrentIOProvider = provider;
@@ -95,6 +95,11 @@ namespace SkyEditor.SaveEditor
         {
             await Save(Filename, provider);
         }
+
+        public virtual byte[] ToByteArray()
+        {
+            return Bits.ToByteArray();
+        } 
 
         public virtual string GetDefaultExtension()
         {
