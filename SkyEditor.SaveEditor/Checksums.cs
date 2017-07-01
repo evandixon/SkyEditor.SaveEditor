@@ -13,21 +13,21 @@ namespace SkyEditor.SaveEditor
         public static uint Calculate32BitChecksum(BitBlock bits, int startIndex, int endIndex)
         {
             ulong sum = 0;
-            for (int i = startIndex; i < endIndex; i += 4)
+            for (int i = startIndex; i <= endIndex; i += 4)
             {
-                sum += bits.GetUInt(startIndex, 0, 32) & 0xFFFFFFFF;
+                sum += bits.GetUInt(i, 0, 32) & 0xFFFFFFFF;
             }
-            return (uint)sum;
+            return (uint)(sum & 0xFFFFFFFF);
         }
 
         public static uint Calculate32BitChecksum(GenericFile file, int startIndex, int endIndex)
         {
             ulong sum = 0;
-            for (int i = startIndex; i < endIndex; i += 4)
+            for (int i = startIndex; i <= endIndex; i += 4)
             {
-                sum += file.ReadUInt32(startIndex) & 0xFFFFFFFF;
+                sum += file.ReadUInt32(i) & 0xFFFFFFFF;
             }
-            return (uint)sum;
+            return (uint)(sum & 0xFFFFFFFF);
         }
     }
 }

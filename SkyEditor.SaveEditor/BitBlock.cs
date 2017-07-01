@@ -46,9 +46,9 @@ namespace SkyEditor.SaveEditor
             Bits = new List<bool>();
             foreach (var item in source)
             {
-                for (int b = 0; b < 7; b++)
+                for (int b = 0; b < 8; b++)
                 {
-                    Bits.Add(((item >> b) & 1) != 0);
+                    Bits.Add(((item >> b) & 1) == 1);
                 }
             }
         }
@@ -86,9 +86,9 @@ namespace SkyEditor.SaveEditor
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 0;
+                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
                 }
             }
         }
@@ -121,9 +121,9 @@ namespace SkyEditor.SaveEditor
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 0;
+                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
                 }
             }
         }
@@ -156,9 +156,9 @@ namespace SkyEditor.SaveEditor
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 0;
+                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
                 }
             }
         }
@@ -191,9 +191,9 @@ namespace SkyEditor.SaveEditor
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 0;
+                    Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
                 }
             }
         }
@@ -274,7 +274,7 @@ namespace SkyEditor.SaveEditor
 
         public void AppendByte(byte source)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 8; i++)
             {
                 Bits.Add(((source >> i) & 1) != 0);
             }
@@ -324,7 +324,7 @@ namespace SkyEditor.SaveEditor
                     builder.Append("0");
                 }
             }
-            return builder.ToString()
+            return builder.ToString();
         }
 
         public object Clone()

@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ini" Version="1.0.7" />
     <PackageReference Include="SkyEditor.Core" Version="4.1.0-CI161" />
   </ItemGroup>
 

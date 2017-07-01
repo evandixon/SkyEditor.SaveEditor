@@ -533,55 +533,6 @@ Namespace MysteryDungeon.Explorers
 
 #End Region
 
-#Region "Technical Stuff"
-
-        ''' <summary>
-        ''' Fixes the save file's checksum to reflect any changes made
-        ''' </summary>
-        Protected Overrides Sub FixChecksum()
-            'Fix the first checksum
-            Dim buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(Bits, 4, Offsets.ChecksumEnd))
-            For count = 0 To 3
-                Bits.Int(count, 0, 8) = buffer(count)
-            Next
-
-            'Ensure backup save matches.
-            'Not strictly required, as the first one will be loaded if it's valid, but looks nicer.
-            CopyToBackup()
-
-            'Quicksave checksum
-            buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(Bits, Offsets.QuicksaveChecksumStart, Offsets.QuicksaveChecksumEnd))
-            For x As Byte = 0 To 3
-                Bits.Int(x + Offsets.QuicksaveStart, 0, 8) = buffer(x)
-            Next
-        End Sub
-
-        ''' <summary>
-        ''' Copies the primary save to the backup save.
-        ''' </summary>
-        Private Sub CopyToBackup()
-            Dim e As Integer = Offsets.BackupSaveStart
-            For i As Integer = 4 To e - 1
-                Bits.Int(i + e, 0, 8) = Bits.Int(i, 0, 8)
-            Next
-        End Sub
-
-        ''' <summary>
-        ''' Determines whether or not the given file is a SkySave.
-        ''' </summary>
-        ''' <param name="File">File to determine the type of.</param>
-        ''' <returns></returns>
-        Public Async Function IsFileOfType(File As GenericFile) As Task(Of Boolean) Implements IDetectableFileType.IsOfType
-            If File.Length > Offsets.ChecksumEnd Then
-                Dim buffer = BitConverter.GetBytes(Checksums.Calculate32BitChecksum(File, 4, Offsets.ChecksumEnd))
-                Return Await File.ReadAsync(0) = buffer(0) AndAlso Await File.ReadAsync(1) = buffer(1) AndAlso Await File.ReadAsync(2) = buffer(2) AndAlso Await File.ReadAsync(3) = buffer(3)
-            Else
-                Return False
-            End If
-        End Function
-
-#End Region
-
     End Class
 
 End Namespace

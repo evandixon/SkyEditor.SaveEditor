@@ -5,13 +5,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\BRT.sav" />
+    <None Remove="Resources\EoS.sav" />
+    <None Remove="Resources\EoT.sav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BRT.sav" />
+    <EmbeddedResource Include="Resources\EoS.sav" />
+    <EmbeddedResource Include="Resources\EoT.sav" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.11" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestSaves\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SkyEditor.SaveEditor\SkyEditor.SaveEditor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
 </Project>

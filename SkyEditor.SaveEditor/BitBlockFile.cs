@@ -71,13 +71,13 @@ namespace SkyEditor.SaveEditor
             }
         }
 
-        protected virtual void FixChecksum()
+        protected virtual void PreSave()
         {
         }
 
         public virtual async Task Save(string filename, IIOProvider provider)
         {
-            FixChecksum();
+            PreSave();
             var buffer = new byte[(int)Math.Ceiling(Bits.Count / (decimal)8) - 1];
             using (var f = new GenericFile())
             {
@@ -98,6 +98,7 @@ namespace SkyEditor.SaveEditor
 
         public virtual byte[] ToByteArray()
         {
+            PreSave();
             return Bits.ToByteArray();
         } 
 
