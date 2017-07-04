@@ -24,7 +24,141 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             Assert.IsTrue(save.IsPrimaryChecksumValid());
             Assert.IsTrue(save.IsSecondaryChecksumValid());
             Assert.IsTrue(save.IsQuickSaveChecksumValid());
+
+            Assert.AreEqual(save.PrimaryChecksum, save.SecondaryChecksum, "Primary and backup checksums should match.");
         }
+
+        #region General
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void TeamName_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual("Blue", save.TeamName);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void TeamName_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual("Blue", newSave.TeamName);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Adventres_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(128, save.NumberOfAdventures);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Adventures_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(128, newSave.NumberOfAdventures);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void ExplorersRank_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(SkyExplorerRank.Diamond, save.ExplorerRank);
+        }
+
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void ExplorersRank_Edit()
+        {
+            var save = GetTestSave();
+
+            save.ExplorerRank = SkyExplorerRank.Normal;
+            Assert.AreEqual(SkyExplorerRank.Normal, save.ExplorerRank);
+            Assert.AreEqual(0, save.ExplorerRankPoints);
+
+            save.ExplorerRank = SkyExplorerRank.Guildmaster;
+            Assert.AreEqual(SkyExplorerRank.Guildmaster, save.ExplorerRank);
+            Assert.AreEqual(100000, save.ExplorerRankPoints);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void ExplorersRankPoints_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(3820, save.ExplorerRankPoints);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void ExplorersRankPoints_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(3820, newSave.ExplorerRankPoints);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void StoredMoney_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(44459, save.StoredMoney);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void StoredMoney_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(44459, newSave.StoredMoney);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void HeldMoney_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(42, save.HeldMoney);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void HeldMoney_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(42, newSave.HeldMoney);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void SpEpisodeHeldMoney_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(0, save.SpEpisodeHeldMoney);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void SpEpisodeHeldMoney_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(0, newSave.SpEpisodeHeldMoney);
+        }
+
+        #endregion
+
+        #region Items
 
         private void TestItem(SkyItem item, int id, int containedItem, int quantity, bool isBox, bool isUsedTM, bool isStackable)
         {
@@ -71,7 +205,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             TestItem(save.StoredItems[13], 23, 0, 1, false, false, false); // Joy Ribbon
             TestItem(save.StoredItems[14], 436, 0, 1, false, false, false); // Viridian Bow
             TestItem(save.StoredItems[15], 25, 0, 1, false, false, false); // Persim Band
-            
+
             // ...
 
             // Page 4
@@ -116,7 +250,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             TestHeldItem(save.HeldItems[5], 83, 0, 1, false, false, false, 0); // Totter Seed
             TestHeldItem(save.HeldItems[6], 86, 0, 1, false, false, false, 0); // Warp Seed
             TestHeldItem(save.HeldItems[7], 86, 0, 1, false, false, false, 0); // Warp Seed
-                
+
             TestHeldItem(save.HeldItems[8], 187, 215, 1, false, true, false, 0); // Used TM (Dig)
             TestHeldItem(save.HeldItems[9], 309, 0, 1, false, false, false, 0); // Mug Orb
             TestHeldItem(save.HeldItems[10], 84, 0, 1, false, false, false, 0); // Sleep Seed
@@ -150,5 +284,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
         {
             Assert.AreEqual(0, GetTestSave().FriendRescueHeldItems.Count);
         }
+
+        #endregion
     }
 }

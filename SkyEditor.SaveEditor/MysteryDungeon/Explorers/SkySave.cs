@@ -1,4 +1,5 @@
 ﻿using SkyEditor.Core.IO;
+using SkyEditor.SaveEditor.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,15 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             public virtual int QuicksaveStart => 0x19000;
             public virtual int QuicksaveChecksumStart => 0x19004;
             public virtual int QuicksaveChecksumEnd => 0x1E7FF;
+
+            // General
+            public virtual int TeamNameStart => 0x994E * 8;
+            public virtual int TeamNameLength => 10;
+            public virtual int HeldMoney => 0x990C * 8 + 6;
+            public virtual int SpEpisodeHeldMoney => 0x990F * 8 + 6;
+            public virtual int StoredMoney => 0x9915 * 8 + 6;
+            public virtual int NumberOfAdventures => 0x8B70 * 8;
+            public virtual int ExplorerRank => 0x9958 * 8;
 
             // Items
             public virtual int StoredItemOffset => 0x8E0C * 8 + 6;
@@ -103,11 +113,105 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// <summary>
         /// Updates all checksums to match current save data
         /// </summary>
-        protected void FixChecksums()
+        protected void RecalculateChecksums()
         {
             PrimaryChecksum = CalculatePrimaryChecksum();
             SecondaryChecksum = CalculateSecondaryChecksum();
             QuicksaveChecksum = CalculateQuicksaveChecksum();
+        }
+
+        #endregion
+
+        #region General
+        /// <summary>
+        /// The team name of the main game's exploration team
+        /// </summary>
+        public string TeamName { get; set; }
+
+        /// <summary>
+        /// The money held by the player in the main game
+        /// </summary>
+        public int HeldMoney { get; set; }
+
+        /// <summary>
+        /// The money held in the special episode
+        /// </summary>
+        public int SpEpisodeHeldMoney { get; set; }
+
+        /// <summary>
+        /// The money stored in the Duskall bank
+        /// </summary>
+        public int StoredMoney { get; set; }
+
+        /// <summary>
+        /// The number of adventures had by the main team
+        /// </summary>
+        public int NumberOfAdventures { get; set; }
+
+        /// <summary>
+        /// The rank points held by the main game's exploration team
+        /// </summary>
+        public int ExplorerRankPoints { get; set; }
+
+        /// <summary>
+        /// The rank held by the main game's exploration team
+        /// </summary>
+        /// <remarks>This proeprty wraps <see cref="ExplorerRankPoints"/>, so setting this property will reduce the number of explorer rank points held by the team.</remarks>
+        public SkyExplorerRank ExplorerRank
+        {
+            get
+            {
+                if (ExplorerRankPoints >= 100000)
+                    return SkyExplorerRank.Guildmaster;
+                else if (ExplorerRankPoints >= 25000)
+                    return SkyExplorerRank.Master3Star;
+                else if (ExplorerRankPoints >= 21000)
+                    return SkyExplorerRank.Master2Star;
+                else if (ExplorerRankPoints >= 17000)
+                    return SkyExplorerRank.Master1Star;
+                else if (ExplorerRankPoints >= 13500)
+                    return SkyExplorerRank.Master;
+                else if (ExplorerRankPoints >= 10500)
+                    return SkyExplorerRank.Hyper;
+                else if (ExplorerRankPoints >= 7500)
+                    return SkyExplorerRank.Ultra;
+                else if (ExplorerRankPoints >= 5000)
+                    return SkyExplorerRank.Super;
+                else if (ExplorerRankPoints >= 3200)
+                    return SkyExplorerRank.Diamond;
+                else if (ExplorerRankPoints >= 1600)
+                    return SkyExplorerRank.Gold;
+                else if (ExplorerRankPoints >= 400)
+                    return SkyExplorerRank.Silver;
+                else if (ExplorerRankPoints >= 100)
+                    return SkyExplorerRank.Bronze;
+                else
+                    return SkyExplorerRank.Normal;
+            }
+            set
+            {
+                ExplorerRankPoints = (int)value;
+            }
+        }
+
+        private void LoadGeneral(int baseOffset)
+        {
+            TeamName = Bits.GetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength);
+            HeldMoney = Bits.GetInt(0, Offsets.HeldMoney, 24);
+            SpEpisodeHeldMoney = Bits.GetInt(0, Offsets.SpEpisodeHeldMoney, 24);
+            StoredMoney = Bits.GetInt(0, Offsets.StoredMoney, 24);
+            NumberOfAdventures = Bits.GetInt(0, Offsets.NumberOfAdventures, 32);
+            ExplorerRankPoints = Bits.GetInt(0, Offsets.ExplorerRank, 32);
+        }
+
+        private void SaveGeneral()
+        {
+            Bits.SetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength, TeamName);
+            Bits.SetInt(0, Offsets.HeldMoney, 24, HeldMoney);
+            Bits.SetInt(0, Offsets.SpEpisodeHeldMoney, 24,SpEpisodeHeldMoney);
+            Bits.SetInt(0, Offsets.StoredMoney, 24, StoredMoney);
+            Bits.SetInt(0, Offsets.NumberOfAdventures, 32, NumberOfAdventures);
+            Bits.SetInt(0, Offsets.ExplorerRank, 32,ExplorerRankPoints);
         }
 
         #endregion
@@ -137,8 +241,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         {
             // Stored items
             StoredItems = new List<SkyItem>();
-            var ids = Bits.GetRange(Offsets.StoredItemOffset, 11 * 1000);
-            var parameters = Bits.GetRange(Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
+            var ids = Bits.GetRange(baseOffset + Offsets.StoredItemOffset, 11 * 1000);
+            var parameters = Bits.GetRange(baseOffset + Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
             for (int i = 0; i < 1000; i++)
             {
                 var id = ids.GetNextInt(11);
@@ -161,7 +265,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Main Game
             for (int i = 0; i < 50; i++)
             {
-                var item = new SkyHeldItem(Bits.GetRange(Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new SkyHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
                 if (item.IsValid)
                 {
                     HeldItems.Add(item);
@@ -175,7 +279,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Sp. Episode
             for (int i = 50; i < 100; i++)
             {
-                var item = new SkyHeldItem(Bits.GetRange(Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new SkyHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
                 if (item.IsValid)
                 {
                     SpEpisodeHeldItems.Add(item);
@@ -189,7 +293,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Friend Rescue
             for (int i = 100; i < 150; i++)
             {
-                var item = new SkyHeldItem(Bits.GetRange(Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new SkyHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
                 if (item.IsValid)
                 {
                     FriendRescueHeldItems.Add(item);
@@ -290,18 +394,23 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
                 baseOffset = Offsets.BackupSaveStart;
             }
 
+            LoadGeneral(baseOffset);
             LoadItems(baseOffset);
         }
 
         protected override void PreSave()
         {
+            SaveGeneral();
             SaveItems();
-
-            // Write properties to primary save
-            FixChecksums();
 
             // Copy primary save to backup save
             Bits.SetRange(Offsets.BackupSaveStart + 4, Bits.GetRange(4, Offsets.BackupSaveStart - 4));
+
+            // Checksums
+            RecalculateChecksums();
+            Bits.SetUInt(0, 0, 32, PrimaryChecksum);
+            Bits.SetUInt(Offsets.BackupSaveStart, 0, 32, SecondaryChecksum);
+            Bits.SetUInt(Offsets.QuicksaveStart, 0, 32, QuicksaveChecksum);            
         }
 
         /// <summary>
