@@ -7,25 +7,6 @@ Namespace MysteryDungeon.Explorers
         Implements IDetectableFileType
 
         Public Class SkyOffsets
-            Public Overridable ReadOnly Property BackupSaveStart As Integer = &HC800
-            Public Overridable ReadOnly Property ChecksumEnd As Integer = &HB65A
-            Public Overridable ReadOnly Property QuicksaveStart As Integer = &H19000
-            Public Overridable ReadOnly Property QuicksaveChecksumStart As Integer = &H19004
-            Public Overridable ReadOnly Property QuicksaveChecksumEnd As Integer = &H1E7FF
-
-            Public Overridable ReadOnly Property TeamNameStart As Integer = &H994E * 8
-            Public Overridable ReadOnly Property TeamNameLength As Integer = 10
-
-            Public Overridable ReadOnly Property ExplorerRank As Integer = &H9958 * 8
-
-            Public Overridable ReadOnly Property Adventures As Integer = &H8B70 * 8
-
-            Public Overridable ReadOnly Property WindowFrameType As Integer = &H995F * 8 + 5
-
-            Public Overridable ReadOnly Property HeldMoney As Integer = &H990C * 8 + 6
-            Public Overridable ReadOnly Property SPHeldMoney As Integer = &H990F * 8 + 6
-            Public Overridable ReadOnly Property StoredMoney As Integer = &H9915 * 8 + 6
-
             Public Overridable ReadOnly Property StoredPokemonOffset As Integer = &H464 * 8
             Public Overridable ReadOnly Property StoredPokemonLength As Integer = 362
             Public Overridable ReadOnly Property StoredPokemonNumber As Integer = 720
@@ -38,14 +19,6 @@ Namespace MysteryDungeon.Explorers
             Public Overridable ReadOnly Property SpActivePokemonOffset As Integer = &H84F4 * 8 + 2
             Public Overridable ReadOnly Property ActivePokemonLength As Integer = 546
             Public Overridable ReadOnly Property ActivePokemonNumber As Integer = 4
-
-            Public Overridable ReadOnly Property HeldItemOffset As Integer = &H8BA2 * 8
-            Public Overridable ReadOnly Property HeldItemLength As Integer = 33
-            Public Overridable ReadOnly Property HeldItemNumber As Integer = 50 '1st 50 are the team's, 2nd 50 are the Sp. Episode
-
-            Public Overridable ReadOnly Property StoredItemOffset As Integer = &H8E0C * 8 + 6
-            Public Overridable ReadOnly Property StoredItemLength As Integer = 2 * 11
-            Public Overridable ReadOnly Property StoredItemNumber As Integer = 1000
 
             Public Overridable ReadOnly Property ItemShop1Offset As Integer = &H98CA * 8 + 6
             Public Overridable ReadOnly Property ItemShopLength As Integer = 22
@@ -82,23 +55,15 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Private Sub Init()
-            LoadGeneral()
-            LoadItems()
             LoadActivePokemon()
             LoadStoredPokemon()
             LoadQuicksavePokemon()
-            LoadHistory()
-            LoadSettings()
         End Sub
 
         Private Sub PreSave()
-            SaveGeneral()
-            SaveItems()
             SaveActivePokemon()
             SaveStoredPokemon()
             SaveQuicksavePokemon()
-            SaveHistory()
-            SaveSettings()
         End Sub
 
         Public Overrides Async Function Save(Destination As String, provider As IIOProvider) As Task
@@ -256,122 +221,6 @@ Namespace MysteryDungeon.Explorers
         End Sub
 
         Public Property QuicksavePokemon As List(Of SkyQuicksavePokemon)
-
-#End Region
-
-#Region "History"
-        Private Sub LoadHistory()
-            '----------
-            '--History
-            '----------
-
-            '-----Original Player ID & Gender
-            Dim rawOriginalPlayerID = Bits.Int(&HBE, 0, 16)
-            If rawOriginalPlayerID > 600 Then
-                OriginalPlayerID = rawOriginalPlayerID - 600
-                OriginalPlayerIsFemale = True
-            Else
-                OriginalPlayerID = rawOriginalPlayerID
-                OriginalPlayerIsFemale = False
-            End If
-
-            '-----Original Partner ID & Gender
-            Dim rawOriginalPartnerID = Bits.Int(&HC0, 0, 16)
-            If rawOriginalPartnerID > 600 Then
-                OriginalPartnerID = rawOriginalPartnerID - 600
-                OriginalPartnerIsFemale = True
-            Else
-                OriginalPartnerID = rawOriginalPartnerID
-                OriginalPartnerIsFemale = False
-            End If
-
-            '-----Original Names
-            OriginalPlayerName = Bits.GetStringPMD(&H13F, 0, 10)
-            OriginalPartnerName = Bits.GetStringPMD(&H149, 0, 10)
-        End Sub
-
-        Private Sub SaveHistory()
-            '----------
-            '--History
-            '----------
-
-            '-----Original Player ID & Gender
-            Dim rawOriginalPlayerID = OriginalPlayerID
-            If OriginalPlayerIsFemale Then
-                rawOriginalPlayerID += 600
-            End If
-            Bits.Int(&HBE, 0, 16) = rawOriginalPlayerID
-
-            '-----Original Partner ID & Gender
-            Dim rawOriginalPartnerID = OriginalPartnerID
-            If OriginalPartnerIsFemale Then
-                rawOriginalPartnerID += 600
-            End If
-            Bits.Int(&HC0, 0, 16) = rawOriginalPartnerID
-
-            '-----Original Names
-            Bits.SetStringPMD(&H13F, 0, 10, OriginalPlayerName)
-            Bits.SetStringPMD(&H149, 0, 10, OriginalPartnerName)
-        End Sub
-
-        ''' <summary>
-        ''' Gets or sets the original player Pokemon.
-        ''' Used in-game for special episodes.
-        ''' </summary>
-        ''' <returns></returns>
-        Public Property OriginalPlayerID As Integer
-
-        ''' <summary>
-        ''' Gets or sets the original player gender.
-        ''' Used in-game for special episodes.
-        ''' </summary>
-        ''' <returns></returns>
-        Public Property OriginalPlayerIsFemale As Boolean
-
-        ''' <summary>
-        ''' Gets or sets the original partner Pokemon.
-        ''' Used in-game for special episodes.
-        ''' </summary>
-        ''' <returns></returns>
-        Public Property OriginalPartnerID As Integer
-
-        ''' <summary>
-        ''' Gets or sets the original partner gender.
-        ''' Used in-game for special episodes.
-        ''' </summary>
-        ''' <returns></returns>
-        Public Property OriginalPartnerIsFemale As Boolean
-
-        ''' <summary>
-        ''' Gets or sets the original player name.
-        ''' Used in-game for special episodes.
-        ''' </summary>
-        ''' <returns></returns>
-        Public Property OriginalPlayerName As String
-
-        ''' <summary>
-        ''' Gets or sets the original partner name.
-        ''' Used in-game for special episodes.
-        ''' </summary>
-        ''' <returns></returns>
-        Public Property OriginalPartnerName As String
-#End Region
-
-#Region "Settings"
-        Private Sub LoadSettings()
-            WindowFrameType = Bits.Int(0, Offsets.WindowFrameType, 3)
-        End Sub
-        Private Sub SaveSettings()
-            Bits.Int(0, Offsets.WindowFrameType, 3) = WindowFrameType
-        End Sub
-
-        ''' <summary>
-        ''' Gets or sets the type of window frame used in the game.  Must be 1-5.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property WindowFrameType As Byte
 
 #End Region
 

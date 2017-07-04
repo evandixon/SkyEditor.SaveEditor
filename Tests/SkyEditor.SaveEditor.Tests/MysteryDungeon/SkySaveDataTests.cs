@@ -286,5 +286,101 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
         }
 
         #endregion
+
+        #region History
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPlayerPokemon_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(489, save.OriginalPlayerPokemon.ID);
+            Assert.IsFalse(save.OriginalPlayerPokemon.IsFemale);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPlayerPokemon_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(489, newSave.OriginalPlayerPokemon.ID);
+            Assert.IsFalse(newSave.OriginalPlayerPokemon.IsFemale);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPartnerPokemon_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(428, save.OriginalPartnerPokemon.ID);
+            Assert.IsFalse(save.OriginalPartnerPokemon.IsFemale);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPartnerPokemon_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(428, newSave.OriginalPartnerPokemon.ID);
+            Assert.IsFalse(newSave.OriginalPartnerPokemon.IsFemale);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPlayerName_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual("Evan", save.OriginalPlayerName);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPlayerName_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual("Evan", newSave.OriginalPlayerName);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPartnerName_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual("Piplup", save.OriginalPartnerName);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void OriginalPartnerName_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual("Piplup", newSave.OriginalPartnerName);
+        }
+        #endregion
+
+        #region Settings
+
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void WindowFrameType_Read()
+        {
+            var save = GetTestSave();
+            Assert.AreEqual(5, save.WindowFrameType);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void WindowFrameType_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            Assert.AreEqual(5, save.WindowFrameType);
+        }
+        #endregion
     }
 }

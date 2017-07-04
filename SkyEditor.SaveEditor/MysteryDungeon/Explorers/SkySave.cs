@@ -30,6 +30,15 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // Items
             public virtual int StoredItemOffset => 0x8E0C * 8 + 6;
             public virtual int HeldItemOffset => 0x8BA2 * 8;
+
+            // History
+            public virtual int OriginalPlayerID => 0xBE * 8;
+            public virtual int OriginalPartnerID => 0xC0 * 8;
+            public virtual int OriginalPlayerName => 0x13F * 8;
+            public virtual int OriginalPartnerName => 0x149 * 8;
+
+            // Settings
+            public virtual int WindowFrameType => 0x995F * 8 + 5;
         }
 
         public SkySave() : base()
@@ -196,22 +205,22 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadGeneral(int baseOffset)
         {
-            TeamName = Bits.GetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength);
-            HeldMoney = Bits.GetInt(0, Offsets.HeldMoney, 24);
-            SpEpisodeHeldMoney = Bits.GetInt(0, Offsets.SpEpisodeHeldMoney, 24);
-            StoredMoney = Bits.GetInt(0, Offsets.StoredMoney, 24);
-            NumberOfAdventures = Bits.GetInt(0, Offsets.NumberOfAdventures, 32);
-            ExplorerRankPoints = Bits.GetInt(0, Offsets.ExplorerRank, 32);
+            TeamName = Bits.GetStringPMD(0, baseOffset + Offsets.TeamNameStart, Offsets.TeamNameLength);
+            HeldMoney = Bits.GetInt(0, baseOffset + Offsets.HeldMoney, 24);
+            SpEpisodeHeldMoney = Bits.GetInt(0, baseOffset + Offsets.SpEpisodeHeldMoney, 24);
+            StoredMoney = Bits.GetInt(0, baseOffset + Offsets.StoredMoney, 24);
+            NumberOfAdventures = Bits.GetInt(0, baseOffset + Offsets.NumberOfAdventures, 32);
+            ExplorerRankPoints = Bits.GetInt(0, baseOffset + Offsets.ExplorerRank, 32);
         }
 
         private void SaveGeneral()
         {
             Bits.SetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength, TeamName);
             Bits.SetInt(0, Offsets.HeldMoney, 24, HeldMoney);
-            Bits.SetInt(0, Offsets.SpEpisodeHeldMoney, 24,SpEpisodeHeldMoney);
+            Bits.SetInt(0, Offsets.SpEpisodeHeldMoney, 24, SpEpisodeHeldMoney);
             Bits.SetInt(0, Offsets.StoredMoney, 24, StoredMoney);
             Bits.SetInt(0, Offsets.NumberOfAdventures, 32, NumberOfAdventures);
-            Bits.SetInt(0, Offsets.ExplorerRank, 32,ExplorerRankPoints);
+            Bits.SetInt(0, Offsets.ExplorerRank, 32, ExplorerRankPoints);
         }
 
         #endregion
@@ -370,6 +379,65 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
         #endregion
 
+        #region History
+
+        /// <summary>
+        /// The original player Pokémon species. Used in-game for special episodes.
+        /// </summary>
+        public ExplorersPokemonId OriginalPlayerPokemon { get; set; }
+
+        /// <summary>
+        /// The original partner Pokémon species. Used in-game for special episodes.
+        /// </summary>
+        public ExplorersPokemonId OriginalPartnerPokemon { get; set; }
+
+        /// <summary>
+        /// The original player name. Used in-game for special episodes.
+        /// </summary>
+        public string OriginalPlayerName { get; set; }
+
+        /// <summary>
+        /// The original partner name. Used in-game for special episodes.
+        /// </summary>
+        public string OriginalPartnerName { get; set; }
+
+        private void LoadHistory(int baseOffset)
+        {
+            OriginalPlayerPokemon = new ExplorersPokemonId(Bits.GetInt(0, baseOffset + Offsets.OriginalPlayerID, 16));
+            OriginalPartnerPokemon = new ExplorersPokemonId(Bits.GetInt(0, baseOffset + Offsets.OriginalPartnerID, 16));
+            OriginalPlayerName = Bits.GetStringPMD(0, baseOffset + Offsets.OriginalPlayerName, 10);
+            OriginalPartnerName = Bits.GetStringPMD(0, baseOffset + Offsets.OriginalPartnerName, 10);
+        }
+
+        private void SaveHistory()
+        {
+            Bits.SetInt(0, Offsets.OriginalPlayerID, 16, OriginalPlayerPokemon.RawID);
+            Bits.SetInt(0, Offsets.OriginalPartnerID, 16, OriginalPartnerPokemon.RawID);
+            Bits.SetStringPMD(0, Offsets.OriginalPlayerName, 10, OriginalPlayerName);
+            Bits.SetStringPMD(0, Offsets.OriginalPartnerName, 10, OriginalPartnerName);
+        }
+
+        #endregion
+
+        #region Settings
+
+        /// <summary>
+        /// The type of window frame used in the game.  Must be 1-5.
+        /// </summary>
+        public byte WindowFrameType { get; set; }
+
+        private void LoadSettings(int baseOffset)
+        {
+            WindowFrameType = (byte)(Bits.GetInt(0, baseOffset + Offsets.WindowFrameType, 3) + 1);
+        }
+
+        public void SaveSettings()
+        {
+            Bits.SetInt(0, Offsets.WindowFrameType, 3, WindowFrameType - 1);
+        }
+
+        #endregion
+
 
         #region Functions
 
@@ -396,12 +464,16 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
             LoadGeneral(baseOffset);
             LoadItems(baseOffset);
+            LoadHistory(baseOffset);
+            LoadSettings(baseOffset);
         }
 
         protected override void PreSave()
         {
             SaveGeneral();
             SaveItems();
+            SaveHistory();
+            SaveSettings();
 
             // Copy primary save to backup save
             Bits.SetRange(Offsets.BackupSaveStart + 4, Bits.GetRange(4, Offsets.BackupSaveStart - 4));
@@ -410,7 +482,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             RecalculateChecksums();
             Bits.SetUInt(0, 0, 32, PrimaryChecksum);
             Bits.SetUInt(Offsets.BackupSaveStart, 0, 32, SecondaryChecksum);
-            Bits.SetUInt(Offsets.QuicksaveStart, 0, 32, QuicksaveChecksum);            
+            Bits.SetUInt(Offsets.QuicksaveStart, 0, 32, QuicksaveChecksum);
         }
 
         /// <summary>
