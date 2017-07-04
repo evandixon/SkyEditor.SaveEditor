@@ -16,6 +16,10 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             public virtual int QuicksaveStart => 0x19000;
             public virtual int QuicksaveChecksumStart => 0x19004;
             public virtual int QuicksaveChecksumEnd => 0x1E7FF;
+
+            // Items
+            public virtual int StoredItemOffset => 0x8E0C * 8 + 6;
+            public virtual int HeldItemOffset => 0x8BA2 * 8;
         }
 
         public SkySave() : base()
@@ -108,6 +112,161 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         #endregion
 
+        #region Items
+        /// <summary>
+        /// The items stored in Kangaskhan's warehouse
+        /// </summary>
+        public List<SkyItem> StoredItems { get; set; }
+
+        /// <summary>
+        /// The items in the bag in the main game
+        /// </summary>
+        public List<SkyHeldItem> HeldItems { get; set; }
+
+        /// <summary>
+        /// The items in the bag in the special episode
+        /// </summary>
+        public List<SkyHeldItem> SpEpisodeHeldItems { get; set; }
+
+        /// <summary>
+        /// The items in the bag in friend rescue
+        /// </summary>
+        public List<SkyHeldItem> FriendRescueHeldItems { get; set; }
+
+        private void LoadItems(int baseOffset)
+        {
+            // Stored items
+            StoredItems = new List<SkyItem>();
+            var ids = Bits.GetRange(Offsets.StoredItemOffset, 11 * 1000);
+            var parameters = Bits.GetRange(Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
+            for (int i = 0; i < 1000; i++)
+            {
+                var id = ids.GetNextInt(11);
+                var param = parameters.GetNextInt(11);
+                if (id > 0)
+                {
+                    StoredItems.Add(new SkyItem(id, param));
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // Held Items
+            HeldItems = new List<SkyHeldItem>();
+            SpEpisodeHeldItems = new List<SkyHeldItem>();
+            FriendRescueHeldItems = new List<SkyHeldItem>();
+
+            // - Main Game
+            for (int i = 0; i < 50; i++)
+            {
+                var item = new SkyHeldItem(Bits.GetRange(Offsets.HeldItemOffset + (i * 33), 33));
+                if (item.IsValid)
+                {
+                    HeldItems.Add(item);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // - Sp. Episode
+            for (int i = 50; i < 100; i++)
+            {
+                var item = new SkyHeldItem(Bits.GetRange(Offsets.HeldItemOffset + (i * 33), 33));
+                if (item.IsValid)
+                {
+                    SpEpisodeHeldItems.Add(item);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // - Friend Rescue
+            for (int i = 100; i < 150; i++)
+            {
+                var item = new SkyHeldItem(Bits.GetRange(Offsets.HeldItemOffset + (i * 33), 33));
+                if (item.IsValid)
+                {
+                    FriendRescueHeldItems.Add(item);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        private void SaveItems()
+        {
+            // Stored items
+            var ids = new BitBlock(11 * 1000);
+            var parameters = new BitBlock(11 * 1000);
+            for (int i = 0; i < 1000; i++)
+            {
+                if (StoredItems.Count > i)
+                {
+                    ids.SetNextInt(11, StoredItems[i].ID);
+                    parameters.SetNextInt(11, StoredItems[i].Parameter);
+                }
+                else
+                {
+                    ids.SetNextInt(11, 0);
+                    parameters.SetNextInt(11, 0);
+                }
+            }
+            Bits.SetRange(Offsets.StoredItemOffset, 11 * 1000, ids);
+            Bits.SetRange(Offsets.StoredItemOffset + 11 * 1000, 11 * 1000, parameters);
+
+            // Held items
+            for (int i = 0; i < 50; i++)
+            {
+                var index = Offsets.HeldItemOffset + i * 33;
+                if (HeldItems.Count > i)
+                {
+                    Bits.SetRange(index, 33, HeldItems[i].ToBitBlock());
+                }
+                else
+                {
+                    Bits.SetRange(index, 33, new BitBlock(33));
+                }
+            }
+
+            // Sp. Episode Held items
+            for (int i = 0; i < 50; i++)
+            {
+                var index = Offsets.HeldItemOffset + (i + 50) * 33;
+                if (SpEpisodeHeldItems.Count > i)
+                {
+                    Bits.SetRange(index, 33, SpEpisodeHeldItems[i].ToBitBlock());
+                }
+                else
+                {
+                    Bits.SetRange(index, 33, new BitBlock(33));
+                }
+            }
+
+            // Friend RescueHeld items
+            for (int i = 0; i < 50; i++)
+            {
+                var index = Offsets.HeldItemOffset + (i + 100) * 33;
+                if (HeldItems.Count > i)
+                {
+                    Bits.SetRange(index, 33, HeldItems[i].ToBitBlock());
+                }
+                else
+                {
+                    Bits.SetRange(index, 33, new BitBlock(33));
+                }
+            }
+        }
+        #endregion
+
+
         #region Functions
 
         public override async Task OpenFile(string filename, IIOProvider provider)
@@ -122,7 +281,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             PrimaryChecksum = Bits.GetUInt(0, 0, 32);
             SecondaryChecksum = Bits.GetUInt(Offsets.BackupSaveStart, 0, 32);
             QuicksaveChecksum = Bits.GetUInt(Offsets.QuicksaveStart, 0, 32);
-            
+
             // Use the backup save if the first one's checksum is not valid
             // If both are invalid, use the first one
             var baseOffset = 0;
@@ -130,10 +289,14 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             {
                 baseOffset = Offsets.BackupSaveStart;
             }
+
+            LoadItems(baseOffset);
         }
 
         protected override void PreSave()
         {
+            SaveItems();
+
             // Write properties to primary save
             FixChecksums();
 

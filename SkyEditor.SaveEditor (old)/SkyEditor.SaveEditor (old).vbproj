@@ -89,16 +89,12 @@
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
     <Compile Include="MysteryDungeon\IDConversion.vb" />
     <Compile Include="MysteryDungeon\IMDAttack.vb" />
-    <Compile Include="MysteryDungeon\Explorers\IExplorersItem.vb" />
-    <Compile Include="MysteryDungeon\Explorers\IExplorersStoredItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersStoredPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\ExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyActivePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\ExplorersAttack.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkyHeldItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyQuicksaveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyQuicksavePokemon.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkyStoredItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyStoredPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDHeldItem.vb" />

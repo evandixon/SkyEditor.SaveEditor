@@ -80,6 +80,33 @@ namespace SkyEditor.SaveEditor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current item cannot contain another item..
+        /// </summary>
+        internal static string Error_CantChangeContainedItem {
+            get {
+                return ResourceManager.GetString("Error_CantChangeContainedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current item does not support changing the quantity.
+        /// </summary>
+        internal static string Error_CantChangeItemQuantity {
+            get {
+                return ResourceManager.GetString("Error_CantChangeItemQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter of a used TM must refer to a TM item..
+        /// </summary>
+        internal static string Error_UsedTMParameterIndexOutOfRange {
+            get {
+                return ResourceManager.GetString("Error_UsedTMParameterIndexOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mystery Dungeon game_data Files.
         /// </summary>
         internal static string GameDataFile {
@@ -208,6 +235,15 @@ namespace SkyEditor.SaveEditor.Resources {
         internal static string TDPkmFile {
             get {
                 return ResourceManager.GetString("TDPkmFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item ID {0}.
+        /// </summary>
+        internal static string UnknownItem {
+            get {
+                return ResourceManager.GetString("UnknownItem", resourceCulture);
             }
         }
     }

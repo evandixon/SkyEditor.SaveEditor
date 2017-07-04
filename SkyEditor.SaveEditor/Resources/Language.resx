@@ -171,4 +171,16 @@ Demonic722 - Misc RAM and save addresses</value>
   <data name="TDPkmFile" xml:space="preserve">
     <value>Explorers of Time and Darkness Stored Pokemon</value>
   </data>
+  <data name="UnknownItem" xml:space="preserve">
+    <value>Item ID {0}</value>
+  </data>
+  <data name="Error_CantChangeContainedItem" xml:space="preserve">
+    <value>The current item cannot contain another item.</value>
+  </data>
+  <data name="Error_CantChangeItemQuantity" xml:space="preserve">
+    <value>The current item does not support changing the quantity</value>
+  </data>
+  <data name="Error_UsedTMParameterIndexOutOfRange" xml:space="preserve">
+    <value>Parameter of a used TM must refer to a TM item.</value>
+  </data>
 </root>

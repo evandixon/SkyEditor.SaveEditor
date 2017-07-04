@@ -83,12 +83,15 @@ namespace SkyEditor.SaveEditor
 
         public void SetInt(int byteIndex, int bitIndex, int bitLength, int value)
         {
+            var bitsWritten = 0;
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
+                    bitsWritten += 1;
+                    if (bitsWritten >= bitLength) return;
                 }
             }
         }
@@ -118,12 +121,15 @@ namespace SkyEditor.SaveEditor
 
         public void SetUInt(int byteIndex, int bitIndex, int bitLength, uint value)
         {
+            var bitsWritten = 0;
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
+                    bitsWritten += 1;
+                    if (bitsWritten >= bitLength) return;
                 }
             }
         }
@@ -153,12 +159,15 @@ namespace SkyEditor.SaveEditor
 
         public void SetShort(int byteIndex, int bitIndex, int bitLength, short value)
         {
+            var bitsWritten = 0;
             var buffer = BitConverter.GetBytes(value);
             for (int i = 0; i < buffer.Length; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     Bits[(byteIndex + i) * 8 + bitIndex + j] = ((buffer[i] >> j) & 1) == 1;
+                    bitsWritten += 1;
+                    if (bitsWritten >= bitLength) return;
                 }
             }
         }
