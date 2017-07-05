@@ -83,16 +83,11 @@
     <Import Include="Windows.UI.Xaml.Media.Imaging" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MysteryDungeon\BinaryExtensions.vb" />
-    <Compile Include="MysteryDungeon\Explorers\IExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
     <Compile Include="MysteryDungeon\IDConversion.vb" />
-    <Compile Include="MysteryDungeon\IMDAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\IExplorersStoredPokemon.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ExplorersActiveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyActivePokemon.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ExplorersAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyQuicksaveAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyQuicksavePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\SkyStoredPokemon.vb" />
@@ -103,7 +98,6 @@
     <Compile Include="MysteryDungeon\Rescue\RBAttack.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBHeldItem.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBPokemon.vb" />
-    <Compile Include="MysteryDungeon\DSMysteryDungeonCharacterEncoding.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBStoredItem.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
