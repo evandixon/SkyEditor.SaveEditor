@@ -31,6 +31,26 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             public virtual int StoredItemOffset => 0x8E0C * 8 + 6;
             public virtual int HeldItemOffset => 0x8BA2 * 8;
 
+            // Stored Pokemon
+            public virtual int StoredPokemonOffset => 0x464 * 8;
+            public virtual int StoredPokemonLength => 362;
+            public virtual int StoredPokemonCount => 720;
+
+            // Active Pokemon
+            public virtual int ActivePokemon1RosterIndexOffset => 0x83D1 * 8 + 1;
+            public virtual int ActivePokemon2RosterIndexOffset => 0x83D3 * 8 + 1;
+            public virtual int ActivePokemon3RosterIndexOffset => 0x83D5 * 8 + 1;
+            public virtual int ActivePokemon4RosterIndexOffset => 0x83D7 * 8 + 1;
+            public virtual int ActivePokemonOffset => 0x83D9 * 8 + 1;
+            public virtual int SpActivePokemonOffset => 0x84F4 * 8 + 2;
+            public virtual int ActivePokemonLength => 564;
+            public virtual int ActivePokemonCount => 4;
+
+            // Quicksave Pokemon
+            public virtual int QuicksavePokemonCount => 20;
+            public virtual int QuicksavePokemonLength => 429 * 8;
+            public virtual int QuicksavePokemonOffset => 0x19000 * 8 + (0x3170 * 8);
+
             // History
             public virtual int OriginalPlayerID => 0xBE * 8;
             public virtual int OriginalPartnerID => 0xC0 * 8;
@@ -39,6 +59,20 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
             // Settings
             public virtual int WindowFrameType => 0x995F * 8 + 5;
+
+            // Unused/Untested
+            public virtual int ItemShop1Offset => 0x98CA * 8 + 6;
+            public virtual int ItemShopLength => 22;
+            public virtual int ItemShop1Number => 8;
+            public virtual int ItemShop2Offset => 0x98E0 * 8 + 6;
+            public virtual int ItemShop2Number => 4;
+
+            public virtual int AdventureLogOffset => 0x9958 * 8;
+            public virtual int AdventureLogLength => 447;
+
+            public virtual int CroagunkShopOffset => 0xB475 * 8;
+            public virtual int CroagunkShopLength => 11;
+            public virtual int CroagunkShopNumber => 8;            
         }
 
         public SkySave() : base()
@@ -379,6 +413,178 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
         #endregion
 
+        #region Stored Pokemon
+
+        private void LoadStoredPokemon(int baseOffset)
+        {
+            StoredPokemon = new List<SkyStoredPokemon>();
+            for (int i = 0; i < Offsets.StoredPokemonCount; i++)
+            {
+                var pkm = new SkyStoredPokemon(Bits.GetRange(baseOffset + Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength));
+
+                if (!pkm.IsValid)
+                {
+                    break;
+                }
+                
+                StoredPokemon.Add(pkm);
+            }
+        }
+
+        private void SaveStoredPokemon()
+        {
+            for (int i = 0; i < Offsets.StoredPokemonCount; i++)
+            {
+                if (StoredPokemon.Count > i)
+                {
+                    Bits.SetRange(Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength, StoredPokemon[i].GetStoredPokemonBits());
+                }
+                else
+                {
+                    Bits.SetRange(Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength, new BitBlock(Offsets.StoredPokemonLength));
+                }
+            }
+        }
+
+        public List<SkyStoredPokemon> StoredPokemon { get; set; }
+
+        #endregion
+
+        #region Active Pokemon
+
+        private void LoadActivePokemon(int baseOffset)
+        {
+            ActivePokemon1RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon1RosterIndexOffset, 16);
+            ActivePokemon2RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon2RosterIndexOffset, 16);
+            ActivePokemon3RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon3RosterIndexOffset, 16);
+            ActivePokemon4RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon4RosterIndexOffset, 16);
+
+            ActivePokemon = new List<SkyActivePokemon>();
+            SpEpisodeActivePokemon = new List<SkyActivePokemon>();
+            for (int i = 0; i < Offsets.ActivePokemonCount; i++)
+            {
+                var main = new SkyActivePokemon(Bits.GetRange(baseOffset + Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
+                var special = new SkyActivePokemon(Bits.GetRange(baseOffset + Offsets.SpActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
+
+                if (main.IsValid)
+                {
+                    ActivePokemon.Add(main);
+                }
+
+                if (special.IsValid)
+                {
+                    SpEpisodeActivePokemon.Add(main);
+                }
+            }
+        }
+
+        private void SaveActivePokemon()
+        {
+            // Update the Active Pokemon Roster Indexes
+            if (ActivePokemon.Count > 0)
+            {
+                ActivePokemon1RosterIndex = ActivePokemon[0].RosterNumber;
+            }
+            else
+            {
+                ActivePokemon1RosterIndex = -1;
+            }
+
+            if (ActivePokemon.Count > 1)
+            {
+                ActivePokemon2RosterIndex = ActivePokemon[1].RosterNumber;
+            }
+            else
+            {
+                ActivePokemon2RosterIndex = -1;
+            }
+
+            if (ActivePokemon.Count > 2)
+            {
+                ActivePokemon3RosterIndex = ActivePokemon[2].RosterNumber;
+            }
+            else
+            {
+                ActivePokemon3RosterIndex = -1;
+            }
+
+            if (ActivePokemon.Count > 3)
+            {
+                ActivePokemon4RosterIndex = ActivePokemon[3].RosterNumber;
+            }
+            else
+            {
+                ActivePokemon4RosterIndex = -1;
+            }
+
+            // Write the indexes
+            Bits.SetInt(0, Offsets.ActivePokemon1RosterIndexOffset, 16, ActivePokemon1RosterIndex);
+            Bits.SetInt(0, Offsets.ActivePokemon2RosterIndexOffset, 16, ActivePokemon2RosterIndex);
+            Bits.SetInt(0, Offsets.ActivePokemon3RosterIndexOffset, 16, ActivePokemon3RosterIndex);
+            Bits.SetInt(0, Offsets.ActivePokemon4RosterIndexOffset, 16, ActivePokemon4RosterIndex);
+
+            // Write the Active Pokemon
+            for (int i = 0; i < Offsets.ActivePokemonCount; i++)
+            {
+                if (ActivePokemon.Count > i)
+                {
+                    Bits.SetRange(Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, ActivePokemon[i].GetActivePokemonBits());
+                }
+                else
+                {
+                    Bits.SetRange(Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, new BitBlock(Offsets.ActivePokemonLength));
+                }
+
+                if (SpEpisodeActivePokemon.Count > i)
+                {
+                    Bits.SetRange(Offsets.SpActivePokemonOffset + i * Offsets.ActivePokemonLength, SpEpisodeActivePokemon[i].GetActivePokemonBits());
+                }
+                else
+                {
+                    Bits.SetRange(Offsets.SpActivePokemonOffset + i * Offsets.ActivePokemonLength, new BitBlock(Offsets.ActivePokemonLength));
+                }
+            }
+        }
+
+        private int ActivePokemon1RosterIndex { get; set; }
+        private int ActivePokemon2RosterIndex { get; set; }
+        private int ActivePokemon3RosterIndex { get; set; }
+        private int ActivePokemon4RosterIndex { get; set; }
+        public List<SkyActivePokemon> ActivePokemon { get; set; }
+        public List<SkyActivePokemon> SpEpisodeActivePokemon { get; set; }
+
+        #endregion
+
+        #region Quicksave Pokemon
+
+        public void LoadQuicksavePokemon(int baseOffset)
+        {
+            QuicksavePokemon = new List<SkyQuicksavePokemon>();
+            for (int i = 0; i < Offsets.QuicksavePokemonCount; i++)
+            {
+                QuicksavePokemon.Add(new SkyQuicksavePokemon(Bits.GetRange(baseOffset + Offsets.QuicksavePokemonOffset, Offsets.QuicksavePokemonLength)));
+            }
+        }
+
+        public void SaveQuicksavePokemon()
+        {
+            for (int i = 0; i < Offsets.QuicksavePokemonCount; i++)
+            {
+                if (QuicksavePokemon.Count > i)
+                {
+                    Bits.SetRange(Offsets.QuicksavePokemonOffset + Offsets.QuicksavePokemonLength * i, Offsets.QuicksavePokemonLength, QuicksavePokemon[i].GetQuicksavePokemonBits());
+                }
+                else
+                {
+                    Bits.SetRange(Offsets.QuicksavePokemonOffset + Offsets.QuicksavePokemonLength * i, Offsets.QuicksavePokemonLength, new BitBlock(Offsets.QuicksavePokemonLength));
+                }
+            }
+        }
+
+        public List<SkyQuicksavePokemon> QuicksavePokemon { get; set; }
+
+        #endregion
+
         #region History
 
         /// <summary>
@@ -438,7 +644,6 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         #endregion
 
-
         #region Functions
 
         public override async Task OpenFile(string filename, IIOProvider provider)
@@ -464,6 +669,9 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
             LoadGeneral(baseOffset);
             LoadItems(baseOffset);
+            LoadStoredPokemon(baseOffset);
+            LoadActivePokemon(baseOffset);
+            LoadQuicksavePokemon(baseOffset);
             LoadHistory(baseOffset);
             LoadSettings(baseOffset);
         }
@@ -472,6 +680,9 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         {
             SaveGeneral();
             SaveItems();
+            SaveStoredPokemon();
+            SaveActivePokemon();
+            SaveQuicksavePokemon();
             SaveHistory();
             SaveSettings();
 

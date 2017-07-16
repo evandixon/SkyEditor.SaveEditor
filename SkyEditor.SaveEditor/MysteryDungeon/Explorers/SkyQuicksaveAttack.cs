@@ -4,22 +4,25 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class ExplorersAttack : IMysteryDungeonNdsAttack
+    public class SkyQuicksaveAttack
     {
-        public const int BitLength = 21;
+        public const int BitLength = 48;
 
-        public ExplorersAttack()
+        public SkyQuicksaveAttack()
         {
         }
 
-        public ExplorersAttack(BitBlock bits)
+        public SkyQuicksaveAttack(BitBlock bits)
         {
             IsValid = bits[0];
             IsLinked = bits[1];
             IsSwitched = bits[2];
             IsSet = bits[3];
-            ID = bits.GetInt(0, 4, 10);
-            PowerBoost = bits.GetInt(0, 14, 7);
+            IsSealed = bits[4];
+            Unknown = bits.GetRange(5, 11);
+            ID = bits.GetInt(0, 16, 16);
+            PP = bits.GetInt(0, 32, 8);
+            PowerBoost = bits.GetInt(0, 40, 8);
         }
 
         public BitBlock ToBitBlock()
@@ -29,10 +32,15 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             bits[1] = IsLinked;
             bits[2] = IsSwitched;
             bits[3] = IsSet;
-            bits.SetInt(0, 4, 10, ID);
-            bits.SetInt(0, 14, 7, PowerBoost);
+            bits[4] = IsSealed;
+            bits.SetRange(5, 11, Unknown);
+            bits.SetInt(0, 16, 16, ID);
+            bits.SetInt(0, 32, 8, PP);
+            bits.SetInt(0, 40, 8, PowerBoost);
             return bits;
         }
+
+        private BitBlock Unknown { get; set; }
 
         /// <summary>
         /// Whether or not the current move is valid.
@@ -71,5 +79,43 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// Power boost of the move, resulting from drinking Ginseng
         /// </summary>
         public int PowerBoost { get; set; }
+
+        /// <summary>
+        /// Whether or not the move has been sealed, preventing its use
+        /// </summary>
+        public bool IsSealed { get; set; }
+
+        /// <summary>
+        /// Power points of the move
+        /// </summary>
+        public int PP { get; set; }
+
+        public static explicit operator ExplorersAttack(SkyQuicksaveAttack attack)
+        {
+            return new ExplorersAttack
+            {
+                IsValid = attack.IsValid,
+                IsLinked = attack.IsLinked,
+                IsSwitched = attack.IsSwitched,
+                IsSet = attack.IsSet,
+                ID = attack.ID,
+                PowerBoost = attack.PowerBoost
+            };
+        }
+
+        public static explicit operator ExplorersActiveAttack(SkyQuicksaveAttack attack)
+        {
+            return new ExplorersActiveAttack
+            {
+                IsValid = attack.IsValid,
+                IsLinked = attack.IsLinked,
+                IsSwitched = attack.IsSwitched,
+                IsSet = attack.IsSet,
+                IsSealed = attack.IsSealed,
+                ID = attack.ID,
+                PP = attack.PP,
+                PowerBoost = attack.PowerBoost
+            };
+        }
     }
 }

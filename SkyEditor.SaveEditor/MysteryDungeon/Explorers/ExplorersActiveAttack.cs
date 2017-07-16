@@ -6,6 +6,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
     public class ExplorersActiveAttack : IExplorersActiveAttack
     {
+        public const int BitLength = 29;
+
         public ExplorersActiveAttack()
         {
         }
@@ -24,7 +26,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         public BitBlock ToBitBlock()
         {
-            var bits = new BitBlock(29);
+            var bits = new BitBlock(BitLength);
             bits[0] = IsValid;
             bits[1] = IsLinked;
             bits[2] = IsSwitched;

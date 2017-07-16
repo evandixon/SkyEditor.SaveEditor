@@ -83,14 +83,8 @@
     <Import Include="Windows.UI.Xaml.Media.Imaging" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MysteryDungeon\Explorers\IExplorersActivePokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDActivePokemon.vb" />
     <Compile Include="MysteryDungeon\IDConversion.vb" />
-    <Compile Include="MysteryDungeon\Explorers\IExplorersStoredPokemon.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkyActivePokemon.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkyQuicksaveAttack.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkyQuicksavePokemon.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkyStoredPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDAttack.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDHeldItem.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDStoredPokemon.vb" />
@@ -103,7 +97,6 @@
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBSave.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBSaveEU.vb" />
-    <Compile Include="MysteryDungeon\Explorers\SkySave.vb" />
     <Compile Include="MysteryDungeon\Explorers\TDSave.vb" />
     <Compile Include="StoredPokemonSlotDefinition.vb" />
   </ItemGroup>

@@ -287,6 +287,82 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         #endregion
 
+        #region Stored Pokemon
+
+        private void TestStoredPokemon(SkySave save)
+        {
+            Assert.AreEqual(97, save.StoredPokemon.Count);
+
+            // Player
+            Assert.AreEqual(490, save.StoredPokemon[0].ID.ID);
+            Assert.AreEqual(false, save.StoredPokemon[0].ID.IsFemale);
+            Assert.AreEqual(60, save.StoredPokemon[0].Level);
+            Assert.AreEqual("Evan", save.StoredPokemon[0].Name);
+
+            // Partner
+            Assert.AreEqual(430, save.StoredPokemon[1].ID.ID);
+            Assert.AreEqual(false, save.StoredPokemon[1].ID.IsFemale);
+            Assert.AreEqual(59, save.StoredPokemon[1].Level);
+            Assert.AreEqual("Empoleon", save.StoredPokemon[1].Name);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void StoredPokemon_Read()
+        {
+            var save = GetTestSave();
+            TestStoredPokemon(save);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void StoredPokemon_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            TestStoredPokemon(newSave);
+        }
+
+        #endregion
+
+        #region Active Pokemon
+
+        private void TestActivePokemon(SkySave save)
+        {
+            Assert.AreEqual(2, save.ActivePokemon.Count);
+
+            // Player
+            Assert.AreEqual(490, save.ActivePokemon[0].ID.ID);
+            Assert.AreEqual(false, save.ActivePokemon[0].ID.IsFemale);
+            Assert.AreEqual(60, save.ActivePokemon[0].Level);
+            Assert.AreEqual("Evan", save.ActivePokemon[0].Name);
+
+            // Partner
+            Assert.AreEqual(430, save.ActivePokemon[1].ID.ID);
+            Assert.AreEqual(false, save.ActivePokemon[1].ID.IsFemale);
+            Assert.AreEqual(59, save.ActivePokemon[1].Level);
+            Assert.AreEqual("Empoleon", save.ActivePokemon[1].Name);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void ActivePokemon_Read()
+        {
+            var save = GetTestSave();
+            TestStoredPokemon(save);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void ActivePokemon_Write()
+        {
+            var save = GetTestSave();
+            var newSave = new SkySave(save.ToByteArray());
+            TestStoredPokemon(newSave);
+        }
+
+        #endregion
+
         #region History
 
         [TestMethod]
