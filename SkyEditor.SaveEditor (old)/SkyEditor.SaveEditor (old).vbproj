@@ -83,8 +83,6 @@
     <Import Include="Windows.UI.Xaml.Media.Imaging" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MysteryDungeon\IDConversion.vb" />
-    <Compile Include="ZLibFile.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBAttack.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBHeldItem.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBPokemon.vb" />
@@ -93,7 +91,6 @@
     <Compile Include="MysteryDungeon\GTIGameData.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBSave.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBSaveEU.vb" />
-    <Compile Include="StoredPokemonSlotDefinition.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.5;net462</TargetFrameworks>
+    <Authors>Evan Dixon</Authors>
+    <Company>Evan Dixon</Company>
+    <Description>Save editing library for Pokemon Mystery Dungeon games.</Description>
+    <Copyright>2016-2017</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

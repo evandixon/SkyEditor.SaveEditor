@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyEditor.SaveEditor", "Sky
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SkyEditor.SaveEditor (old)", "SkyEditor.SaveEditor (old)\SkyEditor.SaveEditor (old).vbproj", "{AB874AC2-D497-49F0-9EB4-CD57397F757F}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SkyEditor.SaveEditor.Tests (old)", "Tests\SkyEditor.SaveEditor.Tests (Old)\SkyEditor.SaveEditor.Tests (old).vbproj", "{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyEditor.SaveEditor.Tests", "Tests\SkyEditor.SaveEditor.Tests\SkyEditor.SaveEditor.Tests.csproj", "{2D43EA9B-92B5-449B-8496-070BD37611A5}"
 EndProject
 Global
@@ -67,20 +65,6 @@ Global
 		{AB874AC2-D497-49F0-9EB4-CD57397F757F}.Release|ARM.ActiveCfg = Release|Any CPU
 		{AB874AC2-D497-49F0-9EB4-CD57397F757F}.Release|x64.ActiveCfg = Release|Any CPU
 		{AB874AC2-D497-49F0-9EB4-CD57397F757F}.Release|x86.ActiveCfg = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|ARM.Build.0 = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|x64.Build.0 = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Debug|x86.Build.0 = Debug|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|ARM.ActiveCfg = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|ARM.Build.0 = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|x64.ActiveCfg = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|x64.Build.0 = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|x86.ActiveCfg = Release|Any CPU
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48}.Release|x86.Build.0 = Release|Any CPU
 		{2D43EA9B-92B5-449B-8496-070BD37611A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D43EA9B-92B5-449B-8496-070BD37611A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D43EA9B-92B5-449B-8496-070BD37611A5}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -102,7 +86,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5916F4BA-DB87-4F40-8EF6-3A2707E89F48} = {0CA3F39C-DDAE-4500-AA4C-62707E641DA8}
 		{2D43EA9B-92B5-449B-8496-070BD37611A5} = {0CA3F39C-DDAE-4500-AA4C-62707E641DA8}
 	EndGlobalSection
 EndGlobal
