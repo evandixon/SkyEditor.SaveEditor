@@ -45,7 +45,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
             {
                 if (throwOnUnsupported)
                 {
-                    throw new ArgumentException(NameOf(eosID), "The given Explorers of Sky Pokémon is not a Red/Blue Rescue Team Pokémon.");
+                    throw new ArgumentException(nameof(eosID), "The given Explorers of Sky Pokémon is not a Red/Blue Rescue Team Pokémon.");
                 }
                 else
                 {
@@ -61,7 +61,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
                 //Shiny Celebi
                 if (throwOnUnsupported)
                 {
-                    throw new ArgumentException(NameOf(eosID), "Shiny/Pink Celebi is not in Red/Blue Rescue Team Pokémon.");
+                    throw new ArgumentException(nameof(eosID), "Shiny/Pink Celebi is not in Red/Blue Rescue Team Pokémon.");
                 }
                 else
                 {
@@ -76,7 +76,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
             {
                 if (throwOnUnsupported)
                 {
-                    throw new ArgumentException(NameOf(eosID), "Purple Keckleon is not in Red/Blue Rescue Team Pokémon.");
+                    throw new ArgumentException(nameof(eosID), "Purple Keckleon is not in Red/Blue Rescue Team Pokémon.");
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
             {
                 if (throwOnUnsupported)
                 {
-                    throw new ArgumentException(NameOf(eosID), "Explorers of Sky Pokemon ID must be 0 or greater");
+                    throw new ArgumentException(nameof(eosID), "Explorers of Sky Pokemon ID must be 0 or greater");
                 }
                 else
                 {
@@ -112,3 +112,4 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
             }
         }
     }
+}

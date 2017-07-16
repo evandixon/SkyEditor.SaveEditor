@@ -22,8 +22,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
         
         public static StoredPokemonSlotDefinition FromLine(string Line, int Index)
         {
-            dynamic parts = Line.Split(':');
-            return new StoredPokemonSlotDefinition(Index, parts(0).Trim, parts(1).Trim);
+            var parts = Line.Split(':');
+            return new StoredPokemonSlotDefinition(Index, parts[0].Trim(), int.Parse(parts[1].Trim()));
         }
         public static List<StoredPokemonSlotDefinition> FromLines(string lines)
         {
