@@ -21,7 +21,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             StoredPokemon = New ObservableCollection(Of FileViewModel)
             AllPokemon = New ObservableCollection(Of FileViewModel)
 
-            AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
+            'AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
@@ -41,9 +41,9 @@ Namespace MysteryDungeon.Explorers.ViewModels
             AddToPartyCommand.IsEnabled = False '(ActivePokemonViewModel.CanAddActivePokemon < 4 AndAlso SelectedBox IsNot Nothing AndAlso SelectedBox.SelectedPokemon IsNot Nothing)
         End Sub
 
-        Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
-            AllPokemon(e.Pokemon.RosterNumber).Model = e.Pokemon.ToStored
-        End Sub
+        'Private Sub _activeVM_ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs) Handles _activeVM.ActivePokemonRemoved
+        '    AllPokemon(e.Pokemon.RosterNumber).Model = e.Pokemon.ToStored
+        'End Sub
 #End Region
 
         Protected ReadOnly Property ActivePokemonViewModel As ExplorersPartyViewModel
@@ -165,14 +165,14 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         End Sub
 
-        ''' <summary>
-        ''' Adds the selected box's selected pokemon to active Pokemon
-        ''' </summary>
-        Private Sub AddActivePokemon()
-            If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
-                ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.Model, GetPokemonIndex(SelectedBox.SelectedPokemon))
-            End If
-        End Sub
+        '''' <summary>
+        '''' Adds the selected box's selected pokemon to active Pokemon
+        '''' </summary>
+        'Private Sub AddActivePokemon()
+        '    If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
+        '        ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.Model, GetPokemonIndex(SelectedBox.SelectedPokemon))
+        '    End If
+        'End Sub
 
         Private Function GetPokemonIndex(pkm As FileViewModel)
             If _storedPlayerPartner.Contains(pkm) Then

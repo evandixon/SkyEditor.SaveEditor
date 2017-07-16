@@ -218,15 +218,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Ginseng.
-        '''</summary>
-        Public Shared ReadOnly Property Ginseng() As String
-            Get
-                Return ResourceManager.GetString("Ginseng", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Held Items.
         '''</summary>
         Public Shared ReadOnly Property HeldItemsSlot() As String
@@ -609,6 +600,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property Pokemon() As String
             Get
                 Return ResourceManager.GetString("Pokemon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Power Boost.
+        '''</summary>
+        Public Shared ReadOnly Property PowerBoost() As String
+            Get
+                Return ResourceManager.GetString("PowerBoost", resourceCulture)
             End Get
         End Property
         

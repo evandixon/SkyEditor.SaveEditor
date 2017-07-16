@@ -86,7 +86,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Init();
         }
 
-        protected SkyOffsets Offsets { get; set; }
+        public SkyOffsets Offsets { get; set; }
 
         #region Checksums
 

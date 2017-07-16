@@ -52,7 +52,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             Init();
         }
 
-        protected RBOffsets Offsets { get; set; }
+        public RBOffsets Offsets { get; set; }
 
         #region Checksums
 

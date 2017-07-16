@@ -61,7 +61,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of RBHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemNumber))
+            slots.Add(New ItemSlot(Of RBHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemCount))
             slots.Add(New RBStoredItemSlot(StoredItems))
             ItemSlots = slots
         End Sub

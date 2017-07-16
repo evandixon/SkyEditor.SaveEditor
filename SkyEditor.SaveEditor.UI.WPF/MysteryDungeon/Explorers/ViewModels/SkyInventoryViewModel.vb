@@ -14,7 +14,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Sub New()
             MyBase.New
 
-            StoredItems = New ObservableCollection(Of SkyStoredItem)
+            StoredItems = New ObservableCollection(Of SkyItem)
             HeldItems = New ObservableCollection(Of SkyHeldItem)
             SpEpisodeHeldItems = New ObservableCollection(Of SkyHeldItem)
         End Sub
@@ -27,15 +27,15 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
 #Region "Properties"
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
-        Public Property StoredItems As ObservableCollection(Of SkyStoredItem)
+        Public Property StoredItems As ObservableCollection(Of SkyItem)
             Get
                 Return _storedItems
             End Get
-            Private Set(value As ObservableCollection(Of SkyStoredItem))
+            Private Set(value As ObservableCollection(Of SkyItem))
                 _storedItems = value
             End Set
         End Property
-        Private WithEvents _storedItems As ObservableCollection(Of SkyStoredItem)
+        Private WithEvents _storedItems As ObservableCollection(Of SkyItem)
 
         Public Property HeldItems As ObservableCollection(Of SkyHeldItem)
             Get
@@ -87,9 +87,9 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of SkyStoredItem)(My.Resources.Language.StoredItemsSlot, StoredItems, m.Offsets.StoredItemNumber))
-            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemNumber))
-            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, m.Offsets.HeldItemNumber))
+            slots.Add(New ItemSlot(Of SkyItem)(My.Resources.Language.StoredItemsSlot, StoredItems, 1000))
+            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, 50))
+            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, 50))
             ItemSlots = slots
         End Sub
 

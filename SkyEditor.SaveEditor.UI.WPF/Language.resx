@@ -156,8 +156,8 @@
   <data name="General" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="Ginseng" xml:space="preserve">
-    <value>Ginseng</value>
+  <data name="PowerBoost" xml:space="preserve">
+    <value>Power Boost</value>
   </data>
   <data name="HeldItemsTabHeader" xml:space="preserve">
     <value>Inventory</value>

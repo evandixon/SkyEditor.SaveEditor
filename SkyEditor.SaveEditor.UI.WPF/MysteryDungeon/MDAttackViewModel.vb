@@ -3,13 +3,13 @@ Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon
+Imports SkyEditor.SaveEditor.MysteryDungeon.Rescue
 
 Namespace MysteryDungeon
     Public Class MDAttackViewModel
         Inherits GenericViewModel(Of IMDAttack)
         Implements INotifyPropertyChanged
         Implements INotifyModified
-        Implements IMDAttack
 
         Public Sub New()
             MyBase.New
@@ -30,7 +30,7 @@ Namespace MysteryDungeon
             RaiseEvent Modified(Me, New EventArgs)
         End Sub
 
-        Public Property IsLinked As Boolean Implements IMDAttack.IsLinked
+        Public Property IsLinked As Boolean
             Get
                 Return Model.IsLinked
             End Get
@@ -42,7 +42,7 @@ Namespace MysteryDungeon
             End Set
         End Property
 
-        Public Property IsSwitched As Boolean Implements IMDAttack.IsSwitched
+        Public Property IsSwitched As Boolean
             Get
                 Return Model.IsSwitched
             End Get
@@ -54,7 +54,7 @@ Namespace MysteryDungeon
             End Set
         End Property
 
-        Public Property IsSet As Boolean Implements IMDAttack.IsSet
+        Public Property IsSet As Boolean
             Get
                 Return Model.IsSet
             End Get
@@ -66,7 +66,7 @@ Namespace MysteryDungeon
             End Set
         End Property
 
-        Public Property ID As Integer Implements IMDAttack.ID
+        Public Property ID As Integer
             Get
                 Return Model.ID
             End Get
@@ -78,21 +78,25 @@ Namespace MysteryDungeon
             End Set
         End Property
 
-        Public Property Ginseng As Integer Implements IMDAttack.Ginseng
+        Public Property PowerBoost As Integer
             Get
-                Return Model.Ginseng
+                Return Model.PowerBoost
             End Get
             Set(value As Integer)
-                If Not Model.Ginseng = value Then
-                    Model.Ginseng = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Ginseng)))
+                If Not Model.PowerBoost = value Then
+                    Model.PowerBoost = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(PowerBoost)))
                 End If
             End Set
         End Property
 
-        Public ReadOnly Property MoveNames As Dictionary(Of Integer, String) Implements IMDAttack.MoveNames
+        Public ReadOnly Property MoveNames As Dictionary(Of Integer, String)
             Get
-                Return Model.MoveNames
+                If TypeOf Model Is RBAttack Then
+                    Return Lists.RBMoves
+                Else
+                    Return Lists.ExplorersMoves
+                End If
             End Get
         End Property
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class IExplorersActivePokemon
+    public interface IExplorersActivePokemon
     {
         int RosterNumber { get; set; }
         int Level { get; set; }

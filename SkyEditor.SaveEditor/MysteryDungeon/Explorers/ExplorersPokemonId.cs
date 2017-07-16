@@ -4,8 +4,13 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public struct ExplorersPokemonId
+    public class ExplorersPokemonId
     {
+        public ExplorersPokemonId()
+        {
+
+        }
+
         public ExplorersPokemonId(int rawID)
         {
             RawID = rawID;

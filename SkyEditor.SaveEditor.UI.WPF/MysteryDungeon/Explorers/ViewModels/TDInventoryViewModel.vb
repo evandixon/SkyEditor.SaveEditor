@@ -44,7 +44,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of TDHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemNumber))
+            slots.Add(New ItemSlot(Of TDHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, 48))
             ItemSlots = slots
         End Sub
 

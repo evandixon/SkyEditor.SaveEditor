@@ -18,11 +18,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Property OriginalPlayerID As Integer
             Get
-                Return Model.OriginalPlayerID
+                Return Model.OriginalPlayerPokemon.ID
             End Get
             Set(value As Integer)
-                If Not value = Model.OriginalPlayerID Then
-                    Model.OriginalPlayerID = value
+                If Not value = Model.OriginalPlayerPokemon.ID Then
+                    Model.OriginalPlayerPokemon.ID = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerID)))
                 End If
             End Set
@@ -30,11 +30,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Property OriginalPlayerIsFemale As Boolean
             Get
-                Return Model.OriginalPlayerIsFemale
+                Return Model.OriginalPlayerPokemon.IsFemale
             End Get
             Set(value As Boolean)
-                If Not value = Model.OriginalPlayerIsFemale Then
-                    Model.OriginalPlayerIsFemale = value
+                If Not value = Model.OriginalPlayerPokemon.IsFemale Then
+                    Model.OriginalPlayerPokemon.IsFemale = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPlayerIsFemale)))
                 End If
             End Set
@@ -42,11 +42,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Property OriginalPartnerID As Integer
             Get
-                Return Model.OriginalPartnerID
+                Return Model.OriginalPartnerPokemon.ID
             End Get
             Set(value As Integer)
-                If Not Model.OriginalPartnerID = value Then
-                    Model.OriginalPartnerID = value
+                If Not Model.OriginalPartnerPokemon.ID = value Then
+                    Model.OriginalPartnerPokemon.ID = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerID)))
                 End If
             End Set
@@ -54,11 +54,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Property OriginalPartnerIsFemale As Boolean
             Get
-                Return Model.OriginalPartnerIsFemale
+                Return Model.OriginalPartnerPokemon.IsFemale
             End Get
             Set(value As Boolean)
-                If Not Model.OriginalPartnerIsFemale = value Then
-                    Model.OriginalPartnerIsFemale = value
+                If Not Model.OriginalPartnerPokemon.IsFemale = value Then
+                    Model.OriginalPartnerPokemon.IsFemale = value
                     RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(OriginalPartnerIsFemale)))
                 End If
             End Set

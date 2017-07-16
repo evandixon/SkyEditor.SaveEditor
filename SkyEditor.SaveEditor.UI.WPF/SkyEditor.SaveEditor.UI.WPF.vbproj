@@ -130,6 +130,7 @@
     <Compile Include="MenuActions\ImportActivePokemon.vb" />
     <Compile Include="MenuActions\ImportPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\ActivePokemonRemoveEventArgs.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyItemViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkySpEpisodePartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\Views\ExplorersActivePokemonGeneralTab.xaml.vb">
       <DependentUpon>ExplorersActivePokemonGeneralTab.xaml</DependentUpon>

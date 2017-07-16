@@ -23,7 +23,7 @@ namespace SkyEditor.SaveEditor.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ListResources {
+    public class ListResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,7 +37,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SkyEditor.SaveEditor.Resources.ListResources", typeof(ListResources).GetTypeInfo().Assembly);
@@ -52,7 +52,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -79,7 +79,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///14=Chikorita
         ///15=Treeko.
         /// </summary>
-        internal static string RBBaseTypes {
+        public static string RBBaseTypes {
             get {
                 return ResourceManager.GetString("RBBaseTypes", resourceCulture);
             }
@@ -115,7 +115,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///Tadpole Pond: 9
         ///Turtleshe [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RBFriendAreaOffsets {
+        public static string RBFriendAreaOffsets {
             get {
                 return ResourceManager.GetString("RBFriendAreaOffsets", resourceCulture);
             }
@@ -164,7 +164,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///Goggle Specs
         ///Lockon Spe [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RBItemOrder {
+        public static string RBItemOrder {
             get {
                 return ResourceManager.GetString("RBItemOrder", resourceCulture);
             }
@@ -206,7 +206,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///32=Plain Ribbon
         ///33=Speci [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RBItems {
+        public static string RBItems {
             get {
                 return ResourceManager.GetString("RBItems", resourceCulture);
             }
@@ -244,7 +244,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///28=Pitfall Valley
         ///29=Northern Range  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RBLocations {
+        public static string RBLocations {
             get {
                 return ResourceManager.GetString("RBLocations", resourceCulture);
             }
@@ -292,7 +292,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///38=Pursuit
         ///39=Doubles [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RBMoves {
+        public static string RBMoves {
             get {
                 return ResourceManager.GetString("RBMoves", resourceCulture);
             }
@@ -341,7 +341,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///39=Jigglypuff
         ///40=Wigg [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RBPokemon {
+        public static string RBPokemon {
             get {
                 return ResourceManager.GetString("RBPokemon", resourceCulture);
             }
@@ -352,7 +352,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///Special Episode:3
         ///Others:715.
         /// </summary>
-        internal static string SkyFriendAreaOffsets {
+        public static string SkyFriendAreaOffsets {
             get {
                 return ResourceManager.GetString("SkyFriendAreaOffsets", resourceCulture);
             }
@@ -395,7 +395,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///33=Goggle Specs
         ///34=Diet  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SkyItems {
+        public static string SkyItems {
             get {
                 return ResourceManager.GetString("SkyItems", resourceCulture);
             }
@@ -434,7 +434,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///29=Sealed Ruin
         ///30=D [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SkyLocations {
+        public static string SkyLocations {
             get {
                 return ResourceManager.GetString("SkyLocations", resourceCulture);
             }
@@ -482,7 +482,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///38=Pursuit
         ///39=DoubleSla [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SkyMoves {
+        public static string SkyMoves {
             get {
                 return ResourceManager.GetString("SkyMoves", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///39=Jigglypuff
         ///40=Wigg [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SkyPokemon {
+        public static string SkyPokemon {
             get {
                 return ResourceManager.GetString("SkyPokemon", resourceCulture);
             }
@@ -541,7 +541,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///   Looks up a localized string similar to Player and Partner: 2
         ///Others:548.
         /// </summary>
-        internal static string TDFriendAreaOffsets {
+        public static string TDFriendAreaOffsets {
             get {
                 return ResourceManager.GetString("TDFriendAreaOffsets", resourceCulture);
             }
@@ -584,7 +584,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///33=Goggle Specs
         ///34=Diet  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string TDItems {
+        public static string TDItems {
             get {
                 return ResourceManager.GetString("TDItems", resourceCulture);
             }
@@ -623,7 +623,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///29=Sealed Ruin
         ///30=D [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string TDLocations {
+        public static string TDLocations {
             get {
                 return ResourceManager.GetString("TDLocations", resourceCulture);
             }

@@ -64,14 +64,14 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property Adventures As Integer
+        Public Property NumberOfAdventures As Integer
             Get
-                Return Model.Adventures
+                Return Model.NumberOfAdventures
             End Get
             Set(value As Integer)
-                If Not Model.Adventures = value Then
-                    Model.Adventures = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Adventures)))
+                If Not Model.NumberOfAdventures = value Then
+                    Model.NumberOfAdventures = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(NumberOfAdventures)))
                 End If
             End Set
         End Property

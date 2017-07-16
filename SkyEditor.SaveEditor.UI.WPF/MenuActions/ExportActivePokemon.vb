@@ -32,10 +32,6 @@ Namespace MenuActions
                     If s.ShowDialog = Forms.DialogResult.OK Then
                         Await pkm.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                     End If
-
-                    If TypeOf pkm.Model Is SkyActivePokemon Then
-                        DirectCast(pkm.Model, SkyActivePokemon).DumpToConsole(CurrentApplicationViewModel.CurrentPluginManager.CurrentConsoleProvider)
-                    End If
                 End If
             Next
         End Sub

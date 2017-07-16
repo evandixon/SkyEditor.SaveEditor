@@ -23,7 +23,7 @@ namespace SkyEditor.SaveEditor.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Language {
+    public class Language {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,7 +37,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SkyEditor.SaveEditor.Resources.Language", typeof(Language).GetTypeInfo().Assembly);
@@ -52,7 +52,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to ----------.
         /// </summary>
-        internal static string BlankPokemon {
+        public static string BlankPokemon {
             get {
                 return ResourceManager.GetString("BlankPokemon", resourceCulture);
             }
@@ -73,7 +73,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to DeSmuMe Save File.
         /// </summary>
-        internal static string DeSmuMeSaveFile {
+        public static string DeSmuMeSaveFile {
             get {
                 return ResourceManager.GetString("DeSmuMeSaveFile", resourceCulture);
             }
@@ -82,7 +82,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The current item cannot contain another item..
         /// </summary>
-        internal static string Error_CantChangeContainedItem {
+        public static string Error_CantChangeContainedItem {
             get {
                 return ResourceManager.GetString("Error_CantChangeContainedItem", resourceCulture);
             }
@@ -91,7 +91,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The current item does not support changing the quantity.
         /// </summary>
-        internal static string Error_CantChangeItemQuantity {
+        public static string Error_CantChangeItemQuantity {
             get {
                 return ResourceManager.GetString("Error_CantChangeItemQuantity", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Parameter of a used TM must refer to a TM item..
         /// </summary>
-        internal static string Error_UsedTMParameterIndexOutOfRange {
+        public static string Error_UsedTMParameterIndexOutOfRange {
             get {
                 return ResourceManager.GetString("Error_UsedTMParameterIndexOutOfRange", resourceCulture);
             }
@@ -109,7 +109,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Mystery Dungeon game_data Files.
         /// </summary>
-        internal static string GameDataFile {
+        public static string GameDataFile {
             get {
                 return ResourceManager.GetString("GameDataFile", resourceCulture);
             }
@@ -118,7 +118,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Held by.
         /// </summary>
-        internal static string ItemToStringHeldBy {
+        public static string ItemToStringHeldBy {
             get {
                 return ResourceManager.GetString("ItemToStringHeldBy", resourceCulture);
             }
@@ -127,7 +127,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to evandixon.
         /// </summary>
-        internal static string PluginAuthor {
+        public static string PluginAuthor {
             get {
                 return ResourceManager.GetString("PluginAuthor", resourceCulture);
             }
@@ -142,7 +142,7 @@ namespace SkyEditor.SaveEditor.Resources {
         ///Prof. 9 - Team Name character encoding
         ///Demonic722 - Misc RAM and save addresses.
         /// </summary>
-        internal static string PluginCredits {
+        public static string PluginCredits {
             get {
                 return ResourceManager.GetString("PluginCredits", resourceCulture);
             }
@@ -151,7 +151,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pokémon Mystery Dungeon Save Editor Core.
         /// </summary>
-        internal static string PluginName {
+        public static string PluginName {
             get {
                 return ResourceManager.GetString("PluginName", resourceCulture);
             }
@@ -160,7 +160,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Raw Save File.
         /// </summary>
-        internal static string RawSaveFile {
+        public static string RawSaveFile {
             get {
                 return ResourceManager.GetString("RawSaveFile", resourceCulture);
             }
@@ -169,7 +169,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Toolbox.
         /// </summary>
-        internal static string RB_Toolbox {
+        public static string RB_Toolbox {
             get {
                 return ResourceManager.GetString("RB_Toolbox", resourceCulture);
             }
@@ -178,7 +178,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Red and Blue Rescue Team Stored Pokemon.
         /// </summary>
-        internal static string RBPkmFile {
+        public static string RBPkmFile {
             get {
                 return ResourceManager.GetString("RBPkmFile", resourceCulture);
             }
@@ -187,7 +187,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Explorers of Sky Active Pokemon.
         /// </summary>
-        internal static string SkyPkmExFile {
+        public static string SkyPkmExFile {
             get {
                 return ResourceManager.GetString("SkyPkmExFile", resourceCulture);
             }
@@ -196,7 +196,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Explorers of Sky Stored Pokemon.
         /// </summary>
-        internal static string SkyPkmFile {
+        public static string SkyPkmFile {
             get {
                 return ResourceManager.GetString("SkyPkmFile", resourceCulture);
             }
@@ -205,7 +205,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Explorers of Sky Quicksave Pokemon.
         /// </summary>
-        internal static string SkyPkmQFile {
+        public static string SkyPkmQFile {
             get {
                 return ResourceManager.GetString("SkyPkmQFile", resourceCulture);
             }
@@ -214,7 +214,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} (Lvl. {1} {2}).
         /// </summary>
-        internal static string SkyStoredPokemonToString {
+        public static string SkyStoredPokemonToString {
             get {
                 return ResourceManager.GetString("SkyStoredPokemonToString", resourceCulture);
             }
@@ -223,7 +223,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Explorers of Time and Darkness Active Pokemon.
         /// </summary>
-        internal static string TDPkmExFile {
+        public static string TDPkmExFile {
             get {
                 return ResourceManager.GetString("TDPkmExFile", resourceCulture);
             }
@@ -232,7 +232,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Explorers of Time and Darkness Stored Pokemon.
         /// </summary>
-        internal static string TDPkmFile {
+        public static string TDPkmFile {
             get {
                 return ResourceManager.GetString("TDPkmFile", resourceCulture);
             }
@@ -241,7 +241,7 @@ namespace SkyEditor.SaveEditor.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Item ID {0}.
         /// </summary>
-        internal static string UnknownItem {
+        public static string UnknownItem {
             get {
                 return ResourceManager.GetString("UnknownItem", resourceCulture);
             }

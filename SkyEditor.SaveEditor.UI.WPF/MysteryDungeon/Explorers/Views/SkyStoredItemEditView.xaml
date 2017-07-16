@@ -8,9 +8,9 @@
              xmlns:skyWPF="clr-namespace:SkyEditor.UI.WPF;assembly=SkyEditor.UI.WPF"
              xmlns:saveEditor="clr-namespace:SkyEditor.SaveEditor;assembly=SkyEditor.SaveEditor"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:explorers="clr-namespace:SkyEditor.SaveEditor.MysteryDungeon.Explorers;assembly=SkyEditor.SaveEditor"
+             xmlns:vm="clr-namespace:SkyEditor.SaveEditor.UI.WPF.MysteryDungeon.Explorers.ViewModels"
              mc:Ignorable="d"
-             TargetType="{x:Type explorers:SkyStoredItem}"
+             TargetType="{x:Type vm:SkyItemViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <GroupBox Header="{x:Static res:Language.NewItem}" Height="110">
