@@ -28,10 +28,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Property ContainedItemID As Integer
             Get
-                Return Model.ContainedItem
+                Return Model.ContainedItemID
             End Get
             Set(value As Integer)
-                Model.ContainedItem = value
+                Model.ContainedItemID = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemID)))
             End Set
         End Property

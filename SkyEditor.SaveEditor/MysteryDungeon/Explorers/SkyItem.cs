@@ -39,7 +39,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// <exception cref="NotSupportedException">
         /// Thrown when setting the property if the item is neither a box nor a Used TM.
         /// </exception>
-        public int ContainedItem
+        public int ContainedItemID
         {
             get
             {
