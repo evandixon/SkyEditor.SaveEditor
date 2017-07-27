@@ -15,22 +15,22 @@ Namespace MysteryDungeon.Rescue.ViewModels
         Public Sub New()
             MyBase.New
 
-            HeldItems = New ObservableCollection(Of RBHeldItem)
+            HeldItems = New ObservableCollection(Of RBHeldItemViewModel)
             StoredItems = New ObservableCollection(Of RBStoredItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
-        Public Property HeldItems As ObservableCollection(Of RBHeldItem)
+        Public Property HeldItems As ObservableCollection(Of RBHeldItemViewModel)
             Get
                 Return _heldItems
             End Get
-            Private Set(value As ObservableCollection(Of RBHeldItem))
+            Private Set(value As ObservableCollection(Of RBHeldItemViewModel))
                 _heldItems = value
             End Set
         End Property
-        Private WithEvents _heldItems As ObservableCollection(Of RBHeldItem)
+        Private WithEvents _heldItems As ObservableCollection(Of RBHeldItemViewModel)
 
         Public Property StoredItems As ObservableCollection(Of RBStoredItemViewModel)
             Get
@@ -51,7 +51,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             HeldItems.Clear()
             For Each item In m.HeldItems
-                HeldItems.Add(item)
+                HeldItems.Add(New RBHeldItemViewModel(item, CurrentApplicationViewModel))
             Next
 
             StoredItems.Clear()
@@ -61,7 +61,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of RBHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemCount))
+            slots.Add(New ItemSlot(Of RBHeldItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemCount))
             slots.Add(New RBStoredItemSlot(StoredItems))
             ItemSlots = slots
         End Sub
@@ -73,7 +73,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             m.HeldItems.Clear()
             For Each item In HeldItems
-                m.HeldItems.Add(item)
+                m.HeldItems.Add(item.Model)
             Next
 
             m.StoredItems.Clear()

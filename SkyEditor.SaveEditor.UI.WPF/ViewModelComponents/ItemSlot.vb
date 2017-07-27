@@ -5,7 +5,7 @@ Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
 Namespace ViewModelComponents
-    Public Class ItemSlot(Of T)
+    Public Class ItemSlot(Of T As GenericViewModel)
         Implements IItemSlot
 
         Delegate Function CloneItem(item As T) As T

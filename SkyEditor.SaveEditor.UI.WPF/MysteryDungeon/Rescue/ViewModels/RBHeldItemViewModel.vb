@@ -1,16 +1,16 @@
 ﻿Imports System.ComponentModel
 Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
-Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
+Imports SkyEditor.SaveEditor.MysteryDungeon.Rescue
 
-Namespace MysteryDungeon.Explorers.ViewModels
-    Public Class SkyItemViewModel
-        Inherits GenericViewModel(Of SkyItem)
+Namespace MysteryDungeon.Rescue.ViewModels
+    Public Class RBHeldItemViewModel
+        Inherits GenericViewModel(Of RBHeldItem)
         Implements INotifyPropertyChanged
         Implements IClonable
 
         Public Sub New()
-            SetModel(New SkyItem())
+            SetModel(New RBHeldItem())
         End Sub
 
         Public Sub New(model As Object, appViewModel As ApplicationViewModel)
@@ -32,41 +32,30 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public ReadOnly Property Name As String
             Get
-                Return Model.Name
+                Return Model.ToString()
             End Get
         End Property
 
-        Public Property ContainedItemID As Integer
+        Public Property Parameter As Integer
             Get
-                Return Model.ContainedItemID
+                Return Model.Parameter
             End Get
             Set(value As Integer)
-                Model.ContainedItemID = value
-                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemID)))
-            End Set
-        End Property
-
-        Public Property Quantity As Integer
-            Get
-                Return Model.Quantity
-            End Get
-            Set(value As Integer)
-                Model.Quantity = value
-                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Quantity)))
+                Model.Parameter = value
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Parameter)))
             End Set
         End Property
 
         Public Function Clone() As Object Implements IClonable.Clone
             If TypeOf Model Is IClonable Then
-                Return New SkyItemViewModel(DirectCast(Model, IClonable).Clone(), CurrentApplicationViewModel)
+                Return New RBHeldItemViewModel(DirectCast(Model, IClonable).Clone(), CurrentApplicationViewModel)
             Else
-                Return New SkyItemViewModel(Model, CurrentApplicationViewModel)
+                Return New RBHeldItemViewModel(Model, CurrentApplicationViewModel)
             End If
         End Function
 
         Public Overrides Function ToString() As String
             Return If(Name, MyBase.ToString())
         End Function
-
     End Class
 End Namespace

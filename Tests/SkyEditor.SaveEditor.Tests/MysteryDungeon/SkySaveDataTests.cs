@@ -163,7 +163,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
         private void TestItem(SkyItem item, int id, int containedItem, int quantity, bool isBox, bool isUsedTM, bool isStackable)
         {
             Assert.AreEqual(id, item.ID);
-            Assert.AreEqual(containedItem, item.ContainedItem);
+            Assert.AreEqual(containedItem, item.ContainedItemID);
             Assert.AreEqual(quantity, item.Quantity);
             Assert.AreEqual(isBox, item.IsBox);
             Assert.AreEqual(isUsedTM, item.IsUsedTM);
@@ -174,7 +174,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
         {
             Assert.IsTrue(item.IsValid, "Invalid items shouldn't be accessible");
             Assert.AreEqual(id, item.ID);
-            Assert.AreEqual(containedItem, item.ContainedItem);
+            Assert.AreEqual(containedItem, item.ContainedItemID);
             Assert.AreEqual(quantity, item.Quantity);
             Assert.AreEqual(isBox, item.IsBox);
             Assert.AreEqual(isUsedTM, item.IsUsedTM);

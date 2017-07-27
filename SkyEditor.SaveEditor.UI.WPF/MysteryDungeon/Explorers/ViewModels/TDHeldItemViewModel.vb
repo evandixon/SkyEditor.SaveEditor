@@ -4,13 +4,13 @@ Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
 Namespace MysteryDungeon.Explorers.ViewModels
-    Public Class SkyItemViewModel
-        Inherits GenericViewModel(Of SkyItem)
+    Public Class TDHeldItemViewModel
+        Inherits GenericViewModel(Of TDHeldItem)
         Implements INotifyPropertyChanged
         Implements IClonable
 
         Public Sub New()
-            SetModel(New SkyItem())
+            SetModel(New TDHeldItem())
         End Sub
 
         Public Sub New(model As Object, appViewModel As ApplicationViewModel)
@@ -58,15 +58,14 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public Function Clone() As Object Implements IClonable.Clone
             If TypeOf Model Is IClonable Then
-                Return New SkyItemViewModel(DirectCast(Model, IClonable).Clone(), CurrentApplicationViewModel)
+                Return New TDHeldItemViewModel(DirectCast(Model, IClonable).Clone(), CurrentApplicationViewModel)
             Else
-                Return New SkyItemViewModel(Model, CurrentApplicationViewModel)
+                Return New TDHeldItemViewModel(Model, CurrentApplicationViewModel)
             End If
         End Function
 
         Public Overrides Function ToString() As String
             Return If(Name, MyBase.ToString())
         End Function
-
     End Class
 End Namespace
