@@ -21,7 +21,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             StoredPokemon = New ObservableCollection(Of FileViewModel)
             AllPokemon = New ObservableCollection(Of FileViewModel)
 
-            'AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
+            AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
@@ -168,11 +168,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
         '''' <summary>
         '''' Adds the selected box's selected pokemon to active Pokemon
         '''' </summary>
-        'Private Sub AddActivePokemon()
-        '    If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
-        '        ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.Model, GetPokemonIndex(SelectedBox.SelectedPokemon))
-        '    End If
-        'End Sub
+        Private Sub AddActivePokemon()
+            '    If AddToPartyCommand.IsEnabled Then 'Check to see if the selected box or Pokemon is null
+            '        ActivePokemonViewModel.AddActivePokemon(SelectedBox.SelectedPokemon.Model, GetPokemonIndex(SelectedBox.SelectedPokemon))
+            '    End If
+        End Sub
 
         Private Function GetPokemonIndex(pkm As FileViewModel)
             If _storedPlayerPartner.Contains(pkm) Then

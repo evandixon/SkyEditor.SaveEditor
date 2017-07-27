@@ -258,6 +258,22 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 End If
             End Set
         End Property
+
+        Public ReadOnly Property PokemonNames As Dictionary(Of Integer, String)
+            Get
+                Return Lists.ExplorersPokemon
+            End Get
+        End Property
+
+        Public ReadOnly Property LocationNames As Dictionary(Of Integer, String)
+            Get
+                If TypeOf Model Is TDStoredPokemon Then
+                    Return Lists.TDLocations
+                Else
+                    Return Lists.SkyLocations
+                End If
+            End Get
+        End Property
     End Class
 End Namespace
 

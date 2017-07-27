@@ -7,7 +7,7 @@ Imports SkyEditor.SaveEditor.MysteryDungeon.Rescue
 
 Namespace MysteryDungeon
     Public Class MDAttackViewModel
-        Inherits GenericViewModel(Of IMDAttack)
+        Inherits GenericViewModel(Of IMysteryDungeonNdsAttack)
         Implements INotifyPropertyChanged
         Implements INotifyModified
 
@@ -15,7 +15,7 @@ Namespace MysteryDungeon
             MyBase.New
         End Sub
 
-        Public Sub New(model As IMDAttack, appViewModel As ApplicationViewModel)
+        Public Sub New(model As IMysteryDungeonNdsAttack, appViewModel As ApplicationViewModel)
             MyBase.New(model, appViewModel)
         End Sub
 
