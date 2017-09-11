@@ -473,7 +473,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
                 if (special.IsValid)
                 {
-                    SpEpisodeActivePokemon.Add(main);
+                    SpEpisodeActivePokemon.Add(special);
                 }
             }
         }
