@@ -157,5 +157,17 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         public BitBlock IQMap { get; set; }
         public int Tactic { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            if (IsValid)
+            {
+                return string.Format(Resources.Language.SkyStoredPokemonToString, Name, Level, Lists.ExplorersPokemon[ID.ID]);
+            }
+            else
+            {
+                return Resources.Language.BlankPokemon;
+            }
+        }
     }
 }
