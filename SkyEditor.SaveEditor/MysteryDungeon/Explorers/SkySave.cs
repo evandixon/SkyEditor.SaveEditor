@@ -43,7 +43,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             public virtual int ActivePokemon4RosterIndexOffset => 0x83D7 * 8 + 1;
             public virtual int ActivePokemonOffset => 0x83D9 * 8 + 1;
             public virtual int SpActivePokemonOffset => 0x84F4 * 8 + 2;
-            public virtual int ActivePokemonLength => 564;
+            public virtual int ActivePokemonLength => 546;
             public virtual int ActivePokemonCount => 4;
 
             // Quicksave Pokemon
