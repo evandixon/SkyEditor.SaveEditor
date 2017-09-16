@@ -6,6 +6,7 @@
     <Company>Evan Dixon</Company>
     <Description>Save editing library for Pokemon Mystery Dungeon games.</Description>
     <Copyright>2016-2017</Copyright>
+    <Version>4.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
