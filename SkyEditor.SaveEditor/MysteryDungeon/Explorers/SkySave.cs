@@ -156,7 +156,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// <summary>
         /// Updates all checksums to match current save data
         /// </summary>
-        protected void RecalculateChecksums()
+        public void RecalculateChecksums()
         {
             PrimaryChecksum = CalculatePrimaryChecksum();
             SecondaryChecksum = CalculateSecondaryChecksum();
@@ -239,12 +239,12 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadGeneral(int baseOffset)
         {
-            TeamName = Bits.GetStringPMD(0, baseOffset + Offsets.TeamNameStart, Offsets.TeamNameLength);
-            HeldMoney = Bits.GetInt(0, baseOffset + Offsets.HeldMoney, 24);
-            SpEpisodeHeldMoney = Bits.GetInt(0, baseOffset + Offsets.SpEpisodeHeldMoney, 24);
-            StoredMoney = Bits.GetInt(0, baseOffset + Offsets.StoredMoney, 24);
-            NumberOfAdventures = Bits.GetInt(0, baseOffset + Offsets.NumberOfAdventures, 32);
-            ExplorerRankPoints = Bits.GetInt(0, baseOffset + Offsets.ExplorerRank, 32);
+            TeamName = Bits.GetStringPMD(baseOffset, Offsets.TeamNameStart, Offsets.TeamNameLength);
+            HeldMoney = Bits.GetInt(baseOffset, Offsets.HeldMoney, 24);
+            SpEpisodeHeldMoney = Bits.GetInt(baseOffset, Offsets.SpEpisodeHeldMoney, 24);
+            StoredMoney = Bits.GetInt(baseOffset, Offsets.StoredMoney, 24);
+            NumberOfAdventures = Bits.GetInt(baseOffset, Offsets.NumberOfAdventures, 32);
+            ExplorerRankPoints = Bits.GetInt(baseOffset, Offsets.ExplorerRank, 32);
         }
 
         private void SaveGeneral()
@@ -284,8 +284,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         {
             // Stored items
             StoredItems = new List<SkyItem>();
-            var ids = Bits.GetRange(baseOffset + Offsets.StoredItemOffset, 11 * 1000);
-            var parameters = Bits.GetRange(baseOffset + Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
+            var ids = Bits.GetRange(baseOffset * 8 + Offsets.StoredItemOffset, 11 * 1000);
+            var parameters = Bits.GetRange(baseOffset * 8 + Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
             for (int i = 0; i < 1000; i++)
             {
                 var id = ids.GetNextInt(11);
@@ -308,7 +308,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Main Game
             for (int i = 0; i < 50; i++)
             {
-                var item = new SkyHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new SkyHeldItem(Bits.GetRange(baseOffset * 8 + Offsets.HeldItemOffset + (i * 33), 33));
                 if (item.IsValid)
                 {
                     HeldItems.Add(item);
@@ -322,7 +322,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Sp. Episode
             for (int i = 50; i < 100; i++)
             {
-                var item = new SkyHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new SkyHeldItem(Bits.GetRange(baseOffset * 8 + Offsets.HeldItemOffset + (i * 33), 33));
                 if (item.IsValid)
                 {
                     SpEpisodeHeldItems.Add(item);
@@ -336,7 +336,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Friend Rescue
             for (int i = 100; i < 150; i++)
             {
-                var item = new SkyHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new SkyHeldItem(Bits.GetRange(baseOffset * 8 + Offsets.HeldItemOffset + (i * 33), 33));
                 if (item.IsValid)
                 {
                     FriendRescueHeldItems.Add(item);
@@ -420,7 +420,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             StoredPokemon = new List<SkyStoredPokemon>();
             for (int i = 0; i < Offsets.StoredPokemonCount; i++)
             {
-                var pkm = new SkyStoredPokemon(Bits.GetRange(baseOffset + Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength));
+                var pkm = new SkyStoredPokemon(Bits.GetRange(baseOffset * 8 + Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength));
 
                 if (!pkm.IsValid)
                 {
@@ -454,17 +454,17 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadActivePokemon(int baseOffset)
         {
-            ActivePokemon1RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon1RosterIndexOffset, 16);
-            ActivePokemon2RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon2RosterIndexOffset, 16);
-            ActivePokemon3RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon3RosterIndexOffset, 16);
-            ActivePokemon4RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon4RosterIndexOffset, 16);
+            ActivePokemon1RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon1RosterIndexOffset, 16);
+            ActivePokemon2RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon2RosterIndexOffset, 16);
+            ActivePokemon3RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon3RosterIndexOffset, 16);
+            ActivePokemon4RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon4RosterIndexOffset, 16);
 
             ActivePokemon = new List<SkyActivePokemon>();
             SpEpisodeActivePokemon = new List<SkyActivePokemon>();
             for (int i = 0; i < Offsets.ActivePokemonCount; i++)
             {
-                var main = new SkyActivePokemon(Bits.GetRange(baseOffset + Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
-                var special = new SkyActivePokemon(Bits.GetRange(baseOffset + Offsets.SpActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
+                var main = new SkyActivePokemon(Bits.GetRange(baseOffset * 8 + Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
+                var special = new SkyActivePokemon(Bits.GetRange(baseOffset * 8 + Offsets.SpActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
 
                 if (main.IsValid)
                 {
@@ -562,7 +562,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             QuicksavePokemon = new List<SkyQuicksavePokemon>();
             for (int i = 0; i < Offsets.QuicksavePokemonCount; i++)
             {
-                QuicksavePokemon.Add(new SkyQuicksavePokemon(Bits.GetRange(baseOffset + Offsets.QuicksavePokemonOffset, Offsets.QuicksavePokemonLength)));
+                QuicksavePokemon.Add(new SkyQuicksavePokemon(Bits.GetRange(baseOffset * 8 + Offsets.QuicksavePokemonOffset, Offsets.QuicksavePokemonLength)));
             }
         }
 
@@ -609,10 +609,10 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadHistory(int baseOffset)
         {
-            OriginalPlayerPokemon = new ExplorersPokemonId(Bits.GetInt(0, baseOffset + Offsets.OriginalPlayerID, 16));
-            OriginalPartnerPokemon = new ExplorersPokemonId(Bits.GetInt(0, baseOffset + Offsets.OriginalPartnerID, 16));
-            OriginalPlayerName = Bits.GetStringPMD(0, baseOffset + Offsets.OriginalPlayerName, 10);
-            OriginalPartnerName = Bits.GetStringPMD(0, baseOffset + Offsets.OriginalPartnerName, 10);
+            OriginalPlayerPokemon = new ExplorersPokemonId(Bits.GetInt(baseOffset, Offsets.OriginalPlayerID, 16));
+            OriginalPartnerPokemon = new ExplorersPokemonId(Bits.GetInt(baseOffset, Offsets.OriginalPartnerID, 16));
+            OriginalPlayerName = Bits.GetStringPMD(baseOffset, Offsets.OriginalPlayerName, 10);
+            OriginalPartnerName = Bits.GetStringPMD(baseOffset, Offsets.OriginalPartnerName, 10);
         }
 
         private void SaveHistory()
@@ -634,7 +634,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadSettings(int baseOffset)
         {
-            WindowFrameType = (byte)(Bits.GetInt(0, baseOffset + Offsets.WindowFrameType, 3) + 1);
+            WindowFrameType = (byte)(Bits.GetInt(baseOffset, Offsets.WindowFrameType, 3) + 1);
         }
 
         public void SaveSettings()
@@ -687,7 +687,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             SaveSettings();
 
             // Copy primary save to backup save
-            Bits.SetRange(Offsets.BackupSaveStart + 4, Bits.GetRange(4, Offsets.BackupSaveStart - 4));
+            Bits.SetRange(Offsets.BackupSaveStart * 8 + 4, Bits.GetRange(4, Offsets.BackupSaveStart * 8 - 4));
 
             // Checksums
             RecalculateChecksums();
