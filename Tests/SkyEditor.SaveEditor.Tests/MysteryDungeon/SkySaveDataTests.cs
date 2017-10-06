@@ -2,6 +2,7 @@
 using SkyEditor.SaveEditor.MysteryDungeon.Explorers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
@@ -11,9 +12,14 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
     {
         public const string TestCategory = "Explorers of Sky Data Tests";
 
+        private byte[] GetTestSaveData()
+        {
+            return DataUtil.GetBinaryResource("EoS.sav");
+        }
+
         private SkySave GetTestSave()
         {
-            return new SkySave(DataUtil.GetBinaryResource("EoS.sav"));
+            return new SkySave(GetTestSaveData());
         }
 
         [TestMethod]
@@ -28,11 +34,27 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             Assert.AreEqual(save.PrimaryChecksum, save.SecondaryChecksum, "Primary and backup checksums should match.");
         }
 
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void TestFixChecksums()
+        {
+            var save = GetTestSave();
+            var save2 = GetTestSave();
+
+            save2.RecalculateChecksums();
+
+            Assert.AreEqual(save.PrimaryChecksum, save2.PrimaryChecksum);
+            Assert.AreEqual(save.SecondaryChecksum, save2.SecondaryChecksum);
+            Assert.AreEqual(save.QuicksaveChecksum, save2.QuicksaveChecksum);
+
+            Assert.AreEqual(save.PrimaryChecksum, save.SecondaryChecksum, "Primary and backup checksums should match.");
+        }
+
         #region General
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void TeamName_Read()
+        public void General_TeamName_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual("Blue", save.TeamName);
@@ -40,7 +62,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void TeamName_Write()
+        public void General_TeamName_Write()
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
@@ -49,7 +71,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Adventres_Read()
+        public void General_Adventres_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual(128, save.NumberOfAdventures);
@@ -57,7 +79,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Adventures_Write()
+        public void General_Adventures_Write()
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
@@ -66,7 +88,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void ExplorersRank_Read()
+        public void General_ExplorersRank_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual(SkyExplorerRank.Diamond, save.ExplorerRank);
@@ -75,7 +97,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void ExplorersRank_Edit()
+        public void General_ExplorersRank_Edit()
         {
             var save = GetTestSave();
 
@@ -90,7 +112,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void ExplorersRankPoints_Read()
+        public void General_ExplorersRankPoints_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual(3820, save.ExplorerRankPoints);
@@ -98,7 +120,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void ExplorersRankPoints_Write()
+        public void General_ExplorersRankPoints_Write()
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
@@ -107,7 +129,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void StoredMoney_Read()
+        public void General_StoredMoney_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual(44459, save.StoredMoney);
@@ -115,7 +137,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void StoredMoney_Write()
+        public void General_StoredMoney_Write()
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
@@ -124,7 +146,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void HeldMoney_Read()
+        public void General_HeldMoney_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual(42, save.HeldMoney);
@@ -132,7 +154,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void HeldMoney_Write()
+        public void General_HeldMoney_Write()
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
@@ -141,7 +163,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void SpEpisodeHeldMoney_Read()
+        public void General_SpEpisodeHeldMoney_Read()
         {
             var save = GetTestSave();
             Assert.AreEqual(0, save.SpEpisodeHeldMoney);
@@ -149,7 +171,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void SpEpisodeHeldMoney_Write()
+        public void General_SpEpisodeHeldMoney_Write()
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
@@ -237,6 +259,12 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
             TestStoredItems(newSave);
+
+            // Test raw data
+            for (int i = 0; i < save.StoredItems.Count; i++)
+            {
+                Assert.AreEqual(save.StoredItems[i], newSave.StoredItems[i]);
+            }
         }
 
         private void TestHeldItems(SkySave save)
@@ -273,6 +301,12 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
             TestHeldItems(newSave);
+
+            // Test raw data
+            for (int i = 0; i < save.HeldItems.Count; i++)
+            {
+                Assert.AreEqual(save.HeldItems[i], newSave.HeldItems[i]);
+            }
         }
 
         public void EnsureNoSpEpisodeHeldItems()
@@ -321,6 +355,12 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
             TestStoredPokemon(newSave);
+
+            // Ensure raw data is equal
+            for (int i = 0; i < save.StoredPokemon.Count; i++)
+            {
+                Assert.IsTrue(save.StoredPokemon[i].GetStoredPokemonBits().Bits.SequenceEqual(newSave.StoredPokemon[i].GetStoredPokemonBits().Bits));
+            }
         }
 
         #endregion
@@ -349,7 +389,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
         public void ActivePokemon_Read()
         {
             var save = GetTestSave();
-            TestStoredPokemon(save);
+            TestActivePokemon(save);
         }
 
         [TestMethod]
@@ -358,7 +398,14 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
         {
             var save = GetTestSave();
             var newSave = new SkySave(save.ToByteArray());
-            TestStoredPokemon(newSave);
+
+            TestActivePokemon(newSave);
+
+            // Ensure raw data is equal
+            for (int i = 0; i < save.ActivePokemon.Count; i++)
+            {
+                Assert.IsTrue(save.ActivePokemon[i].GetActivePokemonBits().Bits.SequenceEqual(newSave.ActivePokemon[i].GetActivePokemonBits().Bits));
+            }
         }
 
         #endregion

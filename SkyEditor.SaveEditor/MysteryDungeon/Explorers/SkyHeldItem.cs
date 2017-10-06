@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -93,6 +94,21 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         public override object Clone()
         {
             return new SkyHeldItem(this.ToBitBlock());
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is SkyHeldItem && ToBitBlock().Bits.SequenceEqual((obj as SkyHeldItem).ToBitBlock().Bits);
+        }
+
+        public static bool operator ==(SkyHeldItem x, SkyHeldItem y)
+        {
+            return x.Equals(y);
+        }
+
+        public static bool operator !=(SkyHeldItem x, SkyHeldItem y)
+        {
+            return (!(x == y));
         }
     }
 }

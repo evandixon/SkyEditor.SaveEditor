@@ -144,5 +144,20 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is SkyItem && ID == (obj as SkyItem).ID && Parameter == (obj as SkyItem).Parameter;
+        }
+
+        public static bool operator ==(SkyItem x, SkyItem y)
+        {
+            return x.Equals(y);
+        }
+
+        public static bool operator !=(SkyItem x, SkyItem y)
+        {
+            return (!(x == y));
+        }
     }
 }
