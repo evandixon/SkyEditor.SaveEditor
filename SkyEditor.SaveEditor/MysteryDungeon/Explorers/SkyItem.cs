@@ -138,6 +138,11 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             return obj is SkyItem && ID == (obj as SkyItem).ID && Parameter == (obj as SkyItem).Parameter;
         }
 
+        public override int GetHashCode()
+        {
+            return ID ^ Parameter;
+        }
+
         public static bool operator ==(SkyItem x, SkyItem y)
         {
             return x.Equals(y);

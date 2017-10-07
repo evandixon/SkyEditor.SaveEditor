@@ -101,6 +101,11 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             return obj is SkyHeldItem && ToBitBlock().Bits.SequenceEqual((obj as SkyHeldItem).ToBitBlock().Bits);
         }
 
+        public override int GetHashCode()
+        {
+            return ID ^ Parameter ^ (int)Holder ^ (Flag1 ? 1 : 0) ^ (Flag2 ? 2 : 0) ^ (Flag3 ? 4 : 0) ^ (Flag4 ? 8 : 0) ^ (Flag5 ? 16 : 0) ^ (Flag6 ? 32 : 0) ^ (Flag7 ? 64 : 0);
+        }
+
         public static bool operator ==(SkyHeldItem x, SkyHeldItem y)
         {
             return x.Equals(y);
