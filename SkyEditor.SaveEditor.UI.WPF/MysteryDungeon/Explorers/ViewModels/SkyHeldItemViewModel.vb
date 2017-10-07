@@ -26,9 +26,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 Model.ID = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ID)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Name)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Quantity)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsBox)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsUsedTM)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsStackableItem)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(StackVisibility)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(CanContainItem)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemVisibility)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemChoices)))
             End Set
@@ -80,9 +83,15 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Get
         End Property
 
+        Public ReadOnly Property IsStackableItem As Boolean
+            Get
+                Return Model.IsStackableItem
+            End Get
+        End Property
+
         Public ReadOnly Property StackVisibility As Visibility
             Get
-                If Model.IsStackableItem Then
+                If IsStackableItem Then
                     Return Visibility.Visible
                 Else
                     Return Visibility.Collapsed
@@ -90,9 +99,15 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Get
         End Property
 
+        Public ReadOnly Property CanContainItem As Boolean
+            Get
+                Return IsBox OrElse IsUsedTM
+            End Get
+        End Property
+
         Public ReadOnly Property ContainedItemVisibility As Visibility
             Get
-                If IsBox OrElse IsUsedTM Then
+                If CanContainItem Then
                     Return Visibility.Visible
                 Else
                     Return Visibility.Collapsed

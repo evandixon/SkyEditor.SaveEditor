@@ -286,9 +286,6 @@
     <Compile Include="MysteryDungeon\Explorers\Views\SkyQuicksaveTab.xaml.vb">
       <DependentUpon>SkyQuicksaveTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MysteryDungeon\Explorers\Views\SkyStoredItemEditView.xaml.vb">
-      <DependentUpon>SkyStoredItemEditView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MysteryDungeon\Explorers\Views\TDGeneralTab.xaml.vb">
       <DependentUpon>TDGeneralTab.xaml</DependentUpon>
     </Compile>
@@ -383,10 +380,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MysteryDungeon\Explorers\Views\SkyQuicksaveTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MysteryDungeon\Explorers\Views\SkyStoredItemEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -86,6 +86,17 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             {
                 if (IsStackableItem)
                 {
+                    // Ensure parameter is within bounds                    
+                    if (Parameter < -1)
+                    {
+                        Parameter = 0;
+                    }
+
+                    if (Parameter > 127 )
+                    {
+                        Parameter = 127;
+                    }
+
                     return Parameter;
                 }
                 else
