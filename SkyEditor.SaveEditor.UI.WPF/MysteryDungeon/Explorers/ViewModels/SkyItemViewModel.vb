@@ -29,6 +29,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Name)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsBox)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsUsedTM)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(StackVisibility)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemVisibility)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemChoices)))
             End Set
@@ -47,6 +48,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             Set(value As Integer)
                 Model.ContainedItemID = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemID)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemName)))
             End Set
         End Property
 
@@ -75,6 +77,16 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public ReadOnly Property IsUsedTM As Boolean
             Get
                 Return Model.IsUsedTM
+            End Get
+        End Property
+
+        Public ReadOnly Property StackVisibility As Visibility
+            Get
+                If Model.IsStackableItem Then
+                    Return Visibility.Visible
+                Else
+                    Return Visibility.Collapsed
+                End If
             End Get
         End Property
 

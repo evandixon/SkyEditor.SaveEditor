@@ -151,6 +151,9 @@
     <Compile Include="MysteryDungeon\Explorers\Views\SkyItemEditView.xaml.vb">
       <DependentUpon>SkyItemEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MysteryDungeon\Explorers\Views\SkyHeldItemView.xaml.vb">
+      <DependentUpon>SkyHeldItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MysteryDungeon\Explorers\Views\SkyStoredItemView.xaml.vb">
       <DependentUpon>SkyStoredItemView.xaml</DependentUpon>
     </Compile>
@@ -324,6 +327,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MysteryDungeon\Explorers\Views\SkyItemEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MysteryDungeon\Explorers\Views\SkyHeldItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
