@@ -17,6 +17,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             StoredItems = New ObservableCollection(Of SkyItemViewModel)
             HeldItems = New ObservableCollection(Of SkyHeldItemViewModel)
             SpEpisodeHeldItems = New ObservableCollection(Of SkyHeldItemViewModel)
+            FriendRescueHeldItems = New ObservableCollection(Of SkyHeldItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
@@ -57,6 +58,16 @@ Namespace MysteryDungeon.Explorers.ViewModels
         End Property
         Private WithEvents _spEpisodeItems As ObservableCollection(Of SkyHeldItemViewModel)
 
+        Public Property FriendRescueHeldItems As ObservableCollection(Of SkyHeldItemViewModel)
+            Get
+                Return _friendRescueHeldItems
+            End Get
+            Private Set(value As ObservableCollection(Of SkyHeldItemViewModel))
+                _friendRescueHeldItems = value
+            End Set
+        End Property
+        Private WithEvents _friendRescueHeldItems As ObservableCollection(Of SkyHeldItemViewModel)
+
         Public Overrides ReadOnly Property SortOrder As Integer
             Get
                 Return 1
@@ -85,11 +96,17 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 SpEpisodeHeldItems.Add(New SkyHeldItemViewModel(item, CurrentApplicationViewModel))
             Next
 
+            FriendRescueHeldItems.Clear()
+            For Each item In m.FriendRescueHeldItems
+                FriendRescueHeldItems.Add(New SkyHeldItemViewModel(item, CurrentApplicationViewModel))
+            Next
+
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
             slots.Add(New ItemSlot(Of SkyItemViewModel)(My.Resources.Language.StoredItemsSlot, StoredItems, 1000))
             slots.Add(New ItemSlot(Of SkyHeldItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 50))
             slots.Add(New ItemSlot(Of SkyHeldItemViewModel)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, 50))
+            slots.Add(New ItemSlot(Of SkyHeldItemViewModel)(My.Resources.Language.FriendRescueHeldItems, FriendRescueHeldItems, 50))
             ItemSlots = slots
         End Sub
 
@@ -111,6 +128,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
             m.SpEpisodeHeldItems.Clear()
             For Each item In SpEpisodeHeldItems
                 m.SpEpisodeHeldItems.Add(item.Model)
+            Next
+
+            m.FriendRescueHeldItems.Clear()
+            For Each item In FriendRescueHeldItems
+                m.FriendRescueHeldItems.Add(item.Model)
             Next
         End Sub
     End Class

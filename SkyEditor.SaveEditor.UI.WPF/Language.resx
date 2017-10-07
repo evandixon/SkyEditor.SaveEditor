@@ -380,4 +380,7 @@ For stackable items like sticks and spikes, this lets you control how much is in
   <data name="AddToPartyContext" xml:space="preserve">
     <value>_Add to Party</value>
   </data>
+  <data name="FriendRescueHeldItems" xml:space="preserve">
+    <value>Friend Rescue Held Items</value>
+  </data>
 </root>
