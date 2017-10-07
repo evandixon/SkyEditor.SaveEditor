@@ -9,6 +9,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
     {
         public SkyHeldItem()
         {
+            IsValid = true;
         }
 
         public SkyHeldItem(int id, int parameter) : base(id, parameter)
