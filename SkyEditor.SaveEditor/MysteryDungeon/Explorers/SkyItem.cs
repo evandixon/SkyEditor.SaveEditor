@@ -30,14 +30,11 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             : string.Format(Language.UnknownItem, ID.ToString());
 
         /// <summary>
-        /// The contained item if this is a box or a used TM
+        /// Gets or sets the contained item if this is a box or a used TM. If this is not a box or a used TM, this will return 0, and changes will not be applied.
         /// </summary>
         /// <exception cref="IndexOutOfRangeException">
         /// If the item is a Used TM (when the ID is 187), thrown when setting the property if the target value is not a TM item (if the value is less than 188).
         /// If the item is a box, thrown when setting the property if the target value is out of range.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Thrown when setting the property if the item is neither a box nor a Used TM.
         /// </exception>
         public int ContainedItemID
         {
@@ -76,19 +73,13 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
                     Parameter = value;
                 }
-                else
-                {
-                    throw new NotSupportedException(Language.Error_CantChangeContainedItem);
-                }
+                // else do nothing
             }
         }
 
         /// <summary>
-        /// The number of items in the stack.
+        /// Gets or sets the number of items in the stack. If the item is not stackable, this will always return 1, and changes will not apply.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        /// Thrown when setting the property if the current item is not stackable.
-        /// </exception>
         public int Quantity
         {
             get
@@ -108,10 +99,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
                 {
                     Parameter = value;
                 }
-                else
-                {
-                    throw new NotSupportedException(Language.Error_CantChangeItemQuantity);
-                }
+                // else do nothing
             }
         }
 

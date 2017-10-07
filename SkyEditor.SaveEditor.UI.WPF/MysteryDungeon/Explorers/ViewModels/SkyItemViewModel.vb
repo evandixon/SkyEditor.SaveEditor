@@ -27,6 +27,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 Model.ID = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ID)))
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Name)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsBox)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsUsedTM)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemVisibility)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemChoices)))
             End Set
         End Property
 
@@ -46,6 +50,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
+        Public ReadOnly Property ContainedItemName As String
+            Get
+                Return Lists.SkyItems(ContainedItemID)
+            End Get
+        End Property
+
         Public Property Quantity As Integer
             Get
                 Return Model.Quantity
@@ -54,6 +64,40 @@ Namespace MysteryDungeon.Explorers.ViewModels
                 Model.Quantity = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Quantity)))
             End Set
+        End Property
+
+        Public ReadOnly Property IsBox As Boolean
+            Get
+                Return Model.IsBox
+            End Get
+        End Property
+
+        Public ReadOnly Property IsUsedTM As Boolean
+            Get
+                Return Model.IsUsedTM
+            End Get
+        End Property
+
+        Public ReadOnly Property ContainedItemVisibility As Visibility
+            Get
+                If IsBox OrElse IsUsedTM Then
+                    Return Visibility.Visible
+                Else
+                    Return Visibility.Collapsed
+                End If
+            End Get
+        End Property
+
+        Public ReadOnly Property ContainedItemChoices As Dictionary(Of Integer, String)
+            Get
+                If IsBox Then
+                    Return Lists.SkyItems
+                ElseIf IsUsedTM Then
+                    Return Lists.SkyItemsMovesOnly
+                Else
+                    Return New Dictionary(Of Integer, String)
+                End If
+            End Get
         End Property
 
         Public Function Clone() As Object Implements IClonable.Clone
