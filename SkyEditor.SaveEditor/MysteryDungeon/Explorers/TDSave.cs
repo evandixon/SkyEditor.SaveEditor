@@ -278,14 +278,14 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // Held items
             for (int i = 0; i < 50; i++)
             {
-                var index = Offsets.HeldItemOffset + i * 33;
+                var index = Offsets.HeldItemOffset + i * Offsets.HeldItemLength;
                 if (HeldItems.Count > i)
                 {
-                    Bits.SetRange(index, 33, HeldItems[i].ToBitBlock());
+                    Bits.SetRange(index, Offsets.HeldItemLength, HeldItems[i].ToBitBlock());
                 }
                 else
                 {
-                    Bits.SetRange(index, 33, new BitBlock(33));
+                    Bits.SetRange(index, Offsets.HeldItemLength, new BitBlock(Offsets.HeldItemLength));
                 }
             }           
         }
