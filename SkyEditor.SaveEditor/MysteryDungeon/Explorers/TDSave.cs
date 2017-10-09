@@ -220,8 +220,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         {
             //// Stored items
             //StoredItems = new List<TDHeldItem>();
-            //var ids = Bits.GetRange(baseOffset + Offsets.StoredItemOffset, 11 * 1000);
-            //var parameters = Bits.GetRange(baseOffset + Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
+            //var ids = Bits.GetRange(baseOffset * 8 + Offsets.StoredItemOffset, 11 * 1000);
+            //var parameters = Bits.GetRange(baseOffset * 8 + Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
             //for (int i = 0; i < 1000; i++)
             //{
             //    var id = ids.GetNextInt(11);
@@ -242,7 +242,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Main Game
             for (int i = 0; i < 50; i++)
             {
-                var item = new TDHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * Offsets.HeldItemLength), Offsets.HeldItemLength));
+                var item = new TDHeldItem(Bits.GetRange(baseOffset * 8 + Offsets.HeldItemOffset + (i * Offsets.HeldItemLength), Offsets.HeldItemLength));
                 if (item.IsValid)
                 {
                     HeldItems.Add(item);
@@ -298,7 +298,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             StoredPokemon = new List<TDStoredPokemon>();
             for (int i = 0; i < Offsets.StoredPokemonCount; i++)
             {
-                var pkm = new TDStoredPokemon(Bits.GetRange(baseOffset + Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength));
+                var pkm = new TDStoredPokemon(Bits.GetRange(baseOffset * 8 + Offsets.StoredPokemonOffset + i * Offsets.StoredPokemonLength, Offsets.StoredPokemonLength));
 
                 if (!pkm.IsValid)
                 {
@@ -332,15 +332,15 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadActivePokemon(int baseOffset)
         {
-            //ActivePokemon1RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon1RosterIndexOffset, 16);
-            //ActivePokemon2RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon2RosterIndexOffset, 16);
-            //ActivePokemon3RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon3RosterIndexOffset, 16);
-            //ActivePokemon4RosterIndex = Bits.GetInt(0, baseOffset + Offsets.ActivePokemon4RosterIndexOffset, 16);
+            //ActivePokemon1RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon1RosterIndexOffset, 16);
+            //ActivePokemon2RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon2RosterIndexOffset, 16);
+            //ActivePokemon3RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon3RosterIndexOffset, 16);
+            //ActivePokemon4RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon4RosterIndexOffset, 16);
 
             ActivePokemon = new List<TDActivePokemon>();
             for (int i = 0; i < Offsets.ActivePokemonCount; i++)
             {
-                var main = new TDActivePokemon(Bits.GetRange(baseOffset + Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
+                var main = new TDActivePokemon(Bits.GetRange(baseOffset * 8 + Offsets.ActivePokemonOffset + i * Offsets.ActivePokemonLength, Offsets.ActivePokemonLength));
                 
                 if (main.IsValid)
                 {
