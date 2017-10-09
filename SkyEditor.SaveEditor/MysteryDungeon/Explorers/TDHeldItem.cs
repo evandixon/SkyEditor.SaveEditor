@@ -25,7 +25,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Flag4 = bits[4];
             Flag5 = bits[5];
             Flag6 = bits[6];
-            Parameter = bits.GetInt(0, 7, 11);
+            Flag7 = bits[7];
+            Parameter = bits.GetInt(0, 8, 10);
             ID = bits.GetInt(0, 18, 10);
 
             var heldBy = bits.GetInt(0, 28, 3);
@@ -61,8 +62,9 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             bits[4] = Flag4;
             bits[5] = Flag5;
             bits[6] = Flag6;
+            bits[7] = Flag7;
 
-            bits.SetInt(0, 7, 11, Parameter);
+            bits.SetInt(0, 8, 10, Parameter);
             bits.SetInt(0, 18, 10, ID);
             bits.SetInt(0, 28, 3, (int)Holder);
 
@@ -84,6 +86,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         protected bool Flag4 { get; set; }
         protected bool Flag5 { get; set; }
         protected bool Flag6 { get; set; }
+        protected bool Flag7 { get; set; }
 
         public ItemHolder Holder { get; set; }
 
