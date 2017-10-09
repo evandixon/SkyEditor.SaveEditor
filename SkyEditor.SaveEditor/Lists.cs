@@ -16,8 +16,9 @@ namespace SkyEditor.SaveEditor
         public static Dictionary<int, string> RBMoves { get; } = BasicIniDictionaryFile.GetDictionary(ListResources.RBMoves);
 
         public static Dictionary<int, string> SkyItems { get; } = BasicIniDictionaryFile.GetDictionary(ListResources.SkyItems);
-        public static Dictionary<int, string> SkyItemsMovesOnly { get; } = SkyItems.Where(x => x.Key >= 188).ToDictionary(x => x.Key, x => x.Value);
+        public static Dictionary<int, string> SkyItemsMovesOnly { get; } = SkyItems.Where(x => x.Key >= 188 && x.Key < 364).ToDictionary(x => x.Key, x => x.Value);
         public static Dictionary<int, string> TDItems { get; } = BasicIniDictionaryFile.GetDictionary(ListResources.TDItems);
+        public static Dictionary<int, string> TDItemsMovesOnly { get; } = TDItems.Where(x => x.Key >= 188 && x.Key < 364).ToDictionary(x => x.Key, x => x.Value);
         public static Dictionary<int, string> RBItems { get; } = BasicIniDictionaryFile.GetDictionary(ListResources.RBItems);
 
         public static Dictionary<int, string> ExplorersPokemon { get; } = BasicIniDictionaryFile.GetDictionary(ListResources.SkyPokemon);

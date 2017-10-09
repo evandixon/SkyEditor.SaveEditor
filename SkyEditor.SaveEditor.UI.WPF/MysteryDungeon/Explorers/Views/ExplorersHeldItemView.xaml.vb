@@ -4,7 +4,7 @@ Imports SkyEditor.UI.WPF
 Imports SkyEditor.SaveEditor.UI.WPF.MysteryDungeon.Explorers.ViewModels
 
 Namespace MysteryDungeon.Explorers
-    Public Class SkyHeldItemView
+    Public Class ExplorersHeldItemView
         Inherits DataBoundViewControl
 
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
@@ -12,7 +12,7 @@ Namespace MysteryDungeon.Explorers
         End Function
 
         Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(ObservableCollection(Of SkyHeldItemViewModel)).GetTypeInfo}
+            Return {GetType(ObservableCollection(Of SkyHeldItemViewModel)).GetTypeInfo, GetType(ObservableCollection(Of TDHeldItemViewModel)).GetTypeInfo}
         End Function
 
         Private Sub gvItems_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles gvItems.SelectionChanged
