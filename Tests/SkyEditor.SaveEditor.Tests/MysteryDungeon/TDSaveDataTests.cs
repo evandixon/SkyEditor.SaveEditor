@@ -265,7 +265,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
             // Partner
             Assert.AreEqual(152, save.ActivePokemon[1].ID.ID);
-            Assert.AreEqual(false, save.ActivePokemon[1].ID.IsFemale);
+            Assert.AreEqual(true, save.ActivePokemon[1].ID.IsFemale);
             Assert.AreEqual(49, save.ActivePokemon[1].Level);
             Assert.AreEqual("Chikorita", save.ActivePokemon[1].Name);
         }
