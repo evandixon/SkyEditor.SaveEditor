@@ -14,22 +14,22 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Sub New()
             MyBase.New
 
-            HeldItems = New ObservableCollection(Of TDHeldItemViewModel)
+            HeldItems = New ObservableCollection(Of ExplorersItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
 
-        Public Property HeldItems As ObservableCollection(Of TDHeldItemViewModel)
+        Public Property HeldItems As ObservableCollection(Of ExplorersItemViewModel)
             Get
                 Return _heldItems
             End Get
-            Private Set(value As ObservableCollection(Of TDHeldItemViewModel))
+            Private Set(value As ObservableCollection(Of ExplorersItemViewModel))
                 _heldItems = value
             End Set
         End Property
-        Private WithEvents _heldItems As ObservableCollection(Of TDHeldItemViewModel)
+        Private WithEvents _heldItems As ObservableCollection(Of ExplorersItemViewModel)
 
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
@@ -39,12 +39,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
             'Set the lists
             HeldItems.Clear()
             For Each item In m.HeldItems
-                HeldItems.Add(New TDHeldItemViewModel(item, CurrentApplicationViewModel))
+                HeldItems.Add(New ExplorersItemViewModel(item, CurrentApplicationViewModel))
             Next
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of TDHeldItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 48))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 48))
             ItemSlots = slots
         End Sub
 

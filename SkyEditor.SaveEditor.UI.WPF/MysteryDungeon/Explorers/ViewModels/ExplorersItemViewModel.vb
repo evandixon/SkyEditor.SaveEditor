@@ -4,12 +4,13 @@ Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
 Namespace MysteryDungeon.Explorers.ViewModels
-    Public Class SkyHeldItemViewModel
-        Inherits GenericViewModel(Of SkyHeldItem)
+    Public Class ExplorersItemViewModel
+        Inherits GenericViewModel(Of SkyItem)
         Implements INotifyPropertyChanged
         Implements IClonable
+
         Public Sub New()
-            SetModel(New SkyHeldItem())
+            SetModel(New SkyItem())
         End Sub
 
         Public Sub New(model As Object, appViewModel As ApplicationViewModel)
@@ -50,14 +51,17 @@ Namespace MysteryDungeon.Explorers.ViewModels
             Set(value As Integer)
                 Model.ContainedItemID = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemID)))
-
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ContainedItemName)))
             End Set
         End Property
 
         Public ReadOnly Property ContainedItemName As String
             Get
-                Return Lists.SkyItems(ContainedItemID)
+                If TypeOf Model Is TDHeldItem Then
+                    Return Lists.TDItems(ContainedItemID)
+                Else
+                    Return Lists.SkyItems(ContainedItemID)
+                End If
             End Get
         End Property
 
@@ -117,26 +121,37 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         Public ReadOnly Property ContainedItemChoices As Dictionary(Of Integer, String)
             Get
-                If IsBox Then
-                    Return Lists.SkyItems
-                ElseIf IsUsedTM Then
-                    Return Lists.SkyItemsMovesOnly
+                If TypeOf Model Is TDHeldItem Then
+                    If IsBox Then
+                        Return Lists.TDItems
+                    ElseIf IsUsedTM Then
+                        Return Lists.TDItemsMovesOnly
+                    Else
+                        Return New Dictionary(Of Integer, String)
+                    End If
                 Else
-                    Return New Dictionary(Of Integer, String)
+                    If IsBox Then
+                        Return Lists.SkyItems
+                    ElseIf IsUsedTM Then
+                        Return Lists.SkyItemsMovesOnly
+                    Else
+                        Return New Dictionary(Of Integer, String)
+                    End If
                 End If
             End Get
         End Property
 
         Public Function Clone() As Object Implements IClonable.Clone
             If TypeOf Model Is IClonable Then
-                Return New SkyHeldItemViewModel(DirectCast(Model, IClonable).Clone(), CurrentApplicationViewModel)
+                Return New ExplorersItemViewModel(DirectCast(Model, IClonable).Clone(), CurrentApplicationViewModel)
             Else
-                Return New SkyHeldItemViewModel(Model, CurrentApplicationViewModel)
+                Return New ExplorersItemViewModel(Model, CurrentApplicationViewModel)
             End If
         End Function
 
         Public Overrides Function ToString() As String
             Return If(Name, MyBase.ToString())
         End Function
+
     End Class
 End Namespace

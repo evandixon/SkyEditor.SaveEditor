@@ -130,10 +130,8 @@
     <Compile Include="MenuActions\ImportActivePokemon.vb" />
     <Compile Include="MenuActions\ImportPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\ActivePokemonRemoveEventArgs.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyHeldItemViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyItemViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersItemViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkySpEpisodePartyViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\ViewModels\TDHeldItemViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\Views\ExplorersActivePokemonGeneralTab.xaml.vb">
       <DependentUpon>ExplorersActivePokemonGeneralTab.xaml</DependentUpon>
     </Compile>
@@ -148,14 +146,11 @@
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyStoredPokemonViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\TDInventoryViewModel.vb" />
-    <Compile Include="MysteryDungeon\Explorers\Views\SkyItemEditView.xaml.vb">
-      <DependentUpon>SkyItemEditView.xaml</DependentUpon>
+    <Compile Include="MysteryDungeon\Explorers\Views\ExplorersItemEditView.xaml.vb">
+      <DependentUpon>ExplorersItemEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MysteryDungeon\Explorers\Views\ExplorersHeldItemView.xaml.vb">
-      <DependentUpon>ExplorersHeldItemView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MysteryDungeon\Explorers\Views\SkyStoredItemView.xaml.vb">
-      <DependentUpon>SkyStoredItemView.xaml</DependentUpon>
+    <Compile Include="MysteryDungeon\Explorers\Views\ExplorersItemView.xaml.vb">
+      <DependentUpon>ExplorersItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MysteryDungeon\MDAttackViewModel.vb" />
     <Compile Include="MysteryDungeon\Rescue\RBStoredItemEditView.xaml.vb">
@@ -274,9 +269,6 @@
     <Compile Include="MysteryDungeon\Rescue\Views\RBStoredPokemonGeneralTab.xaml.vb">
       <DependentUpon>RBStoredPokemonGeneralTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MysteryDungeon\Explorers\Views\SkyHeldItemEditView.xaml.vb">
-      <DependentUpon>SkyHeldItemEditView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MysteryDungeon\Explorers\Views\SkyHistory.xaml.vb">
       <DependentUpon>SkyHistory.xaml</DependentUpon>
     </Compile>
@@ -288,9 +280,6 @@
     </Compile>
     <Compile Include="MysteryDungeon\Explorers\Views\TDGeneralTab.xaml.vb">
       <DependentUpon>TDGeneralTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MysteryDungeon\Explorers\Views\TDHeldItemEditView.xaml.vb">
-      <DependentUpon>TDHeldItemEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MysteryDungeon\Rescue\RBGeneral.xaml.vb">
       <DependentUpon>RBGeneral.xaml</DependentUpon>
@@ -323,17 +312,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MysteryDungeon\Explorers\Views\SkyItemEditView.xaml">
+    <Page Include="MysteryDungeon\Explorers\Views\ExplorersItemEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MysteryDungeon\Explorers\Views\ExplorersHeldItemView.xaml">
+    <Page Include="MysteryDungeon\Explorers\Views\ExplorersItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MysteryDungeon\Explorers\Views\SkyStoredItemView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MysteryDungeon\Rescue\RBStoredItemEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -367,10 +352,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MysteryDungeon\Explorers\Views\SkyHeldItemEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MysteryDungeon\Explorers\Views\SkyHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -384,10 +365,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MysteryDungeon\Explorers\Views\TDGeneralTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MysteryDungeon\Explorers\Views\TDHeldItemEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
