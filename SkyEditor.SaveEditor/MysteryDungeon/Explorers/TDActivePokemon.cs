@@ -63,7 +63,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             bits.SetInt(0, 28, 10, IQ);
             bits.SetInt(0, 38, 10, RosterNumber);
             bits.SetRange(48, 22, Unk3);
-            bits.SetInt(0, 70, 11, ID.ID);
+            bits.SetInt(0, 70, 11, ID.RawID);
             bits.SetInt(0, 81, 10, CurrentHP);
             bits.SetInt(0, 91, 10, MaxHP);
             bits.SetInt(0, 101, 8, Attack);

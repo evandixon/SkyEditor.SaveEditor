@@ -388,7 +388,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
                 ActivePokemon4RosterIndex = -1;
             }
 
-            //// Write the indexes
+            // Write the indexes
+            //throw new NotImplementedException("Need to write roster indexes to appropriate location.");
             //Bits.SetInt(0, Offsets.ActivePokemon1RosterIndexOffset, 16, ActivePokemon1RosterIndex);
             //Bits.SetInt(0, Offsets.ActivePokemon2RosterIndexOffset, 16, ActivePokemon2RosterIndex);
             //Bits.SetInt(0, Offsets.ActivePokemon3RosterIndexOffset, 16, ActivePokemon3RosterIndex);
