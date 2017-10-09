@@ -61,7 +61,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void Initialize(BitBlock bits)
         {
-            IsValid = bits[0];
+            // Bit 0 is always 1 for some reason
             Level = bits.GetInt(0, 1, 7);
             ID = new ExplorersPokemonId(bits.GetInt(0, 8, 11));
             MetAt = bits.GetInt(0, 19, 8);
@@ -89,7 +89,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         public BitBlock GetStoredPokemonBits()
         {
             var bits = new BitBlock(BitLength);
-            bits[0] = IsValid;
+            // Bit 0 is always 1 for some reason
+            bits[0] = true;
             bits.SetInt(0, 1, 7, Level);
             bits.SetInt(0, 8, 11, ID.RawID);
             bits.SetInt(0, 19, 8, MetAt);
@@ -116,7 +117,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
 
         public string Filename { get; set; }
-        public bool IsValid { get; set; }
+        public bool IsValid => Level > 0;
         public int Level { get; set; }
         public ExplorersPokemonId ID { get; set; }
         public int MetAt { get; set; }
