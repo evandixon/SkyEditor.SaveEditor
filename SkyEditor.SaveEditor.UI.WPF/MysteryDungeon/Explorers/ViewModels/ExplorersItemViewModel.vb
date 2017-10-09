@@ -5,12 +5,12 @@ Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
 Namespace MysteryDungeon.Explorers.ViewModels
     Public Class ExplorersItemViewModel
-        Inherits GenericViewModel(Of SkyItem)
+        Inherits GenericViewModel(Of ExplorersItem)
         Implements INotifyPropertyChanged
         Implements IClonable
 
         Public Sub New()
-            SetModel(New SkyItem())
+            SetModel(New ExplorersItem())
         End Sub
 
         Public Sub New(model As Object, appViewModel As ApplicationViewModel)

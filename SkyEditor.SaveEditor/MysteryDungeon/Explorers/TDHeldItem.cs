@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class TDHeldItem : SkyItem
+    public class TDHeldItem : ExplorersItem
     {
         public TDHeldItem()
         {

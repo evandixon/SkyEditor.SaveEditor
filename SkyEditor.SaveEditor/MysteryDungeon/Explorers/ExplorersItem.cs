@@ -5,13 +5,13 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class SkyItem : IExplorersItem, IClonable
+    public class ExplorersItem : IExplorersItem, IClonable
     {
-        public SkyItem()
+        public ExplorersItem()
         {
         }
 
-        public SkyItem(int id, int parameter)
+        public ExplorersItem(int id, int parameter)
         {            
             ID = id;
             Parameter = parameter;
@@ -136,7 +136,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         public virtual object Clone()
         {
-            return new SkyItem(ID, Parameter);
+            return new ExplorersItem(ID, Parameter);
         }
 
         public override string ToString()
@@ -146,7 +146,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         public override bool Equals(object obj)
         {
-            return obj is SkyItem && ID == (obj as SkyItem).ID && Parameter == (obj as SkyItem).Parameter;
+            return obj is ExplorersItem && ID == (obj as ExplorersItem).ID && Parameter == (obj as ExplorersItem).Parameter;
         }
 
         public override int GetHashCode()
@@ -154,12 +154,12 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             return ID ^ Parameter;
         }
 
-        public static bool operator ==(SkyItem x, SkyItem y)
+        public static bool operator ==(ExplorersItem x, ExplorersItem y)
         {
             return x.Equals(y);
         }
 
-        public static bool operator !=(SkyItem x, SkyItem y)
+        public static bool operator !=(ExplorersItem x, ExplorersItem y)
         {
             return (!(x == y));
         }

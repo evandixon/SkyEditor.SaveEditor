@@ -119,7 +119,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// <summary>
         /// Updates all checksums to match current save data
         /// </summary>
-        protected void RecalculateChecksums()
+        public void RecalculateChecksums()
         {
             PrimaryChecksum = CalculatePrimaryChecksum();
             SecondaryChecksum = CalculateSecondaryChecksum();

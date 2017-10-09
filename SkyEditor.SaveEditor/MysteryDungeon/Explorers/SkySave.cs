@@ -263,7 +263,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// <summary>
         /// The items stored in Kangaskhan's warehouse
         /// </summary>
-        public List<SkyItem> StoredItems { get; set; }
+        public List<ExplorersItem> StoredItems { get; set; }
 
         /// <summary>
         /// The items in the bag in the main game
@@ -283,7 +283,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         private void LoadItems(int baseOffset)
         {
             // Stored items
-            StoredItems = new List<SkyItem>();
+            StoredItems = new List<ExplorersItem>();
             var ids = Bits.GetRange(baseOffset * 8 + Offsets.StoredItemOffset, 11 * 1000);
             var parameters = Bits.GetRange(baseOffset * 8 + Offsets.StoredItemOffset + (11 * 1000), 11 * 1000);
             for (int i = 0; i < 1000; i++)
@@ -292,7 +292,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
                 var param = parameters.GetNextInt(11);
                 if (id > 0)
                 {
-                    StoredItems.Add(new SkyItem(id, param));
+                    StoredItems.Add(new ExplorersItem(id, param));
                 }
                 else
                 {

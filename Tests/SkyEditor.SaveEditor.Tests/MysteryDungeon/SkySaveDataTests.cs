@@ -182,7 +182,7 @@ namespace SkyEditor.SaveEditor.Tests.MysteryDungeon
 
         #region Items
 
-        private void TestItem(SkyItem item, int id, int containedItem, int quantity, bool isBox, bool isUsedTM, bool isStackable)
+        private void TestItem(ExplorersItem item, int id, int containedItem, int quantity, bool isBox, bool isUsedTM, bool isStackable)
         {
             Assert.AreEqual(id, item.ID);
             Assert.AreEqual(containedItem, item.ContainedItemID);
