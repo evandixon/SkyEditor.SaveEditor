@@ -332,11 +332,6 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void LoadActivePokemon(int baseOffset)
         {
-            //ActivePokemon1RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon1RosterIndexOffset, 16);
-            //ActivePokemon2RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon2RosterIndexOffset, 16);
-            //ActivePokemon3RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon3RosterIndexOffset, 16);
-            //ActivePokemon4RosterIndex = Bits.GetInt(baseOffset, Offsets.ActivePokemon4RosterIndexOffset, 16);
-
             ActivePokemon = new List<TDActivePokemon>();
             for (int i = 0; i < Offsets.ActivePokemonCount; i++)
             {
@@ -351,50 +346,6 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         private void SaveActivePokemon()
         {
-            // Update the Active Pokemon Roster Indexes
-            if (ActivePokemon.Count > 0)
-            {
-                ActivePokemon1RosterIndex = ActivePokemon[0].RosterNumber;
-            }
-            else
-            {
-                ActivePokemon1RosterIndex = -1;
-            }
-
-            if (ActivePokemon.Count > 1)
-            {
-                ActivePokemon2RosterIndex = ActivePokemon[1].RosterNumber;
-            }
-            else
-            {
-                ActivePokemon2RosterIndex = -1;
-            }
-
-            if (ActivePokemon.Count > 2)
-            {
-                ActivePokemon3RosterIndex = ActivePokemon[2].RosterNumber;
-            }
-            else
-            {
-                ActivePokemon3RosterIndex = -1;
-            }
-
-            if (ActivePokemon.Count > 3)
-            {
-                ActivePokemon4RosterIndex = ActivePokemon[3].RosterNumber;
-            }
-            else
-            {
-                ActivePokemon4RosterIndex = -1;
-            }
-
-            // Write the indexes
-            throw new NotImplementedException("Need to write roster indexes to appropriate location.");
-            //Bits.SetInt(0, Offsets.ActivePokemon1RosterIndexOffset, 16, ActivePokemon1RosterIndex);
-            //Bits.SetInt(0, Offsets.ActivePokemon2RosterIndexOffset, 16, ActivePokemon2RosterIndex);
-            //Bits.SetInt(0, Offsets.ActivePokemon3RosterIndexOffset, 16, ActivePokemon3RosterIndex);
-            //Bits.SetInt(0, Offsets.ActivePokemon4RosterIndexOffset, 16, ActivePokemon4RosterIndex);
-
             // Write the Active Pokemon
             for (int i = 0; i < Offsets.ActivePokemonCount; i++)
             {
