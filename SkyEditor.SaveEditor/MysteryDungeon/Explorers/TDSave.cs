@@ -242,7 +242,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             // - Main Game
             for (int i = 0; i < 50; i++)
             {
-                var item = new TDHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * 33), 33));
+                var item = new TDHeldItem(Bits.GetRange(baseOffset + Offsets.HeldItemOffset + (i * Offsets.HeldItemLength), Offsets.HeldItemLength));
                 if (item.IsValid)
                 {
                     HeldItems.Add(item);
