@@ -14,9 +14,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Sub New()
             MyBase.New
 
-            StoredItems = New ObservableCollection(Of SkyStoredItem)
-            HeldItems = New ObservableCollection(Of SkyHeldItem)
-            SpEpisodeHeldItems = New ObservableCollection(Of SkyHeldItem)
+            StoredItems = New ObservableCollection(Of ExplorersItemViewModel)
+            HeldItems = New ObservableCollection(Of ExplorersItemViewModel)
+            SpEpisodeHeldItems = New ObservableCollection(Of ExplorersItemViewModel)
+            FriendRescueHeldItems = New ObservableCollection(Of ExplorersItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
@@ -27,35 +28,45 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
 #Region "Properties"
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
-        Public Property StoredItems As ObservableCollection(Of SkyStoredItem)
+        Public Property StoredItems As ObservableCollection(Of ExplorersItemViewModel)
             Get
                 Return _storedItems
             End Get
-            Private Set(value As ObservableCollection(Of SkyStoredItem))
+            Private Set(value As ObservableCollection(Of ExplorersItemViewModel))
                 _storedItems = value
             End Set
         End Property
-        Private WithEvents _storedItems As ObservableCollection(Of SkyStoredItem)
+        Private WithEvents _storedItems As ObservableCollection(Of ExplorersItemViewModel)
 
-        Public Property HeldItems As ObservableCollection(Of SkyHeldItem)
+        Public Property HeldItems As ObservableCollection(Of ExplorersItemViewModel)
             Get
                 Return _heldItems
             End Get
-            Private Set(value As ObservableCollection(Of SkyHeldItem))
+            Private Set(value As ObservableCollection(Of ExplorersItemViewModel))
                 _heldItems = value
             End Set
         End Property
-        Private WithEvents _heldItems As ObservableCollection(Of SkyHeldItem)
+        Private WithEvents _heldItems As ObservableCollection(Of ExplorersItemViewModel)
 
-        Public Property SpEpisodeHeldItems As ObservableCollection(Of SkyHeldItem)
+        Public Property SpEpisodeHeldItems As ObservableCollection(Of ExplorersItemViewModel)
             Get
                 Return _spEpisodeItems
             End Get
-            Private Set(value As ObservableCollection(Of SkyHeldItem))
+            Private Set(value As ObservableCollection(Of ExplorersItemViewModel))
                 _spEpisodeItems = value
             End Set
         End Property
-        Private WithEvents _spEpisodeItems As ObservableCollection(Of SkyHeldItem)
+        Private WithEvents _spEpisodeItems As ObservableCollection(Of ExplorersItemViewModel)
+
+        Public Property FriendRescueHeldItems As ObservableCollection(Of ExplorersItemViewModel)
+            Get
+                Return _friendRescueHeldItems
+            End Get
+            Private Set(value As ObservableCollection(Of ExplorersItemViewModel))
+                _friendRescueHeldItems = value
+            End Set
+        End Property
+        Private WithEvents _friendRescueHeldItems As ObservableCollection(Of ExplorersItemViewModel)
 
         Public Overrides ReadOnly Property SortOrder As Integer
             Get
@@ -72,24 +83,30 @@ Namespace MysteryDungeon.Explorers.ViewModels
             'Set the lists
             StoredItems.Clear()
             For Each item In m.StoredItems
-                StoredItems.Add(item)
+                StoredItems.Add(New ExplorersItemViewModel(item, CurrentApplicationViewModel))
             Next
 
             HeldItems.Clear()
             For Each item In m.HeldItems
-                HeldItems.Add(item)
+                HeldItems.Add(New ExplorersItemViewModel(item, CurrentApplicationViewModel))
             Next
 
             SpEpisodeHeldItems.Clear()
             For Each item In m.SpEpisodeHeldItems
-                SpEpisodeHeldItems.Add(item)
+                SpEpisodeHeldItems.Add(New ExplorersItemViewModel(item, CurrentApplicationViewModel))
+            Next
+
+            FriendRescueHeldItems.Clear()
+            For Each item In m.FriendRescueHeldItems
+                FriendRescueHeldItems.Add(New ExplorersItemViewModel(item, CurrentApplicationViewModel))
             Next
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of SkyStoredItem)(My.Resources.Language.StoredItemsSlot, StoredItems, m.Offsets.StoredItemNumber))
-            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemNumber))
-            slots.Add(New ItemSlot(Of SkyHeldItem)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, m.Offsets.HeldItemNumber))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.StoredItemsSlot, StoredItems, 1000))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 50))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, 50))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.FriendRescueHeldItems, FriendRescueHeldItems, 50))
             ItemSlots = slots
         End Sub
 
@@ -100,17 +117,22 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             m.StoredItems.Clear()
             For Each item In StoredItems
-                m.StoredItems.Add(item)
+                m.StoredItems.Add(item.Model)
             Next
 
             m.HeldItems.Clear()
             For Each item In HeldItems
-                m.HeldItems.Add(item)
+                m.HeldItems.Add(item.Model)
             Next
 
             m.SpEpisodeHeldItems.Clear()
             For Each item In SpEpisodeHeldItems
-                m.SpEpisodeHeldItems.Add(item)
+                m.SpEpisodeHeldItems.Add(item.Model)
+            Next
+
+            m.FriendRescueHeldItems.Clear()
+            For Each item In FriendRescueHeldItems
+                m.FriendRescueHeldItems.Add(item.Model)
             Next
         End Sub
     End Class

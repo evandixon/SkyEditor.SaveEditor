@@ -30,10 +30,6 @@ Namespace MenuActions
                     Dim s = CurrentApplicationViewModel.GetSaveFileDialog(pkm)
                     If s.ShowDialog = Forms.DialogResult.OK Then
                         Await pkm.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
-
-                        If TypeOf pkm.Model Is SkyStoredPokemon Then
-                            DirectCast(pkm.Model, SkyStoredPokemon).DumpToConsole(CurrentApplicationViewModel.CurrentPluginManager.CurrentConsoleProvider)
-                        End If
                     End If
                 End If
             Next

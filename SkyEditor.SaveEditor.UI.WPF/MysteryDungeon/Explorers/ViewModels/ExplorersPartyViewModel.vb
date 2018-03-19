@@ -142,11 +142,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
         End Sub
 
-        Public Sub AddActivePokemon(pkm As IExplorersStoredPokemon, rosterNumber As Integer)
-            Dim vm As New FileViewModel(pkm.ToActive(rosterNumber))
-            AddHandler vm.Modified, AddressOf OnModified
-            _party.Add(vm)
-        End Sub
+        'Public Sub AddActivePokemon(pkm As IExplorersStoredPokemon, rosterNumber As Integer)
+        '    Dim vm As New FileViewModel(pkm.ToActive(rosterNumber))
+        '    AddHandler vm.Modified, AddressOf OnModified
+        '    _party.Add(vm)
+        'End Sub
     End Class
 
 End Namespace

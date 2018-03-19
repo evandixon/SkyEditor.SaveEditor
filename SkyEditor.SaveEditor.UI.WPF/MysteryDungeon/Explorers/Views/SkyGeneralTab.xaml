@@ -34,7 +34,7 @@
                 <xctk:IntegerUpDown Minimum="0" Maximum="9999999" VerticalContentAlignment="Top" Value="{Binding StoredMoney}" />
 
                 <Label HorizontalAlignment="Left" Width="170" Content="{x:Static res:Language.Adventures}" />
-                <xctk:IntegerUpDown VerticalContentAlignment="Top" Value="{Binding Adventures}" />
+                <xctk:IntegerUpDown VerticalContentAlignment="Top" Value="{Binding NumberOfAdventures}" />
 
                 <Label HorizontalAlignment="Left" Width="170" Content="{x:Static res:Language.RankPoints}" />
                 <xctk:IntegerUpDown VerticalContentAlignment="Top" Value="{Binding ExplorerRank}" />

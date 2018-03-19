@@ -38,16 +38,16 @@
             <RowDefinition Height="1" />
             <RowDefinition Height="22" />
         </Grid.RowDefinitions>
-        <CheckBox Grid.Column="0" Grid.Row="2" Content="" VerticalAlignment="Center" ToolTip="{x:Static res:Language.Switched}" IsChecked="{Binding Path=(mysteryDungeon:IMDAttack.IsSwitched)}" />
-        <ComboBox Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Path=(mysteryDungeon:IMDAttack.MoveNames)}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding Path=(mysteryDungeon:IMDAttack.ID)}" />
+        <CheckBox Grid.Column="0" Grid.Row="2" Content="" VerticalAlignment="Center" ToolTip="{x:Static res:Language.Switched}" IsChecked="{Binding Path=(mysteryDungeon:IMysteryDungeonNdsAttack.IsSwitched)}" />
+        <ComboBox Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding MoveNames}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding Path=(mysteryDungeon:IMysteryDungeonNdsAttack.ID)}" />
 
         <TextBlock Grid.Column="4" Grid.Row="0" Text="{x:Static res:Language.PP}" FontSize="11" />
-        <xctk:IntegerUpDown Grid.Column="4" Grid.Row="2" Minimum="0" Maximum="128" VerticalAlignment="Center" Height="22" ToolTip="{x:Static res:Language.PP}" Value="{Binding Path=(explorers:IExplorersActiveAttack.PP)}" />
+        <xctk:IntegerUpDown Grid.Column="4" Grid.Row="2" Minimum="0" Maximum="128" VerticalAlignment="Center" Height="22" ToolTip="{x:Static res:Language.PP}" Value="{Binding PP}" />
 
-        <TextBlock Grid.Column="6" Grid.Row="0" Text="{x:Static res:Language.Ginseng}" FontSize="11" />
-        <xctk:IntegerUpDown Grid.Column="6" Grid.Row="2" Minimum="0" Maximum="128" VerticalAlignment="Center" Height="22" ToolTip="{x:Static res:Language.Ginseng}" Value="{Binding Path=(mysteryDungeon:IMDAttack.Ginseng)}" />
-        <CheckBox Grid.Column="8" Grid.Row="2" Content="{x:Static res:Language.Linked}" VerticalAlignment="Center" IsChecked="{Binding Path=(mysteryDungeon:IMDAttack.IsLinked)}"/>
-        <CheckBox Grid.Column="10" Grid.Row="2" Content="{x:Static res:Language.IsSet}" VerticalAlignment="Center" IsChecked="{Binding Path=(mysteryDungeon:IMDAttack.IsSet)}" />
-        <CheckBox Grid.Column="12" Grid.Row="2" Content="{x:Static res:Language.Sealed}" VerticalAlignment="Center" IsChecked="{Binding Path=(explorers:IExplorersActiveAttack.IsSealed)}" />
+        <TextBlock Grid.Column="6" Grid.Row="0" Text="{x:Static res:Language.PowerBoost}" FontSize="11" />
+        <xctk:IntegerUpDown Grid.Column="6" Grid.Row="2" Minimum="0" Maximum="128" VerticalAlignment="Center" Height="22" ToolTip="{x:Static res:Language.PowerBoost}" Value="{Binding PowerBoost}" />
+        <CheckBox Grid.Column="8" Grid.Row="2" Content="{x:Static res:Language.Linked}" VerticalAlignment="Center" IsChecked="{Binding IsLinked}"/>
+        <CheckBox Grid.Column="10" Grid.Row="2" Content="{x:Static res:Language.IsSet}" VerticalAlignment="Center" IsChecked="{Binding IsSet}" />
+        <CheckBox Grid.Column="12" Grid.Row="2" Content="{x:Static res:Language.Sealed}" VerticalAlignment="Center" IsChecked="{Binding IsSealed}" />
     </Grid>
 </skyWPF:DataBoundViewControl>

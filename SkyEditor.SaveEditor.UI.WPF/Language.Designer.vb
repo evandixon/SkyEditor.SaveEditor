@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Public Class Language
@@ -209,20 +209,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Friend Rescue Held Items.
+        '''</summary>
+        Public Shared ReadOnly Property FriendRescueHeldItems() As String
+            Get
+                Return ResourceManager.GetString("FriendRescueHeldItems", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to General.
         '''</summary>
         Public Shared ReadOnly Property General() As String
             Get
                 Return ResourceManager.GetString("General", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Ginseng.
-        '''</summary>
-        Public Shared ReadOnly Property Ginseng() As String
-            Get
-                Return ResourceManager.GetString("Ginseng", resourceCulture)
             End Get
         End Property
         
@@ -609,6 +609,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property Pokemon() As String
             Get
                 Return ResourceManager.GetString("Pokemon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Power Boost.
+        '''</summary>
+        Public Shared ReadOnly Property PowerBoost() As String
+            Get
+                Return ResourceManager.GetString("PowerBoost", resourceCulture)
             End Get
         End Property
         

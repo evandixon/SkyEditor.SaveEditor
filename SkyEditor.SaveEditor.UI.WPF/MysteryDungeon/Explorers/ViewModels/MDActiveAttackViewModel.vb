@@ -5,7 +5,6 @@ Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
 Namespace MysteryDungeon.Explorers.ViewModels
     Public Class MDActiveAttackViewModel
         Inherits MDAttackViewModel
-        Implements IExplorersActiveAttack
 
         Public Sub New()
             MyBase.New
@@ -32,7 +31,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             Return MyBase.SupportsObject(Obj) AndAlso TypeOf Obj Is IExplorersActiveAttack
         End Function
 
-        Public Property IsSealed As Boolean Implements IExplorersActiveAttack.IsSealed
+        Public Property IsSealed As Boolean
             Get
                 Return Model.IsSealed
             End Get
@@ -44,7 +43,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
             End Set
         End Property
 
-        Public Property PP As Integer Implements IExplorersActiveAttack.PP
+        Public Property PP As Integer
             Get
                 Return Model.PP
             End Get

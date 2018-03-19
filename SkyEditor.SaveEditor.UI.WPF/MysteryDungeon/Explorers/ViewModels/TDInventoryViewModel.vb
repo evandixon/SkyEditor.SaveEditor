@@ -14,22 +14,22 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Sub New()
             MyBase.New
 
-            HeldItems = New ObservableCollection(Of TDHeldItem)
+            HeldItems = New ObservableCollection(Of ExplorersItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
 
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
 
-        Public Property HeldItems As ObservableCollection(Of TDHeldItem)
+        Public Property HeldItems As ObservableCollection(Of ExplorersItemViewModel)
             Get
                 Return _heldItems
             End Get
-            Private Set(value As ObservableCollection(Of TDHeldItem))
+            Private Set(value As ObservableCollection(Of ExplorersItemViewModel))
                 _heldItems = value
             End Set
         End Property
-        Private WithEvents _heldItems As ObservableCollection(Of TDHeldItem)
+        Private WithEvents _heldItems As ObservableCollection(Of ExplorersItemViewModel)
 
         Public Overrides Sub SetModel(model As Object)
             MyBase.SetModel(model)
@@ -39,12 +39,12 @@ Namespace MysteryDungeon.Explorers.ViewModels
             'Set the lists
             HeldItems.Clear()
             For Each item In m.HeldItems
-                HeldItems.Add(item)
+                HeldItems.Add(New ExplorersItemViewModel(item, CurrentApplicationViewModel))
             Next
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of TDHeldItem)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemNumber))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 48))
             ItemSlots = slots
         End Sub
 
@@ -55,7 +55,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             m.HeldItems.Clear()
             For Each item In HeldItems
-                m.HeldItems.Add(item)
+                m.HeldItems.Add(item.Model)
             Next
         End Sub
 
