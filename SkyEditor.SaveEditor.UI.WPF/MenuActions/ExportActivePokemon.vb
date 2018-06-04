@@ -28,7 +28,7 @@ Namespace MenuActions
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm = DirectCast(item, IParty).SelectedPokemon
-                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(pkm)
+                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(pkm, False)
                     If s.ShowDialog = Forms.DialogResult.OK Then
                         Await pkm.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                     End If

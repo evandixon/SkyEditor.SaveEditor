@@ -26,7 +26,7 @@ Namespace MenuActions
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm As FileViewModel = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
-                    Dim o = CurrentApplicationViewModel.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentApplicationViewModel.CurrentPluginManager))
+                    Dim o = CurrentApplicationViewModel.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentApplicationViewModel.CurrentPluginManager), False)
                     If o.ShowDialog = Forms.DialogResult.OK Then
                         Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.Model.GetType.GetTypeInfo, CurrentApplicationViewModel.CurrentPluginManager)
                         pkm.Model = newModel
