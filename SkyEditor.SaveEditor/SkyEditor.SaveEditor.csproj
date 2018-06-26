@@ -11,16 +11,80 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\en\RBBaseTypes.txt" />
+    <None Remove="Resources\en\RBFriendAreaOffsets.txt" />
+    <None Remove="Resources\en\RBItemOrder.txt" />
+    <None Remove="Resources\en\RBItems.txt" />
+    <None Remove="Resources\en\RBLocations.txt" />
+    <None Remove="Resources\en\RBMoves.txt" />
+    <None Remove="Resources\en\RBPokemon.txt" />
+    <None Remove="Resources\en\SkyFriendAreaOffsets.txt" />
+    <None Remove="Resources\en\SkyItems.txt" />
+    <None Remove="Resources\en\SkyLocations.txt" />
+    <None Remove="Resources\en\SkyMoves.txt" />
+    <None Remove="Resources\en\SkyPokemon.txt" />
+    <None Remove="Resources\en\TDFriendAreaOffsets.txt" />
+    <None Remove="Resources\en\TDItems.txt" />
+    <None Remove="Resources\en\TDLocations.txt" />
+    <None Remove="Resources\es\SkyItems.txt" />
+    <None Remove="Resources\es\SkyLocations.txt" />
+    <None Remove="Resources\es\SkyMoves.txt" />
+    <None Remove="Resources\es\SkyPokemon.txt" />
+    <None Remove="Resources\fr\SkyFriendAreaOffsets.txt" />
+    <None Remove="Resources\fr\SkyItems.txt" />
+    <None Remove="Resources\fr\SkyLocations.txt" />
+    <None Remove="Resources\fr\SkyMoves.txt" />
+    <None Remove="Resources\fr\SkyPokemon.txt" />
+    <None Remove="Resources\fr\TDFriendAreaOffsets.txt" />
+    <None Remove="Resources\it\SkyItems.txt" />
+    <None Remove="Resources\it\SkyLocations.txt" />
+    <None Remove="Resources\it\SkyMoves.txt" />
+    <None Remove="Resources\it\SkyPokemon.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SkyEditor.Core">
       <Version>4.1.0-CI193</Version>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\de\SkyItems.txt" />
-    <Content Include="Resources\de\SkyLocations.txt" />
-    <Content Include="Resources\de\SkyMoves.txt" />
-    <Content Include="Resources\de\SkyPokemon.txt" />
+    <EmbeddedResource Include="Resources\de\SkyItems.txt" />
+    <EmbeddedResource Include="Resources\de\SkyLocations.txt" />
+    <EmbeddedResource Include="Resources\de\SkyMoves.txt" />
+    <EmbeddedResource Include="Resources\de\SkyPokemon.txt" />
+    <EmbeddedResource Include="Resources\en\RBBaseTypes.txt" />
+    <EmbeddedResource Include="Resources\en\RBFriendAreaOffsets.txt" />
+    <EmbeddedResource Include="Resources\en\RBItemOrder.txt" />
+    <EmbeddedResource Include="Resources\en\RBItems.txt" />
+    <EmbeddedResource Include="Resources\en\RBLocations.txt" />
+    <EmbeddedResource Include="Resources\en\RBMoves.txt" />
+    <EmbeddedResource Include="Resources\en\RBPokemon.txt" />
+    <EmbeddedResource Include="Resources\en\SkyFriendAreaOffsets.txt" />
+    <EmbeddedResource Include="Resources\en\SkyItems.txt" />
+    <EmbeddedResource Include="Resources\en\SkyLocations.txt" />
+    <EmbeddedResource Include="Resources\en\SkyMoves.txt" />
+    <EmbeddedResource Include="Resources\en\SkyPokemon.txt" />
+    <EmbeddedResource Include="Resources\en\TDFriendAreaOffsets.txt" />
+    <EmbeddedResource Include="Resources\en\TDItems.txt" />
+    <EmbeddedResource Include="Resources\en\TDLocations.txt" />
+    <EmbeddedResource Include="Resources\es\SkyItems.txt" />
+    <EmbeddedResource Include="Resources\es\SkyLocations.txt" />
+    <EmbeddedResource Include="Resources\es\SkyMoves.txt" />
+    <EmbeddedResource Include="Resources\es\SkyPokemon.txt" />
+    <EmbeddedResource Include="Resources\fr\SkyFriendAreaOffsets.txt" />
+    <EmbeddedResource Include="Resources\fr\SkyItems.txt" />
+    <EmbeddedResource Include="Resources\fr\SkyLocations.txt" />
+    <EmbeddedResource Include="Resources\fr\SkyMoves.txt" />
+    <EmbeddedResource Include="Resources\fr\SkyPokemon.txt" />
+    <EmbeddedResource Include="Resources\fr\TDFriendAreaOffsets.txt" />
+    <EmbeddedResource Include="Resources\it\SkyItems.txt" />
+    <EmbeddedResource Include="Resources\it\SkyLocations.txt" />
+    <EmbeddedResource Include="Resources\it\SkyMoves.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\it\SkyPokemon.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,11 +103,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ListResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ListResources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -58,22 +117,6 @@
     <EmbeddedResource Update="Resources\Language.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ListResources.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ListResources.es.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ListResources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ListResources.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ListResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

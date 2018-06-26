@@ -84,7 +84,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             Dim b = New ObservableCollection(Of IPokemonBox)
             b.Add(New BasicPokemonBox(My.Resources.Language.AllPokemon, StoredPokemon))
-            Dim defs = StoredPokemonSlotDefinition.FromLines(Resources.ListResources.RBFriendAreaOffsets)
+            Dim defs = StoredPokemonSlotDefinition.FromLines(DataUtil.GetStringResource("RBFriendAreaOffsets"))
             Dim offset As Integer = 0
             For Each item In defs
                 Dim pokemon As New ObservableCollection(Of FileViewModel)
@@ -104,7 +104,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             Dim s As RBSave = model
 
-            Dim defs = StoredPokemonSlotDefinition.FromLines(Resources.ListResources.RBFriendAreaOffsets)
+            Dim defs = StoredPokemonSlotDefinition.FromLines(DataUtil.GetStringResource("RBFriendAreaOffsets"))
             Dim offset As Integer = 0
             For i = 0 To defs.Count - 1
                 For j = 0 To defs(i).Length - 1
