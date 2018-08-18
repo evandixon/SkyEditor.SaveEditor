@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 
@@ -7,21 +8,37 @@ Namespace MenuActions
         Inherits MenuAction
         Implements IDisposable
 
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
+            MyBase.New({My.Resources.Language.MenuDev, My.Resources.Language.MenuDevOpenSDF})
+
+
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            AlwaysVisible = False
+            dialog = New FolderBrowserDialog
+            DevOnly = True
+            SortOrder = 10.6
+
+            CurrentPluginManager = pluginManager
+            CurrentApplicationViewModel = applicationViewModel
+        End Sub
+
+        Protected Property CurrentPluginManager As PluginManager
+
+        Protected Property CurrentApplicationViewModel As ApplicationViewModel
+
         Dim dialog As FolderBrowserDialog
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             If dialog.ShowDialog Then
-                CurrentApplicationViewModel.OpenFile(Await IOHelper.OpenFile(dialog.SelectedPath, AddressOf IOHelper.PickFirstDuplicateMatchSelector, CurrentApplicationViewModel.CurrentPluginManager), True)
+                CurrentApplicationViewModel.OpenFile(Await IOHelper.OpenFile(dialog.SelectedPath, AddressOf IOHelper.PickFirstDuplicateMatchSelector, CurrentPluginManager), True)
             End If
-        End Sub
-
-        Public Sub New()
-            MyBase.New({My.Resources.Language.MenuDev, My.Resources.Language.MenuDevOpenSDF})
-            AlwaysVisible = False
-
-            dialog = New FolderBrowserDialog
-            DevOnly = True
-            SortOrder = 10.6
         End Sub
 
 #Region "IDisposable Support"

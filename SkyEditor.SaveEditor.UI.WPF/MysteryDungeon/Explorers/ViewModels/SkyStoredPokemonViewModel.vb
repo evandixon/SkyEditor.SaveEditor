@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
 Imports System.ComponentModel
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -13,8 +14,11 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements INotifyPropertyChanged
         Implements IPokemonStorage
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager)
             MyBase.New
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
 
             StoredPlayerPartner = New ObservableCollection(Of FileViewModel)
             StoredSpEpisodePokemon = New ObservableCollection(Of FileViewModel)
@@ -22,10 +26,14 @@ Namespace MysteryDungeon.Explorers.ViewModels
             AllPokemon = New ObservableCollection(Of FileViewModel)
 
             AddToPartyCommand = New RelayCommand(AddressOf AddActivePokemon)
+
+            CurrentPluginManager = pluginManager
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+
+        Protected Property CurrentPluginManager As PluginManager
 
 #Region "Event Handlers"
         Private Sub _storedPlayerPartner_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _storedPlayerPartner.CollectionChanged, _storedSpEpisodePokemon.CollectionChanged, _storedPokemon.CollectionChanged
@@ -125,7 +133,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             For count = 0 To s.StoredPokemon.Count - 1
                 Dim pkm = s.StoredPokemon(count)
-                Dim fvm As New FileViewModel(pkm)
+                Dim fvm As New FileViewModel(pkm, CurrentPluginManager)
                 AddHandler fvm.Modified, AddressOf OnModified
 
                 If count < 2 Then 'Player Partner

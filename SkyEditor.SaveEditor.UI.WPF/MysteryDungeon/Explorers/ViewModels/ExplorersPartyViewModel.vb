@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Reflection
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -13,8 +14,13 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements INotifyModified
         Implements INotifyPropertyChanged
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager)
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
             StandbyCommand = New RelayCommand(AddressOf StandbySelectedActivePokemon)
+            CurrentPluginManager = pluginManager
         End Sub
 
         Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
@@ -25,6 +31,8 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
         Public Event ActivePokemonRemoving(sender As Object, e As ActivePokemonRemoveEventArgs)
         Public Event ActivePokemonRemoved(sender As Object, e As ActivePokemonRemoveEventArgs)
+
+        Protected Property CurrentPluginManager As PluginManager
 
         Private Sub OnModified(sender As Object, e As EventArgs) Handles _party.CollectionChanged
             RaiseEvent Modified(Me, New EventArgs)
@@ -83,7 +91,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
                 Dim pkm As New ObservableCollection(Of FileViewModel)
                 For Each item In s.ActivePokemon
-                    Dim vm As New FileViewModel(item)
+                    Dim vm As New FileViewModel(item, CurrentPluginManager)
                     AddHandler vm.Modified, AddressOf OnModified
                     pkm.Add(vm)
                 Next
@@ -94,7 +102,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
                 Dim pkm As New ObservableCollection(Of FileViewModel)
                 For Each item In s.ActivePokemon
-                    Dim vm As New FileViewModel(item)
+                    Dim vm As New FileViewModel(item, CurrentPluginManager)
                     AddHandler vm.Modified, AddressOf OnModified
                     pkm.Add(vm)
                 Next

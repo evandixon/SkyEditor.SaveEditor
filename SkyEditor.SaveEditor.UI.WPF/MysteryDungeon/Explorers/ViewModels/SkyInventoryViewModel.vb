@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -11,9 +12,19 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements IInventory
         Implements INotifyModified
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New
 
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            CurrentPluginManager = pluginManager
+            CurrentApplicationViewModel = applicationViewModel
             StoredItems = New ObservableCollection(Of ExplorersItemViewModel)
             HeldItems = New ObservableCollection(Of ExplorersItemViewModel)
             SpEpisodeHeldItems = New ObservableCollection(Of ExplorersItemViewModel)
@@ -21,6 +32,9 @@ Namespace MysteryDungeon.Explorers.ViewModels
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+        Public Property CurrentPluginManager As PluginManager
 
         Private Sub _heldItems_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _storedItems.CollectionChanged, _heldItems.CollectionChanged, _spEpisodeItems.CollectionChanged
             RaiseEvent Modified(Me, New EventArgs)
@@ -103,10 +117,10 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.StoredItemsSlot, StoredItems, 1000))
-            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 50))
-            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, 50))
-            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.FriendRescueHeldItems, FriendRescueHeldItems, 50))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.StoredItemsSlot, StoredItems, 1000, CurrentPluginManager, CurrentApplicationViewModel))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 50, CurrentPluginManager, CurrentApplicationViewModel))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.EpisodeHeldItems, SpEpisodeHeldItems, 50, CurrentPluginManager, CurrentApplicationViewModel))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.FriendRescueHeldItems, FriendRescueHeldItems, 50, CurrentPluginManager, CurrentApplicationViewModel))
             ItemSlots = slots
         End Sub
 

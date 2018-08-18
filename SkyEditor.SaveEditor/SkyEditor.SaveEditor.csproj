@@ -44,7 +44,7 @@
 
   <ItemGroup>
     <PackageReference Include="SkyEditor.Core">
-      <Version>4.1.0-CI193</Version>
+      <Version>4.1.0-CI218</Version>
     </PackageReference>
   </ItemGroup>
 

@@ -1,12 +1,56 @@
 ﻿Imports System.Collections.Specialized
 Imports System.Reflection
 Imports System.Windows.Input
+Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
 Namespace ViewModelComponents
     Public Class ItemSlot(Of T As GenericViewModel)
         Implements IItemSlot
+
+        Public Sub New(name As String, items As IList(Of T), maxItemCount As Integer, pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            If Not ReflectionHelpers.IsOfType(GetType(T).GetTypeInfo, GetType(IClonable).GetTypeInfo) Then
+                Throw New ArgumentException("T must implement IClonable.  If not, use the overload of New that provides a cloner delegate.", NameOf(T))
+            End If
+
+            Me.CurrentApplicationViewModel = applicationViewModel
+            Me.Name = name
+            Me.ItemCollection = items
+            Me.MaxItemCount = maxItemCount
+            Me.NewItem = pluginManager.CreateInstance(GetType(T))
+
+            AddCommand = New RelayCommand(AddressOf DoAddClonable)
+        End Sub
+
+        Public Sub New(name As String, items As IList(Of T), maxItemCount As Integer, cloner As CloneItem, pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            Me.CurrentApplicationViewModel = applicationViewModel
+            Me.Name = name
+            Me.ItemCollection = items
+            Me.MaxItemCount = maxItemCount
+            Me.NewItem = pluginManager.CreateInstance(GetType(T))
+            Me.cloner = cloner
+
+            AddCommand = New RelayCommand(AddressOf DoAddDelegate)
+        End Sub
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
 
         Delegate Function CloneItem(item As T) As T
 
@@ -59,27 +103,6 @@ Namespace ViewModelComponents
             AddCommand.IsEnabled = CanAdd()
         End Sub
 
-        Public Sub New(name As String, items As IList(Of T), maxItemCount As Integer)
-            If Not ReflectionHelpers.IsOfType(GetType(T).GetTypeInfo, GetType(IClonable).GetTypeInfo) Then
-                Throw New ArgumentException("T must implement IClonable.  If not, use the overload of New that provides a cloner delegate.", NameOf(T))
-            End If
-            Me.Name = name
-            Me.ItemCollection = items
-            Me.MaxItemCount = maxItemCount
-            Me.NewItem = ReflectionHelpers.CreateInstance(GetType(T).GetTypeInfo)
-
-            AddCommand = New RelayCommand(AddressOf DoAddClonable)
-        End Sub
-
-        Public Sub New(name As String, items As IList(Of T), maxItemCount As Integer, cloner As CloneItem)
-            Me.Name = name
-            Me.ItemCollection = items
-            Me.MaxItemCount = maxItemCount
-            Me.NewItem = ReflectionHelpers.CreateInstance(GetType(T).GetTypeInfo)
-            Me.cloner = cloner
-
-            AddCommand = New RelayCommand(AddressOf DoAddDelegate)
-        End Sub
     End Class
 End Namespace
 

@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Explorers
@@ -11,13 +12,26 @@ Namespace MysteryDungeon.Explorers.ViewModels
         Implements IInventory
         Implements INotifyModified
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New
 
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            CurrentPluginManager = pluginManager
+            CurrentApplicationViewModel = applicationViewModel
             HeldItems = New ObservableCollection(Of ExplorersItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+        Public Property CurrentPluginManager As PluginManager
 
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
 
@@ -44,7 +58,7 @@ Namespace MysteryDungeon.Explorers.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 48))
+            slots.Add(New ItemSlot(Of ExplorersItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, 48, CurrentPluginManager, CurrentApplicationViewModel))
             ItemSlots = slots
         End Sub
 

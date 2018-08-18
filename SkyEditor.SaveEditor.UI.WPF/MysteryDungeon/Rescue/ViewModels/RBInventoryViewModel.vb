@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
 Imports System.ComponentModel
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon.Rescue
@@ -12,14 +13,27 @@ Namespace MysteryDungeon.Rescue.ViewModels
         Implements IInventory
         Implements INotifyModified
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New
 
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            CurrentPluginManager = pluginManager
+            CurrentApplicationViewModel = applicationViewModel
             HeldItems = New ObservableCollection(Of RBHeldItemViewModel)
             StoredItems = New ObservableCollection(Of RBStoredItemViewModel)
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+        Public Property CurrentPluginManager As PluginManager
 
         Public Property ItemSlots As IEnumerable(Of IItemSlot) Implements IInventory.ItemSlots
         Public Property HeldItems As ObservableCollection(Of RBHeldItemViewModel)
@@ -61,7 +75,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
 
             'Item slots
             Dim slots As New ObservableCollection(Of IItemSlot)
-            slots.Add(New ItemSlot(Of RBHeldItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemCount))
+            slots.Add(New ItemSlot(Of RBHeldItemViewModel)(My.Resources.Language.HeldItemsSlot, HeldItems, m.Offsets.HeldItemCount, CurrentPluginManager, CurrentApplicationViewModel))
             slots.Add(New RBStoredItemSlot(StoredItems))
             ItemSlots = slots
         End Sub

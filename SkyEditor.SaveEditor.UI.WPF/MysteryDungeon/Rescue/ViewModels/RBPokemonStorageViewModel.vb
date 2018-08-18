@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
 Imports System.ComponentModel
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.MysteryDungeon
@@ -14,18 +15,25 @@ Namespace MysteryDungeon.Rescue.ViewModels
         Implements INotifyPropertyChanged
         Implements IPokemonStorage
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager)
             MyBase.New
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
 
             StoredPokemon = New ObservableCollection(Of FileViewModel)
             AddToPartyCommand = New RelayCommand(Sub()
                                                      'Do nothing
                                                  End Sub)
             AddToPartyCommand.IsEnabled = False
+
+            CurrentPluginManager = pluginManager
         End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+
+        Protected Property CurrentPluginManager As PluginManager
 
 #Region "Event Handlers"
         Private Sub _storedPlayerPartner_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs) Handles _storedPokemon.CollectionChanged
@@ -76,7 +84,7 @@ Namespace MysteryDungeon.Rescue.ViewModels
             Dim s As RBSave = model
             _storedPokemon.Clear()
             For Each item In s.StoredPokemon
-                Dim fmv As New FileViewModel(item)
+                Dim fmv As New FileViewModel(item, CurrentPluginManager)
                 AddHandler fmv.Modified, AddressOf OnModified
 
                 _storedPokemon.Add(fmv)

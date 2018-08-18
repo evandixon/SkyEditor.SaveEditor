@@ -58,10 +58,10 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI193\lib\net462\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI218\lib\net462\SkyEditor.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SkyEditor.UI.WPF, Version=4.1.0.145, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.UI.WPF.4.1.0-CI145\lib\net462\SkyEditor.UI.WPF.dll</HintPath>
+    <Reference Include="SkyEditor.UI.WPF, Version=4.1.0.152, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.UI.WPF.4.1.0-CI152\lib\net462\SkyEditor.UI.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -132,6 +132,7 @@
     <Compile Include="MenuActions\ImportPokemon.vb" />
     <Compile Include="MysteryDungeon\Explorers\ActivePokemonRemoveEventArgs.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\ExplorersItemViewModel.vb" />
+    <Compile Include="MysteryDungeon\Explorers\ViewModels\SkyQuicksaveViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\ViewModels\SkySpEpisodePartyViewModel.vb" />
     <Compile Include="MysteryDungeon\Explorers\Views\ExplorersActivePokemonGeneralTab.xaml.vb">
       <DependentUpon>ExplorersActivePokemonGeneralTab.xaml</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿Imports System.Reflection
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
@@ -8,9 +9,24 @@ Namespace MenuActions
     Public Class ImportPokemon
         Inherits MenuAction
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New({My.Resources.Language.MenuPokemon, My.Resources.Language.MenuPokemonImport})
+
+            If pluginManager Is Nothing Then
+                Throw New ArgumentNullException(NameOf(pluginManager))
+            End If
+
+            If applicationViewModel Is Nothing Then
+                Throw New ArgumentNullException(NameOf(applicationViewModel))
+            End If
+
+            CurrentPluginManager = pluginManager
+            CurrentApplicationViewModel = applicationViewModel
         End Sub
+
+        Protected Property CurrentPluginManager As PluginManager
+
+        Protected Property CurrentApplicationViewModel As ApplicationViewModel
 
         Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(IPokemonStorage).GetTypeInfo}
@@ -26,9 +42,9 @@ Namespace MenuActions
             For Each item In Targets
                 If Await SupportsObject(item) Then
                     Dim pkm As FileViewModel = DirectCast(item, IPokemonStorage).SelectedBox.SelectedPokemon
-                    Dim o = CurrentApplicationViewModel.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentApplicationViewModel.CurrentPluginManager), False)
+                    Dim o = CurrentApplicationViewModel.GetOpenFileDialog(pkm.GetSupportedExtensions(CurrentPluginManager), False)
                     If o.ShowDialog = Forms.DialogResult.OK Then
-                        Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.Model.GetType.GetTypeInfo, CurrentApplicationViewModel.CurrentPluginManager)
+                        Dim newModel = Await IOHelper.OpenFile(o.FileName, pkm.Model.GetType.GetTypeInfo, CurrentPluginManager)
                         pkm.Model = newModel
                     End If
                 End If
