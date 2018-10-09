@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.IO.PluginInfrastructure
 Imports SkyEditor.Core.UI
 
 Namespace MenuActions

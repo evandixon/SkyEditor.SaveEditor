@@ -1,6 +1,7 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.IO.PluginInfrastructure
 Imports SkyEditor.Core.UI
 Imports SkyEditor.SaveEditor.UI.WPF.ViewModelComponents
 Imports SkyEditor.UI.WPF

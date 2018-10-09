@@ -1,4 +1,5 @@
 ﻿using SkyEditor.Core.IO;
+using SkyEditor.Core.IO.PluginInfrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
