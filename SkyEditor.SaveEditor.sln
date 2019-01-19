@@ -24,7 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|ARM.Build.0 = Debug|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -32,7 +31,6 @@ Global
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Debug|x86.Build.0 = Debug|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A013609F-7E04-4F1A-AC09-8D6885539086}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Release|ARM.Build.0 = Release|Any CPU
 		{A013609F-7E04-4F1A-AC09-8D6885539086}.Release|x64.ActiveCfg = Release|Any CPU
@@ -77,5 +75,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D43EA9B-92B5-449B-8496-070BD37611A5} = {0CA3F39C-DDAE-4500-AA4C-62707E641DA8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD7F4050-5528-45AF-9448-C653465B3BDC}
 	EndGlobalSection
 EndGlobal

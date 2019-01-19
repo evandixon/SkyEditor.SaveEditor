@@ -1,5 +1,5 @@
-﻿using SkyEditor.Core.IO;
-using SkyEditor.Core.Utilities;
+﻿using SkyEditor.IO.Binary;
+using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor
 {
-    public class BitBlockFile : IOpenableFile, ISavableAs, IOnDisk, INamed
+    public class BitBlockFile
     {
         public BitBlockFile()
         {
@@ -17,7 +17,40 @@ namespace SkyEditor.SaveEditor
 
         public BitBlockFile(IEnumerable<byte> rawData)
         {
+            if (rawData == null)
+            {
+                throw new ArgumentNullException(nameof(rawData));
+            }
+
             Bits = new BitBlock(rawData);
+        }
+
+        public BitBlockFile(string filename, IFileSystem fileSystem)
+        {
+            if (string.IsNullOrEmpty(filename))
+            {
+                throw new ArgumentNullException(nameof(filename));
+            }
+
+            if (fileSystem == null)
+            {
+                throw new ArgumentNullException(nameof(fileSystem));
+            }
+
+            if (fileSystem.GetFileLength(filename) > int.MaxValue)
+            {
+                throw new ArgumentException(Properties.Resources.BitBlockFile_FileTooLarge);
+            }
+
+            Filename = filename;
+            using (var file = new BinaryFile(filename, fileSystem))
+            {
+                Bits = new BitBlock((int)file.Length * 8);
+                for (int i = 0; i < file.Length; i++)
+                {
+                    Bits.AppendByte(file.ReadByte(i));
+                }
+            }
         }
 
         public event EventHandler FileSaved;
@@ -26,91 +59,49 @@ namespace SkyEditor.SaveEditor
 
         public string Filename { get; set; }
 
-        public string Name
-        {
-            get
-            {
-                if (_name == null)
-                {
-                    return Path.GetFileName(Filename);
-                }
-                else
-                {
-                    return _name;
-                }
-            }
-            set
-            {
-                _name = value;
-            }
-        }
-        private string _name;
-        
-        private IIOProvider CurrentIOProvider { get; set; }
-
-        public virtual async Task OpenFile(string filename, IIOProvider provider)
-        {
-            Filename = filename;
-            CurrentIOProvider = provider;
-            using (var f = new GenericFile())
-            {
-                f.EnableInMemoryLoad = true;
-                f.IsReadOnly = true;
-                await f.OpenFile(filename, provider);
-
-                Bits = new BitBlock(0);
-                ProcessRawData(f);
-            }
-        }
-
-        private void ProcessRawData(GenericFile file)
-        {
-            for (int i = 0;i<file.Length;i++)
-            {
-                Bits.AppendByte(file.Read(i));
-            }
-        }
+        private IFileSystem FileSystem { get; set; }
 
         protected virtual void PreSave()
         {
         }
 
-        public virtual async Task Save(string filename, IIOProvider provider)
+        public virtual async Task Save(string filename, IFileSystem fileSystem)
         {
-            PreSave();
-            var buffer = new byte[(int)Math.Ceiling(Bits.Count / (decimal)8) - 1];
-            using (var f = new GenericFile())
+            if (string.IsNullOrEmpty(filename))
             {
-                f.CreateFile(buffer);
-                for (int i = 0;i<buffer.Length;i++)
+                throw new ArgumentNullException(nameof(filename));
+            }
+
+            PreSave();
+
+            Filename = filename;
+            FileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
+            var buffer = new byte[(int)Math.Ceiling(Bits.Count / (decimal)8) - 1];
+            using (var file = new BinaryFile(buffer))
+            {
+                for (int i = 0; i < buffer.Length; i++)
                 {
-                    await f.WriteAsync(i, (byte)Bits.GetInt(i, 0, 8));
+                    await file.WriteAsync(i, (byte)Bits.GetInt(i, 0, 8));
                 }
-                await f.Save(filename, provider);
+                await file.Save(filename, fileSystem);
             }
             FileSaved?.Invoke(this, new EventArgs());
         }
 
-        public async Task Save(IIOProvider provider)
+        public async Task Save()
         {
-            await Save(Filename, provider);
+            if (string.IsNullOrEmpty(Filename) || FileSystem == null)
+            {
+                throw new InvalidOperationException(Properties.Resources.BitBlockFile_ErrorSavedWithoutFilenameOrFilesystem);
+            }
+
+            await Save(Filename, FileSystem);
         }
 
         public virtual byte[] ToByteArray()
         {
             PreSave();
             return Bits.ToByteArray();
-        } 
-
-        public virtual string GetDefaultExtension()
-        {
-            return "*.sav";
         }
-
-        public virtual IEnumerable<string> GetSupportedExtensions()
-        {
-            return new[] { "*.sav" };
-        }
-
     }
 }

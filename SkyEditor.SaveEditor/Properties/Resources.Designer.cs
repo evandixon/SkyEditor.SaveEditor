@@ -10,7 +10,6 @@
 
 namespace SkyEditor.SaveEditor.Properties {
     using System;
-    using System.Reflection;
     
     
     /// <summary>
@@ -20,7 +19,7 @@ namespace SkyEditor.SaveEditor.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -40,7 +39,7 @@ namespace SkyEditor.SaveEditor.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SkyEditor.SaveEditor.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SkyEditor.SaveEditor.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,6 +57,24 @@ namespace SkyEditor.SaveEditor.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempted to save the file without having ever specified a filename..
+        /// </summary>
+        internal static string BitBlockFile_ErrorSavedWithoutFilenameOrFilesystem {
+            get {
+                return ResourceManager.GetString("BitBlockFile_ErrorSavedWithoutFilenameOrFilesystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitBlockFile only supports files less than 2GB in size.
+        /// </summary>
+        internal static string BitBlockFile_FileTooLarge {
+            get {
+                return ResourceManager.GetString("BitBlockFile_FileTooLarge", resourceCulture);
             }
         }
     }
