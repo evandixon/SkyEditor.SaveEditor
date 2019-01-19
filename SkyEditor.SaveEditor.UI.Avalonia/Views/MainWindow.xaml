@@ -1,0 +1,13 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.ViewModels;assembly=SkyEditor.SaveEditor.UI.Avalonia"
+        Icon="resm:SkyEditor.SaveEditor.UI.Avalonia.Assets.avalonia-logo.ico"
+        Title="SkyEditor.SaveEditor.UI.Avalonia">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+  
+  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  
+</Window>

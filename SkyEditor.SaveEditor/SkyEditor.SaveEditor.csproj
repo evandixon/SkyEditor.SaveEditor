@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.2;net462</TargetFrameworks>
     <Authors>Evan Dixon</Authors>
     <Company>Evan Dixon</Company>
     <Description>Save editing library for Pokemon Mystery Dungeon games.</Description>
@@ -79,10 +79,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\it\SkyPokemon.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SkyEditor.IO" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
