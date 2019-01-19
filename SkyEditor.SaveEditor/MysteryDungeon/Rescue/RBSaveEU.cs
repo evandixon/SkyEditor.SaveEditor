@@ -1,7 +1,6 @@
-﻿using SkyEditor.Core.IO;
-using System;
+﻿using SkyEditor.IO;
+using SkyEditor.IO.FileSystem;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
@@ -36,21 +35,22 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             Offsets = new RBEUOffsets();
         }
 
+        public RBSaveEU(string filename, IFileSystem fileSystem) : base(filename, fileSystem, new RBEUOffsets())
+        {
+        }        
+
         /// <summary>
         /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Time and Darkness.
         /// </summary>
         /// <param name="file">The file to be checked</param>
         /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
-        public override async Task<bool> IsOfType(GenericFile file)
+        public override async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor data)
         {
-            if (file.Length > Offsets.ChecksumEnd)
-            {
-                return await file.ReadUInt32Async(0) == (Checksums.Calculate32BitChecksum(file, 4, Offsets.ChecksumEnd) - 1);
-            }
-            else
+            if (data.Length <= Offsets.ChecksumEnd)
             {
                 return false;
             }
+            return await data.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(data, 4, Offsets.ChecksumEnd);
         }
 
         public override uint CalculatePrimaryChecksum()

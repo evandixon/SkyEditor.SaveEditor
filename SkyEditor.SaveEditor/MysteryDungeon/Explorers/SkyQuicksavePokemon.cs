@@ -1,12 +1,11 @@
-﻿using SkyEditor.Core.IO;
+﻿using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class SkyQuicksavePokemon : IOpenableFile, ISavableAs, IOnDisk
+    public class SkyQuicksavePokemon
     {
         public const int ByteLength = 429;
         public const int BitLength = ByteLength * 8;
@@ -26,6 +25,22 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         public SkyQuicksavePokemon(BitBlock bits)
         {
             Initialize(bits);
+        }
+
+        public SkyQuicksavePokemon(string filename, IFileSystem fileSystem)
+        {
+            Filename = filename ?? throw new ArgumentNullException(nameof(filename));
+            FileSystem = fileSystem ?? throw new ArgumentNullException(nameof(filename));
+
+            var file = new BitBlockFile(filename, fileSystem);
+
+            // matix2267's convention adds 6 bits to the beginning of a file so that the name will be byte-aligned
+            for (int i = 1; i <= 8 - (BitLength % 8); i++)
+            {
+                file.Bits.Bits.RemoveAt(0);
+            }
+
+            Initialize(file.Bits);
         }
 
         public void Initialize(BitBlock bits)
@@ -78,39 +93,29 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             bits.SetRange(2840, 592, Unk6);
             return bits;
         }
-
-        public async Task OpenFile(string filename, IIOProvider provider)
+        public async Task Save(string filename, IFileSystem fileSystem)
         {
-            var toOpen = new BitBlockFile();
-            await toOpen.OpenFile(filename, provider);
+            var file = new BitBlockFile();
 
             // matix2267's convention adds 6 bits to the beginning of a file so that the name will be byte-aligned
             for (int i = 1; i <= 8 - (BitLength % 8); i++)
             {
-                toOpen.Bits.Bits.RemoveAt(0);
+                file.Bits.Bits.Add(false);
             }
 
-            Initialize(toOpen.Bits);
-        }
-
-        public async Task Save(string filename, IIOProvider provider)
-        {
-            var toSave = new BitBlockFile();
-
-            // matix2267's convention adds 6 bits to the beginning of a file so that the name will be byte-aligned
-            for (int i = 1; i <= 8 - (BitLength % 8); i++)
-            {
-                toSave.Bits.Bits.Add(false);
-            }
-
-            toSave.Bits.Bits.AddRange(GetQuicksavePokemonBits());
-            await toSave.Save(filename, provider);
+            file.Bits.Bits.AddRange(GetQuicksavePokemonBits());
+            await file.Save(filename, fileSystem);
             FileSaved?.Invoke(this, new EventArgs());
         }
 
-        public async Task Save(IIOProvider provider)
+        public async Task Save()
         {
-            await Save(Filename, provider);
+            if (string.IsNullOrEmpty(Filename) || FileSystem == null)
+            {
+                throw new InvalidOperationException(Properties.Resources.BitBlockFile_ErrorSavedWithoutFilenameOrFilesystem);
+            }
+
+            await Save(Filename, FileSystem);
         }
 
         public string GetDefaultExtension()
@@ -123,7 +128,8 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             return new string[] { GetDefaultExtension() };
         }
 
-        public string Filename { get; set; }
+        public string Filename { get; protected set; }
+        private IFileSystem FileSystem { get; set; }
         public BitBlock Unk1 { get; set; }
         public BitBlock Unk2 { get; set; }
         public BitBlock Unk3 { get; set; }

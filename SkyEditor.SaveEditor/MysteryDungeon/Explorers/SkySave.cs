@@ -1,14 +1,12 @@
-﻿using SkyEditor.Core.IO;
-using SkyEditor.Core.IO.PluginInfrastructure;
+﻿using SkyEditor.IO;
+using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class SkySave : BitBlockFile, IDetectableFileType
+    public class SkySave : BitBlockFile
     {
         public class SkyOffsets
         {
@@ -82,6 +80,12 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
 
         public SkySave(IEnumerable<byte> rawData) : base(rawData)
+        {
+            Offsets = new SkyOffsets();
+            Init();
+        }
+
+        public SkySave(string filename, IFileSystem fileSystem) : base(filename, fileSystem)
         {
             Offsets = new SkyOffsets();
             Init();
@@ -647,12 +651,6 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         #region Functions
 
-        public override async Task OpenFile(string filename, IIOProvider provider)
-        {
-            await base.OpenFile(filename, provider);
-            Init();
-        }
-
         private void Init()
         {
             // Checksums
@@ -703,16 +701,14 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// <param name="file">The file to be checked</param>
         /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
         /// <remarks>US and EU regions are supported. JP is unknown.</remarks>
-        public async Task<bool> IsOfType(GenericFile file)
+        public async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor file)
         {
-            if (file.Length > Offsets.ChecksumEnd)
-            {
-                return await file.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(file, 4, Offsets.ChecksumEnd);
-            }
-            else
+            if (file.Length <= Offsets.ChecksumEnd)
             {
                 return false;
             }
+
+            return await file.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(file, 4, Offsets.ChecksumEnd);
         }
 
         public override byte[] ToByteArray()

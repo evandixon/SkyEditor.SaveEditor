@@ -1,8 +1,8 @@
-﻿using SkyEditor.Core.IO;
+﻿using SkyEditor.IO;
+using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
@@ -49,6 +49,18 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
         public RBSave(IEnumerable<byte> rawData) : base(rawData)
         {
             Offsets = new RBOffsets();
+            Init();
+        }
+
+        public RBSave(string filename, IFileSystem fileSystem) : base(filename, fileSystem)
+        {
+            Offsets = new RBOffsets();
+            Init();
+        }
+
+        public RBSave(string filename, IFileSystem fileSystem, RBOffsets offsets) : base(filename, fileSystem)
+        {
+            Offsets = offsets ?? throw new ArgumentNullException(nameof(offsets));
             Init();
         }
 
@@ -170,7 +182,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
         //    }
         //}
 
-        private void LoadGeneral(int baseOffset)
+        protected void LoadGeneral(int baseOffset)
         {
             TeamName = Bits.GetStringPMD(0, baseOffset + Offsets.TeamNameStart, Offsets.TeamNameLength);
             HeldMoney = Bits.GetInt(0, Offsets.HeldMoneyOffset, Offsets.HeldMoneyLength);
@@ -179,7 +191,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             BaseType = Bits.GetInt(0, Offsets.BaseTypeOffset, 8);
         }
 
-        private void SaveGeneral()
+        protected void SaveGeneral()
         {
             Bits.SetStringPMD(0, Offsets.TeamNameStart, Offsets.TeamNameLength, TeamName);
             Bits.SetInt(0, Offsets.HeldMoneyOffset, Offsets.HeldMoneyLength, HeldMoney);
@@ -202,7 +214,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
         /// </summary>
         public List<RBHeldItem> HeldItems { get; set; }
 
-        private void LoadItems(int baseOffset)
+        protected void LoadItems(int baseOffset)
         {
             // Stored items
             StoredItems = new List<RBStoredItem>();
@@ -234,7 +246,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             }
         }
 
-        private void SaveItems()
+        protected void SaveItems()
         {
             // Stored items
             var compiledItems = new Dictionary<int, int>(); // Key = item ID, value = quantity
@@ -280,7 +292,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
 
         #region Stored Pokemon
 
-        private void LoadStoredPokemon(int baseOffset)
+        protected void LoadStoredPokemon(int baseOffset)
         {
             StoredPokemon = new List<RBStoredPokemon>();
             for (int i = 0; i < Offsets.StoredPokemonCount; i++)
@@ -296,7 +308,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             }
         }
 
-        private void SaveStoredPokemon()
+        protected void SaveStoredPokemon()
         {
             for (int i = 0; i < Offsets.StoredPokemonCount; i++)
             {
@@ -315,13 +327,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
 
         #endregion
 
-        #region Functions
-
-        public override async Task OpenFile(string filename, IIOProvider provider)
-        {
-            await base.OpenFile(filename, provider);
-            Init();
-        }
+        #region Functions        
 
         private void Init()
         {
@@ -362,16 +368,13 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
         /// </summary>
         /// <param name="file">The file to be checked</param>
         /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
-        public virtual async Task<bool> IsOfType(GenericFile file)
+        public virtual async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor data)
         {
-            if (file.Length > Offsets.ChecksumEnd)
-            {
-                return await file.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(file, 4, Offsets.ChecksumEnd);
-            }
-            else
+            if (data.Length <= Offsets.ChecksumEnd)
             {
                 return false;
             }
+            return await data.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(data, 4, Offsets.ChecksumEnd);
         }
 
         public override byte[] ToByteArray()
