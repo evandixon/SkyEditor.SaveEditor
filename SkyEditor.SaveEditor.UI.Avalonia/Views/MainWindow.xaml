@@ -14,8 +14,23 @@
 
   <StackPanel>
     <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
     <Button Content="Open File" Command="{Binding OpenFileCommand}" />
+    <TabControl Items="{Binding OpenFiles}">
+      <TabControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock
+              Text="(Header)">
+          </TextBlock>
+        </DataTemplate>
+      </TabControl.ItemTemplate>
+      <TabControl.ContentTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Vertical" Spacing="8">
+            <TextBlock Text="{Binding TeamName}"/>
+          </StackPanel>
+        </DataTemplate>
+      </TabControl.ContentTemplate>
+    </TabControl>
   </StackPanel>   
 
 </Window>

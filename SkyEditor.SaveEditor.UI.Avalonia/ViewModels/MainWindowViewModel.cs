@@ -3,6 +3,7 @@ using ReactiveUI;
 using SkyEditor.SaveEditor.MysteryDungeon.Explorers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
@@ -16,6 +17,7 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
         public MainWindowViewModel()
         {
             OpenFileCommand = ReactiveCommand.Create(OpenFile);
+            OpenFiles = new ObservableCollection<ViewModelBase>();
         }
         public string Greeting
         {
@@ -26,11 +28,8 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
 
         public ReactiveCommand<Unit, Task> OpenFileCommand { get; }
 
-        public SkySaveViewModel SaveFileViewModel
-        {
-            get => _saveFileViewModel;
-            set => this.RaiseAndSetIfChanged(ref _saveFileViewModel, value);
-        }
+        public ObservableCollection<ViewModelBase> OpenFiles { get; set; }
+        
         private SkySaveViewModel _saveFileViewModel;
 
         private async Task OpenFile()
@@ -44,8 +43,7 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
             if (paths.Any())
             {
                 var save = new SkySave(paths.First());
-                SaveFileViewModel = new SkySaveViewModel(save);
-                Greeting = SaveFileViewModel.TeamName;
+                OpenFiles.Add(new SkySaveViewModel(save));
             }
         }
     }

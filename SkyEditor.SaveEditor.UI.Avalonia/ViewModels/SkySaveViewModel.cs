@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
 {
-    public class SkySaveViewModel : INotifyPropertyChanged
+    public class SkySaveViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public SkySaveViewModel(SkySave model)
         {
@@ -23,11 +23,9 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
                 if (Model.TeamName != value)
                 {
                     Model.TeamName = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TeamName)));
+                    this.RaisePropertyChanged(nameof(TeamName));
                 }
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
