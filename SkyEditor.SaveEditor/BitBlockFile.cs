@@ -48,7 +48,7 @@ namespace SkyEditor.SaveEditor
                 Bits = new BitBlock((int)file.Length * 8);
                 for (int i = 0; i < file.Length; i++)
                 {
-                    Bits.AppendByte(file.ReadByte(i));
+                    Bits.SetInt(i, 0, 8, file.ReadByte(i));
                 }
             }
         }

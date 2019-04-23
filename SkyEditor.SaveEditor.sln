@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SkyEditor.SaveEditor.UI.WPF", "SkyEditor.SaveEditor.UI.WPF\SkyEditor.SaveEditor.UI.WPF.vbproj", "{A013609F-7E04-4F1A-AC09-8D6885539086}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyEditor.SaveEditor", "Sky
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyEditor.SaveEditor.Tests", "Tests\SkyEditor.SaveEditor.Tests\SkyEditor.SaveEditor.Tests.csproj", "{2D43EA9B-92B5-449B-8496-070BD37611A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyEditor.SaveEditor.UI.Avalonia", "SkyEditor.SaveEditor.UI.Avalonia\SkyEditor.SaveEditor.UI.Avalonia.csproj", "{EFED79B9-DE65-42DB-BE46-DC317043C41F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyEditor.SaveEditor.UI.Avalonia", "SkyEditor.SaveEditor.UI.Avalonia\SkyEditor.SaveEditor.UI.Avalonia.csproj", "{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,22 +71,22 @@ Global
 		{2D43EA9B-92B5-449B-8496-070BD37611A5}.Release|x64.Build.0 = Release|Any CPU
 		{2D43EA9B-92B5-449B-8496-070BD37611A5}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D43EA9B-92B5-449B-8496-070BD37611A5}.Release|x86.Build.0 = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|ARM.Build.0 = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|x64.Build.0 = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Debug|x86.Build.0 = Debug|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|ARM.Build.0 = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|x64.ActiveCfg = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|x64.Build.0 = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|x86.ActiveCfg = Release|Any CPU
-		{EFED79B9-DE65-42DB-BE46-DC317043C41F}.Release|x86.Build.0 = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|x64.Build.0 = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|ARM.Build.0 = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|x64.ActiveCfg = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|x64.Build.0 = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|x86.ActiveCfg = Release|Any CPU
+		{FCA7CB0C-1BE8-4084-809F-7A67B8098E7B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

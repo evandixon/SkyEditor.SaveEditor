@@ -85,10 +85,15 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Init();
         }
 
+
         public SkySave(string filename, IFileSystem fileSystem) : base(filename, fileSystem)
         {
             Offsets = new SkyOffsets();
             Init();
+        }
+
+        public SkySave(string filename) : this(filename, PhysicalFileSystem.Instance)
+        {
         }
 
         public SkyOffsets Offsets { get; set; }
