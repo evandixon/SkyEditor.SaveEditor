@@ -13,13 +13,16 @@
     </Design.DataContext>
 
   <StackPanel>
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <Button Content="Open File" Command="{Binding OpenFileCommand}" />
+    <Menu>
+      <MenuItem Header="_File">
+        <MenuItem Header="Open" Command="{Binding OpenFileCommand}" />
+      </MenuItem>
+    </Menu>
     <TabControl Items="{Binding OpenFiles}">
       <TabControl.ItemTemplate>
         <DataTemplate>
           <TextBlock
-              Text="(Header)">
+              Text="{Binding FileName}">
           </TextBlock>
         </DataTemplate>
       </TabControl.ItemTemplate>

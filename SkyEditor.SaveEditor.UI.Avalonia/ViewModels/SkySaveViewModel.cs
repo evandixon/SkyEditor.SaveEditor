@@ -3,6 +3,7 @@ using SkyEditor.SaveEditor.MysteryDungeon.Explorers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Text;
 
 namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
@@ -15,6 +16,11 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
         }
 
         protected SkySave Model { get; set; }
+
+        public string FileName
+        {
+            get => Path.GetFileName(Model.Filename);
+        }
 
         public string TeamName
         {
