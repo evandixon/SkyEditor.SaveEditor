@@ -1,4 +1,5 @@
 ﻿using SkyEditor.IO;
+using SkyEditor.IO.Binary;
 using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
 using System;
@@ -7,38 +8,20 @@ using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
 {
-    public class RBSave : BitBlockFile
-    {
-        public class RBOffsets
+    public class RBSave : BitBlockFile, ISaveFile
+    {        
+        /// <summary>
+        /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Time and Darkness.
+        /// </summary>
+        /// <param name="file">The file to be checked</param>
+        /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
+        public static async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor data)
         {
-            // Checksums
-            public virtual int ChecksumEnd => 0x57D0;
-            public virtual int BackupSaveStart => 0x6000;
-
-            // General
-            public virtual int TeamNameStart => 0x4EC8 * 8;
-            public virtual int TeamNameLength => 10;
-            public virtual int BaseTypeOffset => 0x67 * 8;
-            public virtual int HeldMoneyOffset => 0x4E6C * 8;
-            public virtual int HeldMoneyLength => 24;
-            public virtual int StoredMoneyOffset => 0x4E6F * 8;
-            public virtual int StoredMoneyLength => 24;
-            public virtual int RescuePointsOffset => 0x4ED3 * 8;
-            public virtual int RescuePointsLength => 32;
-
-            // Stored Items
-            public virtual int StoredItemOffset => 0x4D2B * 8 - 2;
-            public virtual int StoredItemCount => 239;
-
-            // Held Items
-            public virtual int HeldItemOffset => 0x4CF0 * 8;
-            public virtual int HeldItemCount => 20;
-            public virtual int HeldItemLength => 23;
-
-            // Stored Pokemon
-            public virtual int StoredPokemonOffset => (0x5B3 * 8 + 3) - (323 * 9);
-            public virtual int StoredPokemonLength => 323;
-            public virtual int StoredPokemonCount => 407 + 6;
+            if (data.Length <= RBOffsets.Instance.ChecksumEnd)
+            {
+                return false;
+            }
+            return await data.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(data, 4, RBOffsets.Instance.ChecksumEnd);
         }
 
         public RBSave()
@@ -52,13 +35,25 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             Init();
         }
 
+        public RBSave(BinaryFile file) : base(file)
+        {
+            Offsets = new RBOffsets();
+            Init();
+        }
+
+        protected RBSave(BinaryFile file, RBOffsets offsets) : base(file)
+        {
+            Offsets = offsets ?? throw new ArgumentNullException(nameof(offsets));
+            Init();
+        }
+
         public RBSave(string filename, IFileSystem fileSystem) : base(filename, fileSystem)
         {
             Offsets = new RBOffsets();
             Init();
         }
 
-        public RBSave(string filename, IFileSystem fileSystem, RBOffsets offsets) : base(filename, fileSystem)
+        protected RBSave(string filename, IFileSystem fileSystem, RBOffsets offsets) : base(filename, fileSystem)
         {
             Offsets = offsets ?? throw new ArgumentNullException(nameof(offsets));
             Init();
@@ -363,20 +358,6 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
             Bits.SetUInt(Offsets.BackupSaveStart, 0, 32, SecondaryChecksum);
         }
 
-        /// <summary>
-        /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Time and Darkness.
-        /// </summary>
-        /// <param name="file">The file to be checked</param>
-        /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
-        public virtual async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor data)
-        {
-            if (data.Length <= Offsets.ChecksumEnd)
-            {
-                return false;
-            }
-            return await data.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(data, 4, Offsets.ChecksumEnd);
-        }
-
         public override byte[] ToByteArray()
         {
             PreSave();
@@ -384,5 +365,40 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Rescue
         }
 
         #endregion
+
+        public class RBOffsets
+        {
+            public static readonly RBOffsets Instance = new RBOffsets();
+
+            // Checksums
+            public virtual int ChecksumEnd => 0x57D0;
+            public virtual int BackupSaveStart => 0x6000;
+
+            // General
+            public virtual int TeamNameStart => 0x4EC8 * 8;
+            public virtual int TeamNameLength => 10;
+            public virtual int BaseTypeOffset => 0x67 * 8;
+            public virtual int HeldMoneyOffset => 0x4E6C * 8;
+            public virtual int HeldMoneyLength => 24;
+            public virtual int StoredMoneyOffset => 0x4E6F * 8;
+            public virtual int StoredMoneyLength => 24;
+            public virtual int RescuePointsOffset => 0x4ED3 * 8;
+            public virtual int RescuePointsLength => 32;
+
+            // Stored Items
+            public virtual int StoredItemOffset => 0x4D2B * 8 - 2;
+            public virtual int StoredItemCount => 239;
+
+            // Held Items
+            public virtual int HeldItemOffset => 0x4CF0 * 8;
+            public virtual int HeldItemCount => 20;
+            public virtual int HeldItemLength => 23;
+
+            // Stored Pokemon
+            public virtual int StoredPokemonOffset => (0x5B3 * 8 + 3) - (323 * 9);
+            public virtual int StoredPokemonLength => 323;
+            public virtual int StoredPokemonCount => 407 + 6;
+        }
+
     }
 }

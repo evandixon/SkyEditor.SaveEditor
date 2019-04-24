@@ -1,0 +1,27 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Properties="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.Properties;assembly=SkyEditor.SaveEditor.UI.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.ExplorersOfSky.SkyHistoryView">
+  <UniformGrid Columns="2" HorizontalAlignment="Left" Width="300" VerticalAlignment="Top">
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_ExplorersOfSky_OriginalPlayerName}" />
+    <TextBox Text="{Binding OriginalPlayerName}" />
+
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_ExplorersOfSky_OriginalPlayerPkm}" />
+    <ComboBox Items="{Binding ExplorersPokemon}" SelectedItem="{Binding OriginalPlayerPokemonItem}" />
+
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_ExplorersOfSky_OriginalPlayerGender}" />
+    <CheckBox VerticalAlignment="Center" Content="{x:Static Properties:Resources.Views_ExplorersOfSky_IsFemale}" IsChecked="{Binding OriginalPlayerIsFemale}" />
+
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_ExplorersOfSky_OriginalPartnerName}" />
+    <TextBox Text="{Binding OriginalPartnerName}" />
+
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_ExplorersOfSky_OriginalPartnerPkm}" />
+    <ComboBox Items="{Binding ExplorersPokemon}" SelectedItem="{Binding OriginalPartnerPokemonItem}" />
+
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_ExplorersOfSky_OriginalPartnerGender}" />
+    <CheckBox VerticalAlignment="Center" Content="{x:Static Properties:Resources.Views_ExplorersOfSky_IsFemale}"  IsChecked="{Binding OriginalPartnerIsFemale}"/>
+  </UniformGrid>
+</UserControl>

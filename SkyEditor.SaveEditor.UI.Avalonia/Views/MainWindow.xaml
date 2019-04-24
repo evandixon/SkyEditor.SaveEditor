@@ -21,16 +21,12 @@
     <TabControl Items="{Binding OpenFiles}">
       <TabControl.ItemTemplate>
         <DataTemplate>
-          <TextBlock
-              Text="{Binding FileName}">
-          </TextBlock>
+          <TextBlock Text="{Binding FileName}" />
         </DataTemplate>
       </TabControl.ItemTemplate>
       <TabControl.ContentTemplate>
         <DataTemplate>
-          <StackPanel Orientation="Vertical" Spacing="8">
-            <TextBlock Text="{Binding TeamName}"/>
-          </StackPanel>
+          <ContentControl Content="{Binding .}" />
         </DataTemplate>
       </TabControl.ContentTemplate>
     </TabControl>

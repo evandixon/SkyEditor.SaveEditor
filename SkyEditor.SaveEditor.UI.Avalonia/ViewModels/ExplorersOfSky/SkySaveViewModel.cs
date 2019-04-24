@@ -8,30 +8,15 @@ using System.Text;
 
 namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.ExplorersOfSky
 {
-    public class SkySaveViewModel : ViewModelBase, INotifyPropertyChanged
+    public class SkySaveViewModel : SaveFileViewModel<SkySave>
     {
-        public SkySaveViewModel(SkySave model)
+        public SkySaveViewModel(SkySave model) : base(model)
         {
-            this.Model = model;
+            this.GeneralViewModel = new SkyGeneralViewModel(model);
+            this.HistoryViewModel = new SkyHistoryViewModel(model);
         }
 
-        protected SkySave Model { get; set; }
-
-        public string FileName
-        {
-            get => Path.GetFileName(Model.Filename);
-        }
-
-        public string TeamName
-        {
-            get => Model.TeamName;
-            set {
-                if (Model.TeamName != value)
-                {
-                    Model.TeamName = value;
-                    this.RaisePropertyChanged(nameof(TeamName));
-                }
-            }
-        }
+        public SkyGeneralViewModel GeneralViewModel { get; }
+        public SkyHistoryViewModel HistoryViewModel { get; }
     }
 }

@@ -6,5 +6,6 @@ namespace SkyEditor.SaveEditor
 {
     public interface ISaveFile
     {
+        string Filename { get; }
     }
 }

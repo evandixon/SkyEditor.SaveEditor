@@ -1,4 +1,5 @@
 ﻿using SkyEditor.IO;
+using SkyEditor.IO.Binary;
 using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
 using System.Collections.Generic;
@@ -6,43 +7,35 @@ using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class TDSave : BitBlockFile
+    public class TDSave : BitBlockFile, ISaveFile
     {
-        public class TDOffsets
+        /// <summary>
+        /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Time and Darkness.
+        /// </summary>
+        /// <param name="file">The file to be checked</param>
+        /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
+        public static async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor data)
         {
-            // Checksums
-            public virtual int ChecksumEnd => 0xDC7B;
-            public virtual int BackupSaveStart => 0x10000;
-            public virtual int QuicksaveStart => 0x2E000;
-            public virtual int QuicksaveChecksumStart => 0x2E004;
-            public virtual int QuicksaveChecksumEnd => 0x2E0FF;
+            if (data.Length <= TDOffsets.Instance.ChecksumEnd)
+            {
+                return false;
+            }
 
-            // General
-            public virtual int TeamNameStart => 0x96F7 * 8;
-            public virtual int TeamNameLength => 10;
-
-            // Held Items
-            public virtual int HeldItemOffset => 0x8B71 * 8;
-            public virtual int HeldItemCount => 48;
-            public virtual int HeldItemLength => 31;
-
-            // Stored Pokemon
-            public virtual int StoredPokemonOffset => 0x460 * 8 + 3;
-            public virtual int StoredPokemonLength => 388;
-            public virtual int StoredPokemonCount => 550;
-
-            // Active Pokemon
-            public virtual int ActivePokemonOffset => 0x83CB * 8;
-            public virtual int ActivePokemonLength => 544;
-            public virtual int ActivePokemonCount => 4;
-        }
+            return await data.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(data, 4, TDOffsets.Instance.ChecksumEnd);
+        }        
 
         public TDSave()
         {
             Offsets = new TDOffsets();
         }
-
+        
         public TDSave(IEnumerable<byte> rawData) : base(rawData)
+        {
+            Offsets = new TDOffsets();
+            Init();
+        }
+
+        public TDSave(BinaryFile file) : base(file)
         {
             Offsets = new TDOffsets();
             Init();
@@ -414,21 +407,6 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Bits.SetUInt(Offsets.QuicksaveStart, 0, 32, QuicksaveChecksum);
         }
 
-        /// <summary>
-        /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Time and Darkness.
-        /// </summary>
-        /// <param name="file">The file to be checked</param>
-        /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
-        public async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor data)
-        {
-            if (data.Length <= Offsets.ChecksumEnd)
-            {
-                return false;
-            }
-
-            return await data.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(data, 4, Offsets.ChecksumEnd);
-        }
-
         public override byte[] ToByteArray()
         {
             PreSave();
@@ -436,5 +414,36 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
 
         #endregion
+
+        public class TDOffsets
+        {
+            public static readonly TDOffsets Instance = new TDOffsets();
+
+            // Checksums
+            public virtual int ChecksumEnd => 0xDC7B;
+            public virtual int BackupSaveStart => 0x10000;
+            public virtual int QuicksaveStart => 0x2E000;
+            public virtual int QuicksaveChecksumStart => 0x2E004;
+            public virtual int QuicksaveChecksumEnd => 0x2E0FF;
+
+            // General
+            public virtual int TeamNameStart => 0x96F7 * 8;
+            public virtual int TeamNameLength => 10;
+
+            // Held Items
+            public virtual int HeldItemOffset => 0x8B71 * 8;
+            public virtual int HeldItemCount => 48;
+            public virtual int HeldItemLength => 31;
+
+            // Stored Pokemon
+            public virtual int StoredPokemonOffset => 0x460 * 8 + 3;
+            public virtual int StoredPokemonLength => 388;
+            public virtual int StoredPokemonCount => 550;
+
+            // Active Pokemon
+            public virtual int ActivePokemonOffset => 0x83CB * 8;
+            public virtual int ActivePokemonLength => 544;
+            public virtual int ActivePokemonCount => 4;
+        }
     }
 }

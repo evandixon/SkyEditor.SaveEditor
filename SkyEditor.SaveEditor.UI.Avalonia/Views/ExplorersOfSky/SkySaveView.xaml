@@ -2,7 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Properties="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.Properties;assembly=SkyEditor.SaveEditor.UI.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.ExplorersOfSky.SkySaveView">
-  <TextBox Text="{Binding TeamName}" />
+  <TabControl TabStripPlacement="Left">
+    <TabItem Header="{x:Static Properties:Resources.View_ExplorersOfSky_GeneralTab}">
+      <ContentControl Content="{Binding GeneralViewModel}" />
+    </TabItem>
+    <TabItem Header="{x:Static Properties:Resources.View_ExplorersOfSky_HistoryTab}">
+      <ContentControl Content="{Binding HistoryViewModel}" />
+    </TabItem>
+  </TabControl>
 </UserControl>
