@@ -1,4 +1,5 @@
 ﻿using SkyEditor.IO;
+using SkyEditor.IO.Binary;
 using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
 using System.Collections.Generic;
@@ -6,72 +7,22 @@ using System.Threading.Tasks;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 {
-    public class SkySave : BitBlockFile
-    {
-        public class SkyOffsets
+    public class SkySave : BitBlockFile, ISaveFile
+    {    
+        /// <summary>
+        /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Sky.
+        /// </summary>
+        /// <param name="file">The file to be checked</param>
+        /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
+        /// <remarks>US and EU regions are supported. JP is unknown.</remarks>
+        public static async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor file)
         {
-            // Save framework (checksums, multi-save, etc.)
-            public virtual int BackupSaveStart => 0xC800;
-            public virtual int ChecksumEnd => 0xB65A;
-            public virtual int QuicksaveStart => 0x19000;
-            public virtual int QuicksaveChecksumStart => 0x19004;
-            public virtual int QuicksaveChecksumEnd => 0x1E7FF;
+            if (file.Length <= SkyOffsets.Instance.ChecksumEnd)
+            {
+                return false;
+            }
 
-            // General
-            public virtual int TeamNameStart => 0x994E * 8;
-            public virtual int TeamNameLength => 10;
-            public virtual int HeldMoney => 0x990C * 8 + 6;
-            public virtual int SpEpisodeHeldMoney => 0x990F * 8 + 6;
-            public virtual int StoredMoney => 0x9915 * 8 + 6;
-            public virtual int NumberOfAdventures => 0x8B70 * 8;
-            public virtual int ExplorerRank => 0x9958 * 8;
-
-            // Items
-            public virtual int StoredItemOffset => 0x8E0C * 8 + 6;
-            public virtual int HeldItemOffset => 0x8BA2 * 8;
-
-            // Stored Pokemon
-            public virtual int StoredPokemonOffset => 0x464 * 8;
-            public virtual int StoredPokemonLength => 362;
-            public virtual int StoredPokemonCount => 720;
-
-            // Active Pokemon
-            public virtual int ActivePokemon1RosterIndexOffset => 0x83D1 * 8 + 1;
-            public virtual int ActivePokemon2RosterIndexOffset => 0x83D3 * 8 + 1;
-            public virtual int ActivePokemon3RosterIndexOffset => 0x83D5 * 8 + 1;
-            public virtual int ActivePokemon4RosterIndexOffset => 0x83D7 * 8 + 1;
-            public virtual int ActivePokemonOffset => 0x83D9 * 8 + 1;
-            public virtual int SpActivePokemonOffset => 0x84F4 * 8 + 2;
-            public virtual int ActivePokemonLength => 546;
-            public virtual int ActivePokemonCount => 4;
-
-            // Quicksave Pokemon
-            public virtual int QuicksavePokemonCount => 20;
-            public virtual int QuicksavePokemonLength => 429 * 8;
-            public virtual int QuicksavePokemonOffset => 0x19000 * 8 + (0x3170 * 8);
-
-            // History
-            public virtual int OriginalPlayerID => 0xBE * 8;
-            public virtual int OriginalPartnerID => 0xC0 * 8;
-            public virtual int OriginalPlayerName => 0x13F * 8;
-            public virtual int OriginalPartnerName => 0x149 * 8;
-
-            // Settings
-            public virtual int WindowFrameType => 0x995F * 8 + 5;
-
-            // Unused/Untested
-            public virtual int ItemShop1Offset => 0x98CA * 8 + 6;
-            public virtual int ItemShopLength => 22;
-            public virtual int ItemShop1Number => 8;
-            public virtual int ItemShop2Offset => 0x98E0 * 8 + 6;
-            public virtual int ItemShop2Number => 4;
-
-            public virtual int AdventureLogOffset => 0x9958 * 8;
-            public virtual int AdventureLogLength => 447;
-
-            public virtual int CroagunkShopOffset => 0xB475 * 8;
-            public virtual int CroagunkShopLength => 11;
-            public virtual int CroagunkShopNumber => 8;            
+            return await file.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(file, 4, SkyOffsets.Instance.ChecksumEnd);
         }
 
         public SkySave() : base()
@@ -85,7 +36,12 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Init();
         }
 
-
+        public SkySave(BinaryFile file) : base(file)
+        {
+            Offsets = new SkyOffsets();
+            Init();
+        }
+        
         public SkySave(string filename, IFileSystem fileSystem) : base(filename, fileSystem)
         {
             Offsets = new SkyOffsets();
@@ -698,23 +654,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Bits.SetUInt(0, 0, 32, PrimaryChecksum);
             Bits.SetUInt(Offsets.BackupSaveStart, 0, 32, SecondaryChecksum);
             Bits.SetUInt(Offsets.QuicksaveStart, 0, 32, QuicksaveChecksum);
-        }
-
-        /// <summary>
-        /// Determines whether or not the given file is a save file for Pokémon Mystery Dungeon: Explorers of Sky.
-        /// </summary>
-        /// <param name="file">The file to be checked</param>
-        /// <returns>A boolean indicating whether or not the given file is supported by this class</returns>
-        /// <remarks>US and EU regions are supported. JP is unknown.</remarks>
-        public async Task<bool> IsOfType(IReadOnlyBinaryDataAccessor file)
-        {
-            if (file.Length <= Offsets.ChecksumEnd)
-            {
-                return false;
-            }
-
-            return await file.ReadUInt32Async(0) == Checksums.Calculate32BitChecksum(file, 4, Offsets.ChecksumEnd);
-        }
+        } 
 
         public override byte[] ToByteArray()
         {
@@ -723,5 +663,73 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
 
         #endregion
+
+        public class SkyOffsets
+        {
+            public static readonly SkyOffsets Instance = new SkyOffsets();
+
+            // Save framework (checksums, multi-save, etc.)
+            public virtual int BackupSaveStart => 0xC800;
+            public virtual int ChecksumEnd => 0xB65A;
+            public virtual int QuicksaveStart => 0x19000;
+            public virtual int QuicksaveChecksumStart => 0x19004;
+            public virtual int QuicksaveChecksumEnd => 0x1E7FF;
+
+            // General
+            public virtual int TeamNameStart => 0x994E * 8;
+            public virtual int TeamNameLength => 10;
+            public virtual int HeldMoney => 0x990C * 8 + 6;
+            public virtual int SpEpisodeHeldMoney => 0x990F * 8 + 6;
+            public virtual int StoredMoney => 0x9915 * 8 + 6;
+            public virtual int NumberOfAdventures => 0x8B70 * 8;
+            public virtual int ExplorerRank => 0x9958 * 8;
+
+            // Items
+            public virtual int StoredItemOffset => 0x8E0C * 8 + 6;
+            public virtual int HeldItemOffset => 0x8BA2 * 8;
+
+            // Stored Pokemon
+            public virtual int StoredPokemonOffset => 0x464 * 8;
+            public virtual int StoredPokemonLength => 362;
+            public virtual int StoredPokemonCount => 720;
+
+            // Active Pokemon
+            public virtual int ActivePokemon1RosterIndexOffset => 0x83D1 * 8 + 1;
+            public virtual int ActivePokemon2RosterIndexOffset => 0x83D3 * 8 + 1;
+            public virtual int ActivePokemon3RosterIndexOffset => 0x83D5 * 8 + 1;
+            public virtual int ActivePokemon4RosterIndexOffset => 0x83D7 * 8 + 1;
+            public virtual int ActivePokemonOffset => 0x83D9 * 8 + 1;
+            public virtual int SpActivePokemonOffset => 0x84F4 * 8 + 2;
+            public virtual int ActivePokemonLength => 546;
+            public virtual int ActivePokemonCount => 4;
+
+            // Quicksave Pokemon
+            public virtual int QuicksavePokemonCount => 20;
+            public virtual int QuicksavePokemonLength => 429 * 8;
+            public virtual int QuicksavePokemonOffset => 0x19000 * 8 + (0x3170 * 8);
+
+            // History
+            public virtual int OriginalPlayerID => 0xBE * 8;
+            public virtual int OriginalPartnerID => 0xC0 * 8;
+            public virtual int OriginalPlayerName => 0x13F * 8;
+            public virtual int OriginalPartnerName => 0x149 * 8;
+
+            // Settings
+            public virtual int WindowFrameType => 0x995F * 8 + 5;
+
+            // Unused/Untested
+            public virtual int ItemShop1Offset => 0x98CA * 8 + 6;
+            public virtual int ItemShopLength => 22;
+            public virtual int ItemShop1Number => 8;
+            public virtual int ItemShop2Offset => 0x98E0 * 8 + 6;
+            public virtual int ItemShop2Number => 4;
+
+            public virtual int AdventureLogOffset => 0x9958 * 8;
+            public virtual int AdventureLogLength => 447;
+
+            public virtual int CroagunkShopOffset => 0xB475 * 8;
+            public virtual int CroagunkShopLength => 11;
+            public virtual int CroagunkShopNumber => 8;
+        }
     }
 }

@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace SkyEditor.SaveEditor.UI.Avalonia.Views
+namespace SkyEditor.SaveEditor.UI.Avalonia.Views.ExplorersOfSky
 {
     public class SkySaveView : UserControl
     {

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text;
 
-namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
+namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.ExplorersOfSky
 {
     public class SkySaveViewModel : ViewModelBase, INotifyPropertyChanged
     {

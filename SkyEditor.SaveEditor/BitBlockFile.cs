@@ -1,4 +1,5 @@
-﻿using SkyEditor.IO.Binary;
+﻿using SkyEditor.IO;
+using SkyEditor.IO.Binary;
 using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,21 @@ namespace SkyEditor.SaveEditor
             }
 
             Bits = new BitBlock(rawData);
+        }
+
+        public BitBlockFile(BinaryFile data)
+        {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            Filename = data.Filename;
+            Bits = new BitBlock((int)data.Length * 8);
+            for (int i = 0; i < data.Length; i++)
+            {
+                Bits.SetInt(i, 0, 8, data.ReadByte(i));
+            }
         }
 
         public BitBlockFile(string filename, IFileSystem fileSystem)
