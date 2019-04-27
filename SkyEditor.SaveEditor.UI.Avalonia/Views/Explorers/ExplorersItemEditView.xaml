@@ -1,0 +1,29 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Properties="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.Properties;assembly=SkyEditor.SaveEditor.UI.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.Explorers.ExplorersItemEditView">
+  <StackPanel>
+    <TextBlock Text="{x:Static Properties:Resources.Views_Explorers_NewItem}" />
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="3" />
+        <ColumnDefinition Width="50" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="5"/>
+        <RowDefinition Height="20"/>
+        <RowDefinition Height="50" />
+      </Grid.RowDefinitions>
+      <ComboBox Grid.Column="0" Grid.Row="1" Items="{Binding ItemChoices}" SelectedItem="{Binding IDListItem}" />
+      <NumericUpDown Minimum="0" Maximum="127" Value="{Binding Quantity}" Grid.Column="2" Grid.Row="1" IsEnabled="{Binding IsStackableItem}" />
+      <StackPanel Height="47" VerticalAlignment="Bottom" Focusable="True" Grid.ColumnSpan="5" Grid.Row="2" IsEnabled="{Binding CanContainItem}">
+        <TextBlock Text="{x:Static Properties:Resources.Views_Explorers_ContainedItem}"/>
+        <ComboBox Grid.Column="2" Grid.Row="1" Items="{Binding ContainedItemChoices}" SelectedItem="{Binding ContainedItemIDListItem}" />
+      </StackPanel>
+    </Grid>
+  </StackPanel>  
+</UserControl>

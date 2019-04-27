@@ -117,49 +117,78 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Views_ExplorersOfSky_IsFemale" xml:space="preserve">
+  <data name="Views_Explorers_Sky_IsFemale" xml:space="preserve">
     <value>Is Female</value>
   </data>
-  <data name="Views_ExplorersOfSky_OriginalPartnerGender" xml:space="preserve">
+  <data name="Views_Explorers_Sky_OriginalPartnerGender" xml:space="preserve">
     <value>Original Partner Gender</value>
   </data>
-  <data name="Views_ExplorersOfSky_OriginalPartnerName" xml:space="preserve">
+  <data name="Views_Explorers_Sky_OriginalPartnerName" xml:space="preserve">
     <value>Original Partner Name</value>
   </data>
-  <data name="Views_ExplorersOfSky_OriginalPartnerPkm" xml:space="preserve">
+  <data name="Views_Explorers_Sky_OriginalPartnerPkm" xml:space="preserve">
     <value>Original Partner Pokémon</value>
   </data>
-  <data name="Views_ExplorersOfSky_OriginalPlayerGender" xml:space="preserve">
+  <data name="Views_Explorers_Sky_OriginalPlayerGender" xml:space="preserve">
     <value>Original Player Gender</value>
   </data>
-  <data name="Views_ExplorersOfSky_OriginalPlayerName" xml:space="preserve">
+  <data name="Views_Explorers_Sky_OriginalPlayerName" xml:space="preserve">
     <value>Original Player Name</value>
   </data>
-  <data name="Views_ExplorersOfSky_OriginalPlayerPkm" xml:space="preserve">
+  <data name="Views_Explorers_Sky_OriginalPlayerPkm" xml:space="preserve">
     <value>Original Player Pokémon</value>
   </data>
-  <data name="View_ExplorersOfSky_Adventures" xml:space="preserve">
+  <data name="Views_Explorers_Sky_Adventures" xml:space="preserve">
     <value>Adventures</value>
   </data>
-  <data name="View_ExplorersOfSky_GeneralTab" xml:space="preserve">
+  <data name="Views_Explorers_Sky_GeneralTab" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="View_ExplorersOfSky_HeldMoney" xml:space="preserve">
+  <data name="Views_Explorers_Sky_HeldMoney" xml:space="preserve">
     <value>Held Money</value>
   </data>
-  <data name="View_ExplorersOfSky_RankPoints" xml:space="preserve">
+  <data name="Views_Explorers_Sky_RankPoints" xml:space="preserve">
     <value>Rank Points</value>
   </data>
-  <data name="View_ExplorersOfSky_SpEpisodeHeldMoney" xml:space="preserve">
+  <data name="Views_Explorers_Sky_SpEpisodeHeldMoney" xml:space="preserve">
     <value>Sp. Episode Held Money</value>
   </data>
-  <data name="View_ExplorersOfSky_StoredMoney" xml:space="preserve">
+  <data name="Views_Explorers_Sky_StoredMoney" xml:space="preserve">
     <value>Stored Money</value>
   </data>
-  <data name="View_ExplorersOfSky_TeamName" xml:space="preserve">
+  <data name="Views_Explorers_Sky_TeamName" xml:space="preserve">
     <value>Team Name</value>
   </data>
-  <data name="View_ExplorersOfSky_HistoryTab" xml:space="preserve">
+  <data name="Views_Explorers_Sky_HistoryTab" xml:space="preserve">
     <value>History</value>
+  </data>
+  <data name="Views_Explorers_Sky_FriendRescueHeldItemsTab" xml:space="preserve">
+    <value>Friend Rescue Held Items</value>
+  </data>
+  <data name="Views_Explorers_Sky_HeldItemsTab" xml:space="preserve">
+    <value>Held Items</value>
+  </data>
+  <data name="Views_Explorers_Sky_InventoryTab" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="Views_Explorers_Sky_SpEpisodeHeldItemsTab" xml:space="preserve">
+    <value>Sp. Episode Held Items</value>
+  </data>
+  <data name="Views_Explorers_Sky_StoredItemsTab" xml:space="preserve">
+    <value>Stored Items</value>
+  </data>
+  <data name="Views_Explorers_ContainedItem" xml:space="preserve">
+    <value>Contained Item</value>
+  </data>
+  <data name="Views_Explorers_NewItem" xml:space="preserve">
+    <value>New Item</value>
+  </data>
+  <data name="Views_Explorers_NewItemQuantityTooltip" xml:space="preserve">
+    <value>Quantity
+
+For stackable items like sticks and spikes, this lets you control how much is in this stack.  This is ignored for non-stackable items.</value>
+  </data>
+  <data name="Views_Explorers_Add" xml:space="preserve">
+    <value>Add</value>
   </data>
 </root>

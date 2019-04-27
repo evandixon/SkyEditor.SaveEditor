@@ -15,22 +15,22 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <UniformGrid Columns="2" HorizontalAlignment="Left" Width="274" VerticalAlignment="Top">      
-      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.View_ExplorersOfSky_TeamName}" />
+      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_Explorers_Sky_TeamName}" />
       <TextBox Text="{Binding TeamName}"/>
 
-      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.View_ExplorersOfSky_HeldMoney}" />
+      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_Explorers_Sky_HeldMoney}" />
       <NumericUpDown Minimum="0" Maximum="99999" Value="{Binding HeldMoney}" />
 
-      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.View_ExplorersOfSky_SpEpisodeHeldMoney}" />
+      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_Explorers_Sky_SpEpisodeHeldMoney}" />
       <NumericUpDown Minimum="0" Maximum="99999" Value="{Binding SpEpisodeHeldMoney}" />
 
-      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.View_ExplorersOfSky_StoredMoney}" />
+      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_Explorers_Sky_StoredMoney}" />
       <NumericUpDown Minimum="0" Maximum="9999999" Value="{Binding StoredMoney}" />
 
-      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.View_ExplorersOfSky_Adventures}" />
+      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_Explorers_Sky_Adventures}" />
       <NumericUpDown Value="{Binding NumberOfAdventures}" />
 
-      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.View_ExplorersOfSky_RankPoints}" />
+      <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="170" Text="{x:Static Properties:Resources.Views_Explorers_Sky_RankPoints}" />
       <NumericUpDown Value="{Binding ExplorerRank}" />
     </UniformGrid>
   </Grid>

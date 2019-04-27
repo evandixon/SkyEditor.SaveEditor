@@ -61,137 +61,220 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Views_Explorers_Add {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contained Item.
+        /// </summary>
+        public static string Views_Explorers_ContainedItem {
+            get {
+                return ResourceManager.GetString("Views_Explorers_ContainedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Item.
+        /// </summary>
+        public static string Views_Explorers_NewItem {
+            get {
+                return ResourceManager.GetString("Views_Explorers_NewItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity
+        ///
+        ///For stackable items like sticks and spikes, this lets you control how much is in this stack.  This is ignored for non-stackable items..
+        /// </summary>
+        public static string Views_Explorers_NewItemQuantityTooltip {
+            get {
+                return ResourceManager.GetString("Views_Explorers_NewItemQuantityTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adventures.
         /// </summary>
-        public static string View_ExplorersOfSky_Adventures {
+        public static string Views_Explorers_Sky_Adventures {
             get {
-                return ResourceManager.GetString("View_ExplorersOfSky_Adventures", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_Adventures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend Rescue Held Items.
+        /// </summary>
+        public static string Views_Explorers_Sky_FriendRescueHeldItemsTab {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_FriendRescueHeldItemsTab", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
-        public static string View_ExplorersOfSky_GeneralTab {
+        public static string Views_Explorers_Sky_GeneralTab {
             get {
-                return ResourceManager.GetString("View_ExplorersOfSky_GeneralTab", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_GeneralTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Held Items.
+        /// </summary>
+        public static string Views_Explorers_Sky_HeldItemsTab {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_HeldItemsTab", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Held Money.
         /// </summary>
-        public static string View_ExplorersOfSky_HeldMoney {
+        public static string Views_Explorers_Sky_HeldMoney {
             get {
-                return ResourceManager.GetString("View_ExplorersOfSky_HeldMoney", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_HeldMoney", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
-        public static string View_ExplorersOfSky_HistoryTab {
+        public static string Views_Explorers_Sky_HistoryTab {
             get {
-                return ResourceManager.GetString("View_ExplorersOfSky_HistoryTab", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_HistoryTab", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rank Points.
+        ///   Looks up a localized string similar to Inventory.
         /// </summary>
-        public static string View_ExplorersOfSky_RankPoints {
+        public static string Views_Explorers_Sky_InventoryTab {
             get {
-                return ResourceManager.GetString("View_ExplorersOfSky_RankPoints", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sp. Episode Held Money.
-        /// </summary>
-        public static string View_ExplorersOfSky_SpEpisodeHeldMoney {
-            get {
-                return ResourceManager.GetString("View_ExplorersOfSky_SpEpisodeHeldMoney", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stored Money.
-        /// </summary>
-        public static string View_ExplorersOfSky_StoredMoney {
-            get {
-                return ResourceManager.GetString("View_ExplorersOfSky_StoredMoney", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Team Name.
-        /// </summary>
-        public static string View_ExplorersOfSky_TeamName {
-            get {
-                return ResourceManager.GetString("View_ExplorersOfSky_TeamName", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_InventoryTab", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Is Female.
         /// </summary>
-        public static string Views_ExplorersOfSky_IsFemale {
+        public static string Views_Explorers_Sky_IsFemale {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_IsFemale", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_IsFemale", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Original Partner Gender.
         /// </summary>
-        public static string Views_ExplorersOfSky_OriginalPartnerGender {
+        public static string Views_Explorers_Sky_OriginalPartnerGender {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_OriginalPartnerGender", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_OriginalPartnerGender", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Original Partner Name.
         /// </summary>
-        public static string Views_ExplorersOfSky_OriginalPartnerName {
+        public static string Views_Explorers_Sky_OriginalPartnerName {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_OriginalPartnerName", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_OriginalPartnerName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Original Partner Pokémon.
         /// </summary>
-        public static string Views_ExplorersOfSky_OriginalPartnerPkm {
+        public static string Views_Explorers_Sky_OriginalPartnerPkm {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_OriginalPartnerPkm", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_OriginalPartnerPkm", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Original Player Gender.
         /// </summary>
-        public static string Views_ExplorersOfSky_OriginalPlayerGender {
+        public static string Views_Explorers_Sky_OriginalPlayerGender {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_OriginalPlayerGender", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_OriginalPlayerGender", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Original Player Name.
         /// </summary>
-        public static string Views_ExplorersOfSky_OriginalPlayerName {
+        public static string Views_Explorers_Sky_OriginalPlayerName {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_OriginalPlayerName", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_OriginalPlayerName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Original Player Pokémon.
         /// </summary>
-        public static string Views_ExplorersOfSky_OriginalPlayerPkm {
+        public static string Views_Explorers_Sky_OriginalPlayerPkm {
             get {
-                return ResourceManager.GetString("Views_ExplorersOfSky_OriginalPlayerPkm", resourceCulture);
+                return ResourceManager.GetString("Views_Explorers_Sky_OriginalPlayerPkm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank Points.
+        /// </summary>
+        public static string Views_Explorers_Sky_RankPoints {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_RankPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sp. Episode Held Items.
+        /// </summary>
+        public static string Views_Explorers_Sky_SpEpisodeHeldItemsTab {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_SpEpisodeHeldItemsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sp. Episode Held Money.
+        /// </summary>
+        public static string Views_Explorers_Sky_SpEpisodeHeldMoney {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_SpEpisodeHeldMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stored Items.
+        /// </summary>
+        public static string Views_Explorers_Sky_StoredItemsTab {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_StoredItemsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stored Money.
+        /// </summary>
+        public static string Views_Explorers_Sky_StoredMoney {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_StoredMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team Name.
+        /// </summary>
+        public static string Views_Explorers_Sky_TeamName {
+            get {
+                return ResourceManager.GetString("Views_Explorers_Sky_TeamName", resourceCulture);
             }
         }
     }

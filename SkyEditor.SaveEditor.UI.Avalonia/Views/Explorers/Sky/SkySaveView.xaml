@@ -6,10 +6,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.Explorers.Sky.SkySaveView">
   <TabControl TabStripPlacement="Left">
-    <TabItem Header="{x:Static Properties:Resources.View_ExplorersOfSky_GeneralTab}">
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_GeneralTab}">
       <ContentControl Content="{Binding GeneralViewModel}" />
     </TabItem>
-    <TabItem Header="{x:Static Properties:Resources.View_ExplorersOfSky_HistoryTab}">
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_InventoryTab}">
+      <ContentControl Content="{Binding InventoryViewModel}" />
+    </TabItem>
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_HistoryTab}">
       <ContentControl Content="{Binding HistoryViewModel}" />
     </TabItem>
   </TabControl>

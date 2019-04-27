@@ -16,37 +16,6 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers
         public ExplorersItemViewModel(ExplorersItem model)
         {
             Model = model ?? throw new ArgumentNullException(nameof(model));
-
-            if (model is TDHeldItem)
-            {
-                if (IsBox)
-                {
-                    ContainedItemChoices = Lists.TDItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
-                }
-                else if (IsUsedTM)
-                {
-                    ContainedItemChoices = Lists.TDItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
-                }
-                else
-                {
-                    ContainedItemChoices = new List<ListItem>();
-                }
-            }
-            else
-            {
-                if (IsBox)
-                {
-                    ContainedItemChoices = Lists.SkyItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
-                }
-                else if (IsUsedTM)
-                {
-                    ContainedItemChoices = Lists.SkyItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
-                }
-                else
-                {
-                    ContainedItemChoices = new List<ListItem>();
-                }
-            }
         }
 
         public ExplorersItem Model { get; }
@@ -60,12 +29,36 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers
                 {
                     Model.ID = value;
                     this.RaisePropertyChanged(nameof(ID));
+                    this.RaisePropertyChanged(nameof(IDListItem));
                     this.RaisePropertyChanged(nameof(Name));
                     this.RaisePropertyChanged(nameof(Quantity));
                     this.RaisePropertyChanged(nameof(IsBox));
                     this.RaisePropertyChanged(nameof(IsUsedTM));
                     this.RaisePropertyChanged(nameof(IsStackableItem));
                     this.RaisePropertyChanged(nameof(CanContainItem));
+                    this.RaisePropertyChanged(nameof(ItemChoices));
+                    this.RaisePropertyChanged(nameof(ContainedItemChoices));
+                }
+            }
+        }        
+
+        public ListItem IDListItem
+        {
+            get => ItemChoices.Count > ID ? ItemChoices[ID] : null;
+            set
+            {
+                if (value != null && Model.ID != value.Value)
+                {
+                    Model.ID = value.Value;
+                    this.RaisePropertyChanged(nameof(ID));
+                    this.RaisePropertyChanged(nameof(IDListItem));
+                    this.RaisePropertyChanged(nameof(Name));
+                    this.RaisePropertyChanged(nameof(Quantity));
+                    this.RaisePropertyChanged(nameof(IsBox));
+                    this.RaisePropertyChanged(nameof(IsUsedTM));
+                    this.RaisePropertyChanged(nameof(IsStackableItem));
+                    this.RaisePropertyChanged(nameof(CanContainItem));
+                    this.RaisePropertyChanged(nameof(ItemChoices));
                     this.RaisePropertyChanged(nameof(ContainedItemChoices));
                 }
             }
@@ -82,6 +75,22 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers
                 {
                     Model.ContainedItemID = value;
                     this.RaisePropertyChanged(nameof(ContainedItemID));
+                    this.RaisePropertyChanged(nameof(ContainedItemIDListItem));
+                    this.RaisePropertyChanged(nameof(ContainedItemName));
+                }
+            }
+        }
+
+        public ListItem ContainedItemIDListItem
+        {
+            get => ContainedItemChoices.Count > ContainedItemID ? ContainedItemChoices[ContainedItemID] : null;
+            set
+            {
+                if (value != null && Model.ContainedItemID != value.Value)
+                {
+                    Model.ContainedItemID = value.Value;
+                    this.RaisePropertyChanged(nameof(ContainedItemID));
+                    this.RaisePropertyChanged(nameof(ContainedItemIDListItem));
                     this.RaisePropertyChanged(nameof(ContainedItemName));
                 }
             }
@@ -110,7 +119,57 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers
 
         public bool CanContainItem => IsBox || IsUsedTM;
 
-        public List<ListItem> ContainedItemChoices { get; }
+        public List<ListItem> ItemChoices
+        {
+            get
+            {
+                if (Model is TDHeldItem)
+                {
+                    return Lists.TDItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();                    
+                }
+                else
+                {
+                    return Lists.SkyItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();                 
+                }
+            }
+        }
+
+        public List<ListItem> ContainedItemChoices
+        {
+            get
+            {
+                if (Model is TDHeldItem)
+                {
+                    if (IsBox)
+                    {
+                        return Lists.TDItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
+                    }
+                    else if (IsUsedTM)
+                    {
+                        return Lists.TDItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
+                    }
+                    else
+                    {
+                        return new List<ListItem>();
+                    }
+                }
+                else
+                {
+                    if (IsBox)
+                    {
+                        return Lists.SkyItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
+                    }
+                    else if (IsUsedTM)
+                    {
+                        return Lists.SkyItems.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
+                    }
+                    else
+                    {
+                        return new List<ListItem>();
+                    }
+                }
+            }
+        }
 
         public ExplorersItemViewModel Clone()
         {

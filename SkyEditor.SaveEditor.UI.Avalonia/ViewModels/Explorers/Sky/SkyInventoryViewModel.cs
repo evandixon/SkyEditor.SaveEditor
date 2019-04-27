@@ -14,6 +14,17 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
         public SkyInventoryViewModel(SkySave model)
         {
             this.Model = model;
+
+            this.StoredItems = new ObservableCollection<ExplorersItemViewModel>(model.StoredItems.Select(i => new ExplorersItemViewModel(i)));
+            this.HeldItems = new ObservableCollection<ExplorersItemViewModel>(model.HeldItems.Select(i => new ExplorersItemViewModel(i)));
+            this.SpEpisodeHeldItems = new ObservableCollection<ExplorersItemViewModel>(model.SpEpisodeHeldItems.Select(i => new ExplorersItemViewModel(i)));
+            this.FriendRescueHeldItems = new ObservableCollection<ExplorersItemViewModel>(model.FriendRescueHeldItems.Select(i => new ExplorersItemViewModel(i)));
+
+            this.NewStoredItem = new ExplorersItemViewModel();
+            this.NewHeldItem = new ExplorersItemViewModel();
+            this.NewSpEpisodeHeldItem = new ExplorersItemViewModel();
+            this.NewFriendRescueHeldItem = new ExplorersItemViewModel();
+
             this.AddStoredItemCommand = ReactiveCommand.Create(AddStoredItem, this.WhenAnyValue(v => v.CanAddStoredItem));
             this.AddHeldItemCommand = ReactiveCommand.Create(AddHeldItem, this.WhenAnyValue(v => v.CanAddHeldItem));
             this.AddSpEpisodeHeldItemCommand = ReactiveCommand.Create(AddSpEpisodeHeldItem, this.WhenAnyValue(v => v.CanAddSpEpisodeHeldItem));
@@ -60,7 +71,7 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
         }
         private ExplorersItemViewModel _selectedHeldItem;
 
-        public ExplorersItemViewModel NewHeldtem
+        public ExplorersItemViewModel NewHeldItem
         {
             get => _newHeldItem;
             set => this.RaiseAndSetIfChanged(ref _newHeldItem, value);
@@ -73,7 +84,7 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
 
         private void AddHeldItem()
         {
-            HeldItems.Add(NewHeldtem.Clone());
+            HeldItems.Add(NewHeldItem.Clone());
             this.RaisePropertyChanged(nameof(CanAddHeldItem));
         }
 

@@ -29,7 +29,8 @@ Public Class SkyEditorInfo
     End Function
 
     Public Overrides Sub Load(Manager As PluginManager)
-        Manager.LoadRequiredPlugin(New SkyEditor.SaveEditor.PluginDefinition, Me)
+        Throw New NotImplementedException
+        'Manager.LoadRequiredPlugin(New SkyEditor.SaveEditor.PluginDefinition, Me)
     End Sub
 
     Public Function DirectoryDetector(Directory As DirectoryInfo) As IEnumerable(Of Type)

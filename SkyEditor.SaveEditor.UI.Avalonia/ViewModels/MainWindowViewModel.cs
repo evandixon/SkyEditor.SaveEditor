@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using ReactiveUI;
 using SkyEditor.SaveEditor.MysteryDungeon.Explorers;
-using SkyEditor.SaveEditor.UI.Avalonia.ViewModels.ExplorersOfSky;
+using SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

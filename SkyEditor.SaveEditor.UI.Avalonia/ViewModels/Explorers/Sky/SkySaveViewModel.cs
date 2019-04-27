@@ -13,10 +13,12 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
         public SkySaveViewModel(SkySave model) : base(model)
         {
             this.GeneralViewModel = new SkyGeneralViewModel(model);
+            this.InventoryViewModel = new SkyInventoryViewModel(model);
             this.HistoryViewModel = new SkyHistoryViewModel(model);
         }
 
         public SkyGeneralViewModel GeneralViewModel { get; }
+        public SkyInventoryViewModel InventoryViewModel { get; }
         public SkyHistoryViewModel HistoryViewModel { get; }
     }
 }

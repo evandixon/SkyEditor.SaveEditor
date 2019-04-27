@@ -1,0 +1,97 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Properties="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.Properties;assembly=SkyEditor.SaveEditor.UI.Avalonia"
+             xmlns:explorers="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.Views.Explorers;assembly=SkyEditor.SaveEditor.UI.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.Explorers.Sky.SkyInventoryView">
+  <TabControl>
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_StoredItemsTab}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="100" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible">
+          <ListBox Grid.Row="0" Items="{Binding StoredItems}" >
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+        <explorers:ExplorersItemEditView Grid.Row="2" DataContext="{Binding NewStoredItem}" />
+        <Button Grid.Row="4" Command="{Binding AddStoredItemCommand}" Content="{x:Static Properties:Resources.Views_Explorers_Add}" />
+      </Grid>
+    </TabItem>
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_HeldItemsTab}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="100" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" Items="{Binding HeldItems}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <explorers:ExplorersItemEditView Grid.Row="2" DataContext="{Binding NewHeldItem}" />
+        <Button Grid.Row="4" Command="{Binding AddSHeldItemCommand}" Content="{x:Static Properties:Resources.Views_Explorers_Add}" />
+      </Grid>
+    </TabItem>
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_SpEpisodeHeldItemsTab}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="100" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" Items="{Binding SpEpisodeHeldItems}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <explorers:ExplorersItemEditView Grid.Row="2" DataContext="{Binding NewSpEpisodeHeldItem}" />
+        <Button Grid.Row="4" Command="{Binding AddSpEpisodeHeldItemCommand}" Content="{x:Static Properties:Resources.Views_Explorers_Add}" />
+      </Grid>
+    </TabItem>
+    <TabItem Header="{x:Static Properties:Resources.Views_Explorers_Sky_FriendRescueHeldItemsTab}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="100" />
+          <RowDefinition Height="2" />
+          <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" Items="{Binding FriendRescueHeldItems}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <explorers:ExplorersItemEditView Grid.Row="2" DataContext="{Binding NewFriendRescueHeldItem}" />
+        <Button Grid.Row="4" Command="{Binding AddFriendRescueHeldItemCommand}" Content="{x:Static Properties:Resources.Views_Explorers_Add}" />
+      </Grid>
+    </TabItem>
+  </TabControl>
+</UserControl>
