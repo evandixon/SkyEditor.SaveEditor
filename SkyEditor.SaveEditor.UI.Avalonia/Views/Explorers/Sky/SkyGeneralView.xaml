@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Properties="clr-namespace:SkyEditor.SaveEditor.UI.Avalonia.Properties;assembly=SkyEditor.SaveEditor.UI.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.ExplorersOfSky.SkyGeneralView">
+             x:Class="SkyEditor.SaveEditor.UI.Avalonia.Views.Explorers.Sky.SkyGeneralView">
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="400" />

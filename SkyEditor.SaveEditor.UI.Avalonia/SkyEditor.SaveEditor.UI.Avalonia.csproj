@@ -14,13 +14,13 @@
     <AvaloniaResource Include="Assets\*" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Remove="Views\ExplorersOfSky\SkyGeneralView.xaml" />
-    <AvaloniaResource Remove="Views\ExplorersOfSky\SkyHistoryView.xaml" />
+    <AvaloniaResource Remove="Views\Explorers\Sky\SkyGeneralView.xaml" />
+    <AvaloniaResource Remove="Views\Explorers\Sky\SkyHistoryView.xaml" />
     <AvaloniaResource Remove="Views\SkySaveView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Views\ExplorersOfSky\SkyGeneralView.xaml" />
-    <None Remove="Views\ExplorersOfSky\SkyHistoryView.xaml" />
+    <None Remove="Views\Explorers\Sky\SkyGeneralView.xaml" />
+    <None Remove="Views\Explorers\Sky\SkyHistoryView.xaml" />
     <None Remove="Views\SkySaveView.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -29,17 +29,17 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ExplorersOfSky\SkySaveView.xaml">
+    <EmbeddedResource Include="Views\Explorers\Sky\SkySaveView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ExplorersOfSky\SkyGeneralView.xaml">
+    <EmbeddedResource Include="Views\Explorers\Sky\SkyGeneralView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ExplorersOfSky\SkyHistoryView.xaml">
+    <EmbeddedResource Include="Views\Explorers\Sky\SkyHistoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -60,7 +60,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Views\ExplorersOfSky\SkySaveView.xaml">
+    <None Update="Views\Explorers\Sky\SkySaveView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>

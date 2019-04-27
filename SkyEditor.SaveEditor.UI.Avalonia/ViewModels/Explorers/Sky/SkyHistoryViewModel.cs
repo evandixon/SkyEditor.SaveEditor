@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.ExplorersOfSky
+namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
 {
     public class SkyHistoryViewModel : ViewModelBase
     {
         public SkyHistoryViewModel(SkySave model)
         {
             this.Model = model;
-            this.ExplorersPokemon = Lists.ExplorersPokemon.Select(kv => new ListItem { DisplayName = kv.Value, Value = kv.Key }).ToList();
+            this.ExplorersPokemon = Lists.ExplorersPokemon.Select(kv => new ListItem { DisplayName = $"{kv.Key:D3} {kv.Value}", Value = kv.Key }).ToList();
         }
 
         protected SkySave Model { get; set; }

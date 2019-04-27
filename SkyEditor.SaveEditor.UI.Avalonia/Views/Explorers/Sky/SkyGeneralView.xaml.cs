@@ -2,11 +2,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace SkyEditor.SaveEditor.UI.Avalonia.Views.ExplorersOfSky
+namespace SkyEditor.SaveEditor.UI.Avalonia.Views.Explorers.Sky
 {
-    public class SkyHistoryView : UserControl
+    public class SkyGeneralView : UserControl
     {
-        public SkyHistoryView()
+        public SkyGeneralView()
         {
             this.InitializeComponent();
         }

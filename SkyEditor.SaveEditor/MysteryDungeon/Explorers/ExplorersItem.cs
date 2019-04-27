@@ -78,6 +78,13 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         }
 
         /// <summary>
+        /// Name of the contained item
+        /// </summary>
+        public string ContainedItemName => (ID >= 0 && Lists.SkyItems.Count > ID) ?
+            Lists.SkyItems[ID]
+            : string.Format(Language.UnknownItem, ID.ToString());
+
+        /// <summary>
         /// Gets or sets the number of items in the stack. If the item is not stackable, this will always return 1, and changes will not apply.
         /// </summary>
         public int Quantity
@@ -134,9 +141,14 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
         /// </summary>
         public bool IsStackableItem => ID >= 1 && ID <= 9;
 
-        public virtual object Clone()
+        public virtual ExplorersItem Clone()
         {
             return new ExplorersItem(ID, Parameter);
+        }
+
+        object IClonable.Clone()
+        {
+            return Clone();
         }
 
         public override string ToString()

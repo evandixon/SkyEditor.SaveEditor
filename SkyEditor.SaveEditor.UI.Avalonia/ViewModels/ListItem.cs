@@ -46,7 +46,7 @@ namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels
 
         public override string ToString()
         {
-            return $"{Value:D3} {DisplayName}";
+            return DisplayName;
         }
     }
 }

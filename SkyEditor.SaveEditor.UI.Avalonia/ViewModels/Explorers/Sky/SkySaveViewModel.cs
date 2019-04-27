@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text;
 
-namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.ExplorersOfSky
+namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
 {
     public class SkySaveViewModel : SaveFileViewModel<SkySave>
     {

@@ -92,7 +92,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         public ItemHolder Holder { get; set; }
 
-        public override object Clone()
+        public override ExplorersItem Clone()
         {
             return new SkyHeldItem(this.ToBitBlock());
         }

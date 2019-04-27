@@ -377,5 +377,11 @@
   <ItemGroup>
     <Folder Include="Controls\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SkyEditor.SaveEditor\SkyEditor.SaveEditor.csproj">
+      <Project>{ec69c3f0-74c2-4256-bc4b-021ecebdc769}</Project>
+      <Name>SkyEditor.SaveEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

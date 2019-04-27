@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.ExplorersOfSky
+namespace SkyEditor.SaveEditor.UI.Avalonia.ViewModels.Explorers.Sky
 {
     public class SkyGeneralViewModel : ViewModelBase
     {
