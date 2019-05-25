@@ -1,5 +1,6 @@
 ﻿using SkyEditor.Core.IO;
 using SkyEditor.Core.Utilities;
+using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,12 +47,12 @@ namespace SkyEditor.SaveEditor
         }
         private string _name;
         
-        private IIOProvider CurrentIOProvider { get; set; }
+        private IFileSystem CurrentFileSystem { get; set; }
 
-        public virtual async Task OpenFile(string filename, IIOProvider provider)
+        public virtual async Task OpenFile(string filename, IFileSystem provider)
         {
             Filename = filename;
-            CurrentIOProvider = provider;
+            CurrentFileSystem = provider;
             using (var f = new GenericFile())
             {
                 f.EnableInMemoryLoad = true;
@@ -75,7 +76,7 @@ namespace SkyEditor.SaveEditor
         {
         }
 
-        public virtual async Task Save(string filename, IIOProvider provider)
+        public virtual async Task Save(string filename, IFileSystem provider)
         {
             PreSave();
             var buffer = new byte[(int)Math.Ceiling(Bits.Count / (decimal)8) - 1];
@@ -91,7 +92,7 @@ namespace SkyEditor.SaveEditor
             FileSaved?.Invoke(this, new EventArgs());
         }
 
-        public async Task Save(IIOProvider provider)
+        public async Task Save(IFileSystem provider)
         {
             await Save(Filename, provider);
         }

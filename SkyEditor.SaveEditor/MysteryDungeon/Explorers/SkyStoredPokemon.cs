@@ -1,4 +1,5 @@
 ﻿using SkyEditor.Core.IO;
+using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Initialize(bits);
         }
 
-        public async Task OpenFile(string filename, IIOProvider provider)
+        public async Task OpenFile(string filename, IFileSystem provider)
         {
             var toOpen = new BitBlockFile();
             await toOpen.OpenFile(filename, provider);
@@ -38,7 +39,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             Initialize(toOpen.Bits);
         }
 
-        public async Task Save(string filename, IIOProvider provider)
+        public async Task Save(string filename, IFileSystem provider)
         {
             var toSave = new BitBlockFile();
 
@@ -53,7 +54,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
             FileSaved?.Invoke(this, new EventArgs());
         }
 
-        public async Task Save(IIOProvider provider)
+        public async Task Save(IFileSystem provider)
         {
             await Save(Filename, provider);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using SkyEditor.Core.IO;
+using SkyEditor.IO.FileSystem;
 
 namespace SkyEditor.SaveEditor.MysteryDungeon
 {
@@ -18,7 +19,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon
             Offsets = new GtiOffsets();
         }
 
-        public override async Task OpenFile(string filename, IIOProvider provider)
+        public override async Task OpenFile(string filename, IFileSystem provider)
         {
             await base.OpenFile(filename, provider);
             OriginalChecksum = CalculateChecksum();

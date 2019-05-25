@@ -1,5 +1,6 @@
 ﻿using SkyEditor.Core.IO;
 using SkyEditor.Core.IO.PluginInfrastructure;
+using SkyEditor.IO.FileSystem;
 using SkyEditor.SaveEditor.Extensions;
 using System;
 using System.Collections.Generic;
@@ -372,7 +373,7 @@ namespace SkyEditor.SaveEditor.MysteryDungeon.Explorers
 
         #region Functions
 
-        public override async Task OpenFile(string filename, IIOProvider provider)
+        public override async Task OpenFile(string filename, IFileSystem provider)
         {
             await base.OpenFile(filename, provider);
             Init();

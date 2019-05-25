@@ -1,5 +1,6 @@
 ﻿using SkyEditor.Core.IO;
 using SkyEditor.Core.IO.PluginInfrastructure;
+using SkyEditor.IO.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace SkyEditor.SaveEditor
 {
     public class ZLibFile : IOpenableFile, IDetectableFileType
     {
-        public async Task OpenFile(string filename, IIOProvider provider)
+        public async Task OpenFile(string filename, IFileSystem provider)
         {
             using (var file = new GenericFile())
             {
